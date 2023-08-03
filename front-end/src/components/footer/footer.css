@@ -1,0 +1,9 @@
+.container-footer {
+    display: flex;
+    flex-direction: row;
+    height: 160px;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
