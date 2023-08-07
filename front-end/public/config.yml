@@ -1,0 +1,6 @@
+api: "http://127.0.0.1:3000"
+endpoints:
+  account:
+    validate: "/account/validate/"
+    signup: "/account/signup"
+    signin: "/account/signin"

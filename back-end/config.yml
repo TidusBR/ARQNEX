@@ -1,0 +1,34 @@
+isProduction: false
+devPort: 3000
+
+cors:
+  origin: 'http://localhost:5173'
+  optionSuccessStatus: 200
+  credentials: true
+
+bodyParser:
+  limit: 50mb
+
+database:
+  host: 'localhost'
+  user: 'root'
+  password: ''
+  database: 'arq'
+
+session:
+  secret: hello world
+  saveUninitialized: false
+  cookie:
+    maxAge: 86400000
+  resave: true
+
+sessionStore:
+  clearExpired: true
+  createDatabaseTable: true
+  expiration: 86400000
+  checkExpirationInterval: 900000
+
+sessionProduction:
+  cookie:
+    sameSite: none
+    secure: true

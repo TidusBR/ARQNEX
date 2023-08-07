@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Dashboard from "./pages/Dashboard"
-import Login from "./pages/Login"
+import Home from "./pages/Home"
+import Register from "./pages/Register"
 
 export default function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
-          <Route path="/login" element={<Login></Login>}></Route>
+          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/register" element={<Register></Register>}></Route>
         </Routes>
       </BrowserRouter>
     </>

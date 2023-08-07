@@ -1,6 +1,7 @@
 import './header.css'
 import '../../css/button_effects.css'
 import logo from '../../assets/logo.png'
+import PropTypes from 'prop-types';
 
 /*
 export default function Header() {
@@ -30,40 +31,40 @@ export default function Header() {
     )
 }*/
 
-export default function Header() {
+export default function Header({ setRenderLogin }) {
     return (
         <div className="container-header">
             <div className="container-logo">
                 <img src={logo} alt="Logo" />
             </div>
             <div className='group-links'>
-                <div class="container">
-                    <a class="button type1" href="/dashboard">
+                <div className="container">
+                    <a className="button type1" href="/dashboard">
                         Início
                     </a>
 
-                    <a class="button type1" href="/">
+                    <a className="button type1" href="/">
                         Pessoas
                     </a>
 
-                    <a class="button type1" href="/">
+                    <a className="button type1" href="/">
                         Escritórios
                     </a>
 
-                    <a class="button type1" href="/">
+                    <a className="button type1" href="/">
                         Cursos
                     </a>
 
-                    <a class="button type1" href="/">
+                    <a className="button type1" href="/">
                         Ao vivo
                     </a>
                 </div>
-                <div class="container">
-                    <a class="button type3" href='/login'>
+                <div className="container">
+                    <a className="button type3" onClick={() => setRenderLogin(true)}>
                         Entrar
                     </a>
 
-                    <a class="button type3">
+                    <a className="button type3" href="/register">
                         Cadastrar-se
                     </a>
                 </div>
@@ -71,3 +72,7 @@ export default function Header() {
         </div>
     )
 }
+
+Header.propTypes = {
+    setRenderLogin: PropTypes.func.isRequired
+};
