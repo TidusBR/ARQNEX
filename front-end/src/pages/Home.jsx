@@ -1,7 +1,7 @@
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
 import CenterArea from "../components/center_area/CenterArea"
-import Login from "../components/login/Login"
+import Login from "./Login"
 import { useState } from "react";
 
 export default function Home() {
