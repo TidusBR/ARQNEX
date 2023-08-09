@@ -1,66 +1,76 @@
-import PropTypes from 'prop-types';
-import Modal from "react-modal";
-import { config } from '../config.js';
+import React, {useState} from 'react';
+import fotoLogin from "../assets/foto-login.jpg"
+import "./css/login.css"
 
-Modal.setAppElement("#root");
+export default function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-const customStyles = {
-    
-};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(formData);
+  }
 
-  
-export default function Login({ open, setOpen }) {
-    console.log(config);
+  const handleInputChange = (event) => {
+    const { id, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
 
-    return (
-        <Modal
-            isOpen={open}
-            onRequestClose={() => setOpen(false)}
-            style={customStyles}
-            contentLabel="Login"
-        >
-            <form style={{display: "flex", flexDirection: "column"}}>
-                <label htmlFor="name">Nome</label>
-                <input type="text" id="name" name="name"></input>
+  return (
+    <div className='container-login'>
+        <section>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-sm-6 text-black">
 
-                <label htmlFor="password">Senha</label>
-                <input type="password" id="password" name="password"></input>
+                <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-                <button onClick={async (e) => {
-                    e.preventDefault();
-                    e.target.disabled = true;
+                  <form>
 
-                    const response = await fetch(`${config.api}${config.endpoints.account.signin}`, {
-                        method: 'POST',
-                        credentials: 'include',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(
-                            Object.fromEntries(
-                                [...e.target.parentElement.elements]
-                                .filter(element => element.tagName === 'INPUT')
-                                .map(input => [
-                                    input.name,
-                                    input.value
-                                ])
-                            )
-                        )
-                    });
+                    <h3 className="fw-normal mb-3 pb-3">Log in</h3>
 
-                    const data = await response.json();
+                    <div className="form-outline mb-4">
+                      <input type="email" id="email" className="form-control form-control-lg" 
+                        value={formData.email}
+                        onChange={handleInputChange}
+                      />
+                      <label className="form-label" htmlFor="email">Endereço de email</label>
+                    </div>
 
-                    console.log(data);
+                    <div className="form-outline mb-4">
+                      <input type="password" id="password" className="form-control form-control-lg" 
+                        value={formData.password}
+                        onChange={handleInputChange}
+                      />
+                      <label className="form-label" htmlFor="password">Senha</label>
+                    </div>
 
-                    e.target.disabled = false;
-                    
-                }}>Entrar</button>
-            </form>
-        </Modal>
-    )
+                    <div className="pt-1 mb-4">
+                      <button className="btn btn-info btn-lg btn-block text-white bg-warning border-0" type="button"
+                        onClick={handleSubmit}
+                      >Entrar</button>
+                    </div>
+
+                    <p className="small mb-5 pb-lg-2"><a className="text-decoration-none link-info" href="#!">Esqueceu a senha?</a></p>
+                    <p>Não possui conta? <a href="#!" className="text-decoration-none link-info">Inscreva-se aqui</a></p>
+
+                  </form>
+
+                </div>
+
+              </div>
+              <div className="col-sm-6 px-0 d-none d-sm-block">
+                <img src={fotoLogin}
+                  alt="Login image" className="w-100 vh-100"/>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div>
+  )
 }
-
-Login.propTypes = {
-    open: PropTypes.bool.isRequired,
-    setOpen: PropTypes.func.isRequired
-};
