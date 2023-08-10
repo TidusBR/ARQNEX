@@ -32,7 +32,7 @@ export default function Login() {
 
                   <form>
 
-                    <h3 className="fw-normal mb-3 pb-3">Log in</h3>
+                    <h3 className="fw-normal mb-3 pb-3">Conecte-se</h3>
 
                     <div className="form-outline mb-4">
                       <input type="email" id="email" className="form-control form-control-lg" 
@@ -66,7 +66,7 @@ export default function Login() {
               </div>
               <div className="col-sm-6 px-0 d-none d-sm-block">
                 <img src={fotoLogin}
-                  alt="Login image" className="w-100 vh-100"/>
+                  alt="Login image" className="w-100 h-100"/>
               </div>
             </div>
           </div>
