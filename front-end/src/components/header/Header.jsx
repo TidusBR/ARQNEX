@@ -1,72 +1,56 @@
 import './header.css'
-import '../../css/button_effects.css'
 import logo from '../../assets/logo.png'
-import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { config } from '../../config'
 
-/*
-export default function Header() {
+export default function Header({ setLoginOpen, session }) {
     return (
         <div className="container-header">
             <div className="container-logo">
                 <img src={logo} alt="Logo" />
             </div>
             <div className='group-links'>
-                <nav>
-                    <ul className="container-links">
-                        <li><a href="/Dashboard">Início</a></li>
-                        <li><a href="">Pessoas</a></li>
-                        <li><a href="">Escritórios</a></li>
-                        <li><a href="">Cursos</a></li>
-                        <li><a href="">Ao vivo</a></li>
-                    </ul>
-                </nav>
-                <nav>
-                    <ul className="container-links border">
-                        <li><a href="/login">Entrar</a></li>
-                        <li><a href="">Cadastrar</a></li> 
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    )
-}*/
-
-export default function Header({ setRenderLogin }) {
-    return (
-        <div className="container-header">
-            <div className="container-logo">
-                <img src={logo} alt="Logo" />
-            </div>
-            <div className='group-links'>
-                <div className="container">
-                    <a className="button type1" href="/dashboard">
+                <div className="container-links">
+                    <Link className="button" to="/">
                         Início
-                    </a>
+                    </Link>
 
-                    <a className="button type1" href="/">
+                    <Link className="button" to="/">
                         Pessoas
-                    </a>
+                    </Link>
 
-                    <a className="button type1" href="/">
+                    <Link className="button" to="/">
                         Escritórios
-                    </a>
+                    </Link>
 
-                    <a className="button type1" href="/">
+                    <Link className="button" to="/">
                         Cursos
-                    </a>
+                    </Link>
 
-                    <a className="button type1" href="/">
+                    <Link className="button type1" to="/">
                         Ao vivo
-                    </a>
+                    </Link>
                 </div>
-                <div className="container">
-                    <a className="button type3" onClick={() => setRenderLogin(true)}>
+                <div className="container-links">
+                {
+                    !session.loggedIn && (<>
+                    <Link className="button" onClick={() => setLoginOpen(true)}>
                         Entrar
-                    </a>
+                    </Link>
 
-                    <a className="button type3" href="/register">
+                    <Link className="button" to="/register">
                         Cadastrar-se
-                    </a>
+                    </Link>
+                    </>) || (<>
+                    <Link className="button" onClick={async function() {
+                        await fetch(`${config.api}${config.endpoints.account.logout}`, {credentials: "include"});
+                        window.location.href = "/";
+                    }}>
+                        Sair
+                    </Link>
+                    </>)
+                }
                 </div>
             </div>
         </div>
@@ -74,5 +58,6 @@ export default function Header({ setRenderLogin }) {
 }
 
 Header.propTypes = {
-    setRenderLogin: PropTypes.func.isRequired
-};
+    setLoginOpen: PropTypes.func.isRequired,
+    session: PropTypes.object.isRequired
+}

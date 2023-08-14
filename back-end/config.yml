@@ -3,7 +3,6 @@ devPort: 3000
 
 cors:
   origin: 'http://localhost:5173'
-  optionSuccessStatus: 200
   credentials: true
 
 bodyParser:
@@ -18,9 +17,10 @@ database:
 session:
   secret: hello world
   saveUninitialized: false
+  resave: false
   cookie:
-    maxAge: 86400000
-  resave: true
+    sameSite: strict
+    secure: false
 
 sessionStore:
   clearExpired: true

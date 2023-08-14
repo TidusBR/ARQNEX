@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Ago-2023 às 21:03
+-- Tempo de geração: 14-Ago-2023 às 19:48
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.0.25
 
@@ -37,14 +37,6 @@ CREATE TABLE `accounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `accounts`
---
-
-INSERT INTO `accounts` (`id`, `name`, `profileName`, `password`, `email`, `cpf`) VALUES
-(4, 'Jefferson', 'jeff', '$2b$12$H0gnxfM/jKwISWP49orxfODfmqifuXinp1rPibKWy0xOP4Y42a2ZK', 'jeff@gmail.com', '000.000.000-00'),
-(5, 'test', 'test123', '$2b$12$AfOgsMRn/edqeD1P.LBG3Ox3fy3a4Hdp5xmESykp82ksjQpPRw/qm', 'jeffersongimenez@gmail.com', '075.293.381-70');
-
---
 -- Índices para tabelas despejadas
 --
 
@@ -62,7 +54,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT de tabela `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

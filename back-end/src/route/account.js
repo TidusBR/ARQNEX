@@ -31,7 +31,16 @@ AccountRouter.post("/signup", async (req, res) => {
         });
     }
 
-    if (await createAccount({name, profileName, password: await hash(password, 12), email, cpf})) {
+    const hashedPassword = await hash(password, 12);
+
+    if (await createAccount({name, profileName, password: hashedPassword, email, cpf})) {
+        const info = await getAccountInfo({name, profileName, password: hashedPassword, email, cpf});
+
+        req.session.loggedIn = true;
+        req.session.accountInfo = info;
+
+        req.session.save();
+
         return res.json({
             ok: true,
             message: 'Account created successfully'
@@ -63,8 +72,14 @@ AccountRouter.post("/signin", async (req, res) => {
         });
     }
 
-    if (!await compare(password, info.password))
+    if (!await compare(password, info.password)) {
+        return res.json({
+            ok: false,
+            message: "Incorrect password"
+        });
+    }
 
+    req.session.loggedIn = true;
     req.session.accountInfo = info;
     req.session.save();
 
@@ -72,4 +87,9 @@ AccountRouter.post("/signin", async (req, res) => {
         ok: true,
         message: 'Logged in successfully'
     });
+});
+
+AccountRouter.get("/logout", async (req, res) => {
+    req.session.destroy();
+    res.json({ok: true});
 });
