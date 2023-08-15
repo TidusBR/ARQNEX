@@ -6,6 +6,7 @@ import { config } from '../config';
 export default function Register() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(undefined);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,6 +43,12 @@ export default function Register() {
       ...prevData,
       [id]: value,
     }));
+    //console.log(formData.name && formData.profileName && formData.cpf && formData.email && formData.password);
+    if(formData.name && formData.profileName && formData.cpf && formData.email && formData.password) {
+      setIsButtonEnabled(true) 
+      return
+    }
+    setIsButtonEnabled(false); 
   };
 
   return (
@@ -72,7 +79,7 @@ export default function Register() {
                       onChange={handleInputChange}
                     />
                   </div>
-
+                  {/*
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="account-type">Tipo de conta</label>
                     <select className="form-select form-control form-control-md">
@@ -80,11 +87,11 @@ export default function Register() {
                       <option value="office">Escritório</option>
                     </select>
                   </div>
-
+                  */} 
 
 
                   <div className="form-outline mb-4">
-                    <label className="form-label" htmlFor="name">CPF</label>
+                    <label className="form-label" htmlFor="cpf">CPF</label>
                     <input type="text" id="cpf" className="form-control form-control-md"
                       value={formData.cpf}
                       onChange={handleInputChange}
@@ -116,11 +123,9 @@ export default function Register() {
                   <div className="pt-1 mb-4">
                     <button className="btn btn-info btn-lg btn-block text-white bg-warning border-0" type="button"
                       onClick={handleSubmit}
+                      disabled={!isButtonEnabled}
                     >Criar conta</button>
                   </div>
-
-                  <p className="small mb-5 pb-lg-2"><a className="text-decoration-none link-info" href="#!">Esqueceu a senha?</a></p>
-                  <p>Não possui conta? <a href="#!" className="text-decoration-none link-info">Inscreva-se aqui</a></p>
 
                 </form>
 
