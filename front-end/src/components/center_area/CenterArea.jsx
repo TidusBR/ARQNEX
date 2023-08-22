@@ -1,4 +1,4 @@
-import './center_area.css'
+import './center-area.css'
 
 export default function CenterArea({children}) {
     return (
