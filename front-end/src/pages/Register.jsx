@@ -4,39 +4,31 @@ import "./css/register.css";
 import { config } from '../config';
 
 export default function Register() {
-  const [formData, setFormData] = useState({});
-  const [error, setError] = useState(false);
+  // Estado que guarda mensagem de erro
+  const [error, setError] = useState(undefined);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setError(false)
-
     // desativar botão
     event.target.disabled = true;
 
+    /**
+     * Não é mais necessário pois o formulário está fazendo a validação usando o atributo required nos campos de input
     if(
-      document.querySelector("#name").value &&
-      document.querySelector("#profileName").value &&
-      document.querySelector("#cpf").value &&
-      document.querySelector("#email").value &&
-      document.querySelector("#password").value
+      !(
+        document.querySelector("#name").value &&
+        document.querySelector("#username").value &&
+        document.querySelector("#cpf").value &&
+        document.querySelector("#email").value &&
+        document.querySelector("#password").value
+      )
     ) {
-      console.log("TA TUDO PREENCHIDO");
-      setFormData({
-        name: document.querySelector("#name").value,
-        profileName: document.querySelector("#profileName").value,
-        cpf: document.querySelector("#cpf").value,
-        email: document.querySelector("#email").value,
-        password: document.querySelector("#password").value
-      })
-      console.log(formData);
-    }
-    else {
-      console.log("NAO TA TUDO PREENCHIDO");
       event.target.disabled = false;
-      setError(true)
+      setError("Preencha todos os campos!");
+      return;
     }
+    **/
     
     // enviar solicitação de cadastro
     const request = await fetch(`${config.api}${config.endpoints.account.signup}`, {
@@ -45,7 +37,13 @@ export default function Register() {
             "Content-Type": "application/json"
         },
         method: "POST",
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          name: document.querySelector("#name").value,
+          username: document.querySelector("#username").value,
+          cpf: document.querySelector("#cpf").value,
+          email: document.querySelector("#email").value,
+          password: document.querySelector("#password").value
+        })
     });
 
     // processar resposta
@@ -70,7 +68,7 @@ export default function Register() {
 
               <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-                <form className='w-100'>
+                <form className='w-100' onSubmit={handleSubmit} action='/'>
                   <p className='span-subtitle mb-2'>Junte-se a Arqnex</p>
                   <h3 className="fw-normal mb-3 pb-3">Cadastro</h3>
 
@@ -101,12 +99,12 @@ export default function Register() {
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="name">Nome</label>
-                    <input type="text" id="name" className="form-control form-control-md"/>
+                    <input type="text" id="name" className="form-control form-control-md" required/>
                   </div>
 
                   <div className="form-outline mb-4">
-                    <label className="form-label" htmlFor="profileName">Nome de perfil</label>
-                    <input type="text" id="profileName" className="form-control form-control-md"/>
+                    <label className="form-label" htmlFor="username">Nome de Usuário</label>
+                    <input type="text" id="username" pattern="[^\s]+" title="Não use espaçamentos" className="form-control form-control-md" required/>
                   </div>
                   {/*
                   <div className="form-outline mb-4">
@@ -121,33 +119,46 @@ export default function Register() {
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="cpf">CPF</label>
-                    <input type="text" id="cpf" className="form-control form-control-md"/>
+                    <input
+                      type="text"
+                      id="cpf"
+                      pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                      title="Digite um CPF no formato: xxx.xxx.xxx-xx"
+                      maxLength="14"
+                      className="form-control form-control-md"
+                      onInput={(e) => {
+                        e.target.value = e.target.value.replace(/\D/g,"").replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+                      }}
+                      required
+                    />
                   </div>
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="email">Endereço de email</label>
-                    <input type="email" id="email" className="form-control form-control-md"/>
+                    <input type="email" id="email" pattern="/[^\s]+^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" className="form-control form-control-md" required/>
                   </div>
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="password">Senha</label>
-                    <input type="password" id="password" className="form-control form-control-md"/>
+                    <input type="password" id="password" minLength="6" className="form-control form-control-md" required/>
+                  </div>
+
+                  <div className="form-outline mb-4">
+                    <input type="checkbox" id="accept-eula" className="form-control-md checkbox" required/>
+                    <label className="form-label" htmlFor="accept-eula" style={{marginLeft: "0.2rem"}}>Ao criar minha conta eu aceito os <span style={{color: "#DB752C"}}>Termos de Uso</span> e <span style={{color: "#DB752C"}}>Política de Privacidade</span>.</label>
                   </div>
 
                   {
                   error &&
                   <div className="alert alert-danger mb-4" role="alert">
-                    Preencha todos os campos do formulário!
+                    {error}
                   </div>
                   }
+
                   <div className="pt-1 mb-4">
-                    <button className="btn button-create btn-block text-white border-0" type="button"
-                      onClick={handleSubmit}
-                    >Criar conta</button>
+                    <button className="btn button-create btn-block text-white border-0" type="submit">Criar conta</button>
                   </div>
-
                 </form>
-
               </div>
 
             </div>
