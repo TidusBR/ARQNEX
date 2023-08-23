@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
 import {config} from './config'
+import ProfileUser from "./pages/ProfileUser";
 
 
 export default function App() {
@@ -28,7 +29,9 @@ export default function App() {
           { !session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login> }
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/register" element={session.loggedIn ? <Navigate to="/" />: <Register />} />
+            <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
+            {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
+            <Route path="/profile-user" element={session.loggedIn ? <Navigate to="/"/> : <ProfileUser/>}></Route>
           </Routes>
         </CenterArea>
         <Footer />

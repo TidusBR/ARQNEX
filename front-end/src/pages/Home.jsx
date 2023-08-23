@@ -1,28 +1,20 @@
 import './css/home.css'
 import background from '../assets/Dashboard/foto-home.png'
-import CardHome from '../components/card-home/CardHome'
 
 export default function Home() {
 
     const imageStyle = {
         backgroundImage: `url(${background})`,
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover"
+        backgroundSize: "cover",
+        backgroundPosition: "center"
     }
-
-    const card = {
-        backgroundColor: "black",
-        width: "24%",
-        
-    }
-
     return (
         <div className="container-home">
             <section>
                 <div className="row">
                     <div className="col-1">TESTE</div>
-                    <div className="col" 
-                        style={imageStyle}>
+                    <div className="col" style={imageStyle}>
                         <div className="row">
                             <div className="col-8 d-flex flex-column" style={{padding: "130px 50px"}}>
                                 <h1 className='text-white bold'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</h1>
@@ -36,18 +28,14 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </section>
             <section className='pt-5'>
                 <div className='row'>
                     <div className="col"></div>
-                    <div className="col-10 d-flex flex-row">
-                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
-                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
-                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
-                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
+                    <div className="col-10 d-flex flex-row bg-black vh-100">
+                        TESTE
                     </div>
                     <div className='col'></div>
                 </div>
