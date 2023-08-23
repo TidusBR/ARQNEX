@@ -1,12 +1,13 @@
+import "./software-user.css"
+
 export default function SoftwareUser({icon, name}) {
-    console.log(icon, name);
     return (
-        <div className="container-software-user d-flex aligm-itens-center justify-content-center" style={{border: "1.5px solid #EEEEEE"}}>
+        <button className="container-software-user d-flex align-items-center justify-content-center rounded p-2 bg-white">
             <i dangerouslySetInnerHTML={{ __html: icon }}>
             </i>
             <span>
                 {name}
             </span>
-        </div>
+        </button>
     )
 }

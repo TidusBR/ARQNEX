@@ -23,7 +23,7 @@ export default function CardUser() {
         ]
     }
 
-    return (<div className="container-card-user">
+    return (<div className="container-card-user rounded">
         <img src={props.url } alt="" />
         <div>
             <div>
@@ -34,7 +34,7 @@ export default function CardUser() {
             <button className="button-follow">Seguir</button>
             <span className="bio-user">{props.bio}</span>
             <span className="softwares">Softwares</span>
-            <div className="container-softwares">
+            <div className="container-softwares d-flex ">
                 {props.softwares.map((softwareData, index) => (
                     <SoftwareUser key={index} icon={softwareData.icon} name={softwareData.name}/>
                 ))}
