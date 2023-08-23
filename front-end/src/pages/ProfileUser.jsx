@@ -6,7 +6,7 @@ export default function ProfileUser() {
             <div className="row">
                 <div className="col-1"></div>
                 <div className="col">
-                    <div className="col-3 mt-5">
+                    <div className="col-3 my-5">
                         <CardUser/>
                     </div>
                     <div className="col">

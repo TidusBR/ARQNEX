@@ -25,16 +25,16 @@ export default function CardUser() {
 
     return (<div className="container-card-user rounded">
         <img src={props.url } alt="" />
-        <div>
-            <div>
-                <span className="name-user">{props.name}</span>
-                <span className="address-user">{props.address}</span>
-                {props.isPro && <span className="upgrade">PRO</span>}
+        <div className="text-center p-5">
+            <div className="mb-4">
+                <p className="name-user">{props.name}</p>
+                <p className="address-user">{props.address}</p>
+                {props.isPro && <p className="upgrade">PRO</p>}
             </div>
-            <button className="button-follow">Seguir</button>
-            <span className="bio-user">{props.bio}</span>
-            <span className="softwares">Softwares</span>
-            <div className="container-softwares d-flex ">
+            <button className="button-follow bg-white rounded p-2 px-5 mb-4">Seguir</button>
+            <p className="bio-user mb-5">{props.bio}</p>
+            <p className="softwares text-start fw-bold mb-2">Softwares</p>
+            <div className="container-softwares mb-5 d-flex">
                 {props.softwares.map((softwareData, index) => (
                     <SoftwareUser key={index} icon={softwareData.icon} name={softwareData.name}/>
                 ))}
