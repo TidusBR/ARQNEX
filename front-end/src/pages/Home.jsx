@@ -1,5 +1,6 @@
 import './css/home.css'
 import background from '../assets/Dashboard/foto-home.png'
+import CardHome from '../components/card-home/CardHome'
 
 export default function Home() {
 
@@ -42,8 +43,11 @@ export default function Home() {
             <section className='pt-5'>
                 <div className='row'>
                     <div className="col"></div>
-                    <div className="col-10 vh-100 d-flex flex-row m-0 p-0">
-                        
+                    <div className="col-10 d-flex flex-row">
+                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
+                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
+                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
+                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
                     </div>
                     <div className='col'></div>
                 </div>

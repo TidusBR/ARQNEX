@@ -97,16 +97,12 @@ export default function Register() {
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="name">Nome</label>
-                    <input type="text" id="name" className="form-control form-control-md"
-                      value={formData.name}
-                    />
+                    <input type="text" id="name" className="form-control form-control-md"/>
                   </div>
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="profileName">Nome de perfil</label>
-                    <input type="text" id="profileName" className="form-control form-control-md"
-                      value={formData.profileName}
-                    />
+                    <input type="text" id="profileName" className="form-control form-control-md"/>
                   </div>
                   {/*
                   <div className="form-outline mb-4">
@@ -121,23 +117,17 @@ export default function Register() {
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="cpf">CPF</label>
-                    <input type="text" id="cpf" className="form-control form-control-md"
-                      value={formData.cpf}
-                    />
+                    <input type="text" id="cpf" className="form-control form-control-md"/>
                   </div>
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="email">Endereço de email</label>
-                    <input type="email" id="email" className="form-control form-control-md"
-                      value={formData.email}
-                    />
+                    <input type="email" id="email" className="form-control form-control-md"/>
                   </div>
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="password">Senha</label>
-                    <input type="password" id="password" className="form-control form-control-md"
-                      value={formData.password}
-                    />
+                    <input type="password" id="password" className="form-control form-control-md"/>
                   </div>
 
                   {
