@@ -1,5 +1,6 @@
 .container-card-user {
     border: 1px solid #EEEEEE;
+    position: relative;
 }
 
 p {
@@ -36,4 +37,13 @@ p {
 .link-curriculo{
     color: #DB752C;
     text-decoration: none;
+}
+
+.edit-profile {
+    border: 1.5px solid #EEEEEE;
+    position: absolute;
+    background-color: #FFFFFF;
+    top: 14px;
+    right: 8px;
+    color: #1D252C;
 }

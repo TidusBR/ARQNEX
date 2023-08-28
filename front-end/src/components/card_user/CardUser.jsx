@@ -10,6 +10,7 @@ export default function CardUser() {
         name: "Giovanna Oliveira",
         address: "São Paulo, SP",
         isPro: true,
+        isMyProfile: false,
         bio: "Lorem ipsum dolor sit aconsetetur sadipscing elitr, sedumy eirmod tempor invidunt ut labore et.",
         softwares: [
             {
@@ -25,6 +26,7 @@ export default function CardUser() {
 
     return (
         <div className="container-card-user rounded">
+            {props.isMyProfile && <button className="edit-profile rounded p-2 px-4 fw-bold">Editar</button>}
             <img src={props.url } className="img-user" alt="" />
             <div className="text-center p-5">
                 <div className="mb-4">
@@ -32,7 +34,7 @@ export default function CardUser() {
                     <p className="address-user">{props.address}</p>
                     {props.isPro && <p className="upgrade">PRO</p>}
                 </div>
-                <button className="button-follow bg-white rounded p-2 px-5 mb-4">Seguir</button>
+                {!props.isMyProfile && <button className="button-follow bg-white rounded p-2 px-5 mb-4">Seguir</button>}
                 <p className="bio-user mb-5">{props.bio}</p>
                 <p className="softwares text-start fw-bold mb-2">Softwares</p>
                 <div className="container-softwares mb-5 d-flex">
@@ -40,7 +42,7 @@ export default function CardUser() {
                         <SoftwareUser key={index} icon={softwareData.icon} name={softwareData.name}/>
                     ))}
                 </div>
-                <Link className="link-curriculo" to="/">Visualizar currículo</Link>
+                {!props.isMyProfile && <Link className="link-curriculo" to="/">Visualizar currículo</Link>}
             </div>
         </div>
     )
