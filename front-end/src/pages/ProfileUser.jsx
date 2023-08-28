@@ -1,5 +1,6 @@
 import CardUser from "../components/card_user/CardUser";
 import './css/profile-user.css'
+import CardJob from "../components/card_job/CardJob";
 
 export default function ProfileUser() {
     const props = {
@@ -16,7 +17,7 @@ export default function ProfileUser() {
                             <CardUser/>
                         </div>
                         <div className="col-9 d-flex flex-column p-0">
-                            <div className="row mb-5">
+                            <div className="row mb-4">
                                 <div className="col">
                                     <button className="btn btn-primary">Popular</button>
                                 </div>
@@ -36,8 +37,23 @@ export default function ProfileUser() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-4 bg-warning">
-                                    AQUI COLOCA O MODAL
+                                <div className="col-4 p-1">
+                                    <CardJob></CardJob>
+                                </div>
+                                <div className="col-4 p-1">
+                                    <CardJob></CardJob>
+                                </div>
+                                <div className="col-4 p-1">
+                                    <CardJob></CardJob>
+                                </div>
+                                <div className="col-4 p-1">
+                                    <CardJob></CardJob>
+                                </div>
+                                <div className="col-4 p-1">
+                                    <CardJob></CardJob>
+                                </div>
+                                <div className="col-4 p-1">
+                                    <CardJob></CardJob>
                                 </div>
                             </div>
                         </div>
