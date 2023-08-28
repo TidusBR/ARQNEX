@@ -31,7 +31,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
             {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
-            <Route path="/profile-user" element={session.loggedIn ? <Navigate to="/"/> : <ProfileUser/>}></Route>
+            <Route path="/profile-user" element={<ProfileUser/>}></Route>
           </Routes>
         </CenterArea>
         <Footer />
