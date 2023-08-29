@@ -10,11 +10,11 @@ import { useEffect, useState } from "react";
 import { config } from './config'
 import Menu from './components/menuEditPerfil/Menu'
 import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
-import Senha from "./components/menuEditPerfil/Senha";
+import Senha from "./components/menuEditPerfil/Senha/Senha";
 import Interesses from "./components/menuEditPerfil/Interesses";
 import Formacoes from "./components/menuEditPerfil/Formacoes";
-import Cursos from "./components/menuEditPerfil/Cursos";
-import Experiencias from "./components/menuEditPerfil/Experiencias";
+import Cursos from "./components/menuEditPerfil/Cursos/Cursos.jsx";
+import Experiencias from "./components/menuEditPerfil/Experiencias/Experiencias.jsx";
 import EditarPerfil from "./components/menuEditPerfil/editarPerfil"; 
 
 export default function App() {
