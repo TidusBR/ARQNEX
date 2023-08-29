@@ -37,22 +37,22 @@ export default function ProfileUser() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-4 p-1">
+                                <div className="col-4">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4 p-1">
+                                <div className="col-4">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4 p-1">
+                                <div className="col-4">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4 p-1">
+                                <div className="col-4">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4 p-1">
+                                <div className="col-4">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4 p-1">
+                                <div className="col-4">
                                     <CardJob></CardJob>
                                 </div>
                             </div>

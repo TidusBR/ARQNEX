@@ -15,3 +15,9 @@
 .generic {
     color: #292A31CC;
 }
+
+@media (max-width: 940px) {
+    .container-footer {
+        display: none;
+    }
+}

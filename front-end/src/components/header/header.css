@@ -39,3 +39,9 @@
 .button:hover {
     color: orange;
 }
+
+@media (max-width: 900px) {
+    .container-header  {
+        display: none;
+    }
+}

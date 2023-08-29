@@ -64,9 +64,9 @@ export default function Register() {
       <section>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-6 text-black">
+            <div className="col-12 col-lg-6 text-black">
 
-              <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+              <div className="d-flex align-items-center h-custom-2 px-2 px-sm-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
                 <form className='w-100' onSubmit={handleSubmit} action='/'>
                   <p className='span-subtitle mb-2'>Junte-se a Arqnex</p>
@@ -143,9 +143,9 @@ export default function Register() {
                     <input type="password" id="password" minLength="6" className="form-control form-control-md" required/>
                   </div>
 
-                  <div className="form-outline mb-4">
-                    <input type="checkbox" id="accept-eula" className="form-control-md checkbox" required/>
-                    <label className="form-label" htmlFor="accept-eula" style={{marginLeft: "0.2rem"}}>Ao criar minha conta eu aceito os <span style={{color: "#DB752C"}}>Termos de Uso</span> e <span style={{color: "#DB752C"}}>Política de Privacidade</span>.</label>
+                  <div className="form-outline mb-4 d-flex flex-row align-items-center">
+                    <input type="checkbox" id="accept-eula" className="form-control-md checkbox me-3" required/>
+                    <label className="form-label m-0" htmlFor="accept-eula">Ao criar minha conta eu aceito os <span style={{color: "#DB752C"}}>Termos de Uso</span> e <span style={{color: "#DB752C"}}>Política de Privacidade</span>.</label>
                   </div>
 
                   {
@@ -162,7 +162,7 @@ export default function Register() {
               </div>
 
             </div>
-            <div className="col-sm-6 px-0 d-none d-sm-block">
+            <div className="d-md-none d-lg-block col-lg-6 px-0 d-none">
               <img src={fotoRegister}
                 alt="Login image" className="w-100 h-100"/>
             </div>
