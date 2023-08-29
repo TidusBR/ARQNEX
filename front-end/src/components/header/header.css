@@ -65,6 +65,7 @@
         position: fixed;
         top: 0;
         left: 0;
+        animation: openMenu 1s;
     }
     i {
         margin: 0 !important;
@@ -76,5 +77,13 @@
         padding: 0 32px;
         justify-content: space-between;
         border: 1px solid #EEE;
+    }
+    @keyframes openMenu {
+        from {
+            transform: translateX(-102vw);
+        }
+        to {
+            transform: translateX(0vw);
+        }
     }
 }
