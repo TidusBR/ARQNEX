@@ -1,6 +1,6 @@
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
-import { Button } from '@mui/material'
+import { Button, TextField } from '@mui/material'
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { config } from '../config'
@@ -26,17 +26,38 @@ const customStyles = {
     }
 };
 
+/**
+ * @param {object} props
+ * @param {React.CSSProperties | undefined} props.style 
+ * @returns 
+ */
+function InputField({id, label, style, type}) {
+    return (
+        <div style={{display: "flex", flexDirection: "column", ...(style??{})}}>
+            <label style={{fontWeight: "bold", fontSize: "1.2rem"}}>{label}</label>
+            <TextField type={type ?? 'text'} id={id} inputProps={{style: {height: "1rem"}}}></TextField>
+        </div>
+    )
+}
+
+InputField.propTypes = {
+    label: PropTypes.string.isRequired,
+    style: PropTypes.object,
+    id: PropTypes.string,
+    ref: PropTypes.object,
+    type: PropTypes.string
+}
+
 export default function Login({ open, setOpen }) {
   const [error, setError] = useState(undefined);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleLoginSubmit = async (event) => {
     // desativar o botão
     event.target.disabled = true;
 
     // obter dados
-    const username = document.querySelector("#username").value;
-    const password = document.querySelector("#password").value;
+    const name = document.querySelector("input#name").value;
+    const password = document.querySelector("input#password").value;
 
     // enviar solicitação de login
     const request = await fetch(`${config.api}${config.endpoints.account.signin}`, {
@@ -46,7 +67,7 @@ export default function Login({ open, setOpen }) {
         },
         method: "POST",
         body: JSON.stringify({
-            username,
+            name,
             password
         })
     });
@@ -97,30 +118,20 @@ export default function Login({ open, setOpen }) {
 
 
                 <div className='mt-3 mb-2'>
-                    <form className='w-100' onSubmit={handleSubmit} action='/'>
-                        <div className="form-outline mb-4">
-                            <label className="form-label" htmlFor="username" style={{fontWeight: "bold", fontSize: "1.2rem"}}>Nome de Usuário</label>
-                            <input type="text" id="username" pattern="[^\s]+" title="Não use espaçamentos" className="form-control form-control-md" required/>
-                        </div>
-
-                        <div className="form-outline mb-4">
-                            <label className="form-label" htmlFor="password" style={{fontWeight: "bold", fontSize: "1.2rem"}}>Senha</label>
-                            <input type="password" id="password" minLength="6" className="form-control form-control-md" required/>
-                        </div>
-
-                        {
-                        error && <span style={{position: 'absolute', color: 'red'}}>{error}</span>
-                        }
-
-                        <p className='link'>
-                            <a>Esqueceu a senha?</a>
-                        </p>
-
-                        <Button type="submit" style={{backgroundColor: "#DB752C"}} variant="contained" sx={{marginTop: "1rem", width: "100%"}}>Entrar</Button>
-                    </form>
+                    <InputField id="name" label="Nome"></InputField>
+                    <InputField id="password" label="Senha" type="password" style={{marginTop: "1rem"}}></InputField>
+                    {error !== undefined && <label style={{color: "red"}}>{error}</label>}
                 </div>
+
+                <p className='link'>
+                    <a>Esqueceu a senha?</a>
+                </p>
+
+                <Button style={{backgroundColor: "#DB752C"}} variant="contained" sx={{marginTop: "1rem", width: "100%"}} onClick={handleLoginSubmit}>Entrar</Button>
+                
             </div>
         </div>
+        
     </Modal>
   )
 }

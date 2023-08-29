@@ -37,7 +37,3 @@ form h3 {
 .button-create {
     background-color: var(--orange) !important;
 }
-
-.checkbox {
-    accent-color:#DB752C;
-}

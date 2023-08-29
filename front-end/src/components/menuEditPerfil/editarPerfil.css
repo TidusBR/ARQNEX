@@ -1,0 +1,92 @@
+
+.buttonPro button{
+    width: 260px;
+    height: 98px;
+    /* UI Properties */
+    background: var(#DB752C) 0% 0% no-repeat padding-box;
+    background: #DB752C 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #DB752C29;
+    border-radius: 3px;
+    opacity: 1;
+}
+
+button.buttonPro{
+    position: absolute;
+    right: 278px;
+    width: 260px;
+    height: 98px;
+    background: #DB752C 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #DB752C29;
+    border-radius: 3px;
+    opacity: 1;
+    color: white;
+    line-height: 0.2;
+    border: none;
+    top: 10em;
+}
+
+.buttonPro h2{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.buttonPro p{
+    font-size: 16px;
+}
+
+.content{
+    width: 50%;
+    margin-top: 8.5em;
+    padding-left: 2em;
+}
+
+.content h3{
+    color: #1D252C52;
+    opacity: 1;
+    margin-bottom: 6em;
+}
+
+.content h1{
+    line-height: 0.5;
+}
+
+.teste_component{
+    top: 20px
+}
+
+.active{
+    color: #DB752C;
+}
+
+.center_area{
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: -21em;
+    margin-left: 40em;
+}
+
+.center_area label{
+    padding-top: 16px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.input_senha .senha_label_input{
+    margin-bottom: 1.5rem;
+}
+
+.input_senha .senha_button{
+    background: #DB752C 0% 0% no-repeat padding-box;
+    width: 260px;
+    height: 48px;
+    box-shadow: 0px 3px 6px #DB752C29;
+    border-radius: 3px;
+    opacity: 1;
+    font-size: 20px;
+    text-transform: none;
+    
+}
+.input_senha .senha_button:hover{
+    background-color: #DB752C;
+}

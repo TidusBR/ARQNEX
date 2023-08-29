@@ -7,18 +7,24 @@ import Footer from "./components/footer/Footer";
 import Login from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
-import {config} from './config'
-import ProfileUser from "./pages/ProfileUser";
-
+import { config } from './config'
+import Menu from './components/menuEditPerfil/Menu'
+import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
+import Senha from "./components/menuEditPerfil/Senha";
+import Interesses from "./components/menuEditPerfil/Interesses";
+import Formacoes from "./components/menuEditPerfil/Formacoes";
+import Cursos from "./components/menuEditPerfil/Cursos";
+import Experiencias from "./components/menuEditPerfil/Experiencias";
+import EditarPerfil from "./components/menuEditPerfil/editarPerfil"; 
 
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
-  const [session, setSession] = useState({loggedIn: false, account:{}});
+  const [session, setSession] = useState({ loggedIn: false, account: {} });
 
   useEffect(() => {
-    fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include"})
-    .then(response => response.json())
-    .then(data => setSession(data));
+    fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
+      .then(response => response.json())
+      .then(data => setSession(data));
   }, []);
 
   return (
@@ -26,12 +32,17 @@ export default function App() {
       <div>
         <Header session={session} setLoginOpen={setLoginOpen} />
         <CenterArea>
-          { !session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login> }
+          {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
-            {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
-            <Route path="/profile-user" element={session.loggedIn ? <Navigate to="/"/> : <ProfileUser/>}></Route>
+            <Route path="/editarPerfil/*" element={<EditarPerfil />}></Route>
+              <Route path="perfil" element={<Perfil />} />
+              <Route path="senha" element={<Senha />} />
+              <Route path="interesses" element={<Interesses />} />
+              <Route path="formacoes" element={<Formacoes />} />
+              <Route path="cursos" element={<Cursos />} />
+              <Route path="experiencias" element={<Experiencias />} />
           </Routes>
         </CenterArea>
         <Footer />
