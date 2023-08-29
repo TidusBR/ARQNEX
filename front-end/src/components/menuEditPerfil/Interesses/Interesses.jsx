@@ -1,4 +1,4 @@
-import EditarPerfil from './editarPerfil';
+import EditarPerfil from '../editarPerfil'
 
 function Interesses(){
     return(

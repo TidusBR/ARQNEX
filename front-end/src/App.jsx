@@ -11,8 +11,8 @@ import { config } from './config'
 import Menu from './components/menuEditPerfil/Menu'
 import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
 import Senha from "./components/menuEditPerfil/Senha/Senha";
-import Interesses from "./components/menuEditPerfil/Interesses";
-import Formacoes from "./components/menuEditPerfil/Formacoes";
+import Interesses from "./components/menuEditPerfil/Interesses/Interesses.jsx";
+import Formacoes from "./components/menuEditPerfil/Formacoes/Formacoes.jsx";
 import Cursos from "./components/menuEditPerfil/Cursos/Cursos.jsx";
 import Experiencias from "./components/menuEditPerfil/Experiencias/Experiencias.jsx";
 import EditarPerfil from "./components/menuEditPerfil/editarPerfil"; 

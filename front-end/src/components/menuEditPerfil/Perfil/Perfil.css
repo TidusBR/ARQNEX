@@ -63,3 +63,7 @@ button.desconectar_foto_perfil{
     font-size: 20px;
     margin-right: 16px;
 }
+
+.box_form label{
+    margin-top: 1px;
+}
