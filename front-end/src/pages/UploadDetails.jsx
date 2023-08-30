@@ -44,6 +44,7 @@ export default function UploadDetails() {
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Softwares</label>
                                     <select class="form-select">
+                                        <option value="" select hidden></option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -57,6 +58,7 @@ export default function UploadDetails() {
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Estilos</label>
                                     <select className="form-select">
+                                        <option value="" select hidden></option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -65,6 +67,7 @@ export default function UploadDetails() {
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Projeto</label>
                                     <select className="form-select">
+                                        <option value="" select hidden></option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -73,6 +76,7 @@ export default function UploadDetails() {
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Tipo</label>
                                     <select className="form-select">
+                                        <option value="" select hidden></option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
