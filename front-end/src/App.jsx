@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
 import {config} from './config'
 import ProfileUser from "./pages/ProfileUser";
+import UploadDetails from "./pages/UploadDetails";
 
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
             {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
             <Route path="/profile-user" element={<ProfileUser/>}></Route>
+            <Route path="/upload-details" element={<UploadDetails/>}></Route>
           </Routes>
         </CenterArea>
         <Footer />
