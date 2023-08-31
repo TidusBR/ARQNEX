@@ -13,10 +13,10 @@ export default function ProfileUser() {
                 <div className="col-1"></div>
                 <div className="col-10">
                     <div className="row">
-                        <div className="col-3">
+                        <div className="col-xxl-3 col-xl-3">
                             <CardUser/>
                         </div>
-                        <div className="col-9 d-flex flex-column p-0">
+                        <div className="col-xxl-9 col-xl-9 d-flex flex-column p-0">
                             <div className="row mb-4">
                                 <div className="col">
                                     <button className="btn btn-primary">Popular</button>
@@ -37,22 +37,22 @@ export default function ProfileUser() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-4">
+                                <div className="col-xxl-4 col-xl-3">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-xxl-4 col-xl-3">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-xxl-4 col-xl-3">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-xxl-4 col-xl-3">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-xxl-4 col-xl-3">
                                     <CardJob></CardJob>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-xxl-4 col-xl-3">
                                     <CardJob></CardJob>
                                 </div>
                             </div>
