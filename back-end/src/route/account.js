@@ -5,30 +5,36 @@ import { checkAccountExistance, createAccount, getAccountInfo } from "../databas
 
 export const AccountRouter = express.Router();
 
-AccountRouter.post("/signup", async (req, res) => {
-    const { name, username, password, email, cpf } = req.body;
+AccountRouter.post("/validate/:field", async (req, res) => {
+    if (!['name', 'email', 'profileName', 'cpf'].includes(req.params.field) || !Object.keys(req.body).includes(req.params.field)) {
+        return res.status(401).send('Invalid field');
+    }
 
-    if (await checkAccountExistance({username})) {
+    const exists = await checkAccountExistance(
+        {
+            [req.params.field]: req.body[req.params.field]
+        }
+    );
+
+    res.json({
+        exists
+    });
+});
+
+AccountRouter.post("/signup", async (req, res) => {
+    const { name, profileName, password, email, cpf } = req.body;
+
+    if (await checkAccountExistance({name, profileName, email, cpf})) {
         return res.json({
             ok: false,
-            message: 'Já existe um usuário com este nome.'
-        });
-    } else if (await checkAccountExistance({email})) {
-        return res.json({
-            ok: false,
-            message: 'Já existe um usuário com este email.'
-        });
-    } else if (await checkAccountExistance({cpf})) {
-        return res.json({
-            ok: false,
-            message: 'Já existe um usuário com este CPF.'
+            message: 'An account already exists with this information.'
         });
     }
 
     const hashedPassword = await hash(password, 12);
 
-    if (await createAccount({name, username, password: hashedPassword, email, cpf})) {
-        const info = await getAccountInfo({name, username, password: hashedPassword, email, cpf});
+    if (await createAccount({name, profileName, password: hashedPassword, email, cpf})) {
+        const info = await getAccountInfo({name, profileName, password: hashedPassword, email, cpf});
 
         req.session.loggedIn = true;
         req.session.accountInfo = info;
@@ -37,39 +43,39 @@ AccountRouter.post("/signup", async (req, res) => {
 
         return res.json({
             ok: true,
-            message: 'Conta criada com sucesso'
+            message: 'Account created successfully'
         });
     }
 
     res.json({
         ok: false,
-        message: 'Não foi possível processar solicitação, tente novamente depois.'
+        message: 'Could not process request, please try again.'
     });
 });
 
 AccountRouter.post("/signin", async (req, res) => {
-    const { username, password } = req.body;
+    const { name, password } = req.body;
 
-    if (!await checkAccountExistance({username})) {
+    if (!await checkAccountExistance({name})) {
         return res.json({
             ok: false,
-            message: `Usuário inválido.`
+            message: `There are no accounts registered with this name.`
         });
     }
 
-    const info = await getAccountInfo({username});
+    const info = await getAccountInfo({name});
 
     if (info === null) {
         return res.json({
             ok: false,
-            message: "Conta não encontrada."
+            message: "Unable to get account info, try again."
         });
     }
 
     if (!await compare(password, info.password)) {
         return res.json({
             ok: false,
-            message: "Senha inválida"
+            message: "Incorrect password"
         });
     }
 
@@ -79,7 +85,7 @@ AccountRouter.post("/signin", async (req, res) => {
 
     res.json({
         ok: true,
-        message: 'Logado com sucesso'
+        message: 'Logged in successfully'
     });
 });
 
