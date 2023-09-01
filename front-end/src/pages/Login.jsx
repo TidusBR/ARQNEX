@@ -1,6 +1,6 @@
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
-import { Button, TextField } from '@mui/material'
+import { Button } from '@mui/material'
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { config } from '../config'
@@ -8,13 +8,7 @@ import { useState } from "react"
 import './css/login.css'
 import './css/register.css'
 
-import { DoLogin, FacebookProvider } from '../firebase';
-
-export default function Login() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+import { DoLogin, FacebookProvider, GoogleProvider } from '../firebase';
 
 const customStyles = {
     content: {
@@ -31,28 +25,6 @@ const customStyles = {
         background: 'rgba(58, 64, 69, 0.95)',
     }
 };
-
-/**
- * @param {object} props
- * @param {React.CSSProperties | undefined} props.style 
- * @returns 
- */
-function InputField({id, label, style, type}) {
-    return (
-        <div style={{display: "flex", flexDirection: "column", ...(style??{})}}>
-            <label style={{fontWeight: "bold", fontSize: "1.2rem"}}>{label}</label>
-            <TextField type={type ?? 'text'} id={id} inputProps={{style: {height: "1rem"}}}></TextField>
-        </div>
-    )
-}
-
-InputField.propTypes = {
-    label: PropTypes.string.isRequired,
-    style: PropTypes.object,
-    id: PropTypes.string,
-    ref: PropTypes.object,
-    type: PropTypes.string
-}
 
 export default function Login({ open, setOpen }) {
   const [error, setError] = useState(undefined);

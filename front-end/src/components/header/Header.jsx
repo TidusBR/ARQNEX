@@ -12,9 +12,8 @@ import ButtonUpload from './button_upload/ButtonUpload'
 import { useState } from 'react'
 
 export default function Header({ setLoginOpen, session }) {
-    const [toggleButton, useToggleButton] = useState(false)
+    const [toggleButton, useToggleButton] = useState(false);
 
-export default function Header() {
     return (
         <div className="container-header">
             <div className="container-logo">

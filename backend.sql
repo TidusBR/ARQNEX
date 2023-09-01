@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Ago-2023 às 19:48
+-- Tempo de geração: 01-Set-2023 às 20:46
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.0.25
 
@@ -30,10 +30,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `accounts` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
-  `profileName` text NOT NULL,
+  `username` text NOT NULL,
   `password` text NOT NULL,
   `email` text NOT NULL,
-  `cpf` text NOT NULL
+  `cpf` text NOT NULL,
+  `firebase_uid` text NOT NULL,
+  `firebase_provider` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
