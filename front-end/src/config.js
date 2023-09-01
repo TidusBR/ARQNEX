@@ -1,4 +1,15 @@
-import YAML from 'yaml'
+export const config = {
+    firebase: {},
 
-const response = await fetch("/config.yml");
-export const config = YAML.parse(await response.text());
+    api: "http://localhost:3000",
+    endpoints: {
+        account: {
+            signin_firebase: "/account/signin/firebase",
+            validate: "/account/validate/",
+            signup: "/account/signup",
+            signin: "/account/signin",
+            logout: "/account/logout"
+        },
+        session: "/session/"
+    }
+}

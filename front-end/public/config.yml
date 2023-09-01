@@ -1,8 +1,0 @@
-api: "http://localhost:3000"
-endpoints:
-  account:
-    validate: "/account/validate/"
-    signup: "/account/signup"
-    signin: "/account/signin"
-    logout: "/account/logout"
-  session: "/session/"

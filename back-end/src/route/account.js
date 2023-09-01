@@ -21,20 +21,69 @@ AccountRouter.post("/validate/:field", async (req, res) => {
     });
 });
 
-AccountRouter.post("/signup", async (req, res) => {
-    const { name, profileName, password, email, cpf } = req.body;
-
-    if (await checkAccountExistance({name, profileName, email, cpf})) {
+AccountRouter.post("/signin/firebase", async (req, res) => {
+    if (req.body.name === undefined || req.body.email === undefined || req.body.uid === undefined || req.body.providerId === undefined) {
         return res.json({
             ok: false,
-            message: 'An account already exists with this information.'
+            message: "Solicitação inválida"
+        })
+    }
+    
+    const {name, email, uid, providerId} = req.body;
+
+    // Verificar se a conta existe, caso contrário cria a conta
+    if (!(await checkAccountExistance({firebase_uid: uid, firebase_provider: providerId}))) {
+        if (!(await createAccount({name, email, firebase_uid: uid, firebase_provider: providerId}))) {
+            return res.json({
+                ok: false,
+                message: 'Não foi possível criar sua conta, tente novamente.'
+            });
+        }
+    }
+
+    const info = await getAccountInfo({firebase_uid: uid, firebase_provider: providerId});
+
+    if (info === null) {
+        return res.json({
+            ok: false,
+            message: 'Conta não encontrada'
+        })
+    }
+    
+    req.session.loggedIn = true;
+    req.session.accountInfo = info;
+
+    req.session.save();
+
+    return res.json({
+        ok: true,
+        message: 'Logado com sucesso'
+    });
+});
+AccountRouter.post("/signup", async (req, res) => {
+    const { name, username, password, email, cpf } = req.body;
+
+    if (await checkAccountExistance({username})) {
+        return res.json({
+            ok: false,
+            message: 'Já existe um usuário com este nome.'
+        });
+    } else if (await checkAccountExistance({email})) {
+        return res.json({
+            ok: false,
+            message: 'Já existe um usuário com este email.'
+        });
+    } else if (await checkAccountExistance({cpf})) {
+        return res.json({
+            ok: false,
+            message: 'Já existe um usuário com este CPF.'
         });
     }
 
     const hashedPassword = await hash(password, 12);
 
-    if (await createAccount({name, profileName, password: hashedPassword, email, cpf})) {
-        const info = await getAccountInfo({name, profileName, password: hashedPassword, email, cpf});
+    if (await createAccount({name, username, password: hashedPassword, email, cpf})) {
+        const info = await getAccountInfo({name, username, password: hashedPassword, email, cpf});
 
         req.session.loggedIn = true;
         req.session.accountInfo = info;
@@ -43,39 +92,39 @@ AccountRouter.post("/signup", async (req, res) => {
 
         return res.json({
             ok: true,
-            message: 'Account created successfully'
+            message: 'Conta criada com sucesso'
         });
     }
 
     res.json({
         ok: false,
-        message: 'Could not process request, please try again.'
+        message: 'Não foi possível processar solicitação, tente novamente depois.'
     });
 });
 
 AccountRouter.post("/signin", async (req, res) => {
-    const { name, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!await checkAccountExistance({name})) {
+    if (!await checkAccountExistance({username})) {
         return res.json({
             ok: false,
-            message: `There are no accounts registered with this name.`
+            message: `Usuário inválido.`
         });
     }
 
-    const info = await getAccountInfo({name});
+    const info = await getAccountInfo({username});
 
     if (info === null) {
         return res.json({
             ok: false,
-            message: "Unable to get account info, try again."
+            message: "Conta não encontrada."
         });
     }
 
     if (!await compare(password, info.password)) {
         return res.json({
             ok: false,
-            message: "Incorrect password"
+            message: "Senha inválida"
         });
     }
 
@@ -85,7 +134,7 @@ AccountRouter.post("/signin", async (req, res) => {
 
     res.json({
         ok: true,
-        message: 'Logged in successfully'
+        message: 'Logado com sucesso'
     });
 });
 
