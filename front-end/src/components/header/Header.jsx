@@ -13,6 +13,8 @@ import { useState } from 'react'
 
 export default function Header({ setLoginOpen, session }) {
     const [toggleButton, useToggleButton] = useState(false)
+
+export default function Header() {
     return (
         <div className="container-header">
             <div className="container-logo">
@@ -75,7 +77,7 @@ export default function Header({ setLoginOpen, session }) {
                         </Link>
                     </>)
                 }
-                </div>
+            </div>
             </div>
             <div className="group-links-mobile">
                 <button className="border-0" type="button" onClick={() => {useToggleButton(!toggleButton)}}>

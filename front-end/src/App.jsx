@@ -19,6 +19,7 @@ import Cursos from "./components/menuEditPerfil/Cursos/Cursos.jsx";
 import Experiencias from "./components/menuEditPerfil/Experiencias/Experiencias.jsx";
 import EditarPerfil from "./components/menuEditPerfil/editarPerfil"; 
 
+
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [session, setSession] = useState({ loggedIn: false, account: {} });

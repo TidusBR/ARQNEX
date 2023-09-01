@@ -10,7 +10,11 @@ import './css/register.css'
 
 import { DoLogin, FacebookProvider } from '../firebase';
 
-Modal.setAppElement("#root");
+export default function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
 const customStyles = {
     content: {
