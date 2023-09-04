@@ -1,6 +1,6 @@
 import CardUser from "../components/card_user/CardUser";
 import './css/profile-user.css'
-import CardJob from "../components/card_job/CardJob";
+import CardCollection from "../components/card_job/CardCollection";
 
 export default function ProfileUser() {
     const props = {
@@ -38,22 +38,22 @@ export default function ProfileUser() {
                             </div>
                             <div className="row">
                                 <div className="col-xxl-4 col-xl-3">
-                                    <CardJob></CardJob>
+                                    <CardCollection></CardCollection>
                                 </div>
                                 <div className="col-xxl-4 col-xl-3">
-                                    <CardJob></CardJob>
+                                    <CardCollection></CardCollection>
                                 </div>
                                 <div className="col-xxl-4 col-xl-3">
-                                    <CardJob></CardJob>
+                                    <CardCollection></CardCollection>
                                 </div>
                                 <div className="col-xxl-4 col-xl-3">
-                                    <CardJob></CardJob>
+                                    <CardCollection></CardCollection>
                                 </div>
                                 <div className="col-xxl-4 col-xl-3">
-                                    <CardJob></CardJob>
+                                    <CardCollection></CardCollection>
                                 </div>
                                 <div className="col-xxl-4 col-xl-3">
-                                    <CardJob></CardJob>
+                                    <CardCollection></CardCollection>
                                 </div>
                             </div>
                         </div>

@@ -18,3 +18,13 @@
         height: 300px;
     }
 }
+
+.img-upload {
+    border: 2px dashed #DB752C;
+    cursor: pointer;
+    width: 45em;
+    height: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

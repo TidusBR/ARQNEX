@@ -6,7 +6,7 @@ export const config = {
         credentials: true
     },
     bodyParser: {
-        limit: "50mb"
+        limit: "100mb"
     },
     database: {
         host: "localhost",

@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
 import {config} from './config'
 import ProfileUser from "./pages/ProfileUser";
-import UploadDetails from "./pages/UploadDetails";
 
 import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
 import Senha from "./components/menuEditPerfil/Senha/Senha";
@@ -18,7 +17,10 @@ import Formacoes from "./components/menuEditPerfil/Formacoes/Formacoes.jsx";
 import Cursos from "./components/menuEditPerfil/Cursos/Cursos.jsx";
 import Experiencias from "./components/menuEditPerfil/Experiencias/Experiencias.jsx";
 import EditarPerfil from "./components/menuEditPerfil/editarPerfil"; 
+import Upload from "./pages/Upload";
 
+import Modal from 'react-modal';
+Modal.setAppElement("#root");
 
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
@@ -38,10 +40,10 @@ export default function App() {
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/upload" element={session.loggedIn ? <Upload /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
             {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
             <Route path="/profile" element={<ProfileUser/>}></Route>
-            <Route path="/upload-details" element={<UploadDetails/>}></Route>
             <Route path="/edit-profile/*" element={<EditarPerfil />}></Route>
               <Route path="perfil" element={<Perfil />} />
               <Route path="senha" element={<Senha />} />

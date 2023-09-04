@@ -17,6 +17,11 @@ export const config = {
             signin: "/account/signin",
             logout: "/account/logout"
         },
+        collection: {
+            upload: "/collection/upload",
+            upload_details: "/collection/upload-details",
+            list: "/collection/list"
+        },
         session: "/session/"
     }
 }

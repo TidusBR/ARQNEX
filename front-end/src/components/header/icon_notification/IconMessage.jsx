@@ -1,12 +1,12 @@
 export default function IconMessage({notification}) {
     return (
         <i className="m-0">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="45" height="40" viewBox="0 0 45 40">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="45" height="40" viewBox="0 0 45 40">
                 <defs>
                     <filter id="Ellipse_5" x="19" y="0.423" width="26" height="26" filterUnits="userSpaceOnUse">
-                    <feOffset dy="3" input="SourceAlpha"/>
+                    <feOffset dy="3"/>
                     <feGaussianBlur stdDeviation="3" result="blur"/>
-                    <feFlood flood-color="#db752c" flood-opacity="0.161"/>
+                    <feFlood floodColor="#db752c" floodOpacity="0.161"/>
                     <feComposite operator="in" in2="blur"/>
                     <feComposite in="SourceGraphic"/>
                     </filter>
