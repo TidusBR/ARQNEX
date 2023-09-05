@@ -10,6 +10,8 @@ import { config } from "./config.js";
 import { DBConn } from "./database.js";
 import { AccountRouter } from "./route/account.js";
 import { SessionRouter } from "./route/session.js";
+import { CollectionRouter } from "./route/collection.js";
+import { UploadsRouter } from "./route/uploads.js";
 
 const app = express();
 
@@ -43,13 +45,15 @@ app.use((req, res, next) => {
 })
 
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({limit: "100mb"}));
 app.use(bodyParser.json(config.bodyParser));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 
 // Routes
 app.use("/account", AccountRouter);
 app.use("/session", SessionRouter);
+app.use("/collection", CollectionRouter);
+app.use("/uploads", UploadsRouter);
 
 // Run
 app.listen(Number(process.env.PORT ?? config.devPort), () => {

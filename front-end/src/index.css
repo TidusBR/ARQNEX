@@ -8,5 +8,6 @@
 
 body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
+    width: 100vw !important;
+    overflow-x: hidden;
 }
-

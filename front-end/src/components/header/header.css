@@ -3,6 +3,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    height: 70px;
+    padding: 0 32px;
     height: 60px;
     padding: 0 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -18,6 +20,7 @@
 .container-links {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .container-logo {
@@ -38,4 +41,52 @@
 
 .button:hover {
     color: orange;
+}
+
+.group-links-mobile {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .group-links  {
+        display: none;
+    } 
+    .container-header{
+        justify-content: space-between;
+    }
+    .group-links-mobile {
+        display: block;
+    }
+    button {
+        border: 1px solid #EEEEEE;
+        background-color: transparent;
+    }
+    .sidebar {
+        background-color: white;
+        width: 102vw;
+        height: 102vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        animation: openMenu 1s;
+    }
+    i {
+        margin: 0 !important;
+    }
+    .header {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        padding: 0 32px;
+        justify-content: space-between;
+        border: 1px solid #EEE;
+    }
+    @keyframes openMenu {
+        from {
+            transform: translateX(-102vw);
+        }
+        to {
+            transform: translateX(0vw);
+        }
+    }
 }

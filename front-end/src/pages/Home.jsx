@@ -1,8 +1,11 @@
 import './css/home.css'
 import background from '../assets/Dashboard/foto-home.png'
 import CardHome from '../components/card-home/CardHome'
+import { useEffect, useState } from 'react'
+import { config } from '../config';
 
 export default function Home() {
+    const [collections, setCollections] = useState([]);
 
     const imageStyle = {
         backgroundImage: `url(${background})`,
@@ -10,11 +13,11 @@ export default function Home() {
         backgroundSize: "cover"
     }
 
-    const card = {
-        backgroundColor: "black",
-        width: "24%",
-        
-    }
+    useEffect(() => {
+        fetch(`${config.api}${config.endpoints.collection.list}`, { credentials: "include" })
+        .then(response => response.json())
+        .then(data => setCollections(data));
+    }, []);
 
     return (
         <div className="container-home">
@@ -44,10 +47,13 @@ export default function Home() {
                 <div className='row'>
                     <div className="col"></div>
                     <div className="col-10 d-flex flex-row">
-                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
-                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
-                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
-                        <CardHome name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>    
+                        {
+                            collections.map(
+                                (collection, index) => (
+                                    <CardHome collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>
+                                )
+                            )
+                        }
                     </div>
                     <div className='col'></div>
                 </div>

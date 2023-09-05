@@ -57,36 +57,3 @@ button.buttonPro{
 .active{
     color: #DB752C;
 }
-
-.center_area{
-    max-width: 50%;
-    margin: 0 auto;
-    padding: 20px;
-    margin-top: -21em;
-    margin-left: 40em;
-}
-
-.center_area label{
-    padding-top: 16px;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.input_senha .senha_label_input{
-    margin-bottom: 1.5rem;
-}
-
-.input_senha .senha_button{
-    background: #DB752C 0% 0% no-repeat padding-box;
-    width: 260px;
-    height: 48px;
-    box-shadow: 0px 3px 6px #DB752C29;
-    border-radius: 3px;
-    opacity: 1;
-    font-size: 20px;
-    text-transform: none;
-    
-}
-.input_senha .senha_button:hover{
-    background-color: #DB752C;
-}

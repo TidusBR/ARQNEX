@@ -13,21 +13,29 @@ function Perfil() {
                 <section>
                     <form action="form_perfil">
                         <div className="detalhes-foto">
+                            {/* Foto de Perfil */}
+                            <div className='foto_profile'>
+                                <img src="../../assets/fotoPerfil.png" alt="fotoPerfil" />
+                            </div>
                             {/* Upload foto perfil */}
-                            <button className="button-save-interest bg-white rounded p-2 px-5 mb-4" type="button"
-                            /* onClick={handleSubmit} */
-                            /* disabled={!isButtonEnabled} */
-                            >Alterar foto de perfil</button>
+
+                            <div className="button-form pt-1 mb-4">
+                                <button className="btn button-create btn-block text-white border-0" type="button"
+                                /* onClick={handleSubmit} */
+                                >Alterar foto de perfil</button>
+                            </div>
 
                             {/* Ambos a seguir possuem o mesmo tamanho */}
-                            <button className="button-save-interest bg-white rounded p-2 px-5 mb-4" type="button"
-                            /* onClick={handleSubmit} */
-                            /* disabled={!isButtonEnabled} */
-                            >Deletar</button>
-                            <button className="button-save-interest bg-white rounded p-2 px-5 mb-4" type="button"
-                            /* onClick={handleSubmit} */
-                            /* disabled={!isButtonEnabled} */
-                            >Desconectar</button>
+                            
+                                <button className="deletar_foto_perfil button-save-interest bg-white rounded px-4 mb-5" type="button"
+                                /* onClick={handleSubmit} */
+                                /* disabled={!isButtonEnabled} */
+                                >Deletar</button>
+                            
+                                <button className="desconectar_foto_perfil button-save-interest bg-white rounded px-4 mb-5" type="button"
+                                /* onClick={handleSubmit} */
+                                /* disabled={!isButtonEnabled} */
+                                >Desconectar</button>
                         </div>
 
                         {/* mudar o class name pra algum baseado no form do perfil
@@ -42,8 +50,9 @@ function Perfil() {
                         <div className="form-outline mb-4">
                             <label className="form-label" htmlFor="username">Nome de Usuário</label>
                             <input type="text" id="username" className="form-control form-control-md" />
+                            <span className='help-block'>URL: https://arqnex.com/matheusmoura</span>
                         </div>
-                        
+
                         <div className="form-outline mb-4">
                             <label className="form-label" htmlFor="email">Email</label>
                             <input type="text" id="email" className="form-control form-control-md" />
@@ -86,10 +95,11 @@ function Perfil() {
 
                         {/* Campo bibliografia, é um   */}
 
-                        <button className="button-save-interest bg-white rounded p-2 px-5 mb-4" type="button"
-                        /* onClick={handleSubmit} */
-                        /* disabled={!isButtonEnabled} */
-                        >Salvar</button>
+                        <div className="button-form pt-1 mb-4">
+                            <button className="btn button-create btn-block text-white border-0" type="button"
+                            /* onClick={handleSubmit} */
+                            >Salvar</button>
+                        </div>
 
                     </form>
                 </section>

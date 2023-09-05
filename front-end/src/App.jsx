@@ -7,15 +7,20 @@ import Footer from "./components/footer/Footer";
 import Login from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
-import { config } from './config'
-import Menu from './components/menuEditPerfil/Menu'
+import {config} from './config'
+import ProfileUser from "./pages/ProfileUser";
+
 import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
-import Senha from "./components/menuEditPerfil/Senha";
-import Interesses from "./components/menuEditPerfil/Interesses";
-import Formacoes from "./components/menuEditPerfil/Formacoes";
-import Cursos from "./components/menuEditPerfil/Cursos";
-import Experiencias from "./components/menuEditPerfil/Experiencias";
+import Senha from "./components/menuEditPerfil/Senha/Senha";
+import Interesses from "./components/menuEditPerfil/Interesses/Interesses.jsx";
+import Formacoes from "./components/menuEditPerfil/Formacoes/Formacoes.jsx";
+import Cursos from "./components/menuEditPerfil/Cursos/Cursos.jsx";
+import Experiencias from "./components/menuEditPerfil/Experiencias/Experiencias.jsx";
 import EditarPerfil from "./components/menuEditPerfil/editarPerfil"; 
+import Upload from "./pages/Upload";
+
+import Modal from 'react-modal';
+Modal.setAppElement("#root");
 
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
@@ -35,8 +40,11 @@ export default function App() {
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/upload" element={session.loggedIn ? <Upload /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
-            <Route path="/editarPerfil/*" element={<EditarPerfil />}></Route>
+            {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
+            <Route path="/profile" element={<ProfileUser/>}></Route>
+            <Route path="/edit-profile/*" element={<EditarPerfil />}></Route>
               <Route path="perfil" element={<Perfil />} />
               <Route path="senha" element={<Senha />} />
               <Route path="interesses" element={<Interesses />} />
