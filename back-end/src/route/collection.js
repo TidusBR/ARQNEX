@@ -50,12 +50,41 @@ CollectionRouter.post("/upload", async (req, res) => {
 
         await DBConn.execute(`INSERT INTO collections_files(collection_id, file_path) VALUES(?, ?);`, [collectionID, filePath]);
     }
+
+    return res.json({
+        ok: true,
+        collectionID
+    });
 });
 
 CollectionRouter.get("/list", async (req, res) => {
     const list = [];
 
     const result = await DBConn.execute(`SELECT * FROM collections`);
+
+    for (const collection of result[0]) {
+        collection.softwares = [];
+
+        const softwares = await DBConn.execute(`SELECT software_id FROM collections_softwares WHERE collection_id = ?;`, [collection.id]);
+
+        for (const software_id of softwares[0].map(s => s.software_id)) {
+            const software_details = await DBConn.execute(`SELECT * FROM collection_details_softwares WHERE id = ?;`, [software_id]);
+            collection.softwares.push(software_details[0][0]);
+        }
+
+        const files = await DBConn.execute(`SELECT file_path FROM collections_files WHERE collection_id = ?;`, [collection.id]);
+        collection.files = files[0].map(f => f.file_path);
+
+        list.push(collection);
+    }
+
+    return res.json(list);
+});
+
+CollectionRouter.get("/list/:author_id", async (req, res) => {
+    const list = [];
+
+    const result = await DBConn.execute(`SELECT * FROM collections WHERE author_id=?`, [req.params.author_id]);
 
     for (const collection of result[0]) {
         collection.softwares = [];

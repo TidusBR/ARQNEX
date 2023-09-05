@@ -75,9 +75,9 @@ export default function Upload() {
             >
                 <UploadDetails files={files} setShowUploadDetails={setShowUploadDetails}></UploadDetails>
             </Modal>
-            <div className="container-upload-details">
-                <div className="row">
-                    <div className="col-10 col-sm-8  m-auto my-5">
+            <div className="container-upload-details container">
+                <div className="row justify-content-md-center">
+                    <div className="col-10 col-sm-8 m-auto my-5 ">
                         <div className="col-sm">
                             <h1 className="fw-bold ">Qual seu último trabalho?</h1>
                             <h2 style={{width: "44em", wordBreak: "break-word", wordWrap: "break-word", letterSpacing: "0"}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam.</h2>

@@ -19,11 +19,14 @@ export default function Home() {
         .then(data => setCollections(data));
     }, []);
 
+    const openCollection = new URLSearchParams(window.location.search)?.get('col');
+
     return (
         <div className="container-home">
             <section>
                 <div className="row">
-                    <div className="col-1">TESTE</div>
+                    <div className="col-1 d-flex flex-column justify-content-between align-items-center">
+                    </div>
                     <div className="col" 
                         style={imageStyle}>
                         <div className="row">
@@ -45,17 +48,22 @@ export default function Home() {
             </section>
             <section className='pt-5'>
                 <div className='row'>
-                    <div className="col"></div>
-                    <div className="col-10 d-flex flex-row">
-                        {
-                            collections.map(
-                                (collection, index) => (
-                                    <CardHome collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>
-                                )
-                            )
-                        }
+                    <div className="col-10 m-auto p-0">
+                        <h3>
+                            Trabalhos de outros arquitetos
+                        </h3>
                     </div>
-                    <div className='col'></div>
+                    <div className="col-10 d-flex flex-row m-auto">
+                        <div className='row'>
+                            {
+                                collections.map(
+                                    (collection, index) => (
+                                        <CardHome isOpen={openCollection == collection.id} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>
+                                    )
+                                )
+                            }
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

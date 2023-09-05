@@ -1,9 +1,31 @@
 import express from "express";
 import { compare, hash } from "bcrypt";
 
-import { checkAccountExistance, createAccount, getAccountInfo } from "../database.js";
+import { DBConn, checkAccountExistance, createAccount, getAccountInfo } from "../database.js";
 
 export const AccountRouter = express.Router();
+
+AccountRouter.get("/:id/name", async (req, res) => {
+    const exists = await checkAccountExistance(
+        {
+            id: req.params.id
+        }
+    );
+
+    if (exists) {
+        const result = await DBConn.execute(`SELECT name FROM accounts WHERE id=?`, [req.params.id]);
+
+        return res.json({
+            ok: true,
+            name: result[0][0].name
+        });
+    }
+
+    return res.json({
+        ok: false,
+        name: null
+    })
+});
 
 AccountRouter.post("/validate/:field", async (req, res) => {
     if (!['name', 'email', 'profileName', 'cpf'].includes(req.params.field) || !Object.keys(req.body).includes(req.params.field)) {

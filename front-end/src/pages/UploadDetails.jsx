@@ -76,7 +76,11 @@ export default function UploadDetails({ files, setShowUploadDetails }) {
             })
         });
 
-        console.log(request);
+        const response = await request.json();
+
+        if (response.ok) {
+            window.location.href = `/?col=${response.collectionID}`;
+        }
 
         event.target.disabled = false;
     }
@@ -114,9 +118,9 @@ export default function UploadDetails({ files, setShowUploadDetails }) {
                                     <div className="row">
                                         {
                                             files.slice(1).map((file, index) =>
-                                                <div className="col-sm d-flex align-items-center justify-content-center" key={index}>
+                                                <div className="col-sm-3 d-flex align-items-center justify-content-center" key={index}>
                                                     <label className='img-job rounded mb-3'>
-                                                    <img src={file.uri} alt="" className="w-100" width="100%" height="100%" />
+                                                    <img src={file.uri} alt="" className="w-100" width="400px" height="100px" />
                                                     </label>
                                                 </div>
                                             )
@@ -132,7 +136,7 @@ export default function UploadDetails({ files, setShowUploadDetails }) {
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Softwares</label>
-                                    <select className="form-select" value="0" onChange={(e) => setSoftwares([...softwares, e.target.selectedOptions[0].value])}>
+                                    <select className="form-select" value="0" onChange={(e) => !softwares.includes(Number(e.target.selectedOptions[0].value)) && setSoftwares([...softwares, Number(e.target.selectedOptions[0].value)])}>
                                         <option value="" hidden></option>
                                         {
                                             uploadDetails.softwares.map(
@@ -143,11 +147,26 @@ export default function UploadDetails({ files, setShowUploadDetails }) {
                                         }
                                     </select>
                                 </div>
+                                {
+                                softwares.length > 0 &&
                                 <div className="row">
-                                    <div className="col-sm">
-                                        
+                                    <div className="row mb-4">
+                                        <div className='col-12'>
+                                            {
+                                                softwares.map((software_id, index) => (
+                                                    <span key={index} style={{border: "2px solid #EEEEEE"}} className='fw-bold p-2 rounded me-3'>
+                                                        <i className='p-0 m-0 me-2' style={{display: "none"}}>
+                                                            {/*AQUI VC RENDERIZA O SVG QUANDO O SOFTWARE ESTIVER COM ELE*/}
+                                                            {uploadDetails.softwares.find(s => s.id === software_id)?.svg}
+                                                        </i>
+                                                        {uploadDetails.softwares.find(s => s.id === software_id)?.name} 
+                                                    </span>
+                                                ))
+                                            }
+                                        </div>
                                     </div>
                                 </div>
+                                }
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Estilos</label>
                                     <select required className="form-select" value={styles} onChange={(e) => setStyles(e.target.selectedOptions[0].value)}>

@@ -15,7 +15,8 @@ export const config = {
             validate: "/account/validate/",
             signup: "/account/signup",
             signin: "/account/signin",
-            logout: "/account/logout"
+            logout: "/account/logout",
+            name: "/account/%1/name"
         },
         collection: {
             upload: "/collection/upload",

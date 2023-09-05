@@ -36,6 +36,7 @@ export default function ProfileUser() {
                                     </div>
                                 </div>
                             </div>
+                            {/*
                             <div className="row">
                                 <div className="col-xxl-4 col-xl-3">
                                     <CardCollection></CardCollection>
@@ -56,6 +57,7 @@ export default function ProfileUser() {
                                     <CardCollection></CardCollection>
                                 </div>
                             </div>
+                            */}
                         </div>
                     </div>
                     
