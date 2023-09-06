@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
 import {config} from './config'
 import ProfileUser from "./pages/ProfileUser";
+import Dashboard from "./pages/Dashboard";
 
 import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
 import Senha from "./components/menuEditPerfil/Senha/Senha";
@@ -45,12 +46,13 @@ export default function App() {
             {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
             <Route path="/profile" element={<ProfileUser/>}></Route>
             <Route path="/edit-profile/*" element={<EditarPerfil />}></Route>
-              <Route path="perfil" element={<Perfil />} />
-              <Route path="senha" element={<Senha />} />
-              <Route path="interesses" element={<Interesses />} />
-              <Route path="formacoes" element={<Formacoes />} />
-              <Route path="cursos" element={<Cursos />} />
-              <Route path="experiencias" element={<Experiencias />} />
+            <Route path="perfil" element={<Perfil />} />
+            <Route path="senha" element={<Senha />} />
+            <Route path="interesses" element={<Interesses />} />
+            <Route path="formacoes" element={<Formacoes />} />
+            <Route path="cursos" element={<Cursos />} />
+            <Route path="experiencias" element={<Experiencias />} />
+            <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
           </Routes>
         </CenterArea>
         <Footer />
