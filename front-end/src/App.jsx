@@ -30,8 +30,12 @@ export default function App() {
   useEffect(() => {
     fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
       .then(response => response.json())
-      .then(data => setSession(data));
+      .then(data => {
+        setSession(data)
+        console.log(session);});
   }, []);
+
+  
 
   return (
     <BrowserRouter>
