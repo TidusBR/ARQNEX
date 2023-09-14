@@ -62,7 +62,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="col-sm-9 m-auto">
-                    <div className="row py-4">
+                    <div className="row py-4 line-border-bottom">
                         <div className="col-sm-3">
                             <UserInfoInSearch></UserInfoInSearch>
                         </div>
@@ -70,7 +70,30 @@ export default function Dashboard() {
                             
                         </div>
                     </div>
-                        
+                    <div className="row py-4 line-border-bottom">
+                        <div className="col-sm-3">
+                            <UserInfoInSearch></UserInfoInSearch>
+                        </div>
+                        <div className="col-sm-9 bg-black">
+                            
+                        </div>
+                    </div>
+                    <div className="row py-4 line-border-bottom">
+                        <div className="col-sm-3">
+                            <UserInfoInSearch></UserInfoInSearch>
+                        </div>
+                        <div className="col-sm-9 bg-black">
+                            
+                        </div>
+                    </div>
+                    <div className="row py-4 line-border-bottom">
+                        <div className="col-sm-3">
+                            <UserInfoInSearch></UserInfoInSearch>
+                        </div>
+                        <div className="col-sm-9 bg-black">
+                            
+                        </div>
+                    </div>
                     
                 </div>
             </div>
