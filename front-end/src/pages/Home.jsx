@@ -53,7 +53,7 @@ export default function Home() {
                             Trabalhos de outros arquitetos
                         </h3>
                     </div>
-                    <div className="col-10 d-flex flex-row m-auto">
+                    <div className="col-10 m-auto">
                         <div className='row'>
                             {
                                 collections.map(

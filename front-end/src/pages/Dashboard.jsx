@@ -1,20 +1,21 @@
 import './css/dashboard.css'
-import UserInfoInSearch from "../components/user-info-in-search/UserInfoInSearch"
 import CardHome from "../components/card-home/CardHome" 
 import { useEffect, useState } from 'react'
 import { config } from '../config';
 
 export default function Dashboard() {
-
     const user = {
         name: "Watson Roberto",
         isUpgrade: false
     }
 
+    const [page, setPage] = useState(2)
+    const [limit, setLimit] = useState(1)
+
     const [collections, setCollections] = useState([]);
 
     useEffect(() => {
-        fetch(`${config.api}${config.endpoints.collection.list}`, { credentials: "include" })
+        fetch(`${config.api}${config.endpoints.collection.list}?page=${page}&limit=${limit}`, { credentials: "include" })
         .then(response => response.json())
         .then(data => setCollections(data));
     }, []);
@@ -42,7 +43,7 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                <div className="col-sm-12 mt-4 d-flex px-5 pb-4 container-filtros">
+                <div className="col-sm-12 mt-4 d-flex px-5">
                     <div className="col-sm-1">
                         <select className="form-select d-inline">
                             <option value="popular">Popular</option>
@@ -61,40 +62,21 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                <div className="col-sm-9 m-auto">
-                    <div className="row py-4 line-border-bottom">
-                        <div className="col-sm-3">
-                            <UserInfoInSearch></UserInfoInSearch>
-                        </div>
-                        <div className="col-sm-9 bg-black">
-                            
-                        </div>
+                <div className="col-sm-10 m-auto">
+                    <div className="row py-5">
+                        {
+                            collections.map(
+                                (collection, index) => (
+                                    <CardHome isOpen={openCollection == collection.id} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>
+                                )
+                            )
+                        }
+                    </div>               
+                </div>
+                <div className="col-sm-10">
+                    <div className="row">
+
                     </div>
-                    <div className="row py-4 line-border-bottom">
-                        <div className="col-sm-3">
-                            <UserInfoInSearch></UserInfoInSearch>
-                        </div>
-                        <div className="col-sm-9 bg-black">
-                            
-                        </div>
-                    </div>
-                    <div className="row py-4 line-border-bottom">
-                        <div className="col-sm-3">
-                            <UserInfoInSearch></UserInfoInSearch>
-                        </div>
-                        <div className="col-sm-9 bg-black">
-                            
-                        </div>
-                    </div>
-                    <div className="row py-4 line-border-bottom">
-                        <div className="col-sm-3">
-                            <UserInfoInSearch></UserInfoInSearch>
-                        </div>
-                        <div className="col-sm-9 bg-black">
-                            
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
         </div>
