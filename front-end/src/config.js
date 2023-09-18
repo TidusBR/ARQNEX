@@ -21,7 +21,9 @@ export const config = {
         collection: {
             upload: "/collection/upload",
             upload_details: "/collection/upload-details",
-            list: "/collection/list"
+            list: "/collection/list",
+            like: "/collection/%1/like",
+            view: "/collection/%1/view"
         },
         session: "/session/"
     }

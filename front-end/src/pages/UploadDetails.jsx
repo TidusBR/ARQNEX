@@ -131,8 +131,8 @@ export default function UploadDetails({ files, setShowUploadDetails }) {
                             </div>
                             <div className="col-md">
                                 <div className="form-outline mb-3">
-                                    <label className="form-label fw-bold" htmlFor="username">Título</label>
-                                    <input onChange={(e) => setTitle(e.target.value)} type="text" id="username" pattern="[^\s]+" title="Não use espaçamentos" className="form-control form-control-md" required/>
+                                    <label className="form-label fw-bold" htmlFor="title">Título</label>
+                                    <input onChange={(e) => setTitle(e.target.value)} type="text" id="title" className="form-control form-control-md" required/>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Softwares</label>
