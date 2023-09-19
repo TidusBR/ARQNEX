@@ -1,4 +1,3 @@
-import './card-home.css'
 import CardCollection from '../card_job/CardCollection'
 import PropTypes from 'prop-types';
 import { config } from '../../config';
