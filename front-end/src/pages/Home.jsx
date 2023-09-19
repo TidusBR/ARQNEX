@@ -3,9 +3,14 @@ import background from '../assets/Dashboard/foto-home.png'
 import CardHome from '../components/card-home/CardHome'
 import { useEffect, useState } from 'react'
 import { config } from '../config';
+import PropTypes from 'prop-types';
+import { Button } from '@mui/material';
 
-export default function Home() {
+export default function Home({ session }) {
+    // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
+    const [disablePagination, setDisablePagination] = useState(false);
     const [collections, setCollections] = useState([]);
+    const [page, setPage] = useState(1);
 
     const imageStyle = {
         backgroundImage: `url(${background})`,
@@ -14,12 +19,19 @@ export default function Home() {
     }
 
     useEffect(() => {
-        fetch(`${config.api}${config.endpoints.collection.list}`, { credentials: "include" })
+        fetch(`${config.api}${config.endpoints.collection.list}?page=${page}`, { credentials: "include" })
         .then(response => response.json())
-        .then(data => setCollections(data));
-    }, []);
+        .then(data => {
+            if (data.length === 0) {
+                setDisablePagination(true);
+                return;
+            }
+            setCollections(collections => [...collections, ...data])
+        });
+    }, [page]);
 
     const openCollection = new URLSearchParams(window.location.search)?.get('col');
+    //window.history.replaceState(null, '', window.location.pathname);
 
     return (
         <div className="container-home">
@@ -54,18 +66,27 @@ export default function Home() {
                         </h3>
                     </div>
                     <div className="col-10 m-auto">
-                        <div className='row'>
+                        <div className='row justify-content-md-left'>
                             {
                                 collections.map(
                                     (collection, index) => (
-                                        <CardHome isOpen={openCollection == collection.id} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>
+                                        <CardHome isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>
                                     )
                                 )
                             }
+                        </div>
+                    </div>
+                    <div className="col-10 m-auto p-0">
+                        <div className='row justify-content-md-center'>
+                            <Button disabled={disablePagination} onClick={() => setPage(page + 1)} style={{backgroundColor: "white", color: "black"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
     )
+}
+
+Home.propTypes = {
+    session: PropTypes.object.isRequired
 }

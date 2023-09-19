@@ -17,6 +17,8 @@ import Upload from "./pages/Upload";
 import Modal from 'react-modal';
 Modal.setAppElement("#root");
 
+//É SÓ VOCÊ PEGAR O OJBETO SESSION E PASSAR PARA OS OUTROS COMPONENTES COMO PROPRIEDADE, POR EXEMPLO
+//O PERFIL DO USUÁRIO, PRECISA SABER SE O USUÁRIO ESTÁ LOGADO, ENTÃO BASTA, PASSAR SESSION COMO UMA PROPRIEDADE PARA O COMPONENTE "ProfileUser", ler linha 48.
 export default function App() {
   
   const [isLoginOpen, setLoginOpen] = useState(false);
@@ -41,7 +43,7 @@ export default function App() {
         <CenterArea>
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home session={session} />} />
             <Route path="/upload" element={session.loggedIn ? <Upload /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
             {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
