@@ -2,23 +2,32 @@ import './css/dashboard.css'
 import CardHome from "../components/card-home/CardHome" 
 import { useEffect, useState } from 'react'
 import { config } from '../config';
+import { Button } from '@mui/material';
 
 export default function Dashboard() {
+    
     const user = {
         name: "Watson Roberto",
         isUpgrade: false
     }
 
-    const [page, setPage] = useState(2)
-    const [limit, setLimit] = useState(1)
+    // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
+    const [disablePagination, setDisablePagination] = useState(false);
+    const [page, setPage] = useState(1)
 
     const [collections, setCollections] = useState([]);
 
     useEffect(() => {
-        fetch(`${config.api}${config.endpoints.collection.list}?page=${page}&limit=${limit}`, { credentials: "include" })
+        fetch(`${config.api}${config.endpoints.collection.list}?page=${page}`, { credentials: "include" })
         .then(response => response.json())
-        .then(data => setCollections(data));
-    }, []);
+        .then(data => {
+            if (data.length === 0) {
+                setDisablePagination(true);
+                return;
+            }
+            setCollections(collections => [...collections, ...data])
+        });
+    }, [page]);
 
     const openCollection = new URLSearchParams(window.location.search)?.get('col');
 
@@ -49,7 +58,7 @@ export default function Dashboard() {
                             <option value="popular">Popular</option>
                         </select>
                     </div>
-                    <div className="col-sm-10 text-center">
+                    <div className="col-sm-9 text-center">
                         <button className="p-2 border-0 fw-bold bg-white rounded me-3 ">
                             Clássico
                         </button>
@@ -57,12 +66,12 @@ export default function Dashboard() {
                             Contemporâneo + Moderno
                         </button>
                     </div>
-                    <div className="col-sm-1">
+                    <div className="col-sm-2">
                         <input className="form-control icon-search" type="text" placeholder="Buscar"/>
                     </div>
                 </div>
 
-                <div className="col-sm-10 m-auto">
+                <div className="col-sm-10 m-auto bg-black mt-5">
                     <div className="row py-5">
                         {
                             collections.map(
@@ -73,9 +82,9 @@ export default function Dashboard() {
                         }
                     </div>               
                 </div>
-                <div className="col-sm-10">
-                    <div className="row">
-
+                <div className="col-10 m-auto p-0">
+                    <div className='row justify-content-center'>
+                        <Button disabled={disablePagination} onClick={() => setPage(page + 1)} style={{backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
                     </div>
                 </div>
             </div>
