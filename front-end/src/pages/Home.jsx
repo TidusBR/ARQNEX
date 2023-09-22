@@ -1,6 +1,6 @@
 import './css/home.css'
 import background from '../assets/Dashboard/foto-home.png'
-import CardHome from '../components/card-home/CardHome'
+import CardJob from '../components/card-job/CardJob'
 import { useEffect, useState } from 'react'
 import { config } from '../config';
 import PropTypes from 'prop-types';
@@ -29,6 +29,8 @@ export default function Home({ session }) {
             setCollections(collections => [...collections, ...data])
         });
     }, [page]);
+
+    console.log();
 
     const openCollection = new URLSearchParams(window.location.search)?.get('col');
     //window.history.replaceState(null, '', window.location.pathname);
@@ -70,7 +72,9 @@ export default function Home({ session }) {
                             {
                                 collections.map(
                                     (collection, index) => (
-                                        <CardHome isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>
+                                        <div className='col-12 col-sm-8 col-md-3 m-auto' key={index}>
+                                            <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
+                                        </div>
                                     )
                                 )
                             }
@@ -78,7 +82,8 @@ export default function Home({ session }) {
                     </div>
                     <div className="col-10 m-auto p-0">
                         <div className='row justify-content-center'>
-                            <Button disabled={disablePagination} onClick={() => setPage(page + 1)} style={{backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
+                            <Button disabled={disablePagination} onClick={() => setPage(page + 1)} 
+                            style={{backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE", display: collections.length > 4 ? "block" : "none"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
                         </div>
                     </div>
                 </div>

@@ -1,17 +1,32 @@
 import CardUser from "../components/card_user/CardUser";
+import { config } from "../config";
 import './css/profile-user.css'
-import CardCollection from "../components/card_job/CardCollection";
+import CardCollection from "../components/card-collection/CardCollection";
+import { useEffect, useState } from "react";
 
-export default function ProfileUser() {
-    const props = {
-        jobs: 7,
-        followers: 130
+export default function ProfileUser({ session }) {
+
+    let props = {
+        followers: 10,
+        jobs: 12
     }
+
+    const [collection, setCollections] = useState([])
+
+    useEffect(() => {
+        fetch(`${config.api}${config.endpoints.collection.list}`, { credentials: "include" })
+        .then(response => response.json())
+        .then(data => {
+            setCollections(data);
+        });
+    }, [])
+
+    const openCollection = new URLSearchParams(window.location.search)?.get('col');
+
     return (
         <div className="container-profile-user my-5">
             <div className="row">
-                <div className="col-1"></div>
-                <div className="col-10">
+                <div className="col-10 m-auto">
                     <div className="row">
                         <div className="col-xxl-3 col-xl-3">
                             <CardUser/>
@@ -36,33 +51,16 @@ export default function ProfileUser() {
                                     </div>
                                 </div>
                             </div>
-                            {/*
+
                             <div className="row">
-                                <div className="col-xxl-4 col-xl-3">
-                                    <CardCollection></CardCollection>
-                                </div>
-                                <div className="col-xxl-4 col-xl-3">
-                                    <CardCollection></CardCollection>
-                                </div>
-                                <div className="col-xxl-4 col-xl-3">
-                                    <CardCollection></CardCollection>
-                                </div>
-                                <div className="col-xxl-4 col-xl-3">
-                                    <CardCollection></CardCollection>
-                                </div>
-                                <div className="col-xxl-4 col-xl-3">
-                                    <CardCollection></CardCollection>
-                                </div>
-                                <div className="col-xxl-4 col-xl-3">
-                                    <CardCollection></CardCollection>
+                                <div className="col-xxl-4 col-xl-3 bg-black">
+                                    {/* <CardJob></CardJob> */}
                                 </div>
                             </div>
-                            */}
                         </div>
                     </div>
                     
                 </div>
-                <div className="col-1"></div>
             </div>
         </div>
     )

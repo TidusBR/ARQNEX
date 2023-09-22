@@ -14,7 +14,7 @@ const customStyles = {
         top: '50%',
         left: '50%',
         width: '40rem',
-        height: '50rem',
+        minHeight: '50rem',
         transform: 'translate(-50%, -50%)',
         border: "none",
         borderRadius: "10px",
@@ -35,6 +35,8 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
     const [isLiked, setIsLiked] = useState(info.isLiked);
     const [likes, setLikes] = useState(info.likes);
     const [views, setViews] = useState(info.views);
+
+    
 
     if (!imgProps)
         imgProps = {src: foto}
@@ -71,6 +73,8 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
             setLikes(data.likes);
         });
     }
+
+    
 
     return(
         <>
@@ -191,9 +195,8 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
                 </div>
             </Modal>
             <div onClick={() => setOpen(true)}>
-                <img {...imgProps} style={{width: "398px", height: "300px"}} className='card-job'/>
+                <img {...imgProps} style={{width: "100%", height: "300px"}} className='card-job'/>
             </div>
-            
         </>
     )
 }

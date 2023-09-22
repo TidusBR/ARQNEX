@@ -1,10 +1,11 @@
 import './css/dashboard.css'
-import CardHome from "../components/card-home/CardHome" 
+import CardJob from "../components/card-job/CardJob" 
 import { useEffect, useState } from 'react'
 import { config } from '../config';
 import { Button } from '@mui/material';
+import PropTypes from 'prop-types';
 
-export default function Dashboard() {
+export default function Dashboard({ session }) {
     
     const user = {
         name: "Watson Roberto",
@@ -59,7 +60,7 @@ export default function Dashboard() {
                         </select>
                     </div>
                     <div className="col-sm-9 text-center">
-                        <button className="p-2 border-0 fw-bold bg-white rounded me-3 ">
+                        <button className="p-2 border-0 fw-bold bg-white rounded me-3">
                             Clássico
                         </button>
                         <button className="p-2 border-0 fw-bold bg-white rounded">
@@ -71,12 +72,12 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                <div className="col-sm-10 m-auto bg-black mt-5">
+                <div className="col-sm-10 m-auto mt-5">
                     <div className="row py-5">
                         {
                             collections.map(
                                 (collection, index) => (
-                                    <CardHome isOpen={openCollection == collection.id} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>
+                                    <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
                                 )
                             )
                         }
@@ -84,10 +85,15 @@ export default function Dashboard() {
                 </div>
                 <div className="col-10 m-auto p-0">
                     <div className='row justify-content-center'>
-                        <Button disabled={disablePagination} onClick={() => setPage(page + 1)} style={{backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
+                        <Button disabled={disablePagination} onClick={() => setPage(page + 1)} 
+                        style={{display: (collections.length > 4) ? "block" : "none", backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
                     </div>
                 </div>
             </div>
         </div>
     )
+}
+
+Dashboard.propTypes = {
+    session: PropTypes.object.isRequired
 }

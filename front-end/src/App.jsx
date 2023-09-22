@@ -7,49 +7,47 @@ import Footer from "./components/footer/Footer";
 import Login from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
-import {config} from './config'
+import { config } from './config'
 import ProfileUser from "./pages/ProfileUser";
 import Dashboard from "./pages/Dashboard";
 import EditProfile from "./pages/EditProfile";
-
 import Upload from "./pages/Upload";
-
 import Modal from 'react-modal';
+
 Modal.setAppElement("#root");
 
-//É SÓ VOCÊ PEGAR O OJBETO SESSION E PASSAR PARA OS OUTROS COMPONENTES COMO PROPRIEDADE, POR EXEMPLO
-//O PERFIL DO USUÁRIO, PRECISA SABER SE O USUÁRIO ESTÁ LOGADO, ENTÃO BASTA, PASSAR SESSION COMO UMA PROPRIEDADE PARA O COMPONENTE "ProfileUser", ler linha 48.
 export default function App() {
-  
   const [isLoginOpen, setLoginOpen] = useState(false);
-  const [session, setSession] = useState({ loggedIn: false, account: {} });
+  const [session, setSession] = useState(null); // Inicialize com null
 
   useEffect(() => {
     fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
       .then(response => response.json())
       .then(data => {
-        setSession(data)
-        console.log("oioi");
+        setSession(data);
       });
-    }, []
-  );
+  }, []);
 
-  
+  // Renderize o componente apenas quando session não for null
+  if (session === null) {
+    return null; 
+  }
 
   return (
     <BrowserRouter>
       <>
+      {console.log(session)}
         <Header session={session} setLoginOpen={setLoginOpen} />
         <CenterArea>
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
+            {/* {FAZER VALIDAÇÕES PARA RENDERIZAR AS PÁGINAS DE ACORDO COM SUA PERMISSÃO DE SESSÃO} */}
             <Route path="/" element={<Home session={session} />} />
             <Route path="/upload" element={session.loggedIn ? <Upload /> : <Navigate to="/" />} />
-            <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
-            {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
-            <Route path="/profile" element={<ProfileUser/>}></Route>
-            <Route path="/edit-profile" element={<EditProfile />}></Route>
-            <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
+            <Route path="/register" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
+            <Route path="/profile" element={session.loggedIn ? <ProfileUser session={session} /> : <Navigate to="/" />}></Route>
+            <Route path="/edit-profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
+            <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
           </Routes>
         </CenterArea>
         <Footer />
