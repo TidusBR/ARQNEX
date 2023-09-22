@@ -77,7 +77,7 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
     
 
     return(
-        <>
+        <div className='h-100'>
             <Modal
             isOpen={open}
             onRequestClose={() => setOpen(false)}
@@ -194,10 +194,10 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
                     
                 </div>
             </Modal>
-            <div onClick={() => setOpen(true)}>
-                <img {...imgProps} style={{width: "100%", height: "300px"}} className='card-job'/>
+            <div className='h-100' onClick={() => setOpen(true)}>
+                <img {...imgProps} className='card-job'/>
             </div>
-        </>
+        </div>
     )
 }
 

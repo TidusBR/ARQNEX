@@ -36,7 +36,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <>
-      {console.log(session)}
         <Header session={session} setLoginOpen={setLoginOpen} />
         <CenterArea>
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}

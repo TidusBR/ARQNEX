@@ -83,7 +83,7 @@ export default function Home({ session }) {
                     <div className="col-10 m-auto p-0">
                         <div className='row justify-content-center'>
                             <Button disabled={disablePagination} onClick={() => setPage(page + 1)} 
-                            style={{backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE", display: collections.length > 4 ? "block" : "none"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
+                            style={{backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE", display: collections.length > 16 ? "block" : "none"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
                         </div>
                     </div>
                 </div>

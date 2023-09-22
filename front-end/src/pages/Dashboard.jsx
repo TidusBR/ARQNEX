@@ -72,12 +72,14 @@ export default function Dashboard({ session }) {
                     </div>
                 </div>
 
-                <div className="col-sm-10 m-auto mt-5">
+                <div className="col-sm-10 m-auto mt-3">
                     <div className="row py-5">
                         {
                             collections.map(
                                 (collection, index) => (
-                                    <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
+                                    <div className="col-md-6 col-lg-6 col-xl-3 mb-3" style={{height: "300px"}}>
+                                        <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
+                                    </div>
                                 )
                             )
                         }
@@ -86,7 +88,7 @@ export default function Dashboard({ session }) {
                 <div className="col-10 m-auto p-0">
                     <div className='row justify-content-center'>
                         <Button disabled={disablePagination} onClick={() => setPage(page + 1)} 
-                        style={{display: (collections.length > 4) ? "block" : "none", backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
+                        style={{display: (collections.length > 16) ? "block" : "none", backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
                     </div>
                 </div>
             </div>

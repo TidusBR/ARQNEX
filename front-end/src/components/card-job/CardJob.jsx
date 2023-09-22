@@ -4,9 +4,7 @@ import { config } from '../../config';
 
 export default function CardJob({ collection, isOpen, session }) {
     return (
-        // <div className='col col-sm-3'>
         <CardCollection session={session} isOpen={isOpen} info={collection} imgProps={{src: `${config.api}/${collection.files[0]}`}}></CardCollection>
-        // </div>
     )
 }
 
