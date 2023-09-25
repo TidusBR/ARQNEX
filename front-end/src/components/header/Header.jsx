@@ -12,8 +12,7 @@ import ButtonUpload from './button_upload/ButtonUpload'
 import { useState } from 'react'
 
 export default function Header({ setLoginOpen, session }) {
-    const [toggleButton, useToggleButton] = useState(false);
-
+    console.log(session);
     return (
         <div className="container-header row">
             <div className='d-none d-lg-block col-lg-12 h-100'>
@@ -49,65 +48,65 @@ export default function Header({ setLoginOpen, session }) {
 
                     {
                         !session.loggedIn && (
-                                                <div className="col-lg-2 col-xl-2">
-                                                    <div className="row">
-                                                        <div className="col-lg-6 col-xl-6">
-                                                            <Link className="button" onClick={() => setLoginOpen(true)}>
-                                                                Entrar
-                                                            </Link>
-                                                        </div>
-                                                        <div className="col-lg-6 col-xl-6">
-                                                            <Link className="button" to="/register">
-                                                                Cadastrar-se
-                                                            </Link>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ) || 
-                                            (
-                                                <div className="col-lg-6 col-xl-5">
-                                                    <div className="row d-flex align-items-center justify-content-between">
-                                                        <div className="col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
-                                                            <Link className="text-decoration-none" to="/become-pro">
-                                                                <BecomeUpgrade></BecomeUpgrade>
-                                                            </Link>
-                                                        </div>
-                                                        <div className="col-lg-1 col-xl-1 d-flex align-items-center justify-content-center">
-                                                            <Link to="/my-profile">
-                                                                <IconUser userImg={imgTest}></IconUser>
-                                                            </Link>
-                                                        </div>
-                                                        <div className="col-lg-1 col-xl-1 d-flex align-items-center justify-content-center">
-                                                            <Link to="/message">
-                                                                <IconMessage notification={"teste"}></IconMessage>
-                                                            </Link>
-                                                        </div>
-                                                        <div className="col-lg-1 col-xl-1 d-flex align-items-center justify-content-center">
-                                                            <Link to="/notifications">
-                                                                <IconNotification notification={"teste"}></IconNotification>
-                                                            </Link>
-                                                        </div>
-                                                        <div className="col-lg-2 col-xl-2 d-flex align-items-center justify-content-center">
-                                                            <Link to="/upload" className='text-decoration-none'>
-                                                                <ButtonUpload></ButtonUpload>
-                                                            </Link>
-                                                        </div>
-                                                        <div className='col-lg-2 col-xl-2 d-flex align-items-center justify-content-center'>
-                                                            <Link className="button" onClick={async function () {
-                                                                await fetch(`${config.api}${config.endpoints.account.logout}`, { credentials: "include" });
-                                                                window.location.href = "/";
-                                                            }}>
-                                                                Sair
-                                                            </Link>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )
+                            <div className="col-lg-2 col-xl-2">
+                                <div className="row">
+                                    <div className="col-lg-6 col-xl-6 d-flex align-items-center justify-content-center">
+                                        <Link className="button" onClick={() => setLoginOpen(true)}>
+                                            Entrar
+                                        </Link>
+                                    </div>
+                                    <div className="col-lg-6 col-xl-6 d-flex align-items-center justify-content-center">
+                                        <Link className="button text-nowrap" to="/register">
+                                            Cadastrar-se
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        ) ||
+                        (
+                            <div className="col-lg-6 col-xl-5">
+                                <div className="row d-flex align-items-center justify-content-between">
+                                    <div className="col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
+                                        <Link className="text-decoration-none" to="/become-pro">
+                                            <BecomeUpgrade></BecomeUpgrade>
+                                        </Link>
+                                    </div>
+                                    <div className="col-lg-1 col-xl-1 d-flex align-items-center justify-content-center">
+                                        <Link to="/my-profile">
+                                            <IconUser userImg={imgTest}></IconUser>
+                                        </Link>
+                                    </div>
+                                    <div className="col-lg-1 col-xl-1 d-flex align-items-center justify-content-center">
+                                        <Link to="/message">
+                                            <IconMessage notification={"teste"}></IconMessage>
+                                        </Link>
+                                    </div>
+                                    <div className="col-lg-1 col-xl-1 d-flex align-items-center justify-content-center">
+                                        <Link to="/notifications">
+                                            <IconNotification notification={"teste"}></IconNotification>
+                                        </Link>
+                                    </div>
+                                    <div className="col-lg-2 col-xl-2 d-flex align-items-center justify-content-center">
+                                        <Link to="/upload" className='text-decoration-none'>
+                                            <ButtonUpload></ButtonUpload>
+                                        </Link>
+                                    </div>
+                                    <div className='col-lg-2 col-xl-2 d-flex align-items-center justify-content-center'>
+                                        <Link className="button" onClick={async function () {
+                                            await fetch(`${config.api}${config.endpoints.account.logout}`, { credentials: "include" });
+                                            window.location.href = "/";
+                                        }}>
+                                            Sair
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        )
                     }
                 </div>
 
             </div>
-            <div className="d-block d-lg-none col-12 h-100 p-0">
+            <div className="d-block d-lg-none col-12 h-100 p-0 bg-white">
                 {/* <button className="border-0" type="button" onClick={() => { useToggleButton(!toggleButton) }}>
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
@@ -128,17 +127,68 @@ export default function Header({ setLoginOpen, session }) {
                             </button>
                         </div>
                     </div>} */}
-                <div class="collapse" id="navbarToggleExternalContent">
-                    <div class="bg-dark p-4">
-                        <h5 class="text-white h4">Collapsed content</h5>
-                        <span class="text-muted">Toggleable via the navbar brand.</span>
-                    </div>
-                </div>
-                <nav class="navbar navbar-dark bg-dark h-100 w-100 px-2">
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                <nav className="navbar" style={{ height: "70px" }}>
+                    <div className="container-fluid d-flex justify-content-end">
+                        <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                            <span className="navbar-toggler-icon"></span>
                         </button>
+                        <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                            <div className="offcanvas-header d-flex justify-content-between align-items-basline">
+                                <img className="navbar-brand p-0" src={logo} alt="Logo" />
+                                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div className="offcanvas-body">
+                                {session.loggedIn && (
+                                <div className='text-center mb-5'>
+                                    <Link to="/profile">
+                                        <img src={imgTest} style={{width: "120px", height: "120px"}} className='rounded-circle mb-2' alt="" />
+                                    </Link>
+                                    <p className='fw-bold'>{session.account.name}</p>
+                                </div>)}
+                                <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                    <li className="nav-item">
+                                        <Link className="button nav-link active " to="/">
+                                            Início
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="button nav-link" to="/">
+                                            Pessoas
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="button nav-link" to="/">
+                                            Escritórios
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="button nav-link" to="/">
+                                            Cursos
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="button nav-link type1" to="/">
+                                            Ao vivo
+                                        </Link>
+                                    </li>
+                                    {session.loggedIn && (<><li className="nav-item">
+                                        <Link className="button nav-link type1" to="/">
+                                            Mensagens
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="button nav-link type1" to="/">
+                                            Notificações
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="button nav-link type1" to="/upload">
+                                            Upload
+                                        </Link>
+                                    </li></>)}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div>
