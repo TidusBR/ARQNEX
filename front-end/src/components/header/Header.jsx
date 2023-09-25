@@ -12,7 +12,9 @@ import ButtonUpload from './button_upload/ButtonUpload'
 import { useState } from 'react'
 
 export default function Header({ setLoginOpen, session }) {
-    console.log(session);
+
+    
+
     return (
         <div className="container-header row">
             <div className='d-none d-lg-block col-lg-12 h-100'>
@@ -129,11 +131,8 @@ export default function Header({ setLoginOpen, session }) {
                     </div>} */}
                 <nav className="navbar" style={{ height: "70px" }}>
                     <div className="container-fluid d-flex justify-content-between">
-                        {!session.loggedIn && <div className='ps-3'>
-                            <Link className="button me-3" onClick={() => setLoginOpen(true)}>
-                                Entrar
-                            </Link>
-                            <Link className="button text-nowrap" to="/register">
+                        {!session.loggedIn && <div className='ps-4'>
+                            <Link style={{fontSize: "1rem"}} className="button text-nowrap" to="/register">
                                 Cadastrar-se
                             </Link>
                         </div>}
@@ -141,10 +140,10 @@ export default function Header({ setLoginOpen, session }) {
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                        <div className="offcanvas offcanvas-end"  id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                             <div className="offcanvas-header d-flex justify-content-between align-items-basline">
                                 <img className="navbar-brand p-0" src={logo} alt="Logo" />
-                                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                <button type="button" id='btn-close-menu' className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div className="offcanvas-body">
                                 {session.loggedIn && (
@@ -152,59 +151,67 @@ export default function Header({ setLoginOpen, session }) {
                                     <Link to="/profile">
                                         <img src={imgTest} style={{width: "120px", height: "120px"}} className='rounded-circle mb-2' alt="" />
                                     </Link>
-                                    <p className='fw-bold'>{session.account.name}</p>
+                                    <p>{session.account.name}</p>
                                 </div>)}
-                                <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                    <li className="nav-item">
-                                        <Link className="button nav-link active " to="/">
+                                <div className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                    <div className="nav-item">
+                                        <Link className="button nav-link" onClick={() => {
+                                            setLoginOpen(true)
+                                        }
+                                        }>
+                                            Entrar
+                                        </Link>
+                                    </div>
+                                    <div className="nav-item">
+                                        <Link className="button nav-link" to="/">
                                             Início
                                         </Link>
-                                    </li>
-                                    <li className="nav-item">
+                                    </div>
+                                    <div className="nav-item">
                                         <Link className="button nav-link" to="/">
                                             Pessoas
                                         </Link>
-                                    </li>
-                                    <li className="nav-item">
+                                    </div>
+                                    <div className="nav-item">
                                         <Link className="button nav-link" to="/">
                                             Escritórios
                                         </Link>
-                                    </li>
-                                    <li className="nav-item">
+                                    </div>
+                                    <div className="nav-item">
                                         <Link className="button nav-link" to="/">
                                             Cursos
                                         </Link>
-                                    </li>
-                                    <li className="nav-item">
+                                    </div>
+                                    <div className="nav-item">
                                         <Link className="button nav-link type1" to="/">
                                             Ao vivo
                                         </Link>
-                                    </li>
-                                    {session.loggedIn && (<><li className="nav-item">
-                                    <li className="nav-item">
+                                    </div>
+                                    {session.loggedIn && (<><div className="nav-item">
+                                    <div className="nav-item">
                                         <Link className="button nav-link type1" to="/upload">
                                             Upload
                                         </Link>
-                                    </li>
+                                    </div>
                                         <Link className="button nav-link type1" to="/">
                                             Mensagens
                                         </Link>
-                                    </li>
-                                    <li className="nav-item">
+                                    </div>
+                                    <div className="nav-item">
                                         <Link className="button nav-link type1" to="/">
                                             Notificações
                                         </Link>
-                                    </li>
-                                    <li className="nav-item">
+                                    </div>
+                                    <div className="nav-item">
                                         <Link className="button nav-link" onClick={async function () {
                                             await fetch(`${config.api}${config.endpoints.account.logout}`, { credentials: "include" });
                                             window.location.href = "/";
                                         }}>
                                             Sair
                                         </Link>
-                                    </li>
+                                    </div>
                                     </>)}
-                                </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
