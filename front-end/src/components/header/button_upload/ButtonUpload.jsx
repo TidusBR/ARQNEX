@@ -1,5 +1,5 @@
 export default function ButtonUpload() {
-    return <button className="button-upload py-1 px-3 bg-white rounded fw-bold" style={{border: "2px solid #EEEEEE"}}>
+    return <button className="button-upload d-flex align-items-center py-1 px-3 bg-white rounded fw-bold" style={{border: "2px solid #EEEEEE", fontSize: "0.8rem"}}>
         <i>
             <svg xmlns="http://www.w3.org/2000/svg" id="ic_upload" width="24" height="24" viewBox="0 0 24 24">
                 <rect id="Rectangle_27" data-name="Rectangle 27" width="24" height="24" fill="none"/>

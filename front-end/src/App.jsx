@@ -6,6 +6,7 @@ import CenterArea from "./components/center_area/CenterArea";
 import Footer from "./components/footer/Footer";
 import Login from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import { useEffect, useState } from "react";
 import { config } from './config'
 import ProfileUser from "./pages/ProfileUser";
