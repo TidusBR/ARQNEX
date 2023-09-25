@@ -128,7 +128,16 @@ export default function Header({ setLoginOpen, session }) {
                         </div>
                     </div>} */}
                 <nav className="navbar" style={{ height: "70px" }}>
-                    <div className="container-fluid d-flex justify-content-end">
+                    <div className="container-fluid d-flex justify-content-between">
+                        {!session.loggedIn && <div className='ps-3'>
+                            <Link className="button me-3" onClick={() => setLoginOpen(true)}>
+                                Entrar
+                            </Link>
+                            <Link className="button text-nowrap" to="/register">
+                                Cadastrar-se
+                            </Link>
+                        </div>}
+                        <div></div>
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                             <span className="navbar-toggler-icon"></span>
                         </button>
@@ -172,6 +181,11 @@ export default function Header({ setLoginOpen, session }) {
                                         </Link>
                                     </li>
                                     {session.loggedIn && (<><li className="nav-item">
+                                    <li className="nav-item">
+                                        <Link className="button nav-link type1" to="/upload">
+                                            Upload
+                                        </Link>
+                                    </li>
                                         <Link className="button nav-link type1" to="/">
                                             Mensagens
                                         </Link>
@@ -182,10 +196,14 @@ export default function Header({ setLoginOpen, session }) {
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="button nav-link type1" to="/upload">
-                                            Upload
+                                        <Link className="button nav-link" onClick={async function () {
+                                            await fetch(`${config.api}${config.endpoints.account.logout}`, { credentials: "include" });
+                                            window.location.href = "/";
+                                        }}>
+                                            Sair
                                         </Link>
-                                    </li></>)}
+                                    </li>
+                                    </>)}
                                 </ul>
                             </div>
                         </div>
