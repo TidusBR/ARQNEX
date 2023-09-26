@@ -51,7 +51,7 @@ export default function App() {
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
             <Route path="/" element={<Home session={session} />} />
-            <Route path="/upload" element={session.loggedIn ? <Upload /> : <Navigate to="/" />} />
+            <Route path="/upload" element={session.loggedIn ? <Upload session={session} /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
             {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
             <Route path="/profile" element={<ProfileUser/>}></Route>
