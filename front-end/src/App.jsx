@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
 import {config} from './config'
 import ProfileUser from "./pages/ProfileUser";
-import BecomePro from "./components/become_pro/BecomePro";
+import BecamePro from './components/become_pro/BecomePro'
 
 import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
 import Senha from "./components/menuEditPerfil/Senha/Senha";
@@ -52,7 +52,7 @@ export default function App() {
               <Route path="/edit-profile/formacoes" element={<Formacoes />} />
               <Route path="/edit-profile/cursos" element={<Cursos />} />
               <Route path="/edit-profile/experiencias" element={<Experiencias />} />
-            <Route path="/become-pro" element={<BecomePro />}></Route>
+            <Route path="/become-pro" element={<BecamePro />}></Route>
           </Routes>
         </CenterArea>
         <Footer />
