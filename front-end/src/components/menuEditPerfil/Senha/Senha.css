@@ -1,0 +1,27 @@
+
+.center_area{
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: -21em;
+    margin-left: 40em;
+}
+
+.center_area label{
+    padding-top: 16px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.input_senha .senha_label_input{
+    margin-bottom: 1.5rem;
+}
+
+.button-form button{
+    width: 240px;
+    height: 40px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-right: 16px;
+    font-size: 18px;
+}

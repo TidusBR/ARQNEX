@@ -12,6 +12,7 @@ import { AccountRouter } from "./route/account.js";
 import { SessionRouter } from "./route/session.js";
 import { CollectionRouter } from "./route/collection.js";
 import { UploadsRouter } from "./route/uploads.js";
+import { PaypalRouter } from "./route/paypal.js";
 
 const app = express();
 
@@ -50,10 +51,27 @@ app.use(bodyParser.json(config.bodyParser));
 app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 
 // Routes
+app.all("*", async (req, _, next) => {
+    if (req.session.loggedIn && req.session.accountInfo?.premium_level > 0) {
+        if (Date.now() - req.session.accountInfo?.premium_time > 0) {
+            await DBConn.execute(`UPDATE accounts SET premium_level = 0, premium_time = 0 WHERE id = ?;`, [
+                req.session.accountInfo.id
+            ]);
+
+            req.session.accountInfo.premium_level = 0;
+            req.session.accountInfo.premium_time = 0;
+            req.session.save();
+        }
+    }
+
+    return next();
+});
+
 app.use("/account", AccountRouter);
 app.use("/session", SessionRouter);
 app.use("/collection", CollectionRouter);
 app.use("/uploads", UploadsRouter);
+app.use("/paypal", PaypalRouter);
 
 // Run
 app.listen(Number(process.env.PORT ?? config.devPort), () => {
