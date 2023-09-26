@@ -25,6 +25,10 @@ export const config = {
             like: "/collection/%1/like",
             view: "/collection/%1/view"
         },
+        paypal: {
+            createOrder: "/paypal/create-order",
+            captureOrder: "/paypal/capture-order"
+        },
         session: "/session/"
     }
 }

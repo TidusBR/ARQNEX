@@ -1,0 +1,69 @@
+form{
+    width: 950px;
+}
+
+.detalhes-foto{
+    width: 960px;   
+    height: 122px;
+    display: flex;
+}
+
+.form-two_inline{
+    width: 50%;
+    padding-right: 16px;
+}
+
+.box_form{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-two_inline textarea{
+    width: 950px;
+    height: 182px;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    opacity: 1;
+    padding-top: 57px;
+}
+
+span.help-block{
+    color: #1D252C3D;
+    font-size: 20px;
+
+}
+
+.foto_profile{
+    width: 122px;
+    height: 122px;
+    border-radius: 50%;
+}
+
+button.deletar_foto_perfil{
+    width: 122px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #EEEEEE;
+    opacity: 1;
+    margin-top: 42px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 16px;
+}
+
+button.desconectar_foto_perfil{
+    margin-left: 16em;
+    width: 122px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    opacity: 1;
+    margin-top: 42px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 16px;
+}
+
+.box_form label{
+    margin-top: 1px;
+}
