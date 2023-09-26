@@ -153,15 +153,18 @@ export default function Header({ setLoginOpen, session }) {
                                     </Link>
                                     <p>{session.account.name}</p>
                                 </div>)}
+                                <div className=''>
+
+                                </div>
                                 <div className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                    <div className="nav-item">
+                                    {!session.loggedIn && <div className="nav-item">
                                         <Link className="button nav-link" onClick={() => {
                                             setLoginOpen(true)
                                         }
                                         }>
                                             Entrar
                                         </Link>
-                                    </div>
+                                    </div>}
                                     <div className="nav-item">
                                         <Link className="button nav-link" to="/">
                                             Início

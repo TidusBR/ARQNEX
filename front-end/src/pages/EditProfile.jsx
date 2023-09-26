@@ -1,44 +1,57 @@
 import { useEffect, useState } from "react"
+import "./css/edit-profile.css"
 
 export default function EditProfile() {
 
-    const menuOptions = [
+    const [menuOptions, setMenuOptions] = useState([
         {
             id: 1,
             name: "Perfil",
-            active: true
+            path: "/edit-profile/profile"
         },
         {
             id: 2,
             name: "Senha",
-            active: false
+            path: "/edit-profile/password"
         },
         {
             id: 3,
             name: "Interesses",
-            active: false
+            path: "/edit-profile/interests"
         },
         {
             id: 4,
             name: "Formações",
-            active: false
+            path: "/edit-profile/formations"
         },
         {
             id: 5,
             name: "Cursos",
-            active: false
+            path: "/edit-profile/courses"
         },
         {
             id: 6,
             name: "Experiências",
-            active: false
-        },
-    ]
+            path: "/edit-profile/experiences"
+        }
+    ])
 
-    const [selectedSection, setSelectedSection] = useState(1)
+    const [active, setActive] = useState({})
 
-    const onChangeColor = (e) => {
-        console.log(e.target.style.color = "#DB752C");
+    useEffect(() => {
+        menuOptions.forEach((element) => {
+            if(window.location.pathname === element.path) {
+                setActive(element.path)
+            }
+        })
+      }, []);
+
+
+
+    const changeMenu = (e) => {
+        console.log(active);
+        console.log(e.target.dataset.path);
+        setActive(e.target.dataset.path)
     }
 
     return(
@@ -57,20 +70,25 @@ export default function EditProfile() {
                     </div>
                 </div>
                 <div className="col-10 m-auto">
-                    <div className="row">
+                    <div className="row d-flex justify-content-between">
                         <div className="col-2">
                             <div style={{border: "1px solid #1D252C3D", borderRadius: "5px"}}>
                                 {
                                     menuOptions.map(
-                                        (element, index, array) => (
-                                            <a key={element.id} className="d-block text-decoration-none ps-3 py-3" 
-                                            style={{color: element.active ? "#DB752C" : "#1D252C52", cursor: "pointer", 
-                                            borderBottom: index === array.length - 1 ? "none" : "2px solid #EEEEEE"}}
-                                            onClick={onChangeColor}>{element.name}</a>
-                                        )
+                                        (element, index, array) => {
+                                            return (
+                                                <a key={element.id} data-path={element.path} className={`${element.path === active ? "menu-color-active" : ""} d-block text-decoration-none ps-3 py-3`}
+                                                style={{color: element.active === true ? "#DB752C" : "#1D252C52", cursor: "pointer", 
+                                                borderBottom: index === array.length - 1 ? "none" : "2px solid #EEEEEE"}}
+                                                onClick={changeMenu}>{element.name}</a>
+                                            )
+                                        }
                                     )
                                 }
                             </div>
+                        </div>
+                        <div className="col-8">
+                            
                         </div>
                     </div>
                 </div>
