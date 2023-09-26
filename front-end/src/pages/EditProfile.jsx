@@ -51,6 +51,9 @@ export default function EditProfile() {
     const changeMenu = (e) => {
         console.log(active);
         console.log(e.target.dataset.path);
+        location.href = location.origin + e.target.dataset.path
+        // location.pathname = e.target.dataset.path
+        console.log();
         setActive(e.target.dataset.path)
     }
 

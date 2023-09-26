@@ -15,12 +15,6 @@ import EditProfile from "./pages/EditProfile";
 import Upload from "./pages/Upload";
 import Modal from 'react-modal';
 import Page404 from './pages/Page404';
-import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
-import Senha from "./components/menuEditPerfil/Senha/Senha";
-import Interesses from "./components/menuEditPerfil/Interesses/Interesses.jsx";
-import Formacoes from "./components/menuEditPerfil/Formacoes/Formacoes.jsx";
-import Cursos from "./components/menuEditPerfil/Cursos/Cursos.jsx";
-import Experiencias from "./components/menuEditPerfil/Experiencias/Experiencias.jsx";
 
 Modal.setAppElement("#root");
 
