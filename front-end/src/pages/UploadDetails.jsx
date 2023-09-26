@@ -9,7 +9,7 @@ import { useRef } from "react";
  * 
  * @param {{files: Array<{name: string, type: string, sizeInBytes: number, buffer: ArrayBuffer, uri: string}}>} param[0] 
  */
-export default function UploadDetails({ files, setShowUploadDetails }) {
+export default function UploadDetails({ files, setShowUploadDetails, setDialogMessage }) {
     const [title, setTitle] = useState('');
     const [softwares, setSoftwares] = useState([]);
     const [styles, setStyles] = useState(0);
@@ -80,6 +80,8 @@ export default function UploadDetails({ files, setShowUploadDetails }) {
 
         if (response.ok) {
             window.location.href = `/?col=${response.collectionID}`;
+        } else {
+            setDialogMessage(response.message);
         }
 
         event.target.disabled = false;
@@ -230,5 +232,6 @@ export default function UploadDetails({ files, setShowUploadDetails }) {
 
 UploadDetails.propTypes = {
     files: PropTypes.array.isRequired,
-    setShowUploadDetails: PropTypes.func.isRequired
+    setShowUploadDetails: PropTypes.func.isRequired,
+    setDialogMessage: PropTypes.func.isRequired
 }

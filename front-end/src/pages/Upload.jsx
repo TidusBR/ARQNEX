@@ -3,6 +3,7 @@ import './css/upload-details.css'
 import PropTypes from 'prop-types'
 import UploadDetails from './UploadDetails';
 import { useState } from 'react';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText } from '@mui/material';
 
 export function UploadInput({ onChange }) {
     return (
@@ -31,12 +32,19 @@ function readFileBuffer(file) {
 }
 
 
-export default function Upload() {
+export default function Upload({ session }) {
     const [showUploadDetails, setShowUploadDetails] = useState(false);
     const [files, setFiles] = useState([]);
 
+    const [dialogMessage, setDialogMessage] = useState("");
+
     const OnUpload = async (event) => {
         const files = [];
+
+        if (!session.account.isPremium && event.target.files.length > 1) {
+            setDialogMessage("Você precisa ser PRO para fazer upload de mais de 1 arquivo.");
+            return event.preventDefault();
+        }
 
         for (const file of event.target.files) {
             const buffer = await readFileBuffer(file);
@@ -68,12 +76,29 @@ export default function Upload() {
 
     return (
         <>
+            <Dialog
+                open={dialogMessage !== ""}
+                onClose={() => setDialogMessage("")}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        { dialogMessage }
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDialogMessage("")} autoFocus>
+                        Ok
+                    </Button>
+                </DialogActions>
+            </Dialog>
             <Modal
                 isOpen={showUploadDetails}
                 onRequestClose={() => setShowUploadDetails(false)}
                 contentLabel="Detalhes de Upload"
             >
-                <UploadDetails files={files} setShowUploadDetails={setShowUploadDetails}></UploadDetails>
+                <UploadDetails files={files} setDialogMessage={setDialogMessage} setShowUploadDetails={setShowUploadDetails}></UploadDetails>
             </Modal>
             <div className="container-upload-details container">
                 <div className="row justify-content-md-center">
@@ -94,4 +119,8 @@ export default function Upload() {
             </div>
         </>
     )
+}
+
+Upload.propTypes = {
+    session: PropTypes.object.isRequired
 }
