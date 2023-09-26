@@ -27,6 +27,13 @@ CollectionRouter.post("/upload", async (req, res) => {
         return res.sendStatus(401); // Unauthorized
     }
 
+    if (req.session.accountInfo.premium_level === 0 && req.body.files.length > 1) {
+        return res.json({
+            ok: false,
+            message: "Você precisa ser PRO para fazer upload de mais de 1 arquivo."
+        });
+    }
+
     const result = await DBConn.execute(`INSERT INTO collections(author_id, title, description, styles, project, type, upload_time, views) VALUES (?, ?, ?, ?, ?, ?, ?, 0);`, [
         req.session.accountInfo.id,
         req.body.title,
