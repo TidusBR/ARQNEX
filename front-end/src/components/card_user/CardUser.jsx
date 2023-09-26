@@ -25,7 +25,7 @@ export default function CardUser() {
 
     return (
         <div className="container-card-user rounded">
-            {props.isMyProfile && <Link to="/edit-profile"><button className="edit-profile rounded p-2 px-4 fw-bold">Editar</button></Link>}
+            {props.isMyProfile && <Link to="/edit-profile/profile"><button className="edit-profile rounded p-2 px-4 fw-bold">Editar</button></Link>}
             <img src={props.url } className="img-user" alt="" />
             <div className="text-center p-5">
                 <div className="mb-4">
