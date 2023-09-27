@@ -1,3 +1,36 @@
-.texto_profile{
-    margin-left: 150px;
+
+.textoProfile h2 , .portifolio-text h2{
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+    white-space: normal;
 }
+
+.textoProfile p , .portifolio-text p {
+    color: #00000061;
+    font-size: 26px;
+}
+
+/* Dentro do seu arquivo de estilos (BecomePro.css), adicione as seguintes regras CSS: */
+
+.portifolio-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinhe à esquerda */
+    margin-top: 80px;
+    margin-right: 120px;
+
+  }
+  
+  .portifolio-img {
+    margin-left: 200px;
+    flex: 2; /* A imagem ocupará todo o espaço disponível à esquerda */
+  }
+  
+  .portifolio-text {
+    margin-right: 200px;
+    width: 40px;
+    max-width: 100%;
+    flex: 1; /* O texto ocupará o dobro do espaço em relação à imagem */
+  }
+  
