@@ -23,12 +23,13 @@
   }
   
   .portifolio-img {
-    margin-left: 200px;
+    margin-right: 200px;
+   
     flex: 2; /* A imagem ocupará todo o espaço disponível à esquerda */
   }
   
   .portifolio-text {
-    margin-right: 200px;
+    margin-left: 250px;
     width: 40px;
     max-width: 100%;
     flex: 1; /* O texto ocupará o dobro do espaço em relação à imagem */

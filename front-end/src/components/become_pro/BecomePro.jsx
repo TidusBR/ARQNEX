@@ -99,12 +99,12 @@ export default function BecomePro({ }) {
 
 
             <div className='portifolio-container'>
-                <div className='portifolio-img'>
-                    <img src={iphone_arq} alt="" />
-                </div>
                 <div className='portifolio-text'>
                     <h2>Expanda seu portifolio</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, amet. Cumque inventore quo sequi, debitis excepturi autem suscipit optio asperiores, eveniet amet quidem vel dolores enim. Reiciendis facere in alias.</p>
+                </div>
+                <div className='portifolio-img'>
+                    <img src={iphone_arq} alt="" />
                 </div>
             </div>
         </div>
