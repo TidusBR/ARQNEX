@@ -15,6 +15,8 @@ import EditProfile from "./pages/EditProfile";
 import Upload from "./pages/Upload";
 import Modal from 'react-modal';
 import Page404 from './pages/Page404';
+import ProfileForm from "./components/menu/ProfileForm";
+import PasswordForm from "./components/menu/PasswordForm";
 
 Modal.setAppElement("#root");
 
@@ -47,13 +49,16 @@ export default function App() {
             <Route path="/upload" element={session.loggedIn ? <Upload /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
             <Route path="/profile" element={session.loggedIn ? <ProfileUser session={session} /> : <Navigate to="/" />}></Route>
-            <Route path="/edit-profile" element={session.loggedIn ? <Navigate to="/edit-profile/profile" /> : <Navigate to="/" />}></Route>
-            <Route path="/edit-profile/profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
+            <Route path="/edit-profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}>
+              <Route path="profile" element={ <ProfileForm /> }></Route>
+              <Route path="password" element={ <Passwordorm /> }></Route>
+            </Route>
+            {/* <Route path="/edit-profile/profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
             <Route path="/edit-profile/password" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
             <Route path="/edit-profile/interests" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
             <Route path="/edit-profile/formations" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
             <Route path="/edit-profile/courses" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
-            <Route path="/edit-profile/experiences" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
+            <Route path="/edit-profile/experiences" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route> */}
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
             <Route path="*" element={<Page404 />}></Route>
           </Routes>

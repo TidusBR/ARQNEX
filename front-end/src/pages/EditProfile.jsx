@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { Outlet } from "react-router-dom"
+import ProfileForm from "../components/menu/ProfileForm"
 import "./css/edit-profile.css"
 
 export default function EditProfile() {
@@ -51,9 +53,8 @@ export default function EditProfile() {
     const changeMenu = (e) => {
         console.log(active);
         console.log(e.target.dataset.path);
-        location.href = location.origin + e.target.dataset.path
-        // location.pathname = e.target.dataset.path
-        console.log();
+        //location.href = location.origin + e.target.dataset.path
+        location.pathname = e.target.dataset.path
         setActive(e.target.dataset.path)
     }
 
@@ -91,7 +92,7 @@ export default function EditProfile() {
                             </div>
                         </div>
                         <div className="col-8">
-                            
+                            <Outlet/>
                         </div>
                     </div>
                 </div>
