@@ -17,6 +17,10 @@ import Modal from 'react-modal';
 import Page404 from './pages/Page404';
 import ProfileForm from "./components/menu/ProfileForm";
 import PasswordForm from "./components/menu/PasswordForm";
+import CoursesForm from "./components/menu/CoursesForm";
+import ExperiencesForm from "./components/menu/ExperiencesForm";
+import InterestsForm from "./components/menu/InterestsForm";
+import FormationsForm from "./components/menu/FormationsForm";
 
 Modal.setAppElement("#root");
 
@@ -37,8 +41,9 @@ export default function App() {
     return null; 
   }
 
-  return (
+  return (    
     <BrowserRouter>
+    
       <>
         <Header session={session} setLoginOpen={setLoginOpen} />
         <CenterArea>
@@ -51,7 +56,11 @@ export default function App() {
             <Route path="/profile" element={session.loggedIn ? <ProfileUser session={session} /> : <Navigate to="/" />}></Route>
             <Route path="/edit-profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}>
               <Route path="profile" element={ <ProfileForm /> }></Route>
-              <Route path="password" element={ <Passwordorm /> }></Route>
+              <Route path="password" element={ <PasswordForm /> }></Route>
+              <Route path="courses" element={<CoursesForm />}></Route>
+              <Route path="experiences" element={<ExperiencesForm />}></Route>
+              <Route path="interests" element={<InterestsForm />}></Route>
+              <Route path="formations" element={<FormationsForm />}></Route>
             </Route>
             {/* <Route path="/edit-profile/profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
             <Route path="/edit-profile/password" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
