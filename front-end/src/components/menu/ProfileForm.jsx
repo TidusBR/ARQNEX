@@ -10,13 +10,15 @@ export default function ProfileForm() {
                 <div className='d-flex align-items-center  justify-content-between'>
                     <div className="d-flex align-items-center">
                         <img src={foto} width={120} alt="fotoPerfil" />
-                        <button className="btn orange-background btn-block text-white border-0 px-4 py-1 mx-3" type="button"
-                        /* onClick={handleSubmit} */
-                        >Alterar foto de perfil</button>
-                        <button className="bg-white rounded border-button px-4 py-1" type="button"
-                        /* onClick={handleSubmit} */
-                        /* disabled={!isButtonEnabled} */
-                        >Deletar</button>
+                        <div className="d-flex flex-column justify-content-between d-lg-flex flex-lg-row">
+                            <button className="btn orange-background btn-block text-white border-0 px-4 py-1 mx-3" type="button"
+                            /* onClick={handleSubmit} */
+                            >Alterar foto de perfil</button>
+                            <button className="bg-white rounded border-button px-4 py-1" type="button"
+                            /* onClick={handleSubmit} */
+                            /* disabled={!isButtonEnabled} */
+                            >Deletar</button>
+                        </div>
                     </div>
                     
                     <button className="bg-white rounded border-button px-4 py-1" type="button"

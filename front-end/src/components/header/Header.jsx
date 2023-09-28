@@ -131,11 +131,11 @@ export default function Header({ setLoginOpen, session }) {
                     </div>} */}
                 <nav className="navbar" style={{ height: "70px" }}>
                     <div className="container-fluid d-flex justify-content-between">
-                        {!session.loggedIn && <div className='ps-4'>
+                        {/* {!session.loggedIn && <div className='ps-4'>
                             <Link style={{fontSize: "1rem"}} className="button text-nowrap" to="/register">
                                 Cadastrar-se
                             </Link>
-                        </div>}
+                        </div>} */}
                         <div></div>
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                             <span className="navbar-toggler-icon"></span>
@@ -157,14 +157,20 @@ export default function Header({ setLoginOpen, session }) {
 
                                 </div>
                                 <div className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                    {!session.loggedIn && <div className="nav-item">
+                                    {!session.loggedIn && <>
+                                        <div className="nav-item">
                                         <Link className="button nav-link" onClick={() => {
-                                            setLoginOpen(true)
-                                        }
+                                            setLoginOpen(true)}
                                         }>
                                             Entrar
                                         </Link>
-                                    </div>}
+                                    </div>
+                                    <div className="nav-item">
+                                        <Link className="button nav-link" to="/register">
+                                            Cadastrar-se
+                                        </Link>
+                                    </div></>
+                                    }
                                     <div className="nav-item">
                                         <Link className="button nav-link" to="/">
                                             Início
