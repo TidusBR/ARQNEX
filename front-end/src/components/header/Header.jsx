@@ -175,6 +175,31 @@ export default function Header({ setLoginOpen, session }) {
                                             Pessoas
                                         </Link>
                                     </div>
+                                    <div className="nav-item dropdown d-block d-md-none">
+                                        <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Editar perfil
+                                        </Link>
+                                        <div className="dropdown-menu border-0">
+                                            <li className='pb-2'>
+                                                <Link className="dropdown-item" to="/edit-profile/profile">Perfil</Link>
+                                            </li>
+                                            <li className='pb-2'>
+                                                <Link className="dropdown-item" to="/edit-profile/password">Senha</Link>
+                                            </li>
+                                            <li className='pb-2'>
+                                                <Link className="dropdown-item" to="/edit-profile/interests">Interesses</Link>
+                                            </li>
+                                            <li className='pb-2'>
+                                                <Link className="dropdown-item" to="/edit-profile/formations">Formações</Link>
+                                            </li>
+                                            <li className='pb-2'>
+                                                <Link className="dropdown-item" to="/edit-profile/courses">Cursos</Link>
+                                            </li>
+                                            <li>
+                                                <Link className="dropdown-item" to="/edit-profile/experiences">Experiências</Link>
+                                            </li>
+                                        </div>
+                                    </div>
                                     <div className="nav-item">
                                         <Link className="button nav-link" to="/">
                                             Escritórios
@@ -186,22 +211,22 @@ export default function Header({ setLoginOpen, session }) {
                                         </Link>
                                     </div>
                                     <div className="nav-item">
-                                        <Link className="button nav-link type1" to="/">
+                                        <Link className="button nav-link" to="/">
                                             Ao vivo
                                         </Link>
                                     </div>
                                     {session.loggedIn && (<><div className="nav-item">
                                     <div className="nav-item">
-                                        <Link className="button nav-link type1" to="/upload">
+                                        <Link className="button nav-link" to="/upload">
                                             Upload
                                         </Link>
                                     </div>
-                                        <Link className="button nav-link type1" to="/">
+                                        <Link className="button nav-link" to="/">
                                             Mensagens
                                         </Link>
                                     </div>
                                     <div className="nav-item">
-                                        <Link className="button nav-link type1" to="/">
+                                        <Link className="button nav-link" to="/">
                                             Notificações
                                         </Link>
                                     </div>

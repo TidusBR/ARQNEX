@@ -56,14 +56,14 @@ export default function EditProfile() {
     return (
         <div className="container-edit-profile py-5">
             <div className="row">
-                <div className="col-10 m-auto mb-5">
-                    <div className="d-flex justify-content-between">
-                        <div>
+                <div className="col-10 m-auto mb-3 mb-sm-5">
+                    <div className="d-flex flex-sm-row flex-column justify-content-between">
+                        <div className="mb-3 mb-sm-0">
                             <h1 className="fw-bold">Configurações de perfil</h1>
                             <h2>Edite suas informações</h2>
                         </div>
                         <button
-                            className="rounded border-0 py-3 px-4"
+                            className="rounded border-0 d-none d-sm-block py-sm-3 px-sm-4"
                             style={{ background: "#DB752C", boxShadow: "0px 3px 6px #DB752C29" }}
                         >
                             <span className="d-block text-white fw-bold title-button">Tornar-se PRO</span>
@@ -74,21 +74,21 @@ export default function EditProfile() {
                     </div>
                 </div>
                 <div className="col-10 m-auto">
-                    <div className="row d-flex justify-content-between">
-                        <div className="col-2">
-                            <div style={{ border: "1px solid #1D252C3D", borderRadius: "5px" }}>
-                                {menuOptions.map((element) => (
+                    <div className="row d-flex flex-md-row justify-content-between">
+                        <div className="d-none d-md-block col-md-4 col-lg-3 col-xxl-2">
+                            <div className="menu-options d-flex justify-content-around d-md-block mb-4 mb-md-0">
+                                {menuOptions.map((element, index, array) => (
                                     <a
                                         key={element.id}
                                         href={element.path}
                                         className={`${
                                             element.path === active ? "menu-color-active" : ""
-                                        } d-block text-decoration-none ps-3 py-3`}
+                                        } d-md-block text-decoration-none ps-3 py-3`}
                                         style={{
                                             color: element.path === active ? "#DB752C" : "#1D252C52",
                                             cursor: "pointer",
                                             borderBottom:
-                                                element.path === active ? "2px solid #DB752C" : "2px solid #EEEEEE"
+                                                element.path === active  ? "2px solid #DB752C" : !(index === array.length - 1) ? "2px solid #EEEEEE" : "none"
                                         }}
                                         onClick={(e) => changeMenu(e, element.path)}
                                     >
@@ -97,7 +97,7 @@ export default function EditProfile() {
                                 ))}
                             </div>
                         </div>
-                        <div className="col-8">
+                        <div className="col-12 col-md-8">
                             <Outlet />
                         </div>
                     </div>
