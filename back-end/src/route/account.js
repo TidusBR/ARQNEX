@@ -2,8 +2,29 @@ import express from "express";
 import { compare, hash } from "bcrypt";
 
 import { DBConn, checkAccountExistance, createAccount, getAccountInfo } from "../database.js";
+import { fetchCollectionInfos } from "./collection.js";
 
 export const AccountRouter = express.Router();
+
+
+AccountRouter.get("/profile/:username", async (req, res) => {
+    if (req.params.username === undefined || req.params.username.length === 0) {
+        return res.sendStatus(401);
+    }
+
+    const [[result]] = await DBConn.execute(`SELECT id, name, premium_level FROM accounts WHERE username=?`, [req.params.username]);
+
+    result.collections = [];
+
+    const [collections] = await DBConn.execute(`SELECT * FROM collections WHERE author_id=?`, [result.id]);
+
+    for (const collection of collections) {
+        await fetchCollectionInfos(req, collection);
+        result.collections.push(collection);
+    }
+
+    return res.json(result);
+});
 
 AccountRouter.get("/:id/name", async (req, res) => {
     const exists = await checkAccountExistance(

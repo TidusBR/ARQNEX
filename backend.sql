@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26-Set-2023 às 19:34
+-- Tempo de geração: 30-Set-2023 às 00:30
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.0.25
 
@@ -107,9 +107,15 @@ CREATE TABLE `collection_details_projects` (
 --
 
 INSERT INTO `collection_details_projects` (`id`, `name`) VALUES
-(1, 'One'),
-(2, 'Two'),
-(3, 'Three');
+(1, 'Comercial'),
+(2, 'Corporativo'),
+(3, 'Educacional'),
+(4, 'Hospitalar'),
+(5, 'Hotelaria'),
+(6, 'Interiores'),
+(7, 'Paisagismo'),
+(8, 'Residencial'),
+(9, 'Urbanismo');
 
 -- --------------------------------------------------------
 
@@ -127,9 +133,26 @@ CREATE TABLE `collection_details_softwares` (
 --
 
 INSERT INTO `collection_details_softwares` (`id`, `name`) VALUES
-(1, 'One'),
-(2, 'Two'),
-(3, 'Three');
+(1, 'Adobe After Effects'),
+(2, 'Adobe Illustrator'),
+(3, 'Adobe InDesin'),
+(4, 'Adobe Photoshop'),
+(5, 'Archicad'),
+(6, 'ARmedia'),
+(7, 'AutoCAD'),
+(8, 'CorelDRAW'),
+(9, 'Corona'),
+(10, 'Dynamo for Revit'),
+(11, 'Grasshopper 3D for Rhinoceros'),
+(12, 'Lumion'),
+(13, 'Promob'),
+(14, 'Revit'),
+(15, 'Rhinocheros 3D'),
+(16, 'SketchUp'),
+(17, 'Unreal'),
+(18, 'V-ray for SketchUp'),
+(19, 'V-ray for 3DS MAX'),
+(20, '3DS MAX');
 
 -- --------------------------------------------------------
 
@@ -147,9 +170,9 @@ CREATE TABLE `collection_details_styles` (
 --
 
 INSERT INTO `collection_details_styles` (`id`, `name`) VALUES
-(1, 'One'),
-(2, 'Two'),
-(3, 'Three');
+(1, 'Clássico'),
+(2, 'Moderno'),
+(3, 'Contemporâneo');
 
 -- --------------------------------------------------------
 
@@ -167,9 +190,11 @@ CREATE TABLE `collection_details_types` (
 --
 
 INSERT INTO `collection_details_types` (`id`, `name`) VALUES
-(1, 'One'),
-(2, 'Two'),
-(3, 'Three');
+(1, 'Arquitetônico'),
+(2, 'Interiores'),
+(3, 'Planta Baixa'),
+(4, 'Layout'),
+(5, 'Croqui');
 
 --
 -- Índices para tabelas despejadas

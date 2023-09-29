@@ -66,7 +66,7 @@ CollectionRouter.post("/upload", async (req, res) => {
     });
 });
 
-async function fetchCollectionInfos(req, collection) {
+export async function fetchCollectionInfos(req, collection) {
     collection.softwares = [];
 
     const softwares = await DBConn.execute(`SELECT software_id FROM collections_softwares WHERE collection_id = ?;`, [collection.id]);
@@ -96,19 +96,6 @@ CollectionRouter.get("/list", async (req, res) => {
     const list = [];
 
     const result = await DBConn.execute(`SELECT * FROM collections LIMIT 16 OFFSET ?`, [((req.query.page ?? 0) - 1) * 16]);
-
-    for (const collection of result[0]) {
-        await fetchCollectionInfos(req, collection);
-        list.push(collection);
-    }
-
-    return res.json(list);
-});
-
-CollectionRouter.get("/list/:author_id", async (req, res) => {
-    const list = [];
-
-    const result = await DBConn.execute(`SELECT * FROM collections WHERE author_id=?`, [req.params.author_id]);
 
     for (const collection of result[0]) {
         await fetchCollectionInfos(req, collection);
