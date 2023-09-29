@@ -17,9 +17,12 @@ export default function ProfileUser({ session }) {
         fetch(`${config.api}${config.endpoints.collection.list}/${session.account.id}`, { credentials: "include" })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             setCollections(data);
         });
     }, [])
+
+    
 
     if(collections === null) {
         return;
@@ -37,23 +40,23 @@ export default function ProfileUser({ session }) {
                         </div>
                         <div className="col-lg-9">
                             <div className="row mb-4">
-                                <div className="col-2">
-                                    <select className="form-select d-inline">
+                                <div className="col-4 col-md-3 col-xl-2">
+                                    <select className="form-select d-inline select-size">
                                         <option value="popular">Popular</option>
                                     </select>
                                 </div>
-                                <div className="col-10 d-flex flex-row-reverse align-items-center flex-start">
+                                <div className="col-8 col-md-9 col-xl-10 d-flex flex-row-reverse align-items-center flex-start">
                                     <div>
-                                        <span style={{fontSize: "1.2rem" ,color: "#000000DE"}} className="followers me-1 fw-bold">{
+                                        <span  className="followers me-1 fw-bold">{
                                             props.followers < 10 ? `0${props.followers}` : props.followers
                                         }</span>
-                                        <span style={{fontSize: "1.2rem" ,color: "#00000061"}}>Trabalhos</span>
+                                        <span className="text-job">Trabalhos</span>
                                     </div>
                                     <div className="me-4">
-                                        <span style={{fontSize: "1.2rem" ,color: "#000000DE"}} className="jobs me-1 fw-bold">{
+                                        <span  className="jobs me-1 fw-bold">{
                                             props.jobs < 10 ? `0${props.jobs}` : props.jobs
                                         }</span>
-                                        <span style={{fontSize: "1.2rem" ,color: "#00000061"}}>Trabalhos</span>
+                                        <span className="text-job">Trabalhos</span>
                                     </div>
                                 </div>
                             </div>

@@ -24,10 +24,10 @@ export default function CardUser() {
     }
 
     return (
-        <div className="container-card-user rounded">
+        <div className="container-card-user rounded mb-4">
             {props.isMyProfile && <Link to="/edit-profile/profile"><button className="edit-profile rounded p-2 px-4 fw-bold">Editar</button></Link>}
             <img src={props.url } className="img-user" alt="" />
-            <div className="text-center p-5">
+            <div className="text-center p-4 p-xxl-5">
                 <div className="mb-4">
                     <p className="name-user">{props.name}</p>
                     <p className="address-user">{props.address}</p>
@@ -36,9 +36,11 @@ export default function CardUser() {
                 {!props.isMyProfile && <button className="button-follow bg-white rounded p-2 px-5 mb-4">Seguir</button>}
                 <p className="bio-user mb-5">{props.bio}</p>
                 <p className="softwares text-start fw-bold mb-2">Softwares</p>
-                <div className="container-softwares mb-5 d-flex">
+                <div className="container-softwares mb-3 d-flex row">
                     {props.softwares.map((softwareData, index) => (
-                        <SoftwareUser key={index} icon={softwareData.icon} name={softwareData.name}/>
+                        <div className="col-6 col-sm-3 col-md-2 col-lg-12 col-xxl-6 mb-2">
+                            <SoftwareUser key={index} icon={softwareData.icon} name={softwareData.name}/>
+                        </div>
                     ))}
                 </div>
                 {!props.isMyProfile && <Link className="link-curriculo" to="/">Visualizar currículo</Link>}
