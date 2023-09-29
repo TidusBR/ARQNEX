@@ -16,7 +16,8 @@ export const config = {
             signup: "/account/signup",
             signin: "/account/signin",
             logout: "/account/logout",
-            name: "/account/%1/name"
+            name: "/account/%1/name",
+            profile: "/account/profile/"
         },
         collection: {
             upload: "/collection/upload",

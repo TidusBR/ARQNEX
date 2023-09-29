@@ -2,14 +2,12 @@ import "./card-user.css"
 import imgTest from "../../assets/card-user-test/anna.png"
 import { Link } from 'react-router-dom'
 import SoftwareUser from "../software_user/SoftwareUser"
+import PropTypes from 'prop-types';
 
-export default function CardUser() {
+export default function CardUser({ info, session }) {
     const props = {
         url: imgTest,
-        name: "Giovanna Oliveira",
         address: "São Paulo, SP",
-        isPro: true,
-        isMyProfile: true,
         bio: "Lorem ipsum dolor sit aconsetetur sadipscing elitr, sedumy eirmod tempor invidunt ut labore et.",
         softwares: [
             {
@@ -23,17 +21,19 @@ export default function CardUser() {
         ]
     }
 
+    const isMyProfile = session.account?.id === info.id;
+    
     return (
         <div className="container-card-user rounded">
-            {props.isMyProfile && <Link to="/edit-profile"><button className="edit-profile rounded p-2 px-4 fw-bold">Editar</button></Link>}
-            <img src={props.url } className="img-user" alt="" />
+            {isMyProfile && <Link to="/edit-profile"><button className="edit-profile rounded p-2 px-4 fw-bold">Editar</button></Link>}
+            <img src={ props.url } className="img-user" alt="" />
             <div className="text-center p-5">
                 <div className="mb-4">
-                    <p className="name-user">{props.name}</p>
+                    <p className="name-user">{info.name}</p>
                     <p className="address-user">{props.address}</p>
-                    {props.isPro && <p className="upgrade">PRO</p>}
+                    {info.premium_level > 0 && <p className="upgrade">PRO</p>}
                 </div>
-                {!props.isMyProfile && <button className="button-follow bg-white rounded p-2 px-5 mb-4">Seguir</button>}
+                {session.loggedIn && !isMyProfile && <button className="button-follow bg-white rounded p-2 px-5 mb-4">Seguir</button>}
                 <p className="bio-user mb-5">{props.bio}</p>
                 <p className="softwares text-start fw-bold mb-2">Softwares</p>
                 <div className="container-softwares mb-5 d-flex">
@@ -41,8 +41,13 @@ export default function CardUser() {
                         <SoftwareUser key={index} icon={softwareData.icon} name={softwareData.name}/>
                     ))}
                 </div>
-                {!props.isMyProfile && <Link className="link-curriculo" to="/">Visualizar currículo</Link>}
+                {!isMyProfile && <Link className="link-curriculo" to="/">Visualizar currículo</Link>}
             </div>
         </div>
     )
+}
+
+CardUser.propTypes = {
+    session: PropTypes.object.isRequired,
+    info: PropTypes.object.isRequired,
 }

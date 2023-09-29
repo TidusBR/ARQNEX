@@ -4,17 +4,13 @@ import { useEffect, useState } from 'react'
 import { config } from '../config';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard({ session }) {
-    
-    const user = {
-        name: "Watson Roberto",
-        isUpgrade: false
-    }
-
     // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
     const [disablePagination, setDisablePagination] = useState(false);
     const [page, setPage] = useState(1)
+    const navigate = useNavigate();
 
     const [collections, setCollections] = useState([]);
 
@@ -37,10 +33,10 @@ export default function Dashboard({ session }) {
             <div className="row">
                 <div className="col-sm-2"></div>
                 <div className="col-sm-6 mt-5 mb-5">
-                    <h1 className="fw-bold">Olá {user.name}.</h1>
+                    <h1 className="fw-bold">Olá {session.account.name}.</h1>
                     <h2 style={{fontSize: "2rem"}} className="mb-4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</h2>
                     <div className="d-flex align-items-center">
-                        <button className="rounded border-0 py-2 px-4 text-white fw-bold d-flex align-items-center justify-content-between me-4" style={{background: "#DB752C"}}>
+                        <button onClick={() => navigate("/upload")} className="rounded border-0 py-2 px-4 text-white fw-bold d-flex align-items-center justify-content-between me-4" style={{background: "#DB752C"}}>
                             <svg className="me-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <g id="ic_upload" transform="translate(-5737 43)">
                                     <rect id="Rectangle_27" data-name="Rectangle 27" width="24" height="24" transform="translate(5737 -43)" fill="none"/>
@@ -49,7 +45,7 @@ export default function Dashboard({ session }) {
                             </svg>
                             <span>Postar um trabalho</span>
                         </button>
-                        {!user.isUpgrade && <a href="#" className="upgrade" style={{fontSize: "0.8rem"}}>Fazer um upgrade, torne-se PRO</a>}
+                        {!session.account.premium_level > 0 && <a href="/become-pro" className="upgrade" style={{fontSize: "0.8rem"}}>Fazer um upgrade, torne-se PRO</a>}
                     </div>
                 </div>
 
@@ -77,7 +73,7 @@ export default function Dashboard({ session }) {
                         {
                             collections.map(
                                 (collection, index) => (
-                                    <div className="col-md-6 col-lg-6 col-xl-3 mb-3" style={{height: "300px"}}>
+                                    <div key={index} className="col-md-6 col-lg-6 col-xl-3 mb-3" style={{height: "300px"}}>
                                         <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
                                     </div>
                                 )

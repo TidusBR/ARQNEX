@@ -1,6 +1,6 @@
 import './css/home.css'
 import background from '../assets/Dashboard/foto-home.png'
-import CardHome from '../components/card-home/CardHome'
+import CardJob from '../components/card-home/CardHome'
 import { useEffect, useState } from 'react'
 import { config } from '../config';
 import PropTypes from 'prop-types';
@@ -70,7 +70,9 @@ export default function Home({ session }) {
                             {
                                 collections.map(
                                     (collection, index) => (
-                                        <CardHome isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardHome>
+                                        <div className='col-12 col-sm-8 col-md-3 m-auto' key={index}>
+                                            <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
+                                        </div>
                                     )
                                 )
                             }

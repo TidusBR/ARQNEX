@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { config } from '../config'
 import { useEffect } from "react";
 import { useRef } from "react";
+import { Icon } from "@mui/material";
 
 /**
  * 
@@ -161,7 +162,7 @@ export default function UploadDetails({ files, setShowUploadDetails, setDialogMe
                                                             {/*AQUI VC RENDERIZA O SVG QUANDO O SOFTWARE ESTIVER COM ELE*/}
                                                             {uploadDetails.softwares.find(s => s.id === software_id)?.svg}
                                                         </i>
-                                                        {uploadDetails.softwares.find(s => s.id === software_id)?.name} 
+                                                        {uploadDetails.softwares.find(s => s.id === software_id)?.name}
                                                     </span>
                                                 ))
                                             }

@@ -10,32 +10,42 @@ import { useEffect, useState } from "react";
 import {config} from './config'
 import ProfileUser from "./pages/ProfileUser";
 
-import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
-import Senha from "./components/menuEditPerfil/Senha/Senha";
-import Interesses from "./components/menuEditPerfil/Interesses/Interesses.jsx";
-import Formacoes from "./components/menuEditPerfil/Formacoes/Formacoes.jsx";
-import Cursos from "./components/menuEditPerfil/Cursos/Cursos.jsx";
-import Experiencias from "./components/menuEditPerfil/Experiencias/Experiencias.jsx";
-import EditarPerfil from "./components/menuEditPerfil/editarPerfil"; 
 import Upload from "./pages/Upload";
 
 import Modal from 'react-modal';
 import BecomePro from "./pages/BecomePro";
+
+import Page404 from './pages/Page404';
+import ProfileForm from "./components/menu/ProfileForm";
+import PasswordForm from "./components/menu/PasswordForm";
+import CoursesForm from "./components/menu/CoursesForm";
+import ExperiencesForm from "./components/menu/ExperiencesForm";
+import InterestsForm from "./components/menu/InterestsForm";
+import FormationsForm from "./components/menu/FormationsForm";
+
+import Dashboard from "./pages/Dashboard";
+import EditProfile from "./pages/EditProfile";
+
 Modal.setAppElement("#root");
 
 //É SÓ VOCÊ PEGAR O OJBETO SESSION E PASSAR PARA OS OUTROS COMPONENTES COMO PROPRIEDADE, POR EXEMPLO
 //O PERFIL DO USUÁRIO, PRECISA SABER SE O USUÁRIO ESTÁ LOGADO, ENTÃO BASTA, PASSAR SESSION COMO UMA PROPRIEDADE PARA O COMPONENTE "ProfileUser", ler linha 48.
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
-  const [session, setSession] = useState({
+
+  /**
+   * objeto session:
+   {
     loggedIn: false,
     account: {
       id: -1,
       name: "",
-      profileName: "",
+      username: "",
       isPremium: false
     }
-  });
+  }
+   */
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
     fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
@@ -43,30 +53,42 @@ export default function App() {
       .then(data => setSession(data));
   }, []);
 
+  if (session === null)
+    return;
+
   return (
     <BrowserRouter>
-      <div>
+      <>
         <Header session={session} setLoginOpen={setLoginOpen} />
         <CenterArea>
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
-            <Route path="/" element={<Home session={session} />} />
+            {/* {FAZER VALIDAÇÕES PARA RENDERIZAR AS PÁGINAS DE ACORDO COM SUA PERMISSÃO DE SESSÃO} */}
+            <Route path="/" element={session.loggedIn ? <Navigate to="/dashboard" />  : <Home session={session} />} />
             <Route path="/upload" element={session.loggedIn ? <Upload session={session} /> : <Navigate to="/" />} />
-            <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
-            {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
-            <Route path="/profile" element={<ProfileUser/>}></Route>
-            <Route path="/edit-profile" element={<EditarPerfil />}></Route>
+            <Route path="/register" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
+            <Route path="/profile/*" element={<ProfileUser session={session} />}></Route>
             <Route path="/become-pro" element={session.loggedIn && !session.account.isPremium ? <BecomePro session={session} /> : <Navigate to="/" />}></Route>
-            <Route path="perfil" element={<Perfil />} />
-            <Route path="senha" element={<Senha />} />
-            <Route path="interesses" element={<Interesses />} />
-            <Route path="formacoes" element={<Formacoes />} />
-            <Route path="cursos" element={<Cursos />} />
-            <Route path="experiencias" element={<Experiencias />} />
+            <Route path="/edit-profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}>
+              <Route path="profile" element={ <ProfileForm /> }></Route>
+              <Route path="password" element={ <PasswordForm /> }></Route>
+              <Route path="courses" element={<CoursesForm />}></Route>
+              <Route path="experiences" element={<ExperiencesForm />}></Route>
+              <Route path="interests" element={<InterestsForm />}></Route>
+              <Route path="formations" element={<FormationsForm />}></Route>
+            </Route>
+            {/* <Route path="/edit-profile/profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
+            <Route path="/edit-profile/password" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
+            <Route path="/edit-profile/interests" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
+            <Route path="/edit-profile/formations" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
+            <Route path="/edit-profile/courses" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
+            <Route path="/edit-profile/experiences" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route> */}
+            <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
+            <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </CenterArea>
         <Footer />
-      </div>
+      </>
     </BrowserRouter>
   );
 }
