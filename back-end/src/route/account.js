@@ -76,7 +76,9 @@ AccountRouter.post("/signin/firebase", async (req, res) => {
 
     // Verificar se a conta existe, caso contrário cria a conta
     if (!(await checkAccountExistance({firebase_uid: uid, firebase_provider: providerId}))) {
-        if (!(await createAccount({name, email, firebase_uid: uid, firebase_provider: providerId}))) {
+        const username = name.split(" ")[0] + "-" + String(Math.floor(Math.random() * 9999));
+
+        if (!(await createAccount({name, email, firebase_uid: uid, firebase_provider: providerId, username}))) {
             return res.json({
                 ok: false,
                 message: 'Não foi possível criar sua conta, tente novamente.'
