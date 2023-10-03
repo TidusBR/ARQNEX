@@ -7,23 +7,26 @@ export default function ProfileForm() {
         <form className="row w-100">
             <div className="detalhes-foto col-12">
                 {/* Foto de Perfil */}
-                <div className="row d-flex align-items-center">
-                    <img src={foto} className="col-2" alt="fotoPerfil" />
-                    <div className="col-10">
-                        <div className="row d-flex align-items-center justify-content-between">
-                            <button className="col-3 btn orange-background text-white border-0 py-2 px-3" type="button"
+                <div className="row d-flex flex-sm-row flex-column align-items-center">
+                    <img src={foto} className="col-6 col-sm-3 col-lg-2 mb-3 mb-sm-0" alt="fotoPerfil" />
+                    <div className="col mb-4 mb-sm-0">
+                        <div className="row d-flex align-items-center justify-content-around">
+                            <button className="col-5 col-sm-4 rounded orange-background text-white border-0 px-1 py-1 px-sm-2 py-sm-1" type="button"
                             /* onClick={handleSubmit} */
                             >Alterar foto de perfil</button>
-                            <button className="col-2 bg-white rounded border-button py-2 px-3" type="button"
+                            <button className="col-5 col-sm-4 bg-white rounded border-button px-1 py-1 px-sm-2 py-sm-1" type="button"
                             /* onClick={handleSubmit} */
                             /* disabled={!isButtonEnabled} */
                             >Deletar</button>
-                            <button className="col-2 bg-white rounded border-button py-2 px-3" type="button"
-                            /* onClick={handleSubmit} */
-                            /* disabled={!isButtonEnabled} */
-                            >Desconectar</button>
+                            
                         </div>
                     </div>
+                    {/* <div className="col">
+                        <button className="col bg-white rounded border-button py-2 px-3" type="button"
+                            /* onClick={handleSubmit} 
+                            /* disabled={!isButtonEnabled} 
+                            >Desconectar</button>
+                    </div> */}
                 </div>
             </div>
 
