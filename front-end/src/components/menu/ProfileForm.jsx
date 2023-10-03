@@ -69,7 +69,7 @@ export default function ProfileForm() {
             {/* Campo bibliografia, é um   */}
 
             <div className="mb-4 col-12 d-flex flex-row-reverse">
-                <button className="btn button-create btn-block text-white border-0 col-6 " type="button"
+                <button className="btn button-create btn-block text-white border-0 col-6 col-lg-4" type="button"
                 /* onClick={handleSubmit} */
                 >Salvar</button>
             </div>

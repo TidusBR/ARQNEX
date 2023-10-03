@@ -1,17 +1,17 @@
 export default function PasswordForm() {
-    return <>
-        <div className="form-outline mb-4">
-          <label className="form-label" htmlFor="name">Nova Senha</label>
-          <input type="text" id="name" className="form-control form-control-md" />
+    return <form className="w-100">
+        <div className="mb-4 col-12">
+          <label className="form-label" htmlFor="password">Nova Senha</label>
+          <input type="text" id="password" className="form-control form-control-md" />
         </div>
-        <div className="form-outline mb-4">
-          <label className="form-label" htmlFor="name">Digite novamente a senha</label>
-          <input type="text" id="name" className="form-control form-control-md" />
+        <div className="mb-4 col-12">
+          <label className="form-label" htmlFor="confirm-password">Digite novamente a senha</label>
+          <input type="text" id="confirm-passowrd" className="form-control form-control-md" />
         </div>
-        <div className="button-form pt-1 mb-4">
-          <button className="btn button-create btn-block text-white border-0" type="button"
-          /* onClick={handleSubmit} */
-          >Salvar</button>
+        <div className="mb-4 col-12 d-flex flex-row-reverse">
+            <button className="btn button-create btn-block text-white border-0 col-6 col-lg-4 " type="button"
+            /* onClick={handleSubmit} */
+            >Salvar</button>
         </div>
-    </>
+    </form>
 }

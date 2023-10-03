@@ -97,7 +97,7 @@ export default function EditProfile() {
                                 ))}
                             </div>
                         </div>
-                        <div className="col-12 col-md-8">
+                        <div className="col-12 col-md-8 col-xxl-9">
                             <Outlet />
                         </div>
                     </div>
