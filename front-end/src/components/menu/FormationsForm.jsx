@@ -1,20 +1,23 @@
 export default function FormationsForm() {
-    return <>
-        <div className="form-outline mb-4">
+    return <form className="w-100 row">
+
+        <div className="mb-4 col-12">
             <label className="form-label" htmlFor="escolaridade">Escolaridade</label>
             <input type="text" id="escolaridade" className="form-control form-control-md" />
         </div>
-        <div className="form-outline mb-4">
+
+        <div className="mb-4 col-12">
             <label className="form-label" htmlFor="formacao">Formação</label>
             <input type="text" id="formacao" className="form-control form-control-md" />
         </div>
-        <div className="form-outline mb-4">
+
+        <div className="mb-4 col-12">
             <label className="form-label" htmlFor="escola">Instituição de Ensino</label>
             <input type="text" id="escola" className="form-control form-control-md" />
         </div>
 
         {/* Form Select */}
-        <div className='select_form'>
+        {/* <div className='select_form'>
             <label for="situacao">Situação</label>
             <br />
             <select className="situacao" id="situacao">
@@ -22,34 +25,47 @@ export default function FormationsForm() {
                 <option value="incompleto">Incompleto</option>
                 <option value="cursando">Cursando</option>
             </select>
+        </div> */}
+        <div className="mb-4 col-12">
+            <label for="situacao">Situação</label>
+            <select required className="form-select" id="situacao">
+                <option value="" hidden></option>
+                <option value="Incompleto">Incompleto</option>
+                <option value="Cursando">Cursando</option>
+                <option value="Completo">Completo</option>
+            </select>
         </div>
-        <div className='box_form'>
-            <div className="form-two_inline">
-                <label className="form-label" htmlFor="anoInicio">Ano de ínicio</label>
-                <input type="text" id="anoInicio" className="form-control form-control-md" />
+        
+        <div className="col-12 mb-4">
+            <div className="row mb-4">
+                <div className="col-12 col-sm-6">
+                    <label className="form-label" htmlFor="anoInicio">Ano de ínicio</label>
+                    <input type="number" id="anoInicio" className="form-control form-control-md" />
+                </div>
+
+                <div className="col-12 col-sm-6">
+                    <label className="form-label" htmlFor="anoTermino">Ano de Término</label>
+                    <input type="number" id="anoTermino" className="form-control form-control-md" />
+                </div>
             </div>
-            <div className="form-two_inline">
-                <label className="form-label" htmlFor="anoTermino">Ano de Término</label>
-                <input type="text" id="anoTermino" className="form-control form-control-md" />
-            </div>
-            <div className="form-two_inline">
-                <label className="form-label" htmlFor="turno">Turno</label>
-                <input type="text" id="turno" className="form-control form-control-md" />
-            </div>
-            <div className="form-two_inline">
-                <label className="form-label" htmlFor="semestre">Semestre</label>
-                <input type="text" id="semestre" className="form-control form-control-md" />
+            <div className="row">
+                <div className="col-12 col-sm-6">
+                    <label className="form-label" htmlFor="turno">Turno</label>
+                    <input type="text" id="turno" className="form-control form-control-md" />
+                </div>
+
+                <div className="col-12 col-sm-6">
+                    <label className="form-label" htmlFor="semestre">Semestre</label>
+                    <input type="text" id="semestre" className="form-control form-control-md" />
+                </div>
             </div>
         </div>
-        <div className="button_add_mais">
-            <button className="btn_add_mais btn-block text-black border-dashed" type="button"
-            /* onClick={handleSubmit} */
-            >Adicionar mais</button>
+
+        <div className="mb-4 col-12">
+            <div className="row d-flex justify-content-between">
+                <button className="btn btn-block col-12 col-md-4 mb-3 mb-md-0" style={{border: "dashed 1px #dee2e6"}} type="button">Adicionar mais</button>
+                <button className="btn button-create btn-block text-white border-0 col-12 col-md-4 " type="button">Salvar</button>
+            </div>
         </div>
-        <div className="button-form pt-1 mb-4">
-            <button className="btn_salvar button-create btn-block text-white border-0" type="button"
-            /* onClick={handleSubmit} */
-            >Salvar</button>
-        </div>
-    </>
+    </form>
 }
