@@ -38,7 +38,7 @@ export default function FormationsForm() {
         
         <div className="col-12 mb-4">
             <div className="row mb-4">
-                <div className="col-12 col-sm-6">
+                <div className="col-12 col-sm-6 mb-4 mb-sm-0">
                     <label className="form-label" htmlFor="anoInicio">Ano de ínicio</label>
                     <input type="number" id="anoInicio" className="form-control form-control-md" />
                 </div>
@@ -49,7 +49,7 @@ export default function FormationsForm() {
                 </div>
             </div>
             <div className="row">
-                <div className="col-12 col-sm-6">
+                <div className="col-12 col-sm-6 mb-4 mb-sm-0">
                     <label className="form-label" htmlFor="turno">Turno</label>
                     <input type="text" id="turno" className="form-control form-control-md" />
                 </div>
@@ -61,11 +61,9 @@ export default function FormationsForm() {
             </div>
         </div>
 
-        <div className="mb-4 col-12">
-            <div className="row d-flex justify-content-between">
-                <button className="btn btn-block col-12 col-md-4 mb-3 mb-md-0" style={{border: "dashed 1px #dee2e6"}} type="button">Adicionar mais</button>
-                <button className="btn button-create btn-block text-white border-0 col-12 col-md-4 " type="button">Salvar</button>
-            </div>
+        <div className="d-flex justify-content-between flex-column flex-md-row">
+            <button className="btn btn-block col-12 col-md-4 mb-3 mb-md-0" style={{border: "dashed 1px #dee2e6"}} type="button">Adicionar mais</button>
+            <button className="btn button-create btn-block text-white border-0 col-12 col-md-4 " type="button">Salvar</button>
         </div>
     </form>
 }
