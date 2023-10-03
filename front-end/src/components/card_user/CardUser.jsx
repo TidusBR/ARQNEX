@@ -1,7 +1,7 @@
 import "./card-user.css"
 import imgTest from "../../assets/card-user-test/anna.png"
 import { Link } from 'react-router-dom'
-import SoftwareUser from "../software_user/SoftwareUser"
+import SoftwareUser from "../software-user/SoftwareUser"
 
 export default function CardUser() {
     const props = {

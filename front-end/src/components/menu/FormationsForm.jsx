@@ -2,32 +2,22 @@ export default function FormationsForm() {
     return <form className="w-100 row">
 
         <div className="mb-4 col-12">
-            <label className="form-label" htmlFor="escolaridade">Escolaridade</label>
+            <label className="form-label fw-bold" htmlFor="escolaridade">Escolaridade</label>
             <input type="text" id="escolaridade" className="form-control form-control-md" />
         </div>
 
         <div className="mb-4 col-12">
-            <label className="form-label" htmlFor="formacao">Formação</label>
+            <label className="form-label fw-bold" htmlFor="formacao">Formação</label>
             <input type="text" id="formacao" className="form-control form-control-md" />
         </div>
 
         <div className="mb-4 col-12">
-            <label className="form-label" htmlFor="escola">Instituição de Ensino</label>
+            <label className="form-label fw-bold" htmlFor="escola">Instituição de Ensino</label>
             <input type="text" id="escola" className="form-control form-control-md" />
         </div>
 
-        {/* Form Select */}
-        {/* <div className='select_form'>
-            <label for="situacao">Situação</label>
-            <br />
-            <select className="situacao" id="situacao">
-                <option value="completo">Completo</option>
-                <option value="incompleto">Incompleto</option>
-                <option value="cursando">Cursando</option>
-            </select>
-        </div> */}
         <div className="mb-4 col-12">
-            <label htmlFor="situacao">Situação</label>
+            <label htmlFor="situacao" className="fw-bold">Situação</label>
             <select required className="form-select" id="situacao">
                 <option value="" hidden></option>
                 <option value="Incompleto">Incompleto</option>
@@ -36,7 +26,7 @@ export default function FormationsForm() {
             </select>
         </div>
         
-        <div className="col-12 mb-4">
+        {/* <div className="col-12 mb-4">
             <div className="row mb-4">
                 <div className="col-12 col-sm-6 mb-4 mb-sm-0">
                     <label className="form-label" htmlFor="anoInicio">Ano de ínicio</label>
@@ -59,7 +49,27 @@ export default function FormationsForm() {
                     <input type="text" id="semestre" className="form-control form-control-md" />
                 </div>
             </div>
-        </div>
+        </div> */}
+
+            <div className="col-12 col-sm-6 mb-4">
+                <label className="form-label fw-bold" htmlFor="anoInicio">Ano de ínicio</label>
+                <input type="number" id="anoInicio" className="form-control form-control-md" />
+            </div>
+
+            <div className="col-12 col-sm-6 mb-4">
+                <label className="form-label fw-bold" htmlFor="anoTermino">Ano de Término</label>
+                <input type="number" id="anoTermino" className="form-control form-control-md" />
+            </div>
+
+            <div className="col-12 col-sm-6 mb-4">
+                <label className="form-label fw-bold" htmlFor="turno">Turno</label>
+                <input type="text" id="turno" className="form-control form-control-md" />
+            </div>
+
+            <div className="col-12 col-sm-6 mb-4">
+                <label className="form-label fw-bold" htmlFor="semestre">Semestre</label>
+                <input type="text" id="semestre" className="form-control form-control-md" />
+            </div>
 
         <div className="d-flex justify-content-between flex-column flex-md-row">
             <button className="btn btn-block col-12 col-md-4 mb-3 mb-md-0" style={{border: "dashed 1px #dee2e6"}} type="button">Adicionar mais</button>

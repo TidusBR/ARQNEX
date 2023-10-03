@@ -25,44 +25,44 @@ export default function ProfileForm() {
             </div>
 
             <div className="mb-4 col-12">
-                <label className="form-label" htmlFor="name">Nome</label>
+                <label className="form-label fw-bold" htmlFor="name">Nome</label>
                 <input type="text" id="name" className="form-control form-control-md" />
             </div>
 
             <div className="mb-4 col-12">
-                <label className="form-label" htmlFor="username">Nome de Usuário</label>
+                <label className="form-label fw-bold" htmlFor="username">Nome de Usuário</label>
                 <input type="text" id="username" className="form-control form-control-md" />
                 <span className='help-block' style={{fontSize: "0.8rem", color: "#1d252c52"}}>URL: https://arqnex.com/matheusmoura</span>
             </div>
 
             <div className="mb-4 col-12">
-                <label className="form-label" htmlFor="email">Email</label>
+                <label className="form-label fw-bold" htmlFor="email">Email</label>
                 <input type="email" id="email" className="form-control form-control-md" />
             </div>
 
             <div className="mb-4 col-12">
-                <label className="form-label" htmlFor="cep">Cep</label>
+                <label className="form-label fw-bold" htmlFor="cep">Cep</label>
                 <input type="text" id="cep" className="form-control form-control-md" />
             </div>
 
             <div className="mb-4 col-12">
-                <label className="form-label" htmlFor="rua">Rua</label>
+                <label className="form-label fw-bold" htmlFor="rua">Rua</label>
                 <input type="text" id="rua" className="form-control form-control-md" />
             </div>
             {/* Adicionar paramentro de numero */}
             <div className="mb-4 col-12">
-                <label className="form-label" htmlFor="numero-casa">Número</label>
+                <label className="form-label fw-bold" htmlFor="numero-casa">Número</label>
                 <input type="text" id="numero-casa" className="form-control form-control-md" />
             </div>
 
             <div className="mb-4 col-12">
-                <label className="form-label" htmlFor="cidade">Cidade</label>
+                <label className="form-label fw-bold" htmlFor="cidade">Cidade</label>
                 <input type="text" id="cidade" className="form-control form-control-md" />
             </div>
 
             {/* Adicionar um parametro de telefone, como (55) 00 0 0000-0000  */}
             <div className="mb-4 col-12">
-                <label className="form-label" htmlFor="bio">Biografia</label>
+                <label className="form-label fw-bold" htmlFor="bio">Biografia</label>
                 <textarea className="form-control" id="bio" rows="3"></textarea>
             </div>
 

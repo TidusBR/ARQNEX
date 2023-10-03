@@ -1,26 +1,24 @@
 export default function CoursesForm() {
     return <form className="w-100 row">
+
         <div className="mb-4 col-12">
-            <label className="form-label" htmlFor="curso">Curso</label>
+            <label className="form-label fw-bold" htmlFor="curso">Curso</label>
             <input type="text" id="curso" className="form-control form-control-md" />
         </div>
 
         <div className="mb-4 col-12">
-            <label className="form-label" htmlFor="instituicao">Instituição</label>
+            <label className="form-label fw-bold" htmlFor="instituicao">Instituição</label>
             <input type="text" id="instituicao" className="form-control form-control-md" />
         </div>
 
-        <div className='mb-4 col-12'>
-            <div className="row">
-                <div className="col-12 col-sm-6  mb-4 mb-sm-0">
-                    <label className="form-label" htmlFor="cargaHoraria">Carga horária</label>
-                    <input type="text" id="cargaHoraria" className="form-control form-control-md" />
-                </div>
-                <div className="col-12 col-sm-6">
-                    <label className="form-label" htmlFor="anoConclusao">Ano de conclusão</label>
-                    <input type="number" id="anoConclusao" className="form-control form-control-md" />
-                </div>
-            </div>
+        <div className="col-12 col-sm-6 mb-4">
+            <label className="form-label fw-bold" htmlFor="cargaHoraria">Carga horária</label>
+            <input type="text" id="cargaHoraria" className="form-control form-control-md" />
+        </div>
+
+        <div className="col-12 col-sm-6 mb-4">
+            <label className="form-label fw-bold" htmlFor="anoConclusao">Ano de conclusão</label>
+            <input type="number" id="anoConclusao" className="form-control form-control-md" />
         </div>
 
         <div className="d-flex justify-content-between flex-column flex-md-row">

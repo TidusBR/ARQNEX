@@ -3,6 +3,7 @@ import { config } from '../../config'
 import { useEffect } from "react";
 import { useRef } from "react";
 
+
 export default function InterestsForm() {
     const [softwares, setSoftwares] = useState([]);
     const [styles, setStyles] = useState(0);
@@ -49,11 +50,19 @@ export default function InterestsForm() {
                 {
                     softwares.map((software_id, index) => (
                         <span key={index} style={{border: "2px solid #EEEEEE", display: "inline-block"}} className='fw-bold p-2 rounded me-3 mb-3'>
-                            <i className='p-0 m-0 me-2' style={{display: "none"}}>
-                                {/*AQUI VC RENDERIZA O SVG QUANDO O SOFTWARE ESTIVER COM ELE*/}
-                                {uploadDetails.softwares.find(s => s.id === software_id)?.svg}
-                            </i>
-                            {uploadDetails.softwares.find(s => s.id === software_id)?.name} 
+                            <div className="d-flex align-items-center">
+                                <i className='p-0 me-1' style={{display: "none"}}>
+                                    {/*AQUI VC RENDERIZA O SVG QUANDO O SOFTWARE ESTIVER COM ELE*/}
+                                    {console.log(uploadDetails)}
+                                    {uploadDetails.softwares.find(s => s.id === software_id)?.svg}
+                                </i>
+                                {uploadDetails.softwares.find(s => s.id === software_id)?.name} 
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" className="ms-1" onClick={(e) => {
+                                    console.log(e.target);
+                                }}>
+                                    <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                                </svg>
+                            </div>
                         </span>
                     ))
                 }
