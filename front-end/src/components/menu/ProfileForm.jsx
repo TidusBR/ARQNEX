@@ -21,74 +21,55 @@ export default function ProfileForm() {
                             
                         </div>
                     </div>
-                    {/* <div className="col">
-                        <button className="col bg-white rounded border-button py-2 px-3" type="button"
-                            /* onClick={handleSubmit} 
-                            /* disabled={!isButtonEnabled} 
-                            >Desconectar</button>
-                    </div> */}
                 </div>
             </div>
 
-            {/* mudar o class name pra algum baseado no form do perfil
-                Os quatro primeiros campos, que vão até o fim da tela
-                alterar os primeiros campos de acordo com o que foi feito com a pagina register
-                */}
-            <div className="form-outline mb-4">
+            <div className="mb-4 col-12">
                 <label className="form-label" htmlFor="name">Nome</label>
                 <input type="text" id="name" className="form-control form-control-md" />
             </div>
 
-            <div className="form-outline mb-4">
+            <div className="mb-4 col-12">
                 <label className="form-label" htmlFor="username">Nome de Usuário</label>
                 <input type="text" id="username" className="form-control form-control-md" />
-                <span className='help-block'>URL: https://arqnex.com/matheusmoura</span>
+                <span className='help-block' style={{fontSize: "0.8rem", color: "#1d252c52"}}>URL: https://arqnex.com/matheusmoura</span>
             </div>
 
-            <div className="form-outline mb-4">
+            <div className="mb-4 col-12">
                 <label className="form-label" htmlFor="email">Email</label>
-                <input type="text" id="email" className="form-control form-control-md" />
+                <input type="email" id="email" className="form-control form-control-md" />
             </div>
 
+            <div className="mb-4 col-12">
+                <label className="form-label" htmlFor="cep">Cep</label>
+                <input type="text" id="cep" className="form-control form-control-md" />
+            </div>
 
+            <div className="mb-4 col-12">
+                <label className="form-label" htmlFor="rua">Rua</label>
+                <input type="text" id="rua" className="form-control form-control-md" />
+            </div>
+            {/* Adicionar paramentro de numero */}
+            <div className="mb-4 col-12">
+                <label className="form-label" htmlFor="numero-casa">Número</label>
+                <input type="text" id="numero-casa" className="form-control form-control-md" />
+            </div>
 
-
-            {/* Os quatro ultimos campos são a seguir, sendo dois deles por linha  
-                Adicionar os paramentros de cep como 000000-00
-                */}
-            <div className='box_form'>
-                <div className="form-two_inline">
-                    <label className="form-label" htmlFor="cep">Cep</label>
-                    <input type="text" id="cep" className="form-control form-control-md" />
-                </div>
-
-                <div className="form-two_inline">
-                    <label className="form-label" htmlFor="rua">Rua</label>
-                    <input type="text" id="rua" className="form-control form-control-md" />
-                </div>
-                {/* Adicionar paramentro de numero */}
-                <div className="form-two_inline">
-                    <label className="form-label" htmlFor="numero-casa">Número</label>
-                    <input type="text" id="numero-casa" className="form-control form-control-md" />
-                </div>
-
-                <div className="form-two_inline">
-                    <label className="form-label" htmlFor="cidade">Cidade</label>
-                    <input type="text" id="cidade" className="form-control form-control-md" />
-                </div>
+            <div className="mb-4 col-12">
+                <label className="form-label" htmlFor="cidade">Cidade</label>
+                <input type="text" id="cidade" className="form-control form-control-md" />
             </div>
 
             {/* Adicionar um parametro de telefone, como (55) 00 0 0000-0000  */}
-            <div className="form-two_inline">
-                <label htmlFor="form-label-txarea">Biografia</label>
-                <textarea name="form-label-txarea" id="*"></textarea>
+            <div className="mb-4 col-12">
+                <label className="form-label" htmlFor="bio">Biografia</label>
+                <textarea className="form-control" id="bio" rows="3"></textarea>
             </div>
-
 
             {/* Campo bibliografia, é um   */}
 
-            <div className="button-form pt-1 mb-4">
-                <button className="btn button-create btn-block text-white border-0" type="button"
+            <div className="mb-4 col-12 d-flex flex-row-reverse">
+                <button className="btn button-create btn-block text-white border-0 col-6 " type="button"
                 /* onClick={handleSubmit} */
                 >Salvar</button>
             </div>
