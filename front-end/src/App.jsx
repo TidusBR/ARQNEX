@@ -44,7 +44,7 @@ export default function App() {
   return (    
     <BrowserRouter>
     
-      <>
+      <div className="">
         <Header session={session} setLoginOpen={setLoginOpen} />
         <CenterArea>
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
@@ -73,7 +73,7 @@ export default function App() {
           </Routes>
         </CenterArea>
         <Footer />
-      </>
+      </div>
     </BrowserRouter>
   );
 }

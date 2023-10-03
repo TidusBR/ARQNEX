@@ -27,7 +27,7 @@ export default function FormationsForm() {
             </select>
         </div> */}
         <div className="mb-4 col-12">
-            <label for="situacao">Situação</label>
+            <label htmlFor="situacao">Situação</label>
             <select required className="form-select" id="situacao">
                 <option value="" hidden></option>
                 <option value="Incompleto">Incompleto</option>

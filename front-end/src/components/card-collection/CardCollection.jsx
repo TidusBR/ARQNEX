@@ -140,20 +140,20 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
                             </div>
                         </div>
 
-                        <div className="row mb-4">
+                        <div className="row">
                             <div className='col-12'>
-                                {
-                                    info.softwares.map((software) => (
-                                        <span style={{border: "2px solid #EEEEEE"}} key={software.id} className='fw-bold p-2 rounded me-3'>
-                                            <i className='p-0 m-0 me-2' style={{display: "none"}}>
-                                                {/*AQUI VC RENDERIZA O SVG QUANDO O SOFTWARE ESTIVER COM ELE*/}
-                                                {software.svg}
-                                            </i>
-                                        {software.name} 
-                                        </span>
-                                    ))
-                                }
-                            </div>
+                                    {
+                                        info.softwares.map((software) => (
+                                            <span key={software.id} style={{border: "2px solid #EEEEEE", display: "inline-block"}} className='fw-bold p-2 rounded me-3 mb-3'>
+                                                <i className='p-0 m-0 me-2' style={{display: "none"}}>
+                                                    {/*AQUI VC RENDERIZA O SVG QUANDO O SOFTWARE ESTIVER COM ELE*/}
+                                                    {software.svg}
+                                                </i>
+                                                {software.name} 
+                                            </span>
+                                        ))
+                                    }
+                                </div>
                         </div>
 
                         <hr/>

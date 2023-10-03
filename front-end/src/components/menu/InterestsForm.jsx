@@ -45,7 +45,6 @@ export default function InterestsForm() {
         </div>
         {
         softwares.length > 0 &&
-        <div className="row mb-4">
             <div className='col-12'>
                 {
                     softwares.map((software_id, index) => (
@@ -59,7 +58,6 @@ export default function InterestsForm() {
                     ))
                 }
             </div>
-        </div>
         }
         <div className="mb-4">
             <label className="form-label fw-bold">Estilos</label>

@@ -21,7 +21,7 @@ function Formacoes() {
 
                 {/* Form Select */}
                 <div className='select_form'>
-                    <label for="situacao">Situação</label>
+                    <label htmlFor="situacao">Situação</label>
                     <br />
                     <select className="situacao" id="situacao">
                         <option value="completo">Completo</option>

@@ -11,3 +11,8 @@ body {
     width: 100vw !important;
     overflow-x: hidden;
 }
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
