@@ -13,8 +13,8 @@ const customStyles = {
     content: {
         top: '50%',
         left: '50%',
-        width: '40rem',
-        minHeight: '50rem',
+        minWidth: '40vw',
+        minHeight: '80vh',
         transform: 'translate(-50%, -50%)',
         border: "none",
         borderRadius: "10px",
@@ -84,7 +84,7 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
             onAfterOpen={updateViews}
             style={customStyles}
             >
-                <div className="container h-100 py-4 d-flex flex-column justify-content-between">
+                <div className="container h-100 pt-4 d-flex flex-column justify-content-between">
                     <div className="row  px-4">
                         <div className="col-12 d-flex flex-row align-items-center justify-content-between mb-3">
                             <div className='d-flex flex-row align-items-center'>
@@ -109,7 +109,7 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
                             }
                         </div>
                     </div>
-                    <div id="gallery" className='mb-2'>
+                    <div id="gallery" className='mb-4'>
                         <div className="row mb-2">
                             <a href={`${config.api}/${info.files[0]}`}>
                                 <img src={`${config.api}/${info.files[0]}`} className='card-job' alt="" style={{width: "100%", height: "20rem" }} />
@@ -136,7 +136,7 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
                     <div className='px-4'>
                         <div className="row justify-content-md-center mb-4">
                             <div className="col-md-auto">
-                                <span style={{fontSize: "16px/20px", color: "#1D252C"}}>{info.description}</span>
+                                <p style={{fontSize: "16px/20px", color: "#1D252C", textAlign: "justify"}}>{info.description}</p>
                             </div>
                         </div>
 
@@ -158,7 +158,7 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
 
                         <hr/>
 
-                        <div className="row">
+                        <div className="row pb-3">
                             <div className="col-12 d-flex justify-content-between align-items-center">
                                 <div className='d-flex align-itens-center'>
                                     <svg className='p-0 m-0 me-3' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

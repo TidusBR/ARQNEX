@@ -72,7 +72,7 @@ export default function Home({ session }) {
                             {
                                 collections.map(
                                     (collection, index) => (
-                                        <div className='col-12 col-sm-8 col-md-3 m-auto' key={index}>
+                                        <div className='col-12 col-sm-8 col-md-3' key={index}>
                                             <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
                                         </div>
                                     )
