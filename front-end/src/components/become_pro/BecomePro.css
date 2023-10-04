@@ -4,6 +4,7 @@
     color: black;
     font-weight: bold;
     white-space: normal;
+    
 }
 
 .textoProfile p , .portifolio-text p {
@@ -18,20 +19,22 @@
     align-items: center;
     justify-content: flex-start; /* Alinhe à esquerda */
     margin-top: 80px;
-    margin-right: 120px;
+    margin-left: 60px;
 
   }
   
   .portifolio-img {
-    margin-right: 200px;
-   
+    margin-left: 120px;
     flex: 2; /* A imagem ocupará todo o espaço disponível à esquerda */
   }
   
   .portifolio-text {
-    margin-left: 250px;
+    margin-left: 240px;
     width: 40px;
     max-width: 100%;
     flex: 1; /* O texto ocupará o dobro do espaço em relação à imagem */
   }
   
+  .bannerColor{
+    background-color: #DB752C;
+  }
