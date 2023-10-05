@@ -32,6 +32,7 @@ export default function App() {
     fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         setSession(data);
       });
   }, []);

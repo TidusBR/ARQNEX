@@ -1,8 +1,28 @@
+import { useEffect, useState } from "react"
 import foto from "../../assets/fotoPerfil.png"
 import "../../pages/css/edit-profile.css"
 
 export default function ProfileForm() {
-    console.log(foto);
+
+    const [imgFile, setImgFile] = useState(null);
+    const [name, setName] = useState(null);
+    const [username, setUsername] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [cep, setCep] = useState(null);
+    const [street, setStreet] = useState(null);
+    const [number, setNumber] = useState(null);
+    const [city, setCity] = useState(null);
+    const [bio, setBio] = useState(null);
+
+    // useEffect(() => {
+    //     fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             setSession(data);
+    //         });
+    // }, []);
+
     return <>
         <form className="row w-100">
             <div className="detalhes-foto col-12">
@@ -18,7 +38,7 @@ export default function ProfileForm() {
                             /* onClick={handleSubmit} */
                             /* disabled={!isButtonEnabled} */
                             >Deletar</button>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -32,7 +52,7 @@ export default function ProfileForm() {
             <div className="mb-4 col-12">
                 <label className="form-label fw-bold" htmlFor="username">Nome de Usuário</label>
                 <input type="text" id="username" className="form-control form-control-md" />
-                <span className='help-block' style={{fontSize: "0.8rem", color: "#1d252c52"}}>URL: https://arqnex.com/matheusmoura</span>
+                <span className='help-block' style={{ fontSize: "0.8rem", color: "#1d252c52" }}>URL: https://arqnex.com/matheusmoura</span>
             </div>
 
             <div className="mb-4 col-12">
