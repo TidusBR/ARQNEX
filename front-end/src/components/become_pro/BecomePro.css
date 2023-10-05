@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 .textoProfile h2 , .portifolio-text h2{
     font-size: 40px;
@@ -38,3 +39,74 @@
   .bannerColor{
     background-color: #DB752C;
   }
+=======
+.textoProfile h2,
+.portifolio-text h2 {
+  font-size: 40px;
+  color: black;
+  font-weight: bold;
+  white-space: normal;
+}
+
+.textoProfile p,
+.portifolio-text p {
+  color: #00000061;
+  font-size: 26px;
+}
+
+
+.portifolio-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 80px 0 80px 120px;
+}
+
+.portifolio-img {
+  margin-right: 200px;
+
+  flex: 2;
+  /* A imagem ocupará todo o espaço disponível à esquerda */
+}
+
+.portifolio-text {
+  margin-left: 250px;
+  width: 40px;
+  max-width: 100%;
+  flex: 1;
+  /* O texto ocupará o dobro do espaço em relação à imagem */
+}
+
+.containers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 3;
+  margin: 20px 20px 20px 20px;
+}
+
+/* .containerGratis{
+  line-height: 3;
+} */
+
+.containerGratis h1.fs-1 {
+  font-size: 46px;
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.containerGratis p.fs-5 {
+  font-weight: bold;
+  color: #00000061;
+}
+
+.texto_containerPago {
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.texto_containerPago p {
+  font-size: 22px;
+}
+>>>>>>> Stashed changes
