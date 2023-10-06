@@ -37,7 +37,7 @@ CREATE TABLE `accounts` (
   `firebase_uid` text NOT NULL,
   `firebase_provider` text NOT NULL,
   `premium_level` int(11) NOT NULL,
-  `premium_time` bigint(20) NOT NULL DEFAULT current_timestamp()
+  `premium_time` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
