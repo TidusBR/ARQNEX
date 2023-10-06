@@ -23,8 +23,62 @@ export default function ProfileForm() {
     //         });
     // }, []);
 
+    const [error, setError] = useState(false);
+
+    const teste = async (event) => {
+        event.preventDefault();
+
+        // desativar botão
+        event.target.disabled = true;
+
+        /**
+         * Não é mais necessário pois o formulário está fazendo a validação usando o atributo required nos campos de input
+        if(
+        !(
+        document.querySelector("#name").value &&
+        document.querySelector("#username").value &&
+        document.querySelector("#cpf").value &&
+        document.querySelector("#email").value &&
+        document.querySelector("#password").value
+        )
+        ) {
+        event.target.disabled = false;
+        setError("Preencha todos os campos!");
+        return;
+        }
+        **/
+
+        // enviar solicitação de cadastro
+        const request = await fetch(`${config.api}${config.endpoints.account.signup}`, {
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                name: document.querySelector("#name").value,
+                username: document.querySelector("#username").value,
+                cpf: document.querySelector("#cpf").value,
+                email: document.querySelector("#email").value,
+                password: document.querySelector("#password").value
+            })
+        });
+
+        // processar resposta
+        const response = await request.json();
+
+        if (!response.ok) {
+            setError(response.message);
+        } else {
+            window.location.href = "/";
+        }
+
+        // reativar botão
+        event.target.disabled = false;
+    }
+
     return <>
-        <form className="row w-100">
+        <form className="row w-100" onSubmit={teste}>
             <div className="detalhes-foto col-12">
                 {/* Foto de Perfil */}
                 <div className="row d-flex flex-sm-row flex-column align-items-center">
@@ -89,9 +143,7 @@ export default function ProfileForm() {
             {/* Campo bibliografia, é um   */}
 
             <div className="mb-4 col-12 d-flex flex-row-reverse">
-                <button className="btn button-create btn-block text-white border-0 col-6 col-lg-4" type="button"
-                /* onClick={handleSubmit} */
-                >Salvar</button>
+                <button className="btn button-create btn-block text-white border-0 col-6 col-lg-4" type="submit">Salvar</button>
             </div>
 
         </form>
