@@ -5,7 +5,9 @@ import { useRef } from "react";
 
 
 export default function InterestsForm() {
+
     const [softwares, setSoftwares] = useState([]);
+    
     const [styles, setStyles] = useState(0);
 
     /**
