@@ -32,6 +32,9 @@ export default function InterestsForm() {
         .then(data => setUploadDetails(JSON.parse(data)));
     }, [setUploadDetails]);
 
+    // console.log(softwares);
+    // console.log(styles);
+
     return <form className="row w-100">
         <div className="mb-4 col-12">
             <label className="form-label fw-bold">Softwares</label>
@@ -55,14 +58,13 @@ export default function InterestsForm() {
                             <div className="d-flex align-items-center">
                                 <i className='p-0 me-1' style={{display: "none"}}>
                                     {/*AQUI VC RENDERIZA O SVG QUANDO O SOFTWARE ESTIVER COM ELE*/}
-                                    {console.log(uploadDetails)}
                                     {uploadDetails.softwares.find(s => s.id === software_id)?.svg}
                                 </i>
                                 {uploadDetails.softwares.find(s => s.id === software_id)?.name} 
                                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" className="ms-1" onClick={(e) => {
-                                    console.log(e.target);
+                                    console.log(e.target.parentElement.parentElement);
                                 }}>
-                                    <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                                    <path style={{pointerEvents: "none"}} d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
                                 </svg>
                             </div>
                         </span>
