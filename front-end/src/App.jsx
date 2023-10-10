@@ -6,15 +6,14 @@ import CenterArea from "./components/center_area/CenterArea";
 import Footer from "./components/footer/Footer";
 import Login from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import { useEffect, useState } from "react";
-import {config} from './config'
+import { config } from './config'
 import ProfileUser from "./pages/ProfileUser";
-
+import Dashboard from "./pages/Dashboard";
+import EditProfile from "./pages/EditProfile";
 import Upload from "./pages/Upload";
-
 import Modal from 'react-modal';
-import BecomePro from "./pages/BecomePro";
-
 import Page404 from './pages/Page404';
 import ProfileForm from "./components/menu/ProfileForm";
 import PasswordForm from "./components/menu/PasswordForm";
@@ -23,52 +22,39 @@ import ExperiencesForm from "./components/menu/ExperiencesForm";
 import InterestsForm from "./components/menu/InterestsForm";
 import FormationsForm from "./components/menu/FormationsForm";
 
-import Dashboard from "./pages/Dashboard";
-import EditProfile from "./pages/EditProfile";
-
 Modal.setAppElement("#root");
 
-//É SÓ VOCÊ PEGAR O OJBETO SESSION E PASSAR PARA OS OUTROS COMPONENTES COMO PROPRIEDADE, POR EXEMPLO
-//O PERFIL DO USUÁRIO, PRECISA SABER SE O USUÁRIO ESTÁ LOGADO, ENTÃO BASTA, PASSAR SESSION COMO UMA PROPRIEDADE PARA O COMPONENTE "ProfileUser", ler linha 48.
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
-
-  /**
-   * objeto session:
-   {
-    loggedIn: false,
-    account: {
-      id: -1,
-      name: "",
-      username: "",
-      isPremium: false
-    }
-  }
-   */
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState(null); // Inicialize com null
 
   useEffect(() => {
     fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
       .then(response => response.json())
-      .then(data => setSession(data));
+      .then(data => {
+        console.log(data);
+        setSession(data);
+      });
   }, []);
 
-  if (session === null)
-    return;
+  // Renderize o componente apenas quando session não for null
+  if (session === null) {
+    return null; 
+  }
 
-  return (
+  return (    
     <BrowserRouter>
-      <>
+    
+      <div className="">
         <Header session={session} setLoginOpen={setLoginOpen} />
         <CenterArea>
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
             {/* {FAZER VALIDAÇÕES PARA RENDERIZAR AS PÁGINAS DE ACORDO COM SUA PERMISSÃO DE SESSÃO} */}
-            <Route path="/" element={session.loggedIn ? <Navigate to="/dashboard" />  : <Home session={session} />} />
-            <Route path="/upload" element={session.loggedIn ? <Upload session={session} /> : <Navigate to="/" />} />
+            <Route path="/" element={<Home session={session} />} />
+            <Route path="/upload" element={session.loggedIn ? <Upload /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
-            <Route path="/profile/*" element={<ProfileUser session={session} />}></Route>
-            <Route path="/become-pro" element={session.loggedIn && !session.account.isPremium ? <BecomePro session={session} /> : <Navigate to="/" />}></Route>
+            <Route path="/profile" element={session.loggedIn ? <ProfileUser session={session} /> : <Navigate to="/" />}></Route>
             <Route path="/edit-profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}>
               <Route path="profile" element={ <ProfileForm /> }></Route>
               <Route path="password" element={ <PasswordForm /> }></Route>
@@ -88,7 +74,7 @@ export default function App() {
           </Routes>
         </CenterArea>
         <Footer />
-      </>
+      </div>
     </BrowserRouter>
   );
 }

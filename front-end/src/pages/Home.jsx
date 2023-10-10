@@ -60,17 +60,17 @@ export default function Home({ session }) {
             </section>
             <section className='pt-5'>
                 <div className='row'>
-                    <div className="col-10 m-auto p-0">
+                    <div className="col-10 m-auto p-0 mb-3">
                         <h3>
                             Trabalhos de outros arquitetos
                         </h3>
                     </div>
-                    <div className="col-10 m-auto">
+                    <div className="col-10 m-auto mb-4">
                         <div className='row justify-content-md-left'>
                             {
                                 collections.map(
                                     (collection, index) => (
-                                        <div className='col-12 col-sm-8 col-md-3 m-auto' key={index}>
+                                        <div className='col-12 col-sm-8 col-md-3 mb-3' key={index}>
                                             <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
                                         </div>
                                     )
@@ -80,7 +80,8 @@ export default function Home({ session }) {
                     </div>
                     <div className="col-10 m-auto p-0">
                         <div className='row justify-content-md-center'>
-                            <Button disabled={disablePagination} onClick={() => setPage(page + 1)} style={{backgroundColor: "white", color: "black"}} variant="contained" sx={{marginTop: "5rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
+                            <Button disabled={disablePagination} onClick={() => setPage(page + 1)}
+                            style={{backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE", display: collections.length > 16 ? "block" : "none"}} variant="contained" sx={{marginTop: "3rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
                         </div>
                     </div>
                 </div>

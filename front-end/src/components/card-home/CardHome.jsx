@@ -1,5 +1,5 @@
 import './card-home.css'
-import CardCollection from '../card_job/CardCollection'
+import CardCollection from '../card-collection/CardCollection'
 import PropTypes from 'prop-types';
 import { config } from '../../config';
 

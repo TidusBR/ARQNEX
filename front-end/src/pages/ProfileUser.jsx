@@ -20,11 +20,17 @@ export default function ProfileUser({ session }) {
 
     useEffect(() => {
         fetch(`${config.api}${config.endpoints.account.profile}${username}`, { credentials: "include" })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else if (response.status !== 200) {
+                navigate("/");
+            }
+        })
         .then(data => {
             setProfileInfo(data);
         });
-    }, [username])
+    }, [navigate, username])
 
     
 

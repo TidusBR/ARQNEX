@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { config } from '../config'
 import { useEffect } from "react";
 import { useRef } from "react";
-import { Icon } from "@mui/material";
 
 /**
  * 
@@ -152,22 +151,18 @@ export default function UploadDetails({ files, setShowUploadDetails, setDialogMe
                                 </div>
                                 {
                                 softwares.length > 0 &&
-                                <div className="row">
-                                    <div className="row mb-4">
-                                        <div className='col-12'>
-                                            {
-                                                softwares.map((software_id, index) => (
-                                                    <span key={index} style={{border: "2px solid #EEEEEE"}} className='fw-bold p-2 rounded me-3'>
-                                                        <i className='p-0 m-0 me-2' style={{display: "none"}}>
-                                                            {/*AQUI VC RENDERIZA O SVG QUANDO O SOFTWARE ESTIVER COM ELE*/}
-                                                            {uploadDetails.softwares.find(s => s.id === software_id)?.svg}
-                                                        </i>
-                                                        {uploadDetails.softwares.find(s => s.id === software_id)?.name}
-                                                    </span>
-                                                ))
-                                            }
-                                        </div>
-                                    </div>
+                                <div className='col-12'>
+                                    {
+                                        softwares.map((software_id, index) => (
+                                            <span key={index} style={{border: "2px solid #EEEEEE", display: "inline-block"}} className='fw-bold p-2 rounded me-3 mb-3'>
+                                                <i className='p-0 m-0 me-2' style={{display: "none"}}>
+                                                    {/*AQUI VC RENDERIZA O SVG QUANDO O SOFTWARE ESTIVER COM ELE*/}
+                                                    {uploadDetails.softwares.find(s => s.id === software_id)?.svg}
+                                                </i>
+                                                {uploadDetails.softwares.find(s => s.id === software_id)?.name} 
+                                            </span>
+                                        ))
+                                    }
                                 </div>
                                 }
                                 <div className="mb-3">
