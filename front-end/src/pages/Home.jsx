@@ -30,8 +30,6 @@ export default function Home({ session }) {
         });
     }, [page]);
 
-    console.log();
-
     const openCollection = new URLSearchParams(window.location.search)?.get('col');
     //window.history.replaceState(null, '', window.location.pathname);
 

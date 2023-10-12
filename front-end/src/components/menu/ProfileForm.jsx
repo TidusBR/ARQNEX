@@ -77,7 +77,7 @@ export default function ProfileForm() {
             .then(response => response.json())
             .then(json => {
                 console.log(json);
-                if (json.logradouro) {
+                if (json.localidade) {
                     document.querySelector('#street').value = json.logradouro;
                     document.querySelector('#city').value = json.localidade;
                     document.querySelector('#neighborhood').value = json.bairro;
