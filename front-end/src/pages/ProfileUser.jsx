@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function ProfileUser({ session }) {
+
     const navigate = useNavigate();
     const location = useLocation();
 
