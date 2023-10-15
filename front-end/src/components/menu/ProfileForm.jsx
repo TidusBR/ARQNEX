@@ -13,7 +13,16 @@ export default function ProfileForm() {
     //         });
     // }, []);
 
+    // const [bio, setBio] = useState("");
+
+    const maxCharacters = 150;
+
     const [error, setError] = useState(false);
+
+    const validaCep = (cep) => {
+        const cepRegex = /^\d{5}-?\d{3}$/;
+        return cepRegex.test(cep);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -35,9 +44,9 @@ export default function ProfileForm() {
         //     })
         // });
 
-        const request = 
+        const request =
         // JSON.stringify(
-            {
+        {
             name: document.querySelector("#name").value,
             username: document.querySelector("#username").value,
             email: document.querySelector("#email").value,
@@ -49,7 +58,7 @@ export default function ProfileForm() {
         }
         // )
 
-        console.log(request);   
+        console.log(request);
 
         // processar resposta
         // const response = await request.json();
@@ -68,23 +77,28 @@ export default function ProfileForm() {
 
         const cep = document.querySelector("#cep");
 
-        console.log(e)
+        if (validaCep(cep.value)) {
+            console.log("cep valido");
+            const value = cep.value.replace(/[^0-9]+/, '');
+            const url = `https://viacep.com.br/ws/${value}/json/`;
 
-        const value = cep.value.replace(/[^0-9]+/, '');
-        const url = `https://viacep.com.br/ws/${value}/json/`;
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    console.log(json);
+                    if (json.localidade) {
+                        document.querySelector('#street').value = json.logradouro;
+                        document.querySelector('#city').value = json.localidade;
+                        document.querySelector('#neighborhood').value = json.bairro;
+                    } else {
+                        console.log("nao acessou");
+                    }
+                });
+        }
+        else {
+            console.log("cep invalido");
+        }
 
-        fetch(url)
-            .then(response => response.json())
-            .then(json => {
-                console.log(json);
-                if (json.localidade) {
-                    document.querySelector('#street').value = json.logradouro;
-                    document.querySelector('#city').value = json.localidade;
-                    document.querySelector('#neighborhood').value = json.bairro;
-                } else {
-                    console.log("nao acessou");
-                }
-            });
     }
 
     return <>
@@ -126,7 +140,7 @@ export default function ProfileForm() {
 
             <div className="mb-4 col-12">
                 <label className="form-label fw-bold" htmlFor="cep">Cep</label>
-                <input required type="text" id="cep" className="form-control form-control-md" onBlur={cepConsulta}/>
+                <input required type="text" id="cep" className="form-control form-control-md" onBlur={cepConsulta} />
             </div>
 
             {/* Adicionar paramentro de numero */}
@@ -153,7 +167,7 @@ export default function ProfileForm() {
             {/* Adicionar um parametro de telefone, como (55) 00 0 0000-0000  */}
             <div className="mb-4 col-12">
                 <label className="form-label fw-bold" htmlFor="bio">Biografia</label>
-                <textarea required className="form-control" id="bio" rows="3"></textarea>
+                <textarea required className="form-control" id="bio" rows="3" maxLength={maxCharacters}></textarea>
             </div>
 
             {/* Campo bibliografia, é um   */}
