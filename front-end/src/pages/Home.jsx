@@ -12,22 +12,17 @@ export default function Home({ session }) {
     const [collections, setCollections] = useState([]);
     const [page, setPage] = useState(1);
 
-    const imageStyle = {
-        backgroundImage: `url(${background})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover"
-    }
 
     useEffect(() => {
         fetch(`${config.api}${config.endpoints.collection.list}?page=${page}`, { credentials: "include" })
-        .then(response => response.json())
-        .then(data => {
-            if (data.length === 0) {
-                setDisablePagination(true);
-                return;
-            }
-            setCollections(collections => [...collections, ...data])
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+                    setDisablePagination(true);
+                    return;
+                }
+                setCollections(collections => [...collections, ...data])
+            });
     }, [page]);
 
     const openCollection = new URLSearchParams(window.location.search)?.get('col');
@@ -37,24 +32,19 @@ export default function Home({ session }) {
         <div className="container-home">
             <section>
                 <div className="row">
-                    <div className="col-1 d-flex flex-column justify-content-between align-items-center">
+                    <div className="d-none col-1 d-lg-flex flex-column justify-content-between align-items-center py-5">
+                        <a href="https://www.facebook.com" className="vertical-text">Facebook</a>
+                        <a href="https://www.instagram.com" className="vertical-text">Instagram</a>
+                        <a href="https://www.twitter.com" className="vertical-text">Twitter</a>
                     </div>
-                    <div className="col" 
-                        style={imageStyle}>
+                    <div className="col imageStyleHome">
                         <div className="row">
-                            <div className="col-8 d-flex flex-column" style={{padding: "130px 50px"}}>
-                                <h1 className='text-white bold'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</h1>
-                                <span className='text-white pt-5 pb-5'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur dignissimos beatae aliquam, quas minima quia quidem voluptates </span>
-                                <button type="button" className="btn btn-light" style={{color: "orange", width: "40%"}}>Entrar agora</button>
-                            </div>
-                            <div className="col d-flex flex-column-reverse text-aligm-right">
-                                <span>Como Funciona</span>
-                                <div className=''>
-                                    video
-                                </div>
+                            <div className="col-10 col-md-6" style={{ padding: "80px 50px" }}>
+                                <h1 className='text-white bold mb-4' style={{ fontSize: "2.5rem" }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</h1>
+                                <p className='text-white mb-4'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur dignissimos beatae aliquam, quas minima quia quidem voluptates </p>
+                                <button type="button" className="btn btn-light px-5" style={{ color: "orange" }}>Entrar agora</button>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </section>
@@ -81,7 +71,7 @@ export default function Home({ session }) {
                     <div className="col-10 m-auto p-0">
                         <div className='row justify-content-md-center'>
                             <Button disabled={disablePagination} onClick={() => setPage(page + 1)}
-                            style={{backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE", display: collections.length > 16 ? "block" : "none"}} variant="contained" sx={{marginTop: "3rem", width: "20%", bottom: "3rem"}}>Carregar mais...</Button>
+                                style={{ backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE", display: collections.length > 16 ? "block" : "none" }} variant="contained" sx={{ marginTop: "3rem", width: "20%", bottom: "3rem" }}>Carregar mais...</Button>
                         </div>
                     </div>
                 </div>
