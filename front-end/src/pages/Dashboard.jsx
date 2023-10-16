@@ -31,8 +31,8 @@ export default function Dashboard({ session }) {
     return (
         <div className="container-dashboard">
             <div className="row">
-                <div className="col-sm-2"></div>
-                <div className="col-sm-6 mt-5 mb-5">
+                <div className="d-none d-md-block col-sm-2"></div>
+                <div className="col-10 col-md-6 mt-5 mb-5 mx-auto mx-md-0">
                     <h1 className="fw-bold">Olá {session.account.name}.</h1>
                     <h2 style={{fontSize: "2rem"}} className="mb-4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</h2>
                     <div className="d-flex align-items-center">
@@ -49,13 +49,13 @@ export default function Dashboard({ session }) {
                     </div>
                 </div>
 
-                <div className="col-sm-12 mt-4 d-flex px-5">
-                    <div className="col-sm-1">
+                <div className="col-sm-12 mt-4 px-5 d-none d-md-flex">
+                    <div className="col-4 col-md-2 col-lg-2 col-xxl-1">
                         <select className="form-select d-inline">
                             <option value="popular">Popular</option>
                         </select>
                     </div>
-                    <div className="col-sm-9 text-center">
+                    <div className="col text-center">
                         <button className="p-2 border-0 fw-bold bg-white rounded me-3">
                             Clássico
                         </button>
@@ -63,10 +63,38 @@ export default function Dashboard({ session }) {
                             Contemporâneo + Moderno
                         </button>
                     </div>
-                    <div className="col-sm-2">
+                    <div className="col-sm-2 col-xxl-1">
                         <input className="form-control icon-search" type="text" placeholder="Buscar"/>
                     </div>
                 </div>
+
+                <div className='col-10 m-auto d-block d-md-none'>
+                    <div className="d-flex justify-content-between">
+                        <div className="col-5 mb-3">
+                            <input className="form-control icon-search" type="text" placeholder="Buscar"/>
+                        </div>
+
+                        <div className="col-5">
+                            <select className="form-select d-inline">
+                                <option value="popular">Popular</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+
+                    <div className="col-12 d-flex justify-content-between">
+                        <button className="p-0 p-md-2 border-0 fw-bold bg-white rounded me-3">
+                            Clássico
+                        </button>
+                        <button className="p-0 p-md-2 border-0 fw-bold bg-white rounded">
+                            Contemporâneo + Moderno
+                        </button>
+                    </div>
+
+                    
+                </div>
+
+                
 
                 <div className="col-sm-10 m-auto mt-3">
                     <div className="row py-5">

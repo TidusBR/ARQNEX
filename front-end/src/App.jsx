@@ -21,6 +21,7 @@ import CoursesForm from "./components/menu/CoursesForm";
 import ExperiencesForm from "./components/menu/ExperiencesForm";
 import InterestsForm from "./components/menu/InterestsForm";
 import FormationsForm from "./components/menu/FormationsForm";
+//import BecamePro from './components/become_pro/BecomePro'
 
 Modal.setAppElement("#root");
 
@@ -52,7 +53,7 @@ export default function App() {
           <Routes>
             {/* {FAZER VALIDAÇÕES PARA RENDERIZAR AS PÁGINAS DE ACORDO COM SUA PERMISSÃO DE SESSÃO} */}
             <Route path="/" element={<Home session={session} />} />
-            <Route path="/upload" element={session.loggedIn ? <Upload /> : <Navigate to="/" />} />
+            <Route path="/upload" element={session.loggedIn ? <Upload session={session} /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
             <Route path="/profile" element={session.loggedIn ? <ProfileUser session={session} /> : <Navigate to="/" />}></Route>
             <Route path="/edit-profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}>
@@ -70,6 +71,7 @@ export default function App() {
             <Route path="/edit-profile/courses" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
             <Route path="/edit-profile/experiences" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route> */}
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
+            {/* <Route path="/become-pro" element={<BecamePro />}></Route> */}
             <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </CenterArea>
