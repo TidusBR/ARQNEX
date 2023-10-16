@@ -3,9 +3,6 @@ import { Button } from '@mui/material';
 import bannerImage from './become_pro_images/banner_becomepro.png';
 import foto_perfil from './become_pro_images/foto-perfil.png'
 import iphone_arq from './become_pro_images/iphone_arq.png'
-<<<<<<< Updated upstream
-/* import styles from './BecomePro.css'; */
-=======
 import styles from './BecomePro.css';
 import { orange } from "@mui/material/colors";
 import logo from './become_pro_images/logo-white.png';
@@ -14,17 +11,11 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { light } from "@mui/material/styles/createPalette";
 
 
->>>>>>> Stashed changes
 
 const bannerImages = {
     width: '1920px',
     height: '600px',
-<<<<<<< Updated upstream
-    backgroundColor: '#DB752C',
-    opacity: '0.8',
-=======
     backgroundColor: 'rgb(219,117,44,0.8)',
->>>>>>> Stashed changes
 }
 
 const bannerTitulo = {
@@ -83,54 +74,6 @@ const textoProfile = {
     // Mantenha o estilo do texto como está
 }
 
-<<<<<<< Updated upstream
-const iconePro = {
-    width: '260px',
-    height: '52px',
-    background: 'transparent linear- gradient(270deg, #FF6A00 0 %, #EE2C09 100 %) 0 % 0 % no - repeat padding - box',
-    borderRadius: '3px',
-    opacity: ' 1',
-}
-
- /* ------------- */
-/* const imageStyle = {
-    backgroundImage: `url(${backgroundOrange})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    
-} */
-
-const containerGratis = {
-    width: '530px',
-    height: '700px',
-    marginRight: '8px',
-    lineHeight: '40px',
-
-    //  d:'flex',
-    // justif: 'content-center',
-    // align:'items-center', 
-    // text:'center',
-}
-
-const containerPago = {
-    backgroundColor: '#DB752C',
-    width: '530px',
-    height: '700px',
-    marginLeft: '8px',
-    lineHeight: '40px',
-}
-
-export default function BecomePro({ }) {
-    return (
-        <div>
-            <div className="banner_container_pro" style={{ textAlign: 'center', position: 'relative' }}>
-                <div className='bannerColor'>
-                    <img src={bannerImage} alt="Banner" className='bannerImages' style={bannerImages} />
-                </div>
-                <div>
-                    <h3 style={iconePro}>PRO</h3>
-                </div>
-=======
 const containerPago = {
     backgroundColor: '#DB752C',
     width: '31.25rem',
@@ -171,7 +114,6 @@ export default function BecomePro() {
         <div>
             <div className="banner_container_pro" style={{ textAlign: 'center', position: 'relative' }}>
                 <img src={bannerImage} alt="Banner" className='bannerImages' style={bannerImages} />
->>>>>>> Stashed changes
                 <h1 style={bannerTitulo}>
                     Tenha maior engajamento, se destaque!
                 </h1>
@@ -207,9 +149,6 @@ export default function BecomePro() {
                     <img src={iphone_arq} alt="" />
                 </div>
             </div>
-<<<<<<< Updated upstream
-            
-=======
 
 
             <div className="justify-content-center ">
@@ -303,7 +242,6 @@ export default function BecomePro() {
                     </div>
                 </div>
             </div>
->>>>>>> Stashed changes
         </div>
     );
 }
