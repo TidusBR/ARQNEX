@@ -151,9 +151,9 @@ export default function Register() {
                     <input type="password" id="password" minLength="6" className="form-control form-control-md" required/>
                   </div>
 
-                  <div className="form-outline mb-4">
-                    <input type="checkbox" id="accept-eula" className="form-control-md checkbox" required/>
-                    <label className="form-label" htmlFor="accept-eula" style={{marginLeft: "0.2rem"}}>Ao criar minha conta eu aceito os <span style={{color: "#DB752C"}}>Termos de Uso</span> e <span style={{color: "#DB752C"}}>Política de Privacidade</span>.</label>
+                  <div className="form-outline mb-4 d-flex align-items-center">
+                    <input type="checkbox" id="accept-eula" className="form-control-md checkbox me-3" required/>
+                    <label className="form-label m-0" htmlFor="accept-eula">Ao criar minha conta eu aceito os <span style={{color: "#DB752C"}}>Termos de Uso</span> e <span style={{color: "#DB752C"}}>Política de Privacidade</span>.</label>
                   </div>
 
                   {
