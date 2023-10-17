@@ -246,6 +246,14 @@ export default function Header({ setLoginOpen, session }) {
                                                 Notificações
                                             </Link>
                                         </div>
+                                        {!session.loggedIn.isPremium && 
+                                        <div className="nav-item">
+                                            <Link className="button nav-link" style={{color: "#EE2C09"}} data-bs-dismiss="offcanvas" onClick={() => {
+                                                navigate("/become-pro")
+                                            }}>
+                                                Fazer um upgrade, torne-se PRO
+                                            </Link>
+                                        </div>}
                                         <div className="nav-item">
                                             <Link className="button nav-link" onClick={async function () {
                                                 await fetch(`${config.api}${config.endpoints.account.logout}`, { credentials: "include" });

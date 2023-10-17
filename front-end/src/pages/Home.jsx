@@ -6,7 +6,7 @@ import { config } from '../config';
 import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 
-export default function Home({ session }) {
+export default function Home({ session, setLoginOpen }) {
     // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
     const [disablePagination, setDisablePagination] = useState(false);
     const [collections, setCollections] = useState([]);
@@ -33,16 +33,16 @@ export default function Home({ session }) {
             <section>
                 <div className="row">
                     <div className="d-none col-1 d-lg-flex flex-column justify-content-between align-items-center py-5">
-                        <a href="https://www.facebook.com" className="vertical-text">Facebook</a>
-                        <a href="https://www.instagram.com" className="vertical-text">Instagram</a>
-                        <a href="https://www.twitter.com" className="vertical-text">Twitter</a>
+                        <a href="https://www.facebook.com" className="vertical-text" target='_blank'>Facebook</a>
+                        <a href="https://www.instagram.com" className="vertical-text" target='_blank'>Instagram</a>
+                        <a href="https://www.twitter.com" className="vertical-text" target='_blank'>Twitter</a>
                     </div>
                     <div className="col imageStyleHome">
                         <div className="row">
                             <div className="col-10 col-md-6" style={{ padding: "80px 50px" }}>
                                 <h1 className='text-white bold mb-4' style={{ fontSize: "2.5rem" }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</h1>
                                 <p className='text-white mb-4'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur dignissimos beatae aliquam, quas minima quia quidem voluptates </p>
-                                <button type="button" className="btn btn-light px-5" style={{ color: "orange" }}>Entrar agora</button>
+                                <Button variant='contained' className="px-5" style={{ color: "orange", background: "white"}} onClick={() => setLoginOpen(true)}>Entrar agora</Button>
                             </div>
                         </div>
                     </div>

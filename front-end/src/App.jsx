@@ -52,7 +52,7 @@ export default function App() {
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
             {/* {FAZER VALIDAÇÕES PARA RENDERIZAR AS PÁGINAS DE ACORDO COM SUA PERMISSÃO DE SESSÃO} */}
-            <Route path="/" element={<Home session={session} />} />
+            <Route path="/" element={<Home session={session} setLoginOpen={setLoginOpen} />} />
             <Route path="/upload" element={session.loggedIn ? <Upload session={session} /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
             <Route path="/profile" element={session.loggedIn ? <ProfileUser session={session} /> : <Navigate to="/" />}></Route>
