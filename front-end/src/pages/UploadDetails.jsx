@@ -104,15 +104,15 @@ export default function UploadDetails({ files, setShowUploadDetails, setDialogMe
             <div className="row">
                 <div className="col-10 col-sm-8  m-auto my-5">
                     <div className="row">
-                        <div className="col-sm">
+                        <div className="col-sm mb-3">
                             <h1 className="fw-bold">Adicionar detalhes</h1>
                             <h2>Fale mais sobre seu trabalho.</h2>
                         </div>
                     </div>
                     <form action="" className="w-100" ref={form}>
                         <div className="row">
-                            <div className="col-md">
-                                <img src={files[0].uri} alt="" className="w-100" width="45rem" height="450rem" />
+                            <div className="col-md mb-4">
+                                <img src={files[0].uri} alt="" className="w-100" style={{borderRadius: "2px"}} width="45rem" height="450rem" />
                                 {
                                 files.length > 1 &&
                                 <>
