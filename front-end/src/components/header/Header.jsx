@@ -124,13 +124,21 @@ export default function Header({ setLoginOpen, session }) {
                             </div>
                             <div className="offcanvas-body">
                                 {session.loggedIn && (
-                                    <div className='text-center mb-5'>
-                                        <Link data-bs-dismiss="offcanvas" onClick={() => {
+                                    <div className='mb-3 d-flex pb-3' style={{ borderBottom: "1.5px solid #EEEEEE" }}>
+                                        <Link data-bs-dismiss="offcanvas" className='me-5' onClick={() => {
                                             navigate("/profile")
                                         }}>
-                                            <img src={imgTest} style={{ width: "120px", height: "120px" }} className='rounded-circle mb-2' alt="" />
+                                            <img src={imgTest} style={{ 
+                                                width: "100px", 
+                                                height: "100px", 
+                                                borderRadius: "16px",
+                                                border: "1px solid rgb(219, 117, 44)" 
+                                                }} className='mb-2 p-1' alt="" />
                                         </Link>
-                                        <p>{session.account.name}</p>
+                                        <div>
+                                            <p style={{fontSize: "1.5rem"}} className='fw-bold mb-1'>{session.account.name}</p>
+                                            <p style={{fontSize: "1.2rem", color: "#AAAAAA"}} className=''>{session.account.username}</p>
+                                        </div>
                                     </div>)}
                                 <div className=''>
 

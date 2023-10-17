@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./css/edit-profile.css";
+import { Button } from '@mui/material';
 
 export default function EditProfile() {
     const location = useLocation();
+    
     const navigate = useNavigate();
 
     const [menuOptions] = useState([
@@ -62,15 +64,17 @@ export default function EditProfile() {
                             <h1 className="fw-bold">Configurações de perfil</h1>
                             <h2>Edite suas informações</h2>
                         </div>
-                        <button
+                        <Button
+                            variant="contained"
                             className="rounded border-0 d-none d-sm-block py-sm-3 px-sm-4"
                             style={{ background: "#DB752C", boxShadow: "0px 3px 6px #DB752C29" }}
+                            onClick={() => {navigate("/become-pro")}}
                         >
                             <span className="d-block text-white fw-bold title-button">Tornar-se PRO</span>
                             <span className="d-block text-white description-button" style={{ fontSize: "0.8rem" }}>
                                 Por apenas R$20,00 mensal
                             </span>
-                        </button>
+                        </Button>
                     </div>
                 </div>
                 <div className="col-10 m-auto">
