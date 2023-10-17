@@ -1,6 +1,22 @@
-.linear-gradient {
+.container-become-pro .linear-gradient {
     background: linear-gradient(to right, #EE2C09, #FF6A00);
     background-color: white;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.container-become-pro li h3 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.container-become-pro ul li {
+    display: flex;
+    align-items: center;
+    margin: 32px 0;
+}
+
+.container-become-pro ul li h3 {
+    margin-left: 16px;
+    color: #00000061;
 }
