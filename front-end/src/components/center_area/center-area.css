@@ -1,9 +1,0 @@
-.container-center-area {
-    min-height: calc(100vh - (280px + 70px));   
-}
-
-@media (max-width: 940px) {
-    .container-center-area {
-        min-height: calc(100vh - 70px);
-    }
-}
