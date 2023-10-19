@@ -1,0 +1,39 @@
+form {
+    width: 23rem;
+}
+
+form h3 {
+    letter-spacing: 1px;
+}
+
+:root {
+    --white: #FFFFFF;
+    --gray-border: #EEEEEE;
+    --primary: #1D252C;
+    --secondary: #1D252C61;
+    --tertiary: #1D252C3D;
+    --orange: #DB752C;
+    --button-facebook: #3A5998;
+    --button-google: #4285F4;
+}
+
+.span-subtitle {
+    color: var(--secondary);
+}
+
+.button-facebook {
+    background-color: var(--button-facebook) !important;
+}
+
+.button-google {
+    background-color: var(--button-google) !important;
+}
+
+.button-facebook, .button-google, .button-create {
+    width: 48%;
+    color: var(--white);
+}
+
+.button-create {
+    background-color: var(--orange) !important;
+}

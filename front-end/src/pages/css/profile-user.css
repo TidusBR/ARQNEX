@@ -1,0 +1,22 @@
+style={{fontSize: "1.2rem" ,color: "#000000DE"}}
+style={{fontSize: "1.2rem" ,color: "#000000DE"}}
+style={{fontSize: "1.2rem" ,color: "#00000061"}}
+style={{fontSize: "1.2rem" ,color: "#00000061"}}
+.jobs, .followers {
+    font-size: 1.2rem;
+    color: #000000DE;
+}
+
+.text-job {
+    font-size: 1.2rem;
+    color: #00000061;
+}
+
+@media(max-width: 578px) {
+    .jobs, .followers, .text-job {
+        font-size: 1rem;
+    }
+    .select-size {
+        font-size: 0.8rem;
+    }
+}

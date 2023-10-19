@@ -1,0 +1,59 @@
+.card-job {
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.Modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40rem;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+    background-color: white;
+    outline: none;
+}
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(58, 64, 69, 0.95);
+    outline: none;
+}
+
+@media (min-width: 400px) {
+    .Modal {
+        width: 30rem;
+    }
+}
+
+@media (min-width: 600px) {
+    .Modal {
+        width: 35rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .Modal {
+        width: 40rem;
+    }
+}
+
+@media (min-height: 768px) {
+    .Modal {
+        height: 45rem;
+    }
+}
+
+@media (min-height: 900px) {
+    .Modal {
+        height: 50rem;
+    }
+}
