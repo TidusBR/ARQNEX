@@ -68,8 +68,6 @@ export default function Dashboard({ session }) {
                     </div>
                 </div>
 
-                {!session.account.isPremium && <a href="/become-pro" className="upgrade" style={{ fontSize: "0.8rem" }}>Fazer um upgrade, torne-se PRO</a>}
-
                 <div className="col-sm-10 m-auto mt-3">
                     <div className="row py-5">
                         {
