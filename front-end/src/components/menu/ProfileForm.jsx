@@ -134,11 +134,11 @@ export default function ProfileForm({ session, updateSession }) {
             <div className="detalhes-foto col-12">
                 {/* Foto de Perfil */}
                 <div className="row d-flex flex-sm-row flex-column align-items-center">
-                    <div className="col-lg-1 col-xl-1 mb-sm-4 d-flex align-items-center justify-content-center">
+                    <div className="col-lg-1 col-xl-1 mb-4 d-flex align-items-center justify-content-center">
                         <img src={avatar} className="rounded-circle" alt="fotoPerfil" width={100} height={100} style={{boxShadow: "0px 3px 6px #00000029"}}/>
                     </div>
                     
-                    <div className="col mb-4 mb-sm-0">
+                    <div className="col mb-4">
                         <div className="row d-flex align-items-center justify-content-around">
                             <input ref={inputFileRef} type="file" accept=".jpeg, .png, .jpg" onChange={handleAvatarChange} hidden />
 
@@ -171,27 +171,21 @@ export default function ProfileForm({ session, updateSession }) {
                 <input required type="email" id="email" className="form-control form-control-md" value={email} onChange={(e) => {e.target.setCustomValidity(''); setEmail(e.target.value)}} />
             </div>
 
-            <div className="mb-4 col-12">
-                <div className="row">
-                    <div className="mb-4 col">
-                        <label className="form-label fw-bold" htmlFor="cep">Cep</label>
-                        <input required type="text" id="cep" className="form-control form-control-md" onBlur={cepConsulta} value={cep} onChange={(e) => setCep(e.target.value)}/>
-                    </div>
-                    <div className="mb-4 col">
-                        <label className="form-label fw-bold" htmlFor="street">Rua</label>
-                        <input required type="text" id="street" className="form-control form-control-md" value={street} onChange={(e) => setStreet(e.target.value)} />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="mb-4 col">
-                        <label className="form-label fw-bold" htmlFor="number">Número</label>
-                        <input required type="text" id="number" className="form-control form-control-md" value={houseNumber} onChange={(e) => setHouseNumber(e.target.value)} />
-                    </div>
-                    <div className="mb-4 col">
-                        <label className="form-label fw-bold" htmlFor="city">Cidade</label>
-                        <input required type="text" id="city" className="form-control form-control-md" value={city} onChange={(e) => setCity(e.target.value)} />
-                    </div>
-                </div>
+            <div className="mb-4 col-6">
+                <label className="form-label fw-bold" htmlFor="cep">Cep</label>
+                <input required type="text" id="cep" className="form-control form-control-md" onBlur={cepConsulta} value={cep} onChange={(e) => setCep(e.target.value)}/>
+            </div>
+            <div className="mb-4 col-6">
+                <label className="form-label fw-bold" htmlFor="street">Rua</label>
+                <input required type="text" id="street" className="form-control form-control-md" value={street} onChange={(e) => setStreet(e.target.value)} />
+            </div>
+            <div className="mb-4 col-6">
+                <label className="form-label fw-bold" htmlFor="number">Número</label>
+                <input required type="text" id="number" className="form-control form-control-md" value={houseNumber} onChange={(e) => setHouseNumber(e.target.value)} />
+            </div>
+            <div className="mb-4 col-6">
+                <label className="form-label fw-bold" htmlFor="city">Cidade</label>
+                <input required type="text" id="city" className="form-control form-control-md" value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
 
             <div className="mb-4 col-12">

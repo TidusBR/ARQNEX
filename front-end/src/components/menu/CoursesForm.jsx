@@ -22,6 +22,11 @@ export function CoursesInputs({ session, index, onChange }) {
 
     return (
         <div className="row">
+
+            { index > 0 && <div className="col-12 mt-1 mb-4" >
+                <hr />
+            </div> }
+            
             <div className="mb-4 col-12">
                 <label className="form-label fw-bold" htmlFor={"curso-" + index}>Curso</label>
                 <input required type="text" id={"curso-" + index} className="form-control form-control-md" value={course} onChange={(e) => setCourse(e.target.value)} />

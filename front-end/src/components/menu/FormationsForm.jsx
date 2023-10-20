@@ -30,6 +30,9 @@ export function FormationsInputs({ index, onChange, session }) {
 
     return (
         <div className="row">
+            { index > 0 && <div className="col-12 mt-1 mb-4" >
+                <hr />
+            </div> }
             <div className="mb-4 col-12">
                 <label className="form-label fw-bold" htmlFor={"escolaridade-"+index}>Escolaridade</label>
                 <input required type="text" id={"escolaridade-"+index} className="form-control form-control-md" value={education} onChange={(e) => setEducation(e.target.value)} />

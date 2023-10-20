@@ -17,7 +17,7 @@ export default function Header({ setLoginOpen, session }) {
         <div className="container-header row">
             <div className='d-none d-lg-block col-lg-12 h-100'>
                 <div className="row d-flex h-100 align-items-center justify-content-between">
-                    <div className='col-lg-6 col-xl-4'>
+                    <div className='col-lg-6 col-xl-5 col-xxl-4'>
                         <div className="row">
                             <div className="col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
                                 <img src={logo} alt="Logo" />
@@ -49,13 +49,13 @@ export default function Header({ setLoginOpen, session }) {
                     {
                         !session.loggedIn && (
                             <div className="col-lg-2 col-xl-2">
-                                <div className="row">
-                                    <div className="col-lg-6 col-xl-6 d-flex align-items-center justify-content-center">
+                                <div className="row d-flex justify-content-end">
+                                    <div className="col-lg-6 col-xl-5 d-flex align-items-center justify-content-center">
                                         <Link className="button" onClick={() => setLoginOpen(true)}>
                                             Entrar
                                         </Link>
                                     </div>
-                                    <div className="col-lg-6 col-xl-6 d-flex align-items-center justify-content-center">
+                                    <div className="col-lg-6 col-xl-5 d-flex align-items-center justify-content-center">
                                         <Link className="button text-nowrap" to="/register">
                                             Cadastrar-se
                                         </Link>
@@ -141,7 +141,7 @@ export default function Header({ setLoginOpen, session }) {
                                         <div>
                                             <p style={{ fontSize: "1.5rem" }} className='fw-bold mb-1'>{session.account.name}</p>
                                             <p style={{ fontSize: "1.2rem", color: "#AAAAAA" }} className='mb-1'>{session.account.username}</p>
-                                            {session.loggedIn.account?.isPremium && <p style={{ fontSize: "1rem", color: "rgb(219, 117, 44)", fontStyle: "italic" }}>PRO</p>}
+                                            {session.account?.isPremium && <p style={{ fontSize: "1rem", color: "rgb(219, 117, 44)", fontStyle: "italic" }}>PRO</p>}
                                         </div>
                                     </div>)}
                                 <div className=''>
@@ -258,7 +258,7 @@ export default function Header({ setLoginOpen, session }) {
                                                 Notificações
                                             </Link>
                                         </div>
-                                        {!session.loggedIn.isPremium &&
+                                        {!session.account.isPremium &&
                                             <div className="nav-item">
                                                 <Link className="button nav-link" style={{ color: "#EE2C09" }} data-bs-dismiss="offcanvas" onClick={() => {
                                                     navigate("/become-pro")

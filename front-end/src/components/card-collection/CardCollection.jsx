@@ -66,7 +66,7 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
             overlayClassName={"Overlay"}
             >
                 <div className="container h-100 py-4 d-flex flex-column justify-content-between">
-                    <div className="row px-4">
+                    <div className="row">
                         <div className="col-12 d-flex flex-row align-items-center justify-content-between mb-3">
                             <div className='d-flex flex-row align-items-center'>
                                 <IconUser userImg={imgTest}></IconUser>
@@ -116,7 +116,7 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
                     
                     <div className='px-4'>
                         <div className="row justify-content-md-center mb-4">
-                            <div className="col-md-auto">
+                            <div className="col-md-auto" style={{textAlign: "justify", overflow: "hidden"}}>
                                 <span style={{fontSize: "1em", color: "#1D252C"}}>{info.description}</span>
                             </div>
                         </div>
@@ -142,7 +142,7 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
                         <hr/>
 
                         <div className="row">
-                            <div className="col-12 d-flex justify-content-between align-items-center">
+                            <div className="col-12 d-flex justify-content-between align-items-center px-0">
                                 <div className='d-flex align-itens-center'>
                                     <svg className='p-0 m-0 me-3' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                         <g id="ic_view" transform="translate(-2897 -1130)">

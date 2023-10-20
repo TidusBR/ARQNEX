@@ -29,6 +29,11 @@ export function ExperiencesInputs({ session, index, onChange }) {
 
     return (
         <div className="row">
+            
+            { index > 0 && <div className="col-12 mt-1 mb-4" >
+                <hr />
+            </div> }
+
             <div className="mb-4 col-12">
                 <label className="form-label fw-bold" htmlFor={"cargo-"+index}>Cargo</label>
                 <input required type="text" id={"cargo-"+index} className="form-control form-control-md" value={role} onChange={(e) => setRole(e.target.value)} />

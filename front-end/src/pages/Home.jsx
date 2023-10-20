@@ -1,6 +1,6 @@
 import './css/home.css'
 import background from '../assets/Dashboard/foto-home.png'
-import CardJob from '../components/card-home/CardHome'
+import CardJob from '../components/card-job/CardJob'
 import { useEffect, useState } from 'react'
 import { config } from '../config';
 import PropTypes from 'prop-types';
@@ -55,7 +55,7 @@ export default function Home({ session, setLoginOpen }) {
                             Trabalhos de outros arquitetos
                         </h3>
                     </div>
-                    <div className="col-10 m-auto mb-4">
+                    {/* <div className="col-10 m-auto mb-4">
                         <div className='row justify-content-md-left'>
                             {
                                 collections.map(
@@ -67,7 +67,22 @@ export default function Home({ session, setLoginOpen }) {
                                 )
                             }
                         </div>
+                    </div> */}
+
+                    <div className="col-sm-10 m-auto">
+                        <div className="row py-5">
+                            {
+                                collections.map(
+                                    (collection, index) => (
+                                        <div key={index} className="col-md-6 col-lg-6 col-xl-3 mb-3" style={{height: "300px"}}>
+                                            <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
+                                        </div>
+                                    )
+                                )
+                            }
+                        </div>               
                     </div>
+
                     <div className="col-10 m-auto p-0">
                         <div className='row justify-content-md-center'>
                             <Button disabled={disablePagination} onClick={() => setPage(page + 1)}
