@@ -10,8 +10,9 @@ import BecomeUpgrade from './become_upgrade/BecomeUpgrade'
 import ButtonUpload from './button_upload/ButtonUpload'
 
 export default function Header({ setLoginOpen, session }) {
+
     const navigate = useNavigate();
-    
+
     return (
         <div className="container-header row">
             <div className='d-none d-lg-block col-lg-12 h-100'>
@@ -63,15 +64,15 @@ export default function Header({ setLoginOpen, session }) {
                             </div>
                         ) ||
                         (
-                            <div className={session.account?.isPremium ? "col-lg-6 col-xl-3" : "col-lg-6 col-xl-4"}>
+                            <div className={session.account?.isPremium ? "col-lg-6 col-xl-3" : "col-lg-6 col-xl-5 col-xxl-4"}>
                                 <div className="row d-flex align-items-center justify-content-between">
                                     {
-                                    !session.account?.isPremium &&
-                                    <div className="col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
-                                        <Link className="text-decoration-none" to="/become-pro">
-                                            <BecomeUpgrade></BecomeUpgrade>
-                                        </Link>
-                                    </div>
+                                        !session.account?.isPremium &&
+                                        <div className="col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
+                                            <Link className="text-decoration-none" to="/become-pro">
+                                                <BecomeUpgrade></BecomeUpgrade>
+                                            </Link>
+                                        </div>
                                     }
                                     <div className="col-lg-1 col-xl-1 d-flex align-items-center justify-content-center">
                                         <Link to="/profile">
@@ -111,32 +112,36 @@ export default function Header({ setLoginOpen, session }) {
             <div className="d-block d-lg-none col-12 h-100 p-0 bg-white">
                 <nav className="navbar" style={{ height: "70px" }}>
                     <div className="container-fluid d-flex justify-content-between">
+
                         <div></div>
+
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                             <span className="navbar-toggler-icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"></span>
                         </button>
-                        <div className="offcanvas offcanvas-end"  id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                        <div className="offcanvas-header d-flex justify-content-between align-items-basline">
+
+                        <div className="offcanvas offcanvas-end" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                            <div className="offcanvas-header d-flex justify-content-between align-items-basline">
                                 <img className="navbar-brand p-0" src={logo} alt="Logo" />
                                 <button type="button" id='btn-close-menu' className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
+                            
                             <div className="offcanvas-body">
                                 {session.loggedIn && (
                                     <div className='mb-3 d-flex pb-3' style={{ borderBottom: "1.5px solid #EEEEEE" }}>
-                                        <Link data-bs-dismiss="offcanvas" style={{position: "relative"}} className='me-5' onClick={() => {
+                                        <Link data-bs-dismiss="offcanvas" style={{ position: "relative" }} className='me-5' onClick={() => {
                                             navigate("/profile")
                                         }}>
-                                            <img src={`${config.api}/uploads/${session.account.id}/avatar`} style={{ 
-                                                width: "100px", 
-                                                height: "100px", 
+                                            <img src={`${config.api}/uploads/${session.account.id}/avatar`} style={{
+                                                width: "100px",
+                                                height: "100px",
                                                 borderRadius: "50%",
-                                                border: "1px solid rgb(219, 117, 44)" 
-                                                }} className='mb-2 p-1' alt="" />
+                                                border: "1px solid rgb(219, 117, 44)"
+                                            }} className='mb-2 p-1' alt="" />
                                         </Link>
                                         <div>
-                                            <p style={{fontSize: "1.5rem"}} className='fw-bold mb-1'>{session.account.name}</p>
-                                            <p style={{fontSize: "1.2rem", color: "#AAAAAA"}} className='mb-1'>{session.account.username}</p>
-                                            {session.loggedIn.account?.isPremium && <p style={{fontSize: "1rem", color: "rgb(219, 117, 44)", fontStyle: "italic"}}>PRO</p>}
+                                            <p style={{ fontSize: "1.5rem" }} className='fw-bold mb-1'>{session.account.name}</p>
+                                            <p style={{ fontSize: "1.2rem", color: "#AAAAAA" }} className='mb-1'>{session.account.username}</p>
+                                            {session.loggedIn.account?.isPremium && <p style={{ fontSize: "1rem", color: "rgb(219, 117, 44)", fontStyle: "italic" }}>PRO</p>}
                                         </div>
                                     </div>)}
                                 <div className=''>
@@ -253,14 +258,14 @@ export default function Header({ setLoginOpen, session }) {
                                                 Notificações
                                             </Link>
                                         </div>
-                                        {!session.loggedIn.isPremium && 
-                                        <div className="nav-item">
-                                            <Link className="button nav-link" style={{color: "#EE2C09"}} data-bs-dismiss="offcanvas" onClick={() => {
-                                                navigate("/become-pro")
-                                            }}>
-                                                Fazer um upgrade, torne-se PRO
-                                            </Link>
-                                        </div>}
+                                        {!session.loggedIn.isPremium &&
+                                            <div className="nav-item">
+                                                <Link className="button nav-link" style={{ color: "#EE2C09" }} data-bs-dismiss="offcanvas" onClick={() => {
+                                                    navigate("/become-pro")
+                                                }}>
+                                                    Fazer um upgrade, torne-se PRO
+                                                </Link>
+                                            </div>}
                                         <div className="nav-item">
                                             <Link className="button nav-link" onClick={async function () {
                                                 await fetch(`${config.api}${config.endpoints.account.logout}`, { credentials: "include" });

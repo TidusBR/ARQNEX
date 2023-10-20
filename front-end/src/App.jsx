@@ -6,15 +6,14 @@ import CenterArea from "./components/center_area/CenterArea";
 import Footer from "./components/footer/Footer";
 import Login from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import { useEffect, useState } from "react";
 import {config} from './config'
 import ProfileUser from "./pages/ProfileUser";
-
+import Dashboard from "./pages/Dashboard";
+import EditProfile from "./pages/EditProfile";
 import Upload from "./pages/Upload";
-
 import Modal from 'react-modal';
-import BecomePro from "./components/become_pro/BecomePro";
-
 import Page404 from './pages/Page404';
 import ProfileForm from "./components/menu/ProfileForm";
 import PasswordForm from "./components/menu/PasswordForm";
@@ -22,30 +21,13 @@ import CoursesForm from "./components/menu/CoursesForm";
 import ExperiencesForm from "./components/menu/ExperiencesForm";
 import InterestsForm from "./components/menu/InterestsForm";
 import FormationsForm from "./components/menu/FormationsForm";
-
-import Dashboard from "./pages/Dashboard";
-import EditProfile from "./pages/EditProfile";
+import BecomePro from "./components/become_pro/BecomePro";
 
 Modal.setAppElement("#root");
 
-//É SÓ VOCÊ PEGAR O OJBETO SESSION E PASSAR PARA OS OUTROS COMPONENTES COMO PROPRIEDADE, POR EXEMPLO
-//O PERFIL DO USUÁRIO, PRECISA SABER SE O USUÁRIO ESTÁ LOGADO, ENTÃO BASTA, PASSAR SESSION COMO UMA PROPRIEDADE PARA O COMPONENTE "ProfileUser", ler linha 48.
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
-
-  /**
-   * objeto session:
-   {
-    loggedIn: false,
-    account: {
-      id: -1,
-      name: "",
-      username: "",
-      isPremium: false
-    }
-  }
-   */
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState(null); // Inicialize com null
 
   const updateSession = () => {
     console.log('updating session')
@@ -69,7 +51,7 @@ export default function App() {
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
             {/* {FAZER VALIDAÇÕES PARA RENDERIZAR AS PÁGINAS DE ACORDO COM SUA PERMISSÃO DE SESSÃO} */}
-            <Route path="/" element={session.loggedIn ? <Navigate to="/dashboard" />  : <Home session={session} />} />
+            <Route path="/" element={session.loggedIn ? <Navigate to="/dashboard" />  : <Home session={session} setLoginOpen={setLoginOpen}/>} />
             <Route path="/upload" element={session.loggedIn ? <Upload session={session} /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
             <Route path="/profile" element={session.account.username ? <Navigate to={"/profile/" + session.account.username} /> : <Navigate to="/" />}></Route>
@@ -83,12 +65,6 @@ export default function App() {
               <Route path="interests" element={<InterestsForm session={session} />}></Route>
               <Route path="formations" element={<FormationsForm session={session} />}></Route>
             </Route>
-            {/* <Route path="/edit-profile/profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
-            <Route path="/edit-profile/password" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
-            <Route path="/edit-profile/interests" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
-            <Route path="/edit-profile/formations" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
-            <Route path="/edit-profile/courses" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route>
-            <Route path="/edit-profile/experiences" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}></Route> */}
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
             <Route path="*" element={<Page404 />}></Route>
           </Routes>
