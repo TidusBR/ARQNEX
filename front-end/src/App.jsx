@@ -21,6 +21,7 @@ import CoursesForm from "./components/menu/CoursesForm";
 import ExperiencesForm from "./components/menu/ExperiencesForm";
 import InterestsForm from "./components/menu/InterestsForm";
 import FormationsForm from "./components/menu/FormationsForm";
+import OfficesForm from "./components/menu/OfficesForm";
 import BecomePro from "./components/become_pro/BecomePro";
 
 Modal.setAppElement("#root");
@@ -57,13 +58,14 @@ export default function App() {
             <Route path="/profile" element={session.account.username ? <Navigate to={"/profile/" + session.account.username} /> : <Navigate to="/" />}></Route>
             <Route path="/profile/*" element={<ProfileUser session={session} />}></Route>
             <Route path="/become-pro" element={session.loggedIn && !session.account.isPremium ? <BecomePro session={session} /> : <Navigate to="/" />}></Route>
-            <Route path="/edit-profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}>
+            <Route path="/edit-profile" element={session.loggedIn ? <EditProfile session={session} /> : <Navigate to="/" />}>
               <Route path="profile" element={ <ProfileForm session={session} updateSession={updateSession} /> }></Route>
               <Route path="password" element={ <PasswordForm updateSession={updateSession} /> }></Route>
               <Route path="courses" element={<CoursesForm session={session} updateSession={updateSession} />}></Route>
               <Route path="experiences" element={<ExperiencesForm session={session} updateSession={updateSession} />}></Route>
               <Route path="interests" element={<InterestsForm session={session} />}></Route>
               <Route path="formations" element={<FormationsForm session={session} />}></Route>
+              <Route path="offices" element={<OfficesForm session={session} />}></Route>
             </Route>
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
             <Route path="*" element={<Page404 />}></Route>
