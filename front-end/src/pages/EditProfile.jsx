@@ -51,7 +51,7 @@ export default function EditProfile({ session }) {
     }, [location.pathname, menuOptions, navigate]);
 
     useEffect(() => {
-        if(session.account.isPremium) {
+        if(!session.account.isPremium) {
             const newMenu = menuOptions;
             newMenu.push({
                 id: 7,
@@ -61,6 +61,15 @@ export default function EditProfile({ session }) {
             setMenuOptions(newMenu)
         } else {
             console.log("Não é premium");
+        }
+        if(!mockHasOffice) {
+            const newMenu = menuOptions;
+            newMenu.push({
+                id: 8,
+                name: "Gerenciar escritório",
+                path: "/edit-profile/manage-office"
+            })
+            setMenuOptions(newMenu)
         }
     }, [menuOptions]);
 
