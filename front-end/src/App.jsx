@@ -23,6 +23,7 @@ import InterestsForm from "./components/menu/InterestsForm";
 import FormationsForm from "./components/menu/FormationsForm";
 import OfficesForm from "./components/menu/OfficesForm";
 import ManageOffice from "./components/menu/ManageOffice";
+import Peoples from "./pages/Peoples";
 import BecomePro from "./components/become_pro/BecomePro";
 
 Modal.setAppElement("#root");
@@ -70,6 +71,7 @@ export default function App() {
               <Route path="manage-office" element={<ManageOffice />}></Route>
             </Route>
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
+            <Route path="/peoples" element={session.loggedIn ? <Peoples session={session}></Peoples> : <Navigate to="/" />}></Route>
             <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </CenterArea>
