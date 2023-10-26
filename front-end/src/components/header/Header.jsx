@@ -35,7 +35,7 @@ export default function Header({ setLoginOpen, session }) {
                                     Pessoas
                                 </Link>
 
-                                <Link className="button" to="/">
+                                <Link className="button" to="/offices">
                                     Escritórios
                                 </Link>
 
@@ -232,7 +232,7 @@ export default function Header({ setLoginOpen, session }) {
                                     </div>}
                                     <div className="nav-item">
                                         <Link className="button nav-link" data-bs-dismiss="offcanvas" onClick={() => {
-                                            navigate("/")
+                                            navigate("/offices")
                                         }}>
                                             Escritórios
                                         </Link>

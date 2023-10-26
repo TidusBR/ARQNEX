@@ -24,6 +24,7 @@ import FormationsForm from "./components/menu/FormationsForm";
 import OfficesForm from "./components/menu/OfficesForm";
 import ManageOffice from "./components/menu/ManageOffice";
 import Peoples from "./pages/Peoples";
+import Offices from "./pages/Offices";
 import BecomePro from "./components/become_pro/BecomePro";
 
 Modal.setAppElement("#root");
@@ -72,6 +73,7 @@ export default function App() {
             </Route>
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
             <Route path="/peoples" element={session.loggedIn ? <Peoples session={session}></Peoples> : <Navigate to="/" />}></Route>
+            <Route path="/offices" element={session.loggedIn ? <Offices session={session}></Offices> : <Navigate to="/" />}></Route>
             <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </CenterArea>

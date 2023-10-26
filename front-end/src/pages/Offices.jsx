@@ -7,13 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import avatarDefault from "../assets/fotoPerfil.png";
 import jobDefault from "../assets/fotoRegister.jpeg";
 
-export default function Peoples({ session }) {
+export default function Offices({ session }) {
     // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
     const [disablePagination, setDisablePagination] = useState(false);
     const [page, setPage] = useState(1)
     const navigate = useNavigate();
 
     const [collections, setCollections] = useState([]);
+
+    // QUANTIDADE DE ESCRITÓRIOS MOCKADOS
+    const [mockQntdOffices] = useState(1000)
 
     useEffect(() => {
         fetch(`${config.api}${config.endpoints.collection.list}?page=${page}`, { credentials: "include" })
@@ -35,31 +38,25 @@ export default function Peoples({ session }) {
         avatar: avatarDefault,
         isPremium: true,
         address: "Campo Grande, MS",
-        semester: "6° Semestre",
         following: true,
         jobs: [jobDefault,jobDefault,jobDefault],
-        hasManyJobs: true,
-        hasOffice: true
+        hasManyJobs: true
     },{
         name: "Jeferson Gimenes",
         avatar: avatarDefault,
         isPremium: true,
         address: "Campo Grande, MS",
-        semester: "6° Semestre",
         following: false,
         jobs: [jobDefault,jobDefault],
-        hasManyJobs: false,
-        hasOffice: true
+        hasManyJobs: false
     },{
         name: "Diogo Soares",
         avatar: avatarDefault,
         isPremium: false,
         address: "São Paulo, SP",
-        semester: "",
         following: false,
         jobs: [jobDefault,jobDefault,jobDefault],
-        hasManyJobs: true,
-        hasOffice: false
+        hasManyJobs: true
     }])
 
     const [sessionOfficeMock] = useState(true)
@@ -69,31 +66,27 @@ export default function Peoples({ session }) {
             <div className="row">
                 <div className="d-none d-md-block col-sm-2"></div>
                 <div className="col-10 col-md-6 mt-5 mb-5 mx-auto mx-md-0">
-                    <h1 className="fw-bold">Pessoas</h1>
+                    <h1 className="fw-bold">Escritórios</h1>
                     <h2 style={{ fontSize: "1.5rem" }} className="mb-4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
                     tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.</h2>
                 </div>
 
-                <div className="col-sm-12 mt-4 px-5 d-md-flex pb-4" style={{borderBottom: "1px solid #EEEEEE"}}>
-                    <div className="col-12 mb-3 col-md-2 col-lg-2 col-xxl-1">
+                <div className="col-sm-10 mt-4 pb-4 d-flex flex-md-row flex-column justify-content-between m-auto" style={{borderBottom: "1px solid #EEEEEE"}}>
+                    <div className="col-12 mb-3 col-md-2">
                         <select className="form-select d-inline">
                             <option value="popular">Popular</option>
                         </select>
                     </div>
-                    <div className="col text-center mb-3">
-                        <button className="p-2 border-0 fw-bold bg-white rounded me-3">
-                            Clássico
-                        </button>
-                        <button className="p-2 border-0 fw-bold bg-white rounded">
-                            Contemporâneo + Moderno
-                        </button>
-                    </div>
-                    <div className="col-12 col-md-2 col-xxl-1">
+                    <div className="col-12 col-md-2">
                         <input className="form-control icon-search" type="text" placeholder="Buscar" />
                     </div>
                 </div>
 
-                <div className='col-12 col-sm-10 m-auto mt-5'>
+                <div className="col-12 col-sm-10 m-auto mt-1 px-md-0">
+                    <p style={{color: "#00000061"}}>{mockQntdOffices} Escritórios</p>
+                </div>
+
+                <div className='col-12 col-sm-10 m-auto mt-3 mt-md-5 '>
                     {users.map((user, index) => {
                         return <div className='row' key={index}>
                                     { index > 0 && <div className="col-12 my-3" >
@@ -105,7 +98,6 @@ export default function Peoples({ session }) {
                                             <p style={{color: "#1D252C"}}  className="fw-bold">{user.name}
                                                 {user.isPremium && <span className="become-upgrade px-1">PRO</span>}
                                             </p>
-                                            <p style={{color: "#1D252C52"}}>{user.semester}</p>
                                             <p style={{color: "#1D252C52"}}>{user.address}</p>
                                             <div className='d-flex'>
                                                 <Button variant='contained' className='me-2' size='small'
@@ -114,8 +106,6 @@ export default function Peoples({ session }) {
                                                 >
                                                     {user.following ? "Seguindo" : "Seguir"}
                                                 </Button>
-                                                {user.hasOffice && <Button variant='contained' size='small'
-                                                style={{textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}}>Convidar</Button>}
                                             </div>
                                         </div>
                                     </div>
@@ -143,6 +133,6 @@ export default function Peoples({ session }) {
     )
 }
 
-Peoples.propTypes = {
+Offices.propTypes = {
     session: PropTypes.object.isRequired
 }
