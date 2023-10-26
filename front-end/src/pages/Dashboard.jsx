@@ -49,13 +49,13 @@ export default function Dashboard({ session }) {
                     </div>
                 </div>
 
-                <div className="col-sm-12 mt-4 px-5 d-none d-md-flex">
-                    <div className="col-4 col-md-2 col-lg-2 col-xxl-1">
+                <div className="col-sm-12 mt-4 px-5 d-md-flex">
+                    <div className="col-12 mb-3 col-md-2 col-lg-2 col-xxl-1">
                         <select className="form-select d-inline">
                             <option value="popular">Popular</option>
                         </select>
                     </div>
-                    <div className="col text-center">
+                    <div className="col text-center mb-3">
                         <button className="p-2 border-0 fw-bold bg-white rounded me-3">
                             Clássico
                         </button>
@@ -63,7 +63,7 @@ export default function Dashboard({ session }) {
                             Contemporâneo + Moderno
                         </button>
                     </div>
-                    <div className="col-sm-2 col-xxl-1">
+                    <div className="col-12 col-md-2 col-xxl-1">
                         <input className="form-control icon-search" type="text" placeholder="Buscar" />
                     </div>
                 </div>

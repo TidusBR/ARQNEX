@@ -56,6 +56,10 @@ export default function Peoples({ session }) {
                     </div>
                 </div>
 
+                <div className='col-12 col-sm-10 bg-black m-auto mt-5'>
+                    TESTE
+                </div> 
+
                 
                 <div className="col-10 m-auto p-0">
                     <div className='row justify-content-center'>
