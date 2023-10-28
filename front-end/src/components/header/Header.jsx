@@ -8,6 +8,7 @@ import IconNotification from './icon_notification/IconNotification'
 import IconMessage from './icon_notification/IconMessage'
 import BecomeUpgrade from './become_upgrade/BecomeUpgrade'
 import ButtonUpload from './button_upload/ButtonUpload'
+import courses from '../courses/Courses'
 
 export default function Header({ setLoginOpen, session }) {
 
@@ -35,7 +36,7 @@ export default function Header({ setLoginOpen, session }) {
                                     Escritórios
                                 </Link>
 
-                                <Link className="button" to="/">
+                                <Link className="button" to="/courses">
                                     Cursos
                                 </Link>
 

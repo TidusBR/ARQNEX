@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { useEffect, useState } from "react";
-import {config} from './config'
+import { config } from './config'
 import ProfileUser from "./pages/ProfileUser";
 import Dashboard from "./pages/Dashboard";
 import EditProfile from "./pages/EditProfile";
@@ -33,7 +33,7 @@ export default function App() {
     console.log('updating session')
     fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
       .then(response => response.json())
-      .then(data => {setSession(data); console.log(data);})
+      .then(data => { setSession(data); console.log(data); })
   }
 
   useEffect(() => {
@@ -51,15 +51,18 @@ export default function App() {
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
             {/* {FAZER VALIDAÇÕES PARA RENDERIZAR AS PÁGINAS DE ACORDO COM SUA PERMISSÃO DE SESSÃO} */}
-            <Route path="/" element={session.loggedIn ? <Navigate to="/dashboard" />  : <Home session={session} setLoginOpen={setLoginOpen}/>} />
+            <Route path="/" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Home session={session} setLoginOpen={setLoginOpen} />} />
             <Route path="/upload" element={session.loggedIn ? <Upload session={session} /> : <Navigate to="/" />} />
             <Route path="/register" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
             <Route path="/profile" element={session.account.username ? <Navigate to={"/profile/" + session.account.username} /> : <Navigate to="/" />}></Route>
             <Route path="/profile/*" element={<ProfileUser session={session} />}></Route>
             <Route path="/become-pro" element={session.loggedIn && !session.account.isPremium ? <BecomePro session={session} /> : <Navigate to="/" />}></Route>
+
+            {/* <Route path="/courses" element={element.loggedIn ? <Courses /> : <Navigate to="/" />} /> */}
+
             <Route path="/edit-profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}>
-              <Route path="profile" element={ <ProfileForm session={session} updateSession={updateSession} /> }></Route>
-              <Route path="password" element={ <PasswordForm updateSession={updateSession} /> }></Route>
+              <Route path="profile" element={<ProfileForm session={session} updateSession={updateSession} />}></Route>
+              <Route path="password" element={<PasswordForm updateSession={updateSession} />}></Route>
               <Route path="courses" element={<CoursesForm session={session} updateSession={updateSession} />}></Route>
               <Route path="experiences" element={<ExperiencesForm session={session} updateSession={updateSession} />}></Route>
               <Route path="interests" element={<InterestsForm session={session} />}></Route>
