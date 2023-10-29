@@ -8,10 +8,14 @@ import IconNotification from './icon_notification/IconNotification'
 import IconMessage from './icon_notification/IconMessage'
 import BecomeUpgrade from './become_upgrade/BecomeUpgrade'
 import ButtonUpload from './button_upload/ButtonUpload'
+import { useState } from 'react'
 
 export default function Header({ setLoginOpen, session }) {
 
     const navigate = useNavigate();
+
+    // ESTOU MOCKANDO UM ESCRITÓRIO PRA APARECER NO MENU MOBILE, ESSE DADO VIRÁ NA SESSAO DO USUÁRIO
+    const [mockOffice] = useState(true)
 
     return (
         <div className="container-header row">
@@ -27,11 +31,11 @@ export default function Header({ setLoginOpen, session }) {
                                     Início
                                 </Link>
 
-                                <Link className="button" to="/">
+                                <Link className="button" to="/peoples">
                                     Pessoas
                                 </Link>
 
-                                <Link className="button" to="/">
+                                <Link className="button" to="/offices">
                                     Escritórios
                                 </Link>
 
@@ -174,7 +178,7 @@ export default function Header({ setLoginOpen, session }) {
                                     </div>
                                     <div className="nav-item">
                                         <Link className="button nav-link" data-bs-dismiss="offcanvas" onClick={() => {
-                                            navigate("/")
+                                            navigate("/peoples")
                                         }}>
                                             Pessoas
                                         </Link>
@@ -209,16 +213,26 @@ export default function Header({ setLoginOpen, session }) {
                                                     navigate("/edit-profile/courses")
                                                 }}>Cursos</Link>
                                             </li>
-                                            <li>
+                                            <li className='pb-2'>
                                                 <Link className="dropdown-item" data-bs-dismiss="offcanvas" onClick={() => {
                                                     navigate("/edit-profile/experiences")
                                                 }}>Experiências</Link>
                                             </li>
+                                            {session.account.isPremium && <li className='pb-2'>
+                                                <Link className="dropdown-item" data-bs-dismiss="offcanvas" onClick={() => {
+                                                    navigate("/edit-profile/offices")
+                                                }}>Escritórios</Link>
+                                            </li>}
+                                            {mockOffice && <li className='pb-2'>
+                                                <Link className="dropdown-item" data-bs-dismiss="offcanvas" onClick={() => {
+                                                    navigate("/edit-profile/manage-office")
+                                                }}>Gerenciar escritório</Link>
+                                            </li>}
                                         </div>
                                     </div>}
                                     <div className="nav-item">
                                         <Link className="button nav-link" data-bs-dismiss="offcanvas" onClick={() => {
-                                            navigate("/")
+                                            navigate("/offices")
                                         }}>
                                             Escritórios
                                         </Link>

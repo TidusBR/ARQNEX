@@ -3,11 +3,11 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./css/edit-profile.css";
 import { Button } from "@mui/material";
 
-export default function EditProfile() {
+export default function EditProfile({ session }) {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [menuOptions] = useState([
+    const [menuOptions, setMenuOptions] = useState([
         {
             id: 1,
             name: "Perfil",
@@ -42,11 +42,36 @@ export default function EditProfile() {
 
     const [active, setActive] = useState(null);
 
+    const [mockHasOffice] = useState(false)
+
     useEffect(() => {
         const activeItem = menuOptions.find((element) => location.pathname === element.path) ?? menuOptions[0];
         setActive(activeItem.path);
         navigate(activeItem.path);
     }, [location.pathname, menuOptions, navigate]);
+
+    useEffect(() => {
+        if(!session.account.isPremium) {
+            const newMenu = menuOptions;
+            newMenu.push({
+                id: 7,
+                name: "Escritórios",
+                path: "/edit-profile/offices"
+            })
+            setMenuOptions(newMenu)
+        } else {
+            console.log("Não é premium");
+        }
+        if(!mockHasOffice) {
+            const newMenu = menuOptions;
+            newMenu.push({
+                id: 8,
+                name: "Gerenciar escritório",
+                path: "/edit-profile/manage-office"
+            })
+            setMenuOptions(newMenu)
+        }
+    }, [menuOptions]);
 
     const changeMenu = (e, path) => {
         e.preventDefault();
