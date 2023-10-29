@@ -40,7 +40,7 @@ export default function Header({ setLoginOpen, session }) {
                                     Cursos
                                 </Link>
 
-                                <Link className="button type1" to="/">
+                                <Link className="button type1" to="/online">
                                     Ao vivo
                                 </Link>
                             </div>
