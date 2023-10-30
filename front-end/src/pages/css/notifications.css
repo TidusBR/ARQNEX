@@ -1,0 +1,20 @@
+.img-responsive-job {
+    height: 120px;
+}
+
+.img-responsive-user {
+    height: 100px;
+}
+
+
+@media (max-width: 600px) {
+    .img-responsive-job {
+        height: 80px;
+    }
+    .img-responsive-user {
+        height: 60px;
+    }
+    .notifications-paragraph {
+        font-size: 0.8rem !important;  
+    }
+}
