@@ -8,26 +8,25 @@ import avatarDefault from "../assets/fotoPerfil.png";
 import jobDefault from "../assets/fotoRegister.jpeg";
 
 export default function Peoples({ session }) {
-    // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
+    const navigate = useNavigate();
+
     const [disablePagination, setDisablePagination] = useState(false);
     const [page, setPage] = useState(1)
-    const navigate = useNavigate();
 
     const [collections, setCollections] = useState([]);
 
-    useEffect(() => {
-        fetch(`${config.api}${config.endpoints.collection.list}?page=${page}`, { credentials: "include" })
-            .then(response => response.json())
-            .then(data => {
-                if (data.length === 0) {
-                    setDisablePagination(true);
-                    return;
-                }
-                setCollections(collections => [...collections, ...data])
-            });
-    }, [page]);
+    const [people, setPeople] = useState([]);
 
-    const openCollection = new URLSearchParams(window.location.search)?.get('col');
+    useEffect(() => {
+        fetch(`${config.api}${config.endpoints.people.list}`, {
+            credentials: "include"
+        })
+        .then(response => response.json())
+        .then(people => {
+            console.log(people);
+            setPeople(people);
+        });
+    }, []);
 
     //USUARIOS MOCKADOS
     const [users, setUsers] = useState([{
@@ -62,8 +61,6 @@ export default function Peoples({ session }) {
         hasOffice: false
     }])
 
-    const [sessionOfficeMock] = useState(true)
-
     return (
         <div className="container-peoples">
             <div className="row">
@@ -94,38 +91,44 @@ export default function Peoples({ session }) {
                 </div>
 
                 <div className='col-12 col-sm-10 m-auto mt-5'>
-                    {users.map((user, index) => {
+                    {people.map((person, index) => {
                         return <div className='row' key={index}>
                                     { index > 0 && <div className="col-12 my-3" >
                                         <hr />
                                     </div> }
                                     <div className="col-12 col-md-3 mb-3 mb-md-0 d-flex align-items-center">
-                                        <img src={user.avatar} className="rounded-circle me-2" alt="fotoPerfil" width={100} height={100} />
+                                        <img src={`${config.api}/uploads/${person.id}/avatar`} className="rounded-circle me-2" alt="fotoPerfil" width={100} height={100} />
                                         <div className="d-flex flex-column justify-content-around">
-                                            <p style={{color: "#1D252C"}}  className="fw-bold">{user.name}
-                                                {user.isPremium && <span className="become-upgrade px-1">PRO</span>}
+                                            <p style={{color: "#1D252C"}}  className="fw-bold">{person.name}
+                                                {person.isPremium && <span className="become-upgrade px-1">PRO</span>}
                                             </p>
-                                            <p style={{color: "#1D252C52"}}>{user.semester}</p>
-                                            <p style={{color: "#1D252C52"}}>{user.address}</p>
+                                            {
+                                            person.semester && person.semester !== "" &&
+                                            <p style={{color: "#1D252C52"}}>{person.semester}° Semestre</p>
+                                            }
+                                            <p style={{color: "#1D252C52"}}>{person.city}</p>
+                                            {
+                                            session.loggedIn &&
                                             <div className='d-flex'>
                                                 <Button variant='contained' className='me-2' size='small'
-                                                    style={user.following ? {textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}
+                                                    style={person.following ? {textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}
                                                     : {textTransform: "none", backgroundColor: "#DB752C", color: "white"}}
                                                 >
-                                                    {user.following ? "Seguindo" : "Seguir"}
+                                                    {person.following ? "Seguindo" : "Seguir"}
                                                 </Button>
-                                                {user.hasOffice && <Button variant='contained' size='small'
+                                                {false /* verificar se user logado tem escritório */ && <Button variant='contained' size='small'
                                                 style={{textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}}>Convidar</Button>}
                                             </div>
+                                            }
                                         </div>
                                     </div>
-                                    {user.jobs.map((job,index) => {
+                                    {person.collections.map((collection, index) => {
                                         return <div className="col-12 col-md-3 mb-3 mb-md-0" key={index}>
-                                                <img src={job} alt="" style={{height: "100%", width: "100%"}}/>
+                                                <img src={`${config.api}/${collection.files[0]}`} alt="" style={{height: "100%", width: "100%"}}/>
                                             </div>
                                     })}
-                                    {user.hasManyJobs && <div className="col-12 mt-2 d-flex flex-row-reverse">
-                                        <a href='#' style={{color: "#DB752C"}} className='text-decoration-none'>Ver mais {'>'}</a>
+                                    {person.collectionCount > 3 && <div className="col-12 mt-2 d-flex flex-row-reverse">
+                                        <a onClick={() => navigate(`/profile/${person.username}`)} style={{color: "#DB752C"}} className='text-decoration-none'>Ver mais {'>'}</a>
                                     </div>}
                                 </div>
                     })}

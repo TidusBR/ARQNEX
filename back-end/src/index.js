@@ -16,6 +16,7 @@ import { PaypalRouter } from "./route/paypal.js";
 
 import {createServer} from "https";
 import { readFile } from "fs/promises";
+import { PeopleRouter } from "./route/people.js";
 
 const app = express();
 
@@ -68,6 +69,7 @@ app.all("*", async (req, _, next) => {
     return next();
 });
 
+app.use("/people", PeopleRouter);
 app.use("/account", AccountRouter);
 app.use("/session", SessionRouter);
 app.use("/collection", CollectionRouter);

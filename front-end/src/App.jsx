@@ -72,7 +72,7 @@ export default function App() {
               <Route path="manage-office" element={<ManageOffice />}></Route>
             </Route>
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
-            <Route path="/peoples" element={session.loggedIn ? <Peoples session={session}></Peoples> : <Navigate to="/" />}></Route>
+            <Route path="/peoples" element={<Peoples session={session}></Peoples>}></Route>
             <Route path="/offices" element={session.loggedIn ? <Offices session={session}></Offices> : <Navigate to="/" />}></Route>
             <Route path="*" element={<Page404 />}></Route>
           </Routes>

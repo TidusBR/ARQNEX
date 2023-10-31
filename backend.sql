@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Out-2023 às 20:52
--- Versão do servidor: 10.4.27-MariaDB
--- versão do PHP: 8.0.25
+-- Tempo de geração: 31/10/2023 às 20:35
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `accounts`
+-- Estrutura para tabela `accounts`
 --
 
 CREATE TABLE `accounts` (
@@ -37,7 +37,7 @@ CREATE TABLE `accounts` (
   `firebase_uid` text NOT NULL,
   `firebase_provider` text NOT NULL,
   `premium_level` int(11) NOT NULL,
-  `premium_time` bigint(20) NOT NULL,
+  `premium_time` bigint(20) NOT NULL DEFAULT current_timestamp(),
   `biography` text NOT NULL,
   `phone` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -45,7 +45,7 @@ CREATE TABLE `accounts` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `account_courses`
+-- Estrutura para tabela `account_courses`
 --
 
 CREATE TABLE `account_courses` (
@@ -57,18 +57,10 @@ CREATE TABLE `account_courses` (
   `conclusionYear` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Extraindo dados da tabela `account_courses`
---
-
-INSERT INTO `account_courses` (`account_id`, `course_id`, `course`, `institution`, `workLoad`, `conclusionYear`) VALUES
-(3, 0, 'test', '123', '10', '2023'),
-(3, 1, 'test2', 'deeee', '11', '2023');
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `account_experiences`
+-- Estrutura para tabela `account_experiences`
 --
 
 CREATE TABLE `account_experiences` (
@@ -82,18 +74,10 @@ CREATE TABLE `account_experiences` (
   `departureDate` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Extraindo dados da tabela `account_experiences`
---
-
-INSERT INTO `account_experiences` (`account_id`, `experience_id`, `role`, `company`, `companyPhone`, `remuneration`, `admissionDate`, `departureDate`) VALUES
-(3, 0, 'test', 'jera', '+5567996390920', '70', '2023-10-09', '2023-10-25'),
-(3, 1, 'test 2', 'jora', '+5567996390333', '222', '2023-11-02', '2023-10-03');
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `account_formation`
+-- Estrutura para tabela `account_formation`
 --
 
 CREATE TABLE `account_formation` (
@@ -109,17 +93,10 @@ CREATE TABLE `account_formation` (
   `semester` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Extraindo dados da tabela `account_formation`
---
-
-INSERT INTO `account_formation` (`account_id`, `formation_id`, `education`, `formation`, `institution`, `situation`, `startYear`, `endYear`, `period`, `semester`) VALUES
-(3, 0, 'Fulene', 'Ciclano', 'UCIDIBI', 'Completo', '2023', '2052', 'Vespertino', '6');
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `account_softwares`
+-- Estrutura para tabela `account_softwares`
 --
 
 CREATE TABLE `account_softwares` (
@@ -130,7 +107,7 @@ CREATE TABLE `account_softwares` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `account_styles`
+-- Estrutura para tabela `account_styles`
 --
 
 CREATE TABLE `account_styles` (
@@ -141,7 +118,7 @@ CREATE TABLE `account_styles` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `address`
+-- Estrutura para tabela `address`
 --
 
 CREATE TABLE `address` (
@@ -156,7 +133,7 @@ CREATE TABLE `address` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `collections`
+-- Estrutura para tabela `collections`
 --
 
 CREATE TABLE `collections` (
@@ -174,7 +151,7 @@ CREATE TABLE `collections` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `collections_files`
+-- Estrutura para tabela `collections_files`
 --
 
 CREATE TABLE `collections_files` (
@@ -185,7 +162,7 @@ CREATE TABLE `collections_files` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `collections_likes`
+-- Estrutura para tabela `collections_likes`
 --
 
 CREATE TABLE `collections_likes` (
@@ -196,7 +173,7 @@ CREATE TABLE `collections_likes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `collections_softwares`
+-- Estrutura para tabela `collections_softwares`
 --
 
 CREATE TABLE `collections_softwares` (
@@ -207,7 +184,7 @@ CREATE TABLE `collections_softwares` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `collection_details_projects`
+-- Estrutura para tabela `collection_details_projects`
 --
 
 CREATE TABLE `collection_details_projects` (
@@ -216,7 +193,7 @@ CREATE TABLE `collection_details_projects` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `collection_details_projects`
+-- Despejando dados para a tabela `collection_details_projects`
 --
 
 INSERT INTO `collection_details_projects` (`id`, `name`) VALUES
@@ -233,7 +210,7 @@ INSERT INTO `collection_details_projects` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `collection_details_softwares`
+-- Estrutura para tabela `collection_details_softwares`
 --
 
 CREATE TABLE `collection_details_softwares` (
@@ -243,7 +220,7 @@ CREATE TABLE `collection_details_softwares` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `collection_details_softwares`
+-- Despejando dados para a tabela `collection_details_softwares`
 --
 
 INSERT INTO `collection_details_softwares` (`id`, `name`, `iconPath`) VALUES
@@ -264,14 +241,14 @@ INSERT INTO `collection_details_softwares` (`id`, `name`, `iconPath`) VALUES
 (15, 'Rhinocheros 3D', 'software-icons/rhinosceros-3d.png'),
 (16, 'SketchUp', 'software-icons/Sketchup.png'),
 (17, 'Unreal', 'software-icons/unreal.svg'),
-(18, 'V-ray', 'software-icons/V-Ray.svg'),
+(18, 'V-ray for SketchUp', 'software-icons/V-Ray.svg'),
 (19, 'V-ray for 3DS MAX', 'software-icons/V-Ray.svg'),
 (20, '3DS MAX', 'software-icons/3dsMax.svg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `collection_details_styles`
+-- Estrutura para tabela `collection_details_styles`
 --
 
 CREATE TABLE `collection_details_styles` (
@@ -280,7 +257,7 @@ CREATE TABLE `collection_details_styles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `collection_details_styles`
+-- Despejando dados para a tabela `collection_details_styles`
 --
 
 INSERT INTO `collection_details_styles` (`id`, `name`) VALUES
@@ -291,7 +268,7 @@ INSERT INTO `collection_details_styles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `collection_details_types`
+-- Estrutura para tabela `collection_details_types`
 --
 
 CREATE TABLE `collection_details_types` (
@@ -300,7 +277,7 @@ CREATE TABLE `collection_details_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `collection_details_types`
+-- Despejando dados para a tabela `collection_details_types`
 --
 
 INSERT INTO `collection_details_types` (`id`, `name`) VALUES
@@ -315,71 +292,77 @@ INSERT INTO `collection_details_types` (`id`, `name`) VALUES
 --
 
 --
--- Índices para tabela `accounts`
+-- Índices de tabela `accounts`
 --
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `account_softwares`
+-- Índices de tabela `account_formation`
+--
+ALTER TABLE `account_formation`
+  ADD KEY `cascade author id to account_formation` (`account_id`);
+
+--
+-- Índices de tabela `account_softwares`
 --
 ALTER TABLE `account_softwares`
   ADD KEY `cascade author id to account_softwares` (`account_id`),
   ADD KEY `cascade software id to account_softwares` (`software_id`);
 
 --
--- Índices para tabela `account_styles`
+-- Índices de tabela `account_styles`
 --
 ALTER TABLE `account_styles`
   ADD KEY `cascade author id to account_styles` (`account_id`),
   ADD KEY `cascade style_id to account_styles` (`style_id`);
 
 --
--- Índices para tabela `address`
+-- Índices de tabela `address`
 --
 ALTER TABLE `address`
   ADD KEY `cascade author id to address` (`account_id`);
 
 --
--- Índices para tabela `collections`
+-- Índices de tabela `collections`
 --
 ALTER TABLE `collections`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cascade author id to collections` (`author_id`);
 
 --
--- Índices para tabela `collections_files`
+-- Índices de tabela `collections_files`
 --
 ALTER TABLE `collections_files`
   ADD KEY `cascade collection id to collection_files` (`collection_id`);
 
 --
--- Índices para tabela `collections_likes`
+-- Índices de tabela `collections_likes`
 --
 ALTER TABLE `collections_likes`
   ADD KEY `cascade collection id to collection_likes` (`collection_id`),
   ADD KEY `cascade account id to collection_likes` (`account_id`);
 
 --
--- Índices para tabela `collections_softwares`
+-- Índices de tabela `collections_softwares`
 --
 ALTER TABLE `collections_softwares`
   ADD KEY `cascade collection id to collection_softwares` (`collection_id`);
 
 --
--- Índices para tabela `collection_details_softwares`
+-- Índices de tabela `collection_details_softwares`
 --
 ALTER TABLE `collection_details_softwares`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `collection_details_styles`
+-- Índices de tabela `collection_details_styles`
 --
 ALTER TABLE `collection_details_styles`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -407,50 +390,56 @@ ALTER TABLE `collection_details_styles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `account_softwares`
+-- Restrições para tabelas `account_formation`
+--
+ALTER TABLE `account_formation`
+  ADD CONSTRAINT `cascade author id to account_formation` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `account_softwares`
 --
 ALTER TABLE `account_softwares`
   ADD CONSTRAINT `cascade author id to account_softwares` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cascade software id to account_softwares` FOREIGN KEY (`software_id`) REFERENCES `collection_details_softwares` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `account_styles`
+-- Restrições para tabelas `account_styles`
 --
 ALTER TABLE `account_styles`
   ADD CONSTRAINT `cascade author id to account_styles` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cascade style_id to account_styles` FOREIGN KEY (`style_id`) REFERENCES `collection_details_styles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `address`
+-- Restrições para tabelas `address`
 --
 ALTER TABLE `address`
   ADD CONSTRAINT `cascade author id to address` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `collections`
+-- Restrições para tabelas `collections`
 --
 ALTER TABLE `collections`
   ADD CONSTRAINT `cascade author id to collections` FOREIGN KEY (`author_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `collections_files`
+-- Restrições para tabelas `collections_files`
 --
 ALTER TABLE `collections_files`
   ADD CONSTRAINT `cascade collection id to collection_files` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `collections_likes`
+-- Restrições para tabelas `collections_likes`
 --
 ALTER TABLE `collections_likes`
   ADD CONSTRAINT `cascade account id to collection_likes` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cascade collection id to collection_likes` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `collections_softwares`
+-- Restrições para tabelas `collections_softwares`
 --
 ALTER TABLE `collections_softwares`
   ADD CONSTRAINT `cascade collection id to collection_softwares` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

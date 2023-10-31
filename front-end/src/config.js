@@ -13,6 +13,9 @@ export const config = {
     },
     api: "http://localhost:3000",
     endpoints: {
+        people: {
+            list: "/people/list"
+        },
         account: {
             signin_firebase: "/account/signin/firebase",
             validate: "/account/validate/",
