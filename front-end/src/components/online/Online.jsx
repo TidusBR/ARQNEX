@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 
 import cadernoCaneta from './online-images/escrevendo-caderno-p.png';
 import fotoJoao from './online-images/joao.png';
-
+import whiteLogo from './online-images/marcadagua.png';
 
 const videoURL = "https://www.youtube.com/watch?v=gAhV48QiVAc";
 
@@ -33,7 +33,7 @@ export default function Online() {
                             height={500} />
                     </div>
                 </div>
-                <div className="col-5 ">
+                <div className="col-5 lign-self-center align-items-center">
                     <div style={{
                         backgroundImage: `url(${cadernoCaneta})`,
                         backgroundColor: "rgba(219, 117, 44, 0.8)",
@@ -71,21 +71,45 @@ export default function Online() {
                                     <h5>15/08: Talk sobre o mercado de trabalho da Arquitetura</h5>
                                 </div>
                             </div>
-                            <div>
-                                {/* foto */}
-                                <h5>27/08: Curso básico de REVIT</h5>
+
+                            <div className="row">
+                                <div className="col-2">
+
+                                    <img src={fotoJoao} alt="" style={{
+
+                                        border: "solid #DB752C 1px",
+                                        width: 56,
+                                        height: 56,
+                                    }} />
+                                </div>
+                                <div className="col-10">
+                                    <h5>27/08: Curso básico de REVIT</h5>
+
+                                </div>
                             </div>
 
-                            <div>
-                                {/* foto */}
-                                <h5>31/08: Projeto executivo na prática</h5>
+                            <div className="row">
+                                <div className="col-2">
+                                    <img src={fotoJoao} alt="" style={{
+                                        border: "solid #DB752C 1px",
+                                        width: 56,
+                                        height: 56,
+                                    }} />
+                                </div>
+                                <div className=" col-10">
+                                    <h5>31/08: Projeto executivo na prática</h5>
+                                </div>
+
+
                             </div>
                         </div>
-                        <div>
-                            {/* logo */}
-                        </div>
 
+
+                        <div className="d-flex align-items-end">
+                            <img src={whiteLogo} alt="" />
+                        </div>
                     </div>
+
                 </div>
             </div>
 

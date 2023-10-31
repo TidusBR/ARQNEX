@@ -23,7 +23,7 @@ import InterestsForm from "./components/menu/InterestsForm";
 import FormationsForm from "./components/menu/FormationsForm";
 import BecomePro from "./components/become_pro/BecomePro";
 import Online from "./components/online/Online";
-// import Online from "./components/online";
+import Courses from "./components/courses/Courses";
 
 Modal.setAppElement("#root");
 
@@ -73,6 +73,7 @@ export default function App() {
             
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
             <Route path="/Online" element={<Online/>}></Route>
+            <Route path="/Courses" element={<Courses/>}></Route>
             <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </CenterArea>
