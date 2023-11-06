@@ -9,7 +9,9 @@ import logo from './become_pro_images/logo-white.png';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import { light } from "@mui/material/styles/createPalette";
-
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import {PayPalPayment} from '../PaypalPayment';
+ 
 
 
 const bannerImages = {
@@ -110,6 +112,12 @@ const containersP = {
 }
 
 export default function BecomePro() {
+
+    const paypalOptions = {
+        clientId: "AQpA-hhfzocEfg3jkMyuziheekP0vE8aV0qUYvImjibDqvfrmZcH0-sEq0QGaITen2_ZlxoXvzO6-_Tg",
+        currency: "BRL"
+    }
+
     return (
         <div>
             <div className="banner_container_pro" style={{ textAlign: 'center', position: 'relative' }}>
@@ -127,6 +135,7 @@ export default function BecomePro() {
                 <Button variant="contained" style={buttonPRO}>
                     Tornar-se PRO
                 </Button>
+                
             </div>
 
             <div className='profile_pro' style={profileProStyle}>
