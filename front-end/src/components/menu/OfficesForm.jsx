@@ -1,20 +1,131 @@
-import avatarDefault from "../../assets/fotoPerfil.png";
 import { useEffect, useRef, useState } from "react";
 import { config } from "../../config";
 
-export default function OfficesForm({ session }) {
+import PropTypes from 'prop-types';
 
+export default function OfficesForm({ updateSession }) {
     const [name, setName] = useState("");
-    const [avatar, setAvatar] = useState(`${config.api}/uploads/${session.account.id}/avatar`);
+    const [avatar, setAvatar] = useState(`${config.api}/uploads/-1/office`);
     const [cnpj, setCnpj] = useState("");
+    const [cep, setCep] = useState("");
+    const [houseNumber, setHouseNumber] = useState("");
+    const [street, setStreet] = useState("");
+    const [neighborhood, setNeighborhood] = useState("");
+    const [city, setCity] = useState("");
+
+    useEffect(() => {
+        fetch(`${config.api}${config.endpoints.office.info}`, { credentials: "include" })
+        .then(res => res.json())
+        .then(data => {
+            setName(data.name);
+            setCnpj(data.cnpj);
+
+            console.log(data.photo)
+
+            if (data.photo.length > 0)
+                setAvatar(`${config.api}/${data.photo}`);
+
+            setCep(data.address.cep);
+            setHouseNumber(data.address.house_number);
+            setStreet(data.address.street);
+            setNeighborhood(data.address.neighborhood);
+            setCity(data.address.city);
+        });
+    }, []);
+
+    const cepConsulta = () => {
+        const cep = document.querySelector("#cep");
+
+        const value = cep.value.replace(/[^0-9]+/, '');
+        const url = `https://viacep.com.br/ws/${value}/json/`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(json => {
+                if (json.erro) {
+                    console.log("CEP inválido!");
+                    setCep("");
+                } else {
+                    setCity(json.localidade);
+
+                    if (json.logradouro) {
+                        setStreet(json.logradouro);
+                        setNeighborhood(json.bairro);
+                    }
+                }
+            });
+    }
 
     const inputFileRef = useRef();
 
-    const handleSubmit = () => {}
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    const handleAvatarChange = () => {}
+        event.target.querySelector("button[type='submit']").disabled = true;
 
-    const handleDeleteAvatar = () => {}
+        const request = await fetch(`${config.api}${config.endpoints.office.update}`, {
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                name,
+                cep,
+                houseNumber,
+                street,
+                neighborhood,
+                city,
+                cnpj
+            })
+        });
+
+        const response = await request.json();
+
+        if (!response.ok) {
+            const input = document.querySelector(`#${response.field}`);
+            input?.setCustomValidity(response.message);
+            input?.checkValidity();
+            input?.reportValidity();
+        } else {
+            updateSession();
+        }
+
+        if (inputFileRef.current.files[0] !== undefined) {
+            const avatar = inputFileRef.current.files[0];
+
+            await fetch(`${config.api}${config.endpoints.office.update_avatar}`, {
+                credentials: "include",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    file: [...new Uint8Array(await avatar.arrayBuffer())],
+                    type: avatar.type
+                })
+            });
+        }
+
+        event.target.querySelector("button[type='submit']").disabled = false;
+        location.reload();
+    }
+
+    const handleAvatarChange = async (event) => {
+        setAvatar(URL.createObjectURL(event.target.files[0]));
+    }
+
+    const handleDeleteAvatar = async () => {
+        await fetch(`${config.api}${config.endpoints.office.delete_avatar}`, {
+            credentials: "include",
+            method: "POST"
+        });
+
+        setAvatar(`${config.api}/uploads/-1/office`);
+
+        updateSession();
+        location.reload();
+    }
 
     return <>
         <form className="row w-100" onSubmit={handleSubmit}>
@@ -31,12 +142,11 @@ export default function OfficesForm({ session }) {
 
                             <button className="col-5 col-sm-4 rounded orange-background text-white border-0 px-1 py-1 px-sm-2 py-sm-1" type="button"
                                 onClick={() => inputFileRef?.current?.click()}
-                            >Alterar foto de perfil</button>
+                            >Alterar foto do escritório</button>
                             <button className="col-5 col-sm-4 bg-white rounded border-button px-1 py-1 px-sm-2 py-sm-1" type="button"
                                 onClick={handleDeleteAvatar}
                             /* disabled={!isButtonEnabled} */
                             >Deletar</button>
-
                         </div>
                     </div>
                 </div>
@@ -50,10 +160,25 @@ export default function OfficesForm({ session }) {
             <div className="mb-4 col-12">
                 <label className="form-label fw-bold" htmlFor="cnpj">CNPJ</label>
                 {/*Se o usuário já tiver cadastrado o cnpj ele precisa estar disabled ou nem deve aparecer */}
-                <input required type="text" id="cnpj" className="form-control form-control-md" value={cnpj} onChange={(e) => setCep(e.target.value)} />
+                <input required type="text" id="cnpj" className="form-control form-control-md" value={cnpj} onChange={(e) => setCnpj(e.target.value)} />
             </div>
 
-            {/* Campo bibliografia, é um   */}
+            <div className="mb-4 col-6">
+                <label className="form-label fw-bold" htmlFor="cep">Cep</label>
+                <input required type="text" id="cep" className="form-control form-control-md" onBlur={cepConsulta} value={cep} onChange={(e) => setCep(e.target.value)}/>
+            </div>
+            <div className="mb-4 col-6">
+                <label className="form-label fw-bold" htmlFor="street">Rua</label>
+                <input required type="text" id="street" className="form-control form-control-md" value={street} onChange={(e) => setStreet(e.target.value)} />
+            </div>
+            <div className="mb-4 col-6">
+                <label className="form-label fw-bold" htmlFor="number">Número</label>
+                <input required type="text" id="number" className="form-control form-control-md" value={houseNumber} onChange={(e) => setHouseNumber(e.target.value)} />
+            </div>
+            <div className="mb-4 col-6">
+                <label className="form-label fw-bold" htmlFor="city">Cidade</label>
+                <input required type="text" id="city" className="form-control form-control-md" value={city} onChange={(e) => setCity(e.target.value)} />
+            </div>
 
             <div className="mb-4 col-12 d-flex flex-row-reverse">
                 <button className="btn button-create btn-block text-white border-0 col-6 col-lg-4" type="submit">Salvar</button>
@@ -61,4 +186,8 @@ export default function OfficesForm({ session }) {
 
         </form>
     </>
+}
+
+OfficesForm.propTypes = {
+    updateSession: PropTypes.func.isRequired
 }

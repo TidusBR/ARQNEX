@@ -11,55 +11,16 @@ export default function Offices({ session }) {
     // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
     const [disablePagination, setDisablePagination] = useState(false);
     const [page, setPage] = useState(1)
-    const navigate = useNavigate();
 
-    const [collections, setCollections] = useState([]);
-
-    // QUANTIDADE DE ESCRITÓRIOS MOCKADOS
-    const [mockQntdOffices] = useState(1000)
+    const [offices, setOffices] = useState([]);
 
     useEffect(() => {
-        fetch(`${config.api}${config.endpoints.collection.list}?page=${page}`, { credentials: "include" })
-            .then(response => response.json())
-            .then(data => {
-                if (data.length === 0) {
-                    setDisablePagination(true);
-                    return;
-                }
-                setCollections(collections => [...collections, ...data])
-            });
-    }, [page]);
-
-    const openCollection = new URLSearchParams(window.location.search)?.get('col');
-
-    //USUARIOS MOCKADOS
-    const [users, setUsers] = useState([{
-        name: "Watson Roberto",
-        avatar: avatarDefault,
-        isPremium: true,
-        address: "Campo Grande, MS",
-        following: true,
-        jobs: [jobDefault,jobDefault,jobDefault],
-        hasManyJobs: true
-    },{
-        name: "Jeferson Gimenes",
-        avatar: avatarDefault,
-        isPremium: true,
-        address: "Campo Grande, MS",
-        following: false,
-        jobs: [jobDefault,jobDefault],
-        hasManyJobs: false
-    },{
-        name: "Diogo Soares",
-        avatar: avatarDefault,
-        isPremium: false,
-        address: "São Paulo, SP",
-        following: false,
-        jobs: [jobDefault,jobDefault,jobDefault],
-        hasManyJobs: true
-    }])
-
-    const [sessionOfficeMock] = useState(true)
+        fetch(`${config.api}${config.endpoints.office.list}`, { credentials: "include" })
+        .then(res => res.json())
+        .then(data => {
+            setOffices(data);
+        });
+    }, []);
 
     return (
         <div className="container-peoples">
@@ -83,38 +44,28 @@ export default function Offices({ session }) {
                 </div>
 
                 <div className="col-12 col-sm-10 m-auto mt-1 px-md-0">
-                    <p style={{color: "#00000061"}}>{mockQntdOffices} Escritórios</p>
+                    <p style={{color: "#00000061"}}>{offices.length} Escritórios</p>
                 </div>
 
                 <div className='col-12 col-sm-10 m-auto mt-3 mt-md-5 '>
-                    {users.map((user, index) => {
+                    {offices.map((office, index) => {
                         return <div className='row' key={index}>
                                     { index > 0 && <div className="col-12 my-3" >
                                         <hr />
                                     </div> }
                                     <div className="col-12 col-md-3 mb-3 mb-md-0 d-flex align-items-center">
-                                        <img src={user.avatar} className="rounded-circle me-2" alt="fotoPerfil" width={100} height={100} />
+                                        <img src={`${config.api}/${office.photo !== '' ? office.photo : '/uploads/-1/office'}`} className="rounded-circle me-2" alt="fotoPerfil" width={100} height={100} />
                                         <div className="d-flex flex-column justify-content-around">
-                                            <p style={{color: "#1D252C"}}  className="fw-bold">{user.name}
-                                                {user.isPremium && <span className="become-upgrade px-1">PRO</span>}
-                                            </p>
-                                            <p style={{color: "#1D252C52"}}>{user.address}</p>
-                                            <div className='d-flex'>
-                                                <Button variant='contained' className='me-2' size='small'
-                                                    style={user.following ? {textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}
-                                                    : {textTransform: "none", backgroundColor: "#DB752C", color: "white"}}
-                                                >
-                                                    {user.following ? "Seguindo" : "Seguir"}
-                                                </Button>
-                                            </div>
+                                            <p style={{color: "#1D252C"}}  className="fw-bold">{office.name}</p>
+                                            <p style={{color: "#1D252C52"}}>{office.address.city}</p>
                                         </div>
                                     </div>
-                                    {user.jobs.map((job,index) => {
+                                    {office.images.map((path,index) => {
                                         return <div className="col-12 col-md-3 mb-3 mb-md-0" key={index}>
-                                                <img src={job} alt="" style={{height: "100%", width: "100%"}}/>
+                                                <img src={`${config.api}/${path}`} alt="" style={{height: "100%", width: "100%"}}/>
                                             </div>
                                     })}
-                                    {user.hasManyJobs && <div className="col-12 mt-2 d-flex flex-row-reverse">
+                                    {office.hasManyJobs && <div className="col-12 mt-2 d-flex flex-row-reverse">
                                         <a href='#' style={{color: "#DB752C"}} className='text-decoration-none'>Ver mais {'>'}</a>
                                     </div>}
                                 </div>
@@ -125,7 +76,7 @@ export default function Offices({ session }) {
                 <div className="col-10 m-auto p-0">
                     <div className='row justify-content-center'>
                         <Button disabled={disablePagination} onClick={() => setPage(page + 1)}
-                            style={{ display: (collections.length > 16) ? "block" : "none", backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE" }} variant="contained" sx={{ marginTop: "5rem", width: "20%", bottom: "3rem" }}>Carregar mais...</Button>
+                            style={{ display: "none", backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE" }} variant="contained" sx={{ marginTop: "5rem", width: "20%", bottom: "3rem" }}>Carregar mais...</Button>
                     </div>
                 </div>
             </div>

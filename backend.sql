@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31/10/2023 às 20:35
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.0.28
+-- Tempo de geração: 07-Nov-2023 às 18:57
+-- Versão do servidor: 10.4.27-MariaDB
+-- versão do PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `accounts`
+-- Estrutura da tabela `accounts`
 --
 
 CREATE TABLE `accounts` (
@@ -37,7 +37,7 @@ CREATE TABLE `accounts` (
   `firebase_uid` text NOT NULL,
   `firebase_provider` text NOT NULL,
   `premium_level` int(11) NOT NULL,
-  `premium_time` bigint(20) NOT NULL DEFAULT current_timestamp(),
+  `premium_time` bigint(20) NOT NULL,
   `biography` text NOT NULL,
   `phone` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -45,7 +45,7 @@ CREATE TABLE `accounts` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `account_courses`
+-- Estrutura da tabela `account_courses`
 --
 
 CREATE TABLE `account_courses` (
@@ -60,7 +60,7 @@ CREATE TABLE `account_courses` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `account_experiences`
+-- Estrutura da tabela `account_experiences`
 --
 
 CREATE TABLE `account_experiences` (
@@ -77,7 +77,7 @@ CREATE TABLE `account_experiences` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `account_formation`
+-- Estrutura da tabela `account_formation`
 --
 
 CREATE TABLE `account_formation` (
@@ -96,7 +96,7 @@ CREATE TABLE `account_formation` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `account_softwares`
+-- Estrutura da tabela `account_softwares`
 --
 
 CREATE TABLE `account_softwares` (
@@ -107,7 +107,7 @@ CREATE TABLE `account_softwares` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `account_styles`
+-- Estrutura da tabela `account_styles`
 --
 
 CREATE TABLE `account_styles` (
@@ -118,7 +118,7 @@ CREATE TABLE `account_styles` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `address`
+-- Estrutura da tabela `address`
 --
 
 CREATE TABLE `address` (
@@ -133,7 +133,7 @@ CREATE TABLE `address` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `collections`
+-- Estrutura da tabela `collections`
 --
 
 CREATE TABLE `collections` (
@@ -151,7 +151,7 @@ CREATE TABLE `collections` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `collections_files`
+-- Estrutura da tabela `collections_files`
 --
 
 CREATE TABLE `collections_files` (
@@ -162,7 +162,7 @@ CREATE TABLE `collections_files` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `collections_likes`
+-- Estrutura da tabela `collections_likes`
 --
 
 CREATE TABLE `collections_likes` (
@@ -173,7 +173,7 @@ CREATE TABLE `collections_likes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `collections_softwares`
+-- Estrutura da tabela `collections_softwares`
 --
 
 CREATE TABLE `collections_softwares` (
@@ -184,7 +184,7 @@ CREATE TABLE `collections_softwares` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `collection_details_projects`
+-- Estrutura da tabela `collection_details_projects`
 --
 
 CREATE TABLE `collection_details_projects` (
@@ -193,7 +193,7 @@ CREATE TABLE `collection_details_projects` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `collection_details_projects`
+-- Extraindo dados da tabela `collection_details_projects`
 --
 
 INSERT INTO `collection_details_projects` (`id`, `name`) VALUES
@@ -210,7 +210,7 @@ INSERT INTO `collection_details_projects` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `collection_details_softwares`
+-- Estrutura da tabela `collection_details_softwares`
 --
 
 CREATE TABLE `collection_details_softwares` (
@@ -220,7 +220,7 @@ CREATE TABLE `collection_details_softwares` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `collection_details_softwares`
+-- Extraindo dados da tabela `collection_details_softwares`
 --
 
 INSERT INTO `collection_details_softwares` (`id`, `name`, `iconPath`) VALUES
@@ -248,7 +248,7 @@ INSERT INTO `collection_details_softwares` (`id`, `name`, `iconPath`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `collection_details_styles`
+-- Estrutura da tabela `collection_details_styles`
 --
 
 CREATE TABLE `collection_details_styles` (
@@ -257,7 +257,7 @@ CREATE TABLE `collection_details_styles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `collection_details_styles`
+-- Extraindo dados da tabela `collection_details_styles`
 --
 
 INSERT INTO `collection_details_styles` (`id`, `name`) VALUES
@@ -268,7 +268,7 @@ INSERT INTO `collection_details_styles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `collection_details_types`
+-- Estrutura da tabela `collection_details_types`
 --
 
 CREATE TABLE `collection_details_types` (
@@ -277,7 +277,7 @@ CREATE TABLE `collection_details_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `collection_details_types`
+-- Extraindo dados da tabela `collection_details_types`
 --
 
 INSERT INTO `collection_details_types` (`id`, `name`) VALUES
@@ -287,82 +287,163 @@ INSERT INTO `collection_details_types` (`id`, `name`) VALUES
 (4, 'Layout'),
 (5, 'Croqui');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `extra_id` int(11) NOT NULL,
+  `timestamp` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `offices`
+--
+
+CREATE TABLE `offices` (
+  `id` int(11) NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `cnpj` text NOT NULL,
+  `photo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `offices_address`
+--
+
+CREATE TABLE `offices_address` (
+  `office_id` int(11) NOT NULL,
+  `cep` text NOT NULL,
+  `house_number` text NOT NULL,
+  `street` text NOT NULL,
+  `neighborhood` text NOT NULL,
+  `city` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `offices_members`
+--
+
+CREATE TABLE `offices_members` (
+  `office_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `accounts`
+-- Índices para tabela `accounts`
 --
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `account_formation`
+-- Índices para tabela `account_formation`
 --
 ALTER TABLE `account_formation`
   ADD KEY `cascade author id to account_formation` (`account_id`);
 
 --
--- Índices de tabela `account_softwares`
+-- Índices para tabela `account_softwares`
 --
 ALTER TABLE `account_softwares`
   ADD KEY `cascade author id to account_softwares` (`account_id`),
   ADD KEY `cascade software id to account_softwares` (`software_id`);
 
 --
--- Índices de tabela `account_styles`
+-- Índices para tabela `account_styles`
 --
 ALTER TABLE `account_styles`
   ADD KEY `cascade author id to account_styles` (`account_id`),
   ADD KEY `cascade style_id to account_styles` (`style_id`);
 
 --
--- Índices de tabela `address`
+-- Índices para tabela `address`
 --
 ALTER TABLE `address`
   ADD KEY `cascade author id to address` (`account_id`);
 
 --
--- Índices de tabela `collections`
+-- Índices para tabela `collections`
 --
 ALTER TABLE `collections`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cascade author id to collections` (`author_id`);
 
 --
--- Índices de tabela `collections_files`
+-- Índices para tabela `collections_files`
 --
 ALTER TABLE `collections_files`
   ADD KEY `cascade collection id to collection_files` (`collection_id`);
 
 --
--- Índices de tabela `collections_likes`
+-- Índices para tabela `collections_likes`
 --
 ALTER TABLE `collections_likes`
   ADD KEY `cascade collection id to collection_likes` (`collection_id`),
   ADD KEY `cascade account id to collection_likes` (`account_id`);
 
 --
--- Índices de tabela `collections_softwares`
+-- Índices para tabela `collections_softwares`
 --
 ALTER TABLE `collections_softwares`
   ADD KEY `cascade collection id to collection_softwares` (`collection_id`);
 
 --
--- Índices de tabela `collection_details_softwares`
+-- Índices para tabela `collection_details_softwares`
 --
 ALTER TABLE `collection_details_softwares`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `collection_details_styles`
+-- Índices para tabela `collection_details_styles`
 --
 ALTER TABLE `collection_details_styles`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- Índices para tabela `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `offices`
+--
+ALTER TABLE `offices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cascade account id to offices` (`owner_id`);
+
+--
+-- Índices para tabela `offices_address`
+--
+ALTER TABLE `offices_address`
+  ADD KEY `cascade office id to offices_address` (`office_id`);
+
+--
+-- Índices para tabela `offices_members`
+--
+ALTER TABLE `offices_members`
+  ADD KEY `cascade office id to offices_members` (`office_id`),
+  ADD KEY `cascade account_id id to offices_members` (`account_id`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
@@ -390,59 +471,90 @@ ALTER TABLE `collection_details_styles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Restrições para tabelas despejadas
+-- AUTO_INCREMENT de tabela `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `offices`
+--
+ALTER TABLE `offices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para despejos de tabelas
 --
 
 --
--- Restrições para tabelas `account_formation`
+-- Limitadores para a tabela `account_formation`
 --
 ALTER TABLE `account_formation`
   ADD CONSTRAINT `cascade author id to account_formation` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `account_softwares`
+-- Limitadores para a tabela `account_softwares`
 --
 ALTER TABLE `account_softwares`
   ADD CONSTRAINT `cascade author id to account_softwares` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cascade software id to account_softwares` FOREIGN KEY (`software_id`) REFERENCES `collection_details_softwares` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `account_styles`
+-- Limitadores para a tabela `account_styles`
 --
 ALTER TABLE `account_styles`
   ADD CONSTRAINT `cascade author id to account_styles` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cascade style_id to account_styles` FOREIGN KEY (`style_id`) REFERENCES `collection_details_styles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `address`
+-- Limitadores para a tabela `address`
 --
 ALTER TABLE `address`
   ADD CONSTRAINT `cascade author id to address` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `collections`
+-- Limitadores para a tabela `collections`
 --
 ALTER TABLE `collections`
   ADD CONSTRAINT `cascade author id to collections` FOREIGN KEY (`author_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `collections_files`
+-- Limitadores para a tabela `collections_files`
 --
 ALTER TABLE `collections_files`
   ADD CONSTRAINT `cascade collection id to collection_files` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `collections_likes`
+-- Limitadores para a tabela `collections_likes`
 --
 ALTER TABLE `collections_likes`
   ADD CONSTRAINT `cascade account id to collection_likes` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cascade collection id to collection_likes` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `collections_softwares`
+-- Limitadores para a tabela `collections_softwares`
 --
 ALTER TABLE `collections_softwares`
   ADD CONSTRAINT `cascade collection id to collection_softwares` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `offices`
+--
+ALTER TABLE `offices`
+  ADD CONSTRAINT `cascade account id to offices` FOREIGN KEY (`owner_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `offices_address`
+--
+ALTER TABLE `offices_address`
+  ADD CONSTRAINT `cascade office id to offices_address` FOREIGN KEY (`office_id`) REFERENCES `offices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `offices_members`
+--
+ALTER TABLE `offices_members`
+  ADD CONSTRAINT `cascade account_id id to offices_members` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cascade office id to offices_members` FOREIGN KEY (`office_id`) REFERENCES `offices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -14,6 +14,17 @@ export async function checkAccountExistance(fields) {
 }
 
 /**
+ * Valida a existência de uma coleção pelo ID da mesma
+ * @param {number} id - id da coleção
+ * @returns {boolean} verdadeiro se a coleção existir
+ */
+export async function checkCollectionExistance(id) {
+    const result = await DBConn.execute(`SELECT COUNT(*) FROM collections WHERE id = ?;`, [id]);
+    return result[0][0]['COUNT(*)'] > 0;
+}
+
+
+/**
  * Cria uma conta no banco de dados salvando os valores de um objeto onde chaves são as colunas
  * @param {{[string]?: any}} fields 
  */
@@ -58,6 +69,12 @@ export async function getAccountInfo(fields) {
 
         const [experiences] = await DBConn.execute(`SELECT experience_id, role, company, companyPhone, remuneration, admissionDate, departureDate FROM account_experiences WHERE account_id = ?`, [info.id]);
         info.experiences = experiences;
+
+        const [[office]] = await DBConn.execute(`SELECT id, name, cnpj, photo, owner_id FROM offices WHERE owner_id = ?`, [info.id]);
+        info.office = office;
+
+        const [[officeMember]] = await DBConn.execute('SELECT COUNT(*) FROM offices_members WHERE account_id = ?;', [info.id]);
+        info.isOfficeMember = officeMember['COUNT(*)'] > 0;
     }
     
     return info;

@@ -32,6 +32,9 @@ PeopleRouter.get("/list", async (req, res) => {
         person.semester = formation?.semester;
         person.isPremium = person.premium_level > 0;
         delete person.premium_level;
+
+        const [[office]] = await DBConn.execute('SELECT COUNT(*) FROM offices_members WHERE account_id = ?;', [person.id]);
+        person.isOfficeMember = office['COUNT(*)'] > 0;
     }
 
     res.json(people);

@@ -13,6 +13,19 @@ export const config = {
     },
     api: "http://localhost:3000",
     endpoints: {
+        office: {
+            delete_avatar: "/office/remove/avatar",
+            list: "/office/list",
+            remove_member: "/office/remove/member",
+            update: "/office/update",
+            update_avatar: "/office/update/avatar",
+            info: "/office/info",
+            members: "/office/members",
+            invite: "/office/invite",
+            reject_invite: "/office/invite/reject",
+            accept_invite: "/office/invite/accept"
+        },
+        notifications: "/notifications",
         people: {
             list: "/people/list"
         },

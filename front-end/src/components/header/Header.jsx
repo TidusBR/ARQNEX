@@ -31,7 +31,7 @@ export default function Header({ setLoginOpen, session }) {
                                     Início
                                 </Link>
 
-                                <Link className="button" to="/peoples">
+                                <Link className="button" to="/people">
                                     Pessoas
                                 </Link>
 
@@ -39,11 +39,11 @@ export default function Header({ setLoginOpen, session }) {
                                     Escritórios
                                 </Link>
 
-                                <Link className="button" to="/">
+                                <Link className="button" to="/courses">
                                     Cursos
                                 </Link>
 
-                                <Link className="button type1" to="/">
+                                <Link className="button type1" to="/online">
                                     Ao vivo
                                 </Link>
                             </div>
@@ -178,7 +178,7 @@ export default function Header({ setLoginOpen, session }) {
                                     </div>
                                     <div className="nav-item">
                                         <Link className="button nav-link" data-bs-dismiss="offcanvas" onClick={() => {
-                                            navigate("/peoples")
+                                            navigate("/people")
                                         }}>
                                             Pessoas
                                         </Link>
@@ -239,14 +239,14 @@ export default function Header({ setLoginOpen, session }) {
                                     </div>
                                     <div className="nav-item">
                                         <Link className="button nav-link" data-bs-dismiss="offcanvas" onClick={() => {
-                                            navigate("/")
+                                            navigate("/courses")
                                         }}>
                                             Cursos
                                         </Link>
                                     </div>
                                     <div className="nav-item">
                                         <Link className="button nav-link" data-bs-dismiss="offcanvas" onClick={() => {
-                                            navigate("/")
+                                            navigate("/online")
                                         }}>
                                             Ao vivo
                                         </Link>
@@ -267,7 +267,7 @@ export default function Header({ setLoginOpen, session }) {
                                     </div>
                                         <div className="nav-item">
                                             <Link className="button nav-link" data-bs-dismiss="offcanvas" onClick={() => {
-                                                navigate("/")
+                                                navigate("/notifications")
                                             }}>
                                                 Notificações
                                             </Link>

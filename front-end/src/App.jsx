@@ -23,9 +23,12 @@ import InterestsForm from "./components/menu/InterestsForm";
 import FormationsForm from "./components/menu/FormationsForm";
 import OfficesForm from "./components/menu/OfficesForm";
 import ManageOffice from "./components/menu/ManageOffice";
-import Peoples from "./pages/Peoples";
+import People from "./pages/People";
 import Offices from "./pages/Offices";
 import BecomePro from "./components/become_pro/BecomePro";
+import Notifications from "./pages/Notifications";
+import Online from "./components/online/Online";
+import Courses from "./components/courses/Courses";
 
 Modal.setAppElement("#root");
 
@@ -68,12 +71,15 @@ export default function App() {
               <Route path="experiences" element={<ExperiencesForm session={session} updateSession={updateSession} />}></Route>
               <Route path="interests" element={<InterestsForm session={session} />}></Route>
               <Route path="formations" element={<FormationsForm session={session} />}></Route>
-              <Route path="offices" element={<OfficesForm session={session} />}></Route>
+              <Route path="offices" element={<OfficesForm updateSession={updateSession} />}></Route>
               <Route path="manage-office" element={<ManageOffice />}></Route>
             </Route>
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
-            <Route path="/peoples" element={<Peoples session={session}></Peoples>}></Route>
-            <Route path="/offices" element={session.loggedIn ? <Offices session={session}></Offices> : <Navigate to="/" />}></Route>
+            <Route path="/people" element={<People session={session}></People>}></Route>
+            <Route path="/offices" element={<Offices session={session}></Offices>}></Route>
+            <Route path="/notifications" element={session.loggedIn ? <Notifications updateSession={updateSession}></Notifications> : <Navigate to="/" />}></Route>
+            <Route path="/online" element={<Online/>}></Route>
+            <Route path="/courses" element={<Courses/>}></Route>
             <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </CenterArea>

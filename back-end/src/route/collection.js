@@ -1,9 +1,10 @@
 import express from "express";
-import { DBConn } from "../database.js";
+import { DBConn, checkCollectionExistance } from "../database.js";
 import mime from 'mime-types';
 import { randomUUID } from 'node:crypto';
 import { mkdir, writeFile } from "node:fs/promises";
 import { Temporal } from '@js-temporal/polyfill';
+import { createLikeNotification } from "./notifications.js";
 
 export const CollectionRouter = express.Router();
 
@@ -109,6 +110,10 @@ CollectionRouter.get("/list", async (req, res) => {
 });
 
 CollectionRouter.get("/:id/view", async (req, res) => {
+    if (!await checkCollectionExistance(req.params.id)) {
+        return res.sendStatus(401);
+    }
+
     const result = await DBConn.execute(`SELECT views FROM collections WHERE id = ?;`, [req.params.id]);
 
     if (result.length === 0) {
@@ -123,7 +128,7 @@ CollectionRouter.get("/:id/view", async (req, res) => {
 });
 
 CollectionRouter.get("/:id/like", async (req, res) => {
-    if (!req.session.loggedIn) {
+    if (!req.session.loggedIn || !await checkCollectionExistance(req.params.id)) {
         return res.sendStatus(401);
     }
 
@@ -134,6 +139,10 @@ CollectionRouter.get("/:id/like", async (req, res) => {
         await DBConn.execute(`DELETE FROM collections_likes WHERE collection_id = ? AND account_id = ?;`, [req.params.id, req.session.user?.id]);
     } else {
         await DBConn.execute(`INSERT INTO collections_likes(collection_id, account_id) VALUES(?, ?);`, [req.params.id, req.session.user?.id]);
+        await createLikeNotification({
+            collectionId: req.params.id,
+            senderId: req.session.user?.id
+        });
     }
 
     const likes = await DBConn.execute(`SELECT COUNT(*) FROM collections_likes WHERE collection_id = ?;`, [req.params.id]);

@@ -29,7 +29,7 @@ PaypalRouter.post("/capture-order", async (req, res) => {
         
         if (jsonResponse?.status === 'COMPLETED') {
             // tempo atual em millis + (1 mês em millis) //  Date.now() + (730 * 60 * 60 * 1000);
-            const premiumTime =  Date.now() + 60000;
+            const premiumTime = Date.now() + (730 * 60 * 60 * 1000);
 
             await DBConn.execute(`UPDATE accounts SET premium_level = 1, premium_time = ? WHERE id = ?;`, [
                 premiumTime,

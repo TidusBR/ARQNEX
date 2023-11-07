@@ -12,6 +12,7 @@ SessionRouter.post("/", async function(req, res) {
         styles: req.session.user?.styles,
         formations: req.session.user?.formations,
         courses: req.session.user?.courses,
-        experiences: req.session.user?.experiences
+        experiences: req.session.user?.experiences,
+        hasOffice: req.session.user?.office !== undefined
     }});
 });

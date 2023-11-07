@@ -18,3 +18,14 @@ UploadsRouter.get("/:author_id/avatar", async (req, res) => {
         res.redirect(`${config.cors.origin}/default-profile.png`);
     }
 });
+
+UploadsRouter.get("/:author_id/office", async (req, res) => {
+    const filePath = `${process.cwd()}/uploads/${req.params.author_id}/office`;
+
+    try {
+        await access(filePath, constants.F_OK);
+        res.sendFile(filePath);
+    } catch {
+        res.redirect(`${config.cors.origin}/default-office.png`);
+    }
+});

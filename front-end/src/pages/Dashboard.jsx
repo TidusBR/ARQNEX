@@ -14,6 +14,10 @@ export default function Dashboard({ session }) {
 
     const [collections, setCollections] = useState([]);
 
+    const [styleFilter, setStyleFilter] = useState(0);
+    const [relevanceFilter, setRelevanceFilter] = useState(0); // 0 = Popular, 1 = Mais curtido, 2 = Novo
+    const [searchTextFilter, setSearchTextFilter] = useState("");
+
     useEffect(() => {
         fetch(`${config.api}${config.endpoints.collection.list}?page=${page}`, { credentials: "include" })
             .then(response => response.json())
@@ -51,20 +55,34 @@ export default function Dashboard({ session }) {
 
                 <div className="col-sm-12 mt-4 px-5 d-md-flex">
                     <div className="col-12 mb-3 col-md-2 col-lg-2 col-xxl-1">
-                        <select className="form-select d-inline">
-                            <option value="popular">Popular</option>
+                        <select
+                            className="form-select d-inline"
+                            value={relevanceFilter}
+                            onChange={(e) => setRelevanceFilter(e.target.value)}
+                        >
+                            <option value="0">Popular</option>
+                            <option value="1">Mais curtido</option>
+                            <option value="2">Novo</option>
                         </select>
                     </div>
                     <div className="col text-center mb-3">
-                        <button className="p-2 border-0 fw-bold bg-white rounded me-3">
+                        <button
+                            className="p-2 border-0 fw-bold rounded me-3"
+                            style={{ backgroundColor: styleFilter === 0 ? "#DB752C52" : "white" }}
+                            onClick={() => setStyleFilter(0)}
+                        >
                             Clássico
                         </button>
-                        <button className="p-2 border-0 fw-bold bg-white rounded">
+                        <button
+                            className="p-2 border-0 fw-bold rounded"
+                            style={{ backgroundColor: styleFilter === 1 ? "#DB752C52" : "white" }}
+                            onClick={() => setStyleFilter(1)}
+                        >
                             Contemporâneo + Moderno
                         </button>
                     </div>
                     <div className="col-12 col-md-2 col-xxl-1">
-                        <input className="form-control icon-search" type="text" placeholder="Buscar" />
+                        <input className="form-control icon-search" type="text" placeholder="Buscar" value={searchTextFilter} onChange={(e) => setSearchTextFilter(e.target.value)} />
                     </div>
                 </div>
 

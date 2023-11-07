@@ -17,6 +17,8 @@ import { PaypalRouter } from "./route/paypal.js";
 import {createServer} from "https";
 import { readFile } from "fs/promises";
 import { PeopleRouter } from "./route/people.js";
+import { NotificationsRouter } from "./route/notifications.js";
+import { OfficeRouter } from "./route/office.js";
 
 const app = express();
 
@@ -75,6 +77,8 @@ app.use("/session", SessionRouter);
 app.use("/collection", CollectionRouter);
 app.use("/uploads", UploadsRouter);
 app.use("/paypal", PaypalRouter);
+app.use("/notifications", NotificationsRouter);
+app.use("/office", OfficeRouter);
 
 /*
 createServer(

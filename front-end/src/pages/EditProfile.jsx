@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import "./css/edit-profile.css";
+
+import PropTypes from 'prop-types';
 import { Button } from "@mui/material";
+
+import "./css/edit-profile.css";
 
 export default function EditProfile({ session }) {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [menuOptions, setMenuOptions] = useState([
+    const [menuOptions] = useState([
         {
             id: 1,
             name: "Perfil",
@@ -37,41 +40,28 @@ export default function EditProfile({ session }) {
             id: 6,
             name: "Experiências",
             path: "/edit-profile/experiences"
+        },
+        {
+            id: 7,
+            name: "Escritório",
+            path: "/edit-profile/offices",
+            isVisible: () => session.account.isPremium
+        },
+        {
+            id: 8,
+            name: "Gerenciar escritório",
+            path: "/edit-profile/manage-office",
+            isVisible: () => session.account.hasOffice
         }
     ]);
 
     const [active, setActive] = useState(null);
-
-    const [mockHasOffice] = useState(false)
 
     useEffect(() => {
         const activeItem = menuOptions.find((element) => location.pathname === element.path) ?? menuOptions[0];
         setActive(activeItem.path);
         navigate(activeItem.path);
     }, [location.pathname, menuOptions, navigate]);
-
-    useEffect(() => {
-        if(!session.account.isPremium) {
-            const newMenu = menuOptions;
-            newMenu.push({
-                id: 7,
-                name: "Escritórios",
-                path: "/edit-profile/offices"
-            })
-            setMenuOptions(newMenu)
-        } else {
-            console.log("Não é premium");
-        }
-        if(!mockHasOffice) {
-            const newMenu = menuOptions;
-            newMenu.push({
-                id: 8,
-                name: "Gerenciar escritório",
-                path: "/edit-profile/manage-office"
-            })
-            setMenuOptions(newMenu)
-        }
-    }, [menuOptions]);
 
     const changeMenu = (e, path) => {
         e.preventDefault();
@@ -106,6 +96,7 @@ export default function EditProfile({ session }) {
                         <div className="d-none d-md-block col-md-4 col-lg-3 col-xxl-2">
                             <div className="menu-options d-flex justify-content-around d-md-block mb-4 mb-md-0">
                                 {menuOptions.map((element, index, array) => (
+                                    (element.isVisible ? element.isVisible() : true) &&
                                     <a
                                         key={element.id}
                                         href={element.path}
@@ -133,4 +124,8 @@ export default function EditProfile({ session }) {
             </div>
         </div>
     );
+}
+
+EditProfile.propTypes = {
+    session: PropTypes.object.isRequired
 }
