@@ -1,16 +1,18 @@
 import './card-home.css'
-import CardCollection from '../card_job/CardCollection'
+import CardCollection from '../card-collection/CardCollection'
 import PropTypes from 'prop-types';
 import { config } from '../../config';
 
-export default function CardHome({ collection }) {
+export default function CardJob({ collection, isOpen, session }) {
     return (
-        <div className='col-3 p-1 card-home'>
-            <CardCollection info={collection} imgProps={{src: `${config.api}/${collection.files[0]}`}}></CardCollection>
+        <div className='col col-sm-3 card-home'>
+            <CardCollection session={session} isOpen={isOpen} info={collection} imgProps={{src: `${config.api}/${collection.files[0]}`}}></CardCollection>
         </div>
     )
 }
 
-CardHome.propTypes = {
-    collection: PropTypes.object.isRequired
+CardJob.propTypes = {
+    collection: PropTypes.object.isRequired,
+    isOpen: PropTypes.bool,
+    session: PropTypes.object.isRequired
 }

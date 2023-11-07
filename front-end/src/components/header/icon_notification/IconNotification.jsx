@@ -1,4 +1,4 @@
-export default function IconNotification({notification}) {
+export default function IconNotification(/*{notification}*/) {
     return (
         <i className="m-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">

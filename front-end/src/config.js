@@ -7,7 +7,10 @@ export const config = {
         messagingSenderId: "493789784827",
         appId: "1:493789784827:web:6aadf77bcdc66467539e5e"
     },
-
+    paypalOptions: {
+        clientId: "AQpA-hhfzocEfg3jkMyuziheekP0vE8aV0qUYvImjibDqvfrmZcH0-sEq0QGaITen2_ZlxoXvzO6-_Tg",
+        currency: "BRL"
+    },
     api: "http://localhost:3000",
     endpoints: {
         account: {
@@ -15,12 +18,33 @@ export const config = {
             validate: "/account/validate/",
             signup: "/account/signup",
             signin: "/account/signin",
-            logout: "/account/logout"
+            logout: "/account/logout",
+            name: "/account/%1/name",
+            profile: "/account/profile/",
+            update: {
+                profile: "/account/update/profile",
+                password: "/account/update/password",
+                interests: "/account/update/interests",
+                education: "/account/update/education",
+                courses: "/account/update/courses",
+                experiences: "/account/update/experiences"
+            },
+            editInfo: {
+                profile: "/account/edit-info/profile"
+            },
+            uploadAvatar: "/account/upload-avatar",
+            deleteAvatar: "/account/delete-avatar"
         },
         collection: {
             upload: "/collection/upload",
             upload_details: "/collection/upload-details",
-            list: "/collection/list"
+            list: "/collection/list",
+            like: "/collection/%1/like",
+            view: "/collection/%1/view"
+        },
+        paypal: {
+            createOrder: "/paypal/create-order",
+            captureOrder: "/paypal/capture-order"
         },
         session: "/session/"
     }

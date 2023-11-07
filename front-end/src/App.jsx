@@ -6,57 +6,79 @@ import CenterArea from "./components/center_area/CenterArea";
 import Footer from "./components/footer/Footer";
 import Login from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import { useEffect, useState } from "react";
-import {config} from './config'
+import { config } from './config'
 import ProfileUser from "./pages/ProfileUser";
-import BecamePro from './components/become_pro/BecomePro'
-
-import Perfil from "./components/menuEditPerfil/Perfil/Perfil";
-import Senha from "./components/menuEditPerfil/Senha/Senha";
-import Interesses from "./components/menuEditPerfil/Interesses/Interesses.jsx";
-import Formacoes from "./components/menuEditPerfil/Formacoes/Formacoes.jsx";
-import Cursos from "./components/menuEditPerfil/Cursos/Cursos.jsx";
-import Experiencias from "./components/menuEditPerfil/Experiencias/Experiencias.jsx";
-import EditarPerfil from "./components/menuEditPerfil/editarPerfil"; 
+import Dashboard from "./pages/Dashboard";
+import EditProfile from "./pages/EditProfile";
 import Upload from "./pages/Upload";
-
 import Modal from 'react-modal';
+import Page404 from './pages/Page404';
+import ProfileForm from "./components/menu/ProfileForm";
+import PasswordForm from "./components/menu/PasswordForm";
+import CoursesForm from "./components/menu/CoursesForm";
+import ExperiencesForm from "./components/menu/ExperiencesForm";
+import InterestsForm from "./components/menu/InterestsForm";
+import FormationsForm from "./components/menu/FormationsForm";
+import BecomePro from "./components/become_pro/BecomePro";
+import Online from "./components/online/Online";
+import Courses from "./components/courses/Courses";
+
 Modal.setAppElement("#root");
 
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
-  const [session, setSession] = useState({ loggedIn: false, account: {} });
+  const [session, setSession] = useState(null); // Inicialize com null
 
-  useEffect(() => {
+  const updateSession = () => {
+    console.log('updating session')
     fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
       .then(response => response.json())
-      .then(data => setSession(data));
+      .then(data => { setSession(data); console.log(data); })
+  }
+
+  useEffect(() => {
+    updateSession();
   }, []);
+
+  if (session === null)
+    return;
 
   return (
     <BrowserRouter>
-      <div>
+      <>
         <Header session={session} setLoginOpen={setLoginOpen} />
         <CenterArea>
           {!session.loggedIn && <Login open={isLoginOpen} setOpen={setLoginOpen}></Login>}
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/upload" element={session.loggedIn ? <Upload /> : <Navigate to="/" />} />
-            <Route path="/register" element={session.loggedIn ? <Navigate to="/" /> : <Register />} />
-            {/*POR ENQUANTO A LÓGICA DE SESSÃO ESTÁ INVERTIDA POIS NÃO QUERO FICAR LOGANDO PARA VER PROFILE USER*/}
-            <Route path="/profile" element={<ProfileUser/>}></Route>
-            <Route path="/edit-profile/*" element={<EditarPerfil />}></Route>
-              <Route path="/edit-profile/perfil" element={<Perfil />} />
-              <Route path="/edit-profile/senha" element={<Senha />} />
-              <Route path="/edit-profile/interesses" element={<Interesses />} />
-              <Route path="/edit-profile/formacoes" element={<Formacoes />} />
-              <Route path="/edit-profile/cursos" element={<Cursos />} />
-              <Route path="/edit-profile/experiencias" element={<Experiencias />} />
-            <Route path="/become-pro" element={<BecamePro />}></Route>
+            {/* {FAZER VALIDAÇÕES PARA RENDERIZAR AS PÁGINAS DE ACORDO COM SUA PERMISSÃO DE SESSÃO} */}
+            <Route path="/" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Home session={session} setLoginOpen={setLoginOpen} />} />
+            <Route path="/upload" element={session.loggedIn ? <Upload session={session} /> : <Navigate to="/" />} />
+            <Route path="/register" element={session.loggedIn ? <Navigate to="/dashboard" /> : <Register />} />
+            <Route path="/profile" element={session.account.username ? <Navigate to={"/profile/" + session.account.username} /> : <Navigate to="/" />}></Route>
+            <Route path="/profile/*" element={<ProfileUser session={session} />}></Route>
+            <Route path="/become-pro" element={session.loggedIn && !session.account.isPremium ? <BecomePro session={session} /> : <Navigate to="/" />}></Route>
+
+            {/* <Route path="/courses" element={element.loggedIn ? <Courses /> : <Navigate to="/" />} /> */}
+
+            <Route path="/edit-profile" element={session.loggedIn ? <EditProfile /> : <Navigate to="/" />}>
+              <Route path="profile" element={<ProfileForm session={session} updateSession={updateSession} />}></Route>
+              <Route path="password" element={<PasswordForm updateSession={updateSession} />}></Route>
+              <Route path="courses" element={<CoursesForm session={session} updateSession={updateSession} />}></Route>
+              <Route path="experiences" element={<ExperiencesForm session={session} updateSession={updateSession} />}></Route>
+              <Route path="interests" element={<InterestsForm session={session} />}></Route>
+              <Route path="formations" element={<FormationsForm session={session} />}></Route>
+            </Route>
+            
+            <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>
+            <Route path="/Online" element={<Online/>}></Route>
+            <Route path="/Courses" element={<Courses/>}></Route>
+            <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </CenterArea>
         <Footer />
-      </div>
+      </>
     </BrowserRouter>
   );
 }

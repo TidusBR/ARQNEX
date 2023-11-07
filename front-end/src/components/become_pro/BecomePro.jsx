@@ -1,256 +1,201 @@
-import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Dialog, DialogContent, DialogTitle } from '@mui/material';
 import bannerImage from './become_pro_images/banner_becomepro.png';
-import foto_perfil from './become_pro_images/foto-perfil.png'
-import iphone_arq from './become_pro_images/iphone_arq.png'
-import styles from './BecomePro.css';
-import { orange } from "@mui/material/colors";
+import foto_perfil from './become_pro_images/foto-perfil.png';
+import iphone_arq from './become_pro_images/iphone_arq.png';
 import logo from './become_pro_images/logo-white.png';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
-import { light } from "@mui/material/styles/createPalette";
+import "./BecomePro.css"
+import { useState } from 'react';
+import { config } from '../../config';
+
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import {PayPalPayment} from '../PaypalPayment';
- 
-
-
-const bannerImages = {
-    width: '1920px',
-    height: '600px',
-    backgroundColor: 'rgb(219,117,44,0.8)',
-}
-
-const bannerTitulo = {
-    position: 'absolute',
-    top: '35%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    fontSize: '70px',
-    whiteSpace: 'nowrap',
-    color: '#FFFFFF',
-};
-
-const bannerSubTiulo = {
-    position: 'absolute',
-    top: '55%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    fontSize: '40px',
-    color: '#FFFFFF',
-};
-
-const buttonSB = {
-    position: 'absolute',
-    top: '75%',
-    left: '44%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#1D252C3D',
-};
-
-const buttonPRO = {
-    position: 'absolute',
-    top: '75%',
-    left: '56%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#FFFFFF',
-    color: '#FF6A00',
-    width: '260px',
-};
-
-const profileProStyle = {
-    marginTop: '40px',
-    display: 'flex', // Adicione o display flex
-    flexDirection: 'row', // Altere de 'column' para 'row'
-    alignItems: 'center', // Alinhe verticalmente ao centro
-    justifyContent: 'center', // Centralize horizontalmente
-    width: '1430px',
-    maxWidth: '100%',
-    marginLeft: '15%',
-};
-
-const imgProfileStyle = {
-    marginRight: '144px', // Espaço entre a imagem e o texto
-};
-
-const textoProfile = {
-    // Mantenha o estilo do texto como está
-}
-
-const containerPago = {
-    backgroundColor: '#DB752C',
-    width: '31.25rem',
-    height: '44rem',
-    marginLeft: '8px',
-    borderRadius: '20px',
-    padding: '20px 20px 20px 20px'
-}
-const containerGratis = {
-    width: '31.25rem',
-    height: '44rem',
-    marginRight: '8px',
-    border: '1.5px solid #EEEEEE',
-    borderRadius: '20px',
-    padding: '20px 20px 20px 20px'
-}
-
-const textoContainerPago = {
-    display: 'flex', 
-    alignItems: 'center', 
-    justifyContent: 'center', 
-};
-
-const buttonTornarPRO = {
-    width: '400px',
-    height: '48px',
-    fontSize: '20px',
-    fontWeight: 'bold'
-}
-
-const containersP = {
-    fontSize: '20px',
-    fontWeight: 'bold'
-}
+import { PayPalPayment } from '../PaypalPayment';
 
 export default function BecomePro() {
-
-    const paypalOptions = {
-        clientId: "AQpA-hhfzocEfg3jkMyuziheekP0vE8aV0qUYvImjibDqvfrmZcH0-sEq0QGaITen2_ZlxoXvzO6-_Tg",
-        currency: "BRL"
-    }
+    const [paymentDialogOpen, setPaymentDialogOpen] = useState(false);
 
     return (
-        <div>
-            <div className="banner_container_pro" style={{ textAlign: 'center', position: 'relative' }}>
-                <img src={bannerImage} alt="Banner" className='bannerImages' style={bannerImages} />
-                <h1 style={bannerTitulo}>
-                    Tenha maior engajamento, se destaque!
-                </h1>
-                <h2 style={bannerSubTiulo}>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.
-                </h2>
-
-                <Button variant="contained" style={buttonSB}>
-                    Saber Mais
-                </Button>
-                <Button variant="contained" style={buttonPRO}>
-                    Tornar-se PRO
-                </Button>
-                
-            </div>
-
-            <div className='profile_pro' style={profileProStyle}>
-                <div className='img_profile' style={imgProfileStyle}>
-                    <img src={foto_perfil} alt="foto-perfil" />
-                </div>
-                <div className='textoProfile' style={textoProfile}>
-                    <h2>Saia na frente, tenha maior visibilidade.</h2>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
-                </div>
-            </div>
-
-
-            <div className='portifolio-container'>
-                <div className='portifolio-text'>
-                    <h2>Expanda seu portifolio</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, amet. Cumque inventore quo sequi, debitis excepturi autem suscipit optio asperiores, eveniet amet quidem vel dolores enim. Reiciendis facere in alias.</p>
-                </div>
-                <div className='portifolio-img'>
-                    <img src={iphone_arq} alt="" />
-                </div>
-            </div>
-
-
-            <div className="justify-content-center ">
-                <div className="d-flex row text-center ">
-                    <h2 className="fs-1 text-dark ">O plano certo pra sua carreira.</h2>
-                    <p className="text-secondary fs-4 text-center">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.</p>
-                </div>
-
-                <div className='containers'>
-                    <div className="container-pay d-flex row justify-content-center align-items-center text-center">
-                        {/* <div className="free-pay h-100 w-50 text-center justify-content-center" style={{ border: '1.5px solid #EEEEEE' }}> */}
-                        <div style={containerGratis} className='containerGratis'>
-
-                            <p className="text-secondary" style={{fontSize:'20px'}}>Plano</p>
-                            <h1 className="fs-1" style={{ borderBottom: '1.5px solid #EEEEEE', fontWeight:'bold' }}>GRÁTIS</h1>
-                            <div className="align-itens-center">
-                                <div className="d-flex justify-content-start align-items-center " >
-                                    <CheckIcon sx={{ color: orange[500] }}></CheckIcon>
-                                    <p className="fs-5">Postar Trabalho</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center " >
-                                    <CheckIcon sx={{ color: orange[500] }}></CheckIcon>
-                                    <p className="fs-5">Seguir perfis</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center " >
-                                    <CheckIcon sx={{ color: orange[500] }}></CheckIcon>
-                                    <p className="fs-5">Oportunidade de trabalho</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center " >
-                                    <ClearIcon></ClearIcon>
-                                    <p className="fs-5">Portifólio ilimitadi</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center " >
-                                    <ClearIcon></ClearIcon>
-                                    <p className="fs-5">Lorem ipsun</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center " >                                    <ClearIcon></ClearIcon>
-                                    <p className="fs-5">Lorem ipsun</p>
-                                </div>
-                                <div className="d-flex justify-content-center " style={{ borderTop: '1.5px solid #EEEEEE' }}>
-                                    <p className="fs-5">Seu plano atual</p>
+        <>
+            <Dialog onClose={()=>setPaymentDialogOpen(false)} open={paymentDialogOpen}>
+                <DialogTitle>Escolha o método de pagamento</DialogTitle>
+                <DialogContent>
+                    <PayPalScriptProvider options={config.paypalOptions}>
+                        <PayPalPayment />
+                    </PayPalScriptProvider>
+                </DialogContent>
+            </Dialog>
+            <div className='container-become-pro'>
+                <div className="row text-center" style={{
+                    padding: "100px 0",
+                    backgroundImage: `url(${bannerImage})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundColor: "rgba(219, 117, 44, 0.8)"
+                }}>
+                    <div className="col-md-10 m-auto">
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="row">
+                                    <h1 className='text-white fw-bold'
+                                        style={{ fontSize: "3rem" }}>Tenha maior engajamento, se <span className='fst-italic'>destaque</span>!</h1>
                                 </div>
                             </div>
-                        </div>
-                        {/* </div> */}
-                        <div className="pro-pay w-50">
-                            <div style={containerPago} className='containerPago'>
-                                <div className="d-flex justify-content-center align-items-center">
-                                    <img src={logo} alt="" />
-                                    <h1 className="text-light">PRO</h1>
+                            <div className="col-12">
+                                <div className="row">
+                                    <h3 style={{ fontSize: "2rem", color: "#FFFFFF9F" }}
+                                        className='mt-4 mb-5 col-8 m-auto'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</h3>
                                 </div>
-                                <div className="d-flex justify-content-center align-items-center" style={{ borderBottom: '1.5px solid #EEEEEE' }}>
-                                    <div className='texto_containerPago' style={textoContainerPago}>
-                                        <p className="text-secondary" style={{ fontSize: '26px' }}>R$</p>
-                                        <h1 className="text-light" style={{ fontSize: '46px' }}>20,00</h1>
-                                        <p className="text-secondary" style={{ fontSize: '26px' }}>/mês</p>
-                                    </div>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center text-light" >
-                                    <CheckIcon sx={{ color: light[500] }}></CheckIcon>
-                                    <p className="fs-5">Postar Trabalho</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center text-light" >
-                                    <CheckIcon sx={{ color: light[500] }}></CheckIcon>
-                                    <p className="fs-5">Seguir perfis</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center text-light" >
-                                    <CheckIcon sx={{ color: light[500] }}></CheckIcon>
-                                    <p className="fs-5">Oportunidade de trabalho</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center text-light" >
-                                    <CheckIcon sx={{ color: light[500] }}></CheckIcon>
-                                    <p className="fs-5">Portifólio ilimitadi</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center text-light" >
-                                    <CheckIcon sx={{ color: light[500] }}></CheckIcon>
-                                    <p className="fs-5">Lorem ipsun</p>
-                                </div>
-                                <div className="d-flex justify-content-start align-items-center text-light" >
-                                    <CheckIcon sx={{ color: light[500] }}></CheckIcon>
-                                    <p className="fs-5">Lorem ipsun</p>
-                                </div>
-
-
-                                <div className="" style={{ borderTop: '1.5px solid #EEEEEE' }}>
-                                    <p className="text-light" style={containersP}>Fazer um upgrade</p>
-                                    <button class="btn btn-light btn btn-outline-danger" style={buttonTornarPRO}>Tornar-se PRO</button>
+                            </div>
+                            <div className='col-12 col-md-8 col-lg-6 col-xxl-4 m-auto'>
+                                <div className='row d-flex justify-content-between'>
+                                    <Button variant='contained'
+                                        style={{ background: "rgba(0,0,0,0.3)" }}
+                                        className='me-3 col-4'>Saber mais</Button>
+                                    <Button variant='contained' className='bg-white col-6' style={{ color: "#EE2C09" }}
+                                    onClick={() => setPaymentDialogOpen(true)}>Tornar-se PRO</Button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div className="row">
+                    <div className="col-12 col-md-10 m-auto mt-5 mb-5">
+                        <div className='row d-flex flex-row justify-content-between align-items-center mb-5'>
+                            <div className="col-8 col-md-6 col-lg-3 col-xl-2 d-flex justify-content-center mx-auto mx-md-0 mb-5 mb-md-0" style={{
+                                position: "relative"
+                            }}>
+                                <img src={foto_perfil} alt="" className='p-2 rounded-circle w-100' style={{
+                                    border: "solid #DB752C 1px"
+                                }} />
+                                <div className='text-center text-white rounded py-2 w-100' style={{
+                                    position: "absolute",
+                                    bottom: "0",
+                                    background: "linear-gradient(to right, #EE2C09, #FF6A00)"
+                                }}>PRO</div>
+                            </div>
+                            <div className="col-12 col-md-5 col-lg-8 col-xl-9 d-flex flex-column justify-content-between mt-3 mt-md-0 text-center text-md-start">
+                                <h2 style={{
+                                    fontSize: "3rem"
+                                }} className='text-black mb-5'>Saia na frente, tenha maior visibilidade.</h2>
+                                <h3 style={{
+                                    fontSize: "2rem",
+                                    color: "#00000061"
+                                }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-10 m-auto mt-5 mb-5">
+                        <div className='row d-flex flex-row justify-content-between align-items-center mb-5'>
+                            <div className="col-12 col-lg-5 d-flex flex-column justify-content-between mt-3 mt-md-0 text-center text-md-start">
+                                <h2 style={{
+                                    fontSize: "3rem"
+                                }} className='text-black mb-5'>Expanda seu portfólio.</h2>
+                                <h3 style={{
+                                    fontSize: "2rem",
+                                    color: "#00000061"
+                                }}>Ut quis dolor rhoncus, laoreet neque sit amet, dignissim tellus. Donec pharetra ullamcorper tristique. Mauris tincidunt et urna vel rutrum. Integer purus orci, dapibus pretium euismod nec, aliquam sed magna.</h3>
+                            </div>
+                            <div className="col-12 col-lg-7 mx-auto mx-md-0 mb-5 mb-md-0 mt-4 mt-lg-0">
+                                <img src={iphone_arq} alt="" className='w-100' />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-10 m-auto mb-5">
+                        <div className='row d-flex flex-row justify-content-between align-items-center mb-5'>
+                            <div className="col-12 d-flex flex-column justify-content-between text-center">
+                                <h2 style={{
+                                    fontSize: "3rem"
+                                }} className='text-black mb-5'>O plano certo pra sua carreira.</h2>
+                                <h3 style={{
+                                    fontSize: "2rem",
+                                    color: "#00000061"
+                                }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.</h3>
+                            </div>
+                        </div>
+                        <div className="row d-flex justify-content-around">
+                            <div className='col-lg-5 px-4 py-5 rounded mb-5 mb-lg-0' style={{
+                                    border: "solid 1.5px #EEEEEE"
+                                }}>
+                                <div className="card-head text-center mb-5">
+                                    <h3 style={{
+                                        fontSize: "1.5rem",
+                                        color: "#00000061"
+                                    }} className='mb-4'>Plano</h3>
+                                    <h2 style={{
+                                        fontSize: "3.5rem",
+                                        fontWeight: "bold",
+                                        color: "black"
+                                    }}>GRÁTIS</h2>
+                                </div>
+                                <div className="card-body py-4"  style={{
+                                    borderBottom: "solid 1.5px #EEEEEE",
+                                    borderTop: "solid 1.5px #EEEEEE"
+                                }}>
+                                    <ul className='m-0 p-0'>
+                                        <li><CheckIcon fontSize='large' style={{color: "#DB752C"}}></CheckIcon> <h3>Postar trabalhos</h3></li>
+                                        <li><CheckIcon fontSize='large' style={{color: "#DB752C"}}></CheckIcon> <h3>Seguir perfis</h3></li>
+                                        <li><CheckIcon fontSize='large' style={{color: "#DB752C"}}></CheckIcon> <h3>Oportunidade de trabalho</h3></li>
+                                        <li><ClearIcon fontSize='large'></ClearIcon> <h3>Portfólio ilimitado</h3></li>
+                                        <li><ClearIcon fontSize='large'></ClearIcon> <h3>Lorem ipsum</h3></li>
+                                        <li><ClearIcon fontSize='large'></ClearIcon> <h3>Lorem ipsum</h3></li>
+                                    </ul>
+                                </div>
+                                <h3 style={{
+                                    fontSize: "1.5rem",
+                                    color: "#00000061"
+                                }} className='mt-4 mb-5 text-center'>Seu plano atual</h3>
+                            </div>
+
+                            <div className='col-lg-5 px-4 py-5 rounded' style={{
+                                    backgroundColor: "#DB752C",
+                                    color: "white"
+                                }}>
+                                <div className="card-head text-center mb-5">
+                                    <div className='d-flex flex-row justify-content-center'>
+                                        <img src={logo} style={{
+                                            height: "100%"
+                                        }} alt="" className='me-3'/>
+                                        <h3 style={{
+                                            fontSize: "1.5rem",
+                                            fontStyle: "italic"
+                                        }} className='mb-4'>PRO</h3>
+                                    </div>
+                                    <div className='d-flex flex-row justify-content-center align-items-center'>
+                                        <h4>R$</h4>
+                                        <h2 style={{
+                                            fontSize: "3.5rem",
+                                            fontWeight: "bold",
+                                            color: "white"
+                                        }} className='mx-3'>20,00</h2>
+                                        <h4>/mês</h4>
+                                    </div>
+                                    
+                                </div>
+                                <div className="card-body py-4"  style={{
+                                    borderBottom: "solid 1.5px #EEEEEE",
+                                    borderTop: "solid 1.5px #EEEEEE"
+                                }}>
+                                    <ul className='m-0 p-0'>
+                                        <li><CheckIcon fontSize='large'></CheckIcon> <h3 className='text-white'>Postar trabalhos</h3></li>
+                                        <li><CheckIcon fontSize='large'></CheckIcon> <h3 className='text-white'>Seguir perfis</h3></li>
+                                        <li><CheckIcon fontSize='large'></CheckIcon> <h3 className='text-white'>Oportunidade de trabalho</h3></li>
+                                        <li><CheckIcon fontSize='large'></CheckIcon> <h3 className='text-white'>Portfólio ilimitado</h3></li>
+                                        <li><CheckIcon fontSize='large'></CheckIcon> <h3 className='text-white'>Lorem ipsum</h3></li>
+                                        <li><CheckIcon fontSize='large'></CheckIcon> <h3 className='text-white'>Lorem ipsum</h3></li>
+                                    </ul>
+                                </div>
+                                <h3 style={{
+                                    fontSize: "1.5rem"
+                                }} className='mt-4 mb-3 text-center'>Fazer um upgrade</h3>
+                                <Button variant='contained' className='bg-white col-6 w-100' style={{ color: "#EE2C09", fontSize: "1.5rem" }}
+                                    onClick={() => setPaymentDialogOpen(true)}>Tornar-se PRO</Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 }

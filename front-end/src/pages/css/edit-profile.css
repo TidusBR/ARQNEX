@@ -1,0 +1,24 @@
+.menu-color-active {
+    color: #DB752C !important;
+}
+.menu-options {
+    border: 1px solid #1D252C3D;
+    border-radius: 5px;
+}
+
+.orange-background {
+    background-color: #DB752C;
+}
+
+.border-button {
+    border: 1.5px solid #EEEEEE;
+}
+
+@media (max-width: 767px) {
+    .menu-options {
+        border: none;
+    }
+    .menu-options a {
+        border-bottom: none;
+    }
+} 
