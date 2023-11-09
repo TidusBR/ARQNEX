@@ -3,10 +3,16 @@ import { config } from "../../config";
 import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
+import { Snackbar, Alert } from "@mui/material";
+
 export default function PasswordForm({ updateSession }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+
+  const [isSnackOpen, setSnackOpen] = useState(false);
+  const [snackMessage, setSnackMessage] = useState("");
+  const [snackSeverity, setSnackSeverity] = useState("success");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +30,10 @@ export default function PasswordForm({ updateSession }) {
             confirmPassword
         })
     });
+
+    setSnackMessage("Informações salvas com sucesso!");
+    setSnackSeverity("success");
+    setSnackOpen(true);
 
     updateSession();
     navigate("/");
@@ -58,6 +68,19 @@ export default function PasswordForm({ updateSession }) {
       >
         Salvar
       </button>
+      <Snackbar
+        anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+        }}
+        open={isSnackOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackOpen(false)}
+    >
+        <Alert onClose={() => setSnackOpen(false)} severity={snackSeverity} sx={{ width: '90%' }}>
+            {snackMessage}
+        </Alert>
+    </Snackbar>
     </div>
   </form>
 }

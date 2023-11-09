@@ -5,6 +5,8 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { config } from '../../config';
 
+import { Snackbar, Alert } from '@mui/material';
+
 export function ExperiencesInputs({ session, index, onChange }) {
     const data = session.account.experiences.find(experience => experience.experience_id === index);
 
@@ -90,6 +92,10 @@ export default function ExperiencesForm({ session, updateSession }) {
     const [experiencesCount, setExperiencesCount] = useState(Math.max(Math.min(session.account.experiences.length, 2), 1));
     const experiencesData = Array(experiencesCount).fill({});
 
+    const [isSnackOpen, setSnackOpen] = useState(false);
+    const [snackMessage, setSnackMessage] = useState("");
+    const [snackSeverity, setSnackSeverity] = useState("success");
+
     const handleSumbit = async (e) => {
         e.preventDefault();
 
@@ -103,6 +109,10 @@ export default function ExperiencesForm({ session, updateSession }) {
             method: "POST",
             body: JSON.stringify(experiencesData)
         });
+
+        setSnackMessage("Informações salvas com sucesso!");
+        setSnackSeverity("success");
+        setSnackOpen(true);
 
         updateSession();
 
@@ -142,6 +152,20 @@ export default function ExperiencesForm({ session, updateSession }) {
                     </div>
                 </div>
             </div>
+
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={isSnackOpen}
+                autoHideDuration={6000}
+                onClose={() => setSnackOpen(false)}
+            >
+                <Alert onClose={() => setSnackOpen(false)} severity={snackSeverity} sx={{ width: '90%' }}>
+                    {snackMessage}
+                </Alert>
+            </Snackbar>
         </form>
     )
 }

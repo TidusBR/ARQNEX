@@ -3,9 +3,15 @@ import { config } from '../../config'
 import { useEffect } from "react";
 import PropTypes from 'prop-types';
 
+import { Snackbar, Alert } from "@mui/material";
+
 export default function InterestsForm({ session }) {
     const [softwares, setSoftwares] = useState(session.account.softwares.map(s => s.id));
     const [styles, setStyles] = useState(session.account.styles);
+
+    const [isSnackOpen, setSnackOpen] = useState(false);
+    const [snackMessage, setSnackMessage] = useState("");
+    const [snackSeverity, setSnackSeverity] = useState("success");
 
     const [uploadDetails, setUploadDetails] = useState({
         /**
@@ -40,6 +46,10 @@ export default function InterestsForm({ session }) {
                 styles
             })
         });
+
+        setSnackMessage("Informações salvas com sucesso!");
+        setSnackSeverity("success");
+        setSnackOpen(true);
 
         event.target.querySelector("button[type='submit']").disabled = false;
     }
@@ -107,6 +117,20 @@ export default function InterestsForm({ session }) {
             /* onClick={handleSubmit} */
             >Salvar</button>
         </div>
+
+        <Snackbar
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center'
+            }}
+            open={isSnackOpen}
+            autoHideDuration={6000}
+            onClose={() => setSnackOpen(false)}
+        >
+            <Alert onClose={() => setSnackOpen(false)} severity={snackSeverity} sx={{ width: '90%' }}>
+                {snackMessage}
+            </Alert>
+        </Snackbar>
     </form>
 }
 

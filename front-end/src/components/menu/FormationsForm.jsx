@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { config } from '../../config';
 
+import { Snackbar, Alert } from '@mui/material';
+
 export function FormationsInputs({ index, onChange, session }) {
     const data = session.account.formations.find(formation => formation.formation_id === index);
 
@@ -91,6 +93,10 @@ export default function FormationsForm({ session }) {
     const [formationCount, setFormationCount] = useState(Math.max(Math.min(session.account.formations.length, 3), 1));
     const formationData = Array(formationCount).fill({});
 
+    const [isSnackOpen, setSnackOpen] = useState(false);
+    const [snackMessage, setSnackMessage] = useState("");
+    const [snackSeverity, setSnackSeverity] = useState("success");
+
     const handleSumbit = async (e) => {
         e.preventDefault();
 
@@ -104,6 +110,10 @@ export default function FormationsForm({ session }) {
             method: "POST",
             body: JSON.stringify(formationData)
         });
+
+        setSnackMessage("Informações salvas com sucesso!");
+        setSnackSeverity("success");
+        setSnackOpen(true);
 
         e.target.querySelector("button[type='submit']").disabled = false;
     }
@@ -139,6 +149,20 @@ export default function FormationsForm({ session }) {
                     </div>
                 </div>
             </div>
+
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={isSnackOpen}
+                autoHideDuration={6000}
+                onClose={() => setSnackOpen(false)}
+            >
+                <Alert onClose={() => setSnackOpen(false)} severity={snackSeverity} sx={{ width: '90%' }}>
+                    {snackMessage}
+                </Alert>
+            </Snackbar>
         </form>
     )
 }

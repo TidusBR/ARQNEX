@@ -18,7 +18,7 @@ NotificationsRouter.get("/", async (req, res) => {
         return res.sendStatus(401);
     }
 
-    const [notifications] = await DBConn.execute('SELECT id, sender_id, action_id, extra_id, timestamp FROM notifications WHERE account_id = ?;', [req.session.user?.id]);
+    const [notifications] = await DBConn.execute('SELECT id, sender_id, action_id, extra_id, timestamp FROM notifications WHERE account_id = ? ORDER BY timestamp DESC;', [req.session.user?.id]);
 
     for (const notification of notifications) {
         const [[sender]] = await DBConn.execute('SELECT name FROM accounts WHERE id = ?;', [notification.sender_id]);

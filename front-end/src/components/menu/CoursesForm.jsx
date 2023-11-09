@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { config } from '../../config';
 
+import { Snackbar, Alert } from '@mui/material';
+
 export function CoursesInputs({ session, index, onChange }) {
     const data = session.account.courses.find(course => course.course_id === index);
 
@@ -60,6 +62,10 @@ export default function CoursesForm({ session, updateSession }) {
     const [coursesCount, setCoursesCount] = useState(Math.max(Math.min(session.account.courses.length, 2), 1));
     const coursesData = Array(coursesCount).fill({});
 
+    const [isSnackOpen, setSnackOpen] = useState(false);
+    const [snackMessage, setSnackMessage] = useState("");
+    const [snackSeverity, setSnackSeverity] = useState("success");
+
     const handleSumbit = async (e) => {
         e.preventDefault();
 
@@ -74,7 +80,12 @@ export default function CoursesForm({ session, updateSession }) {
             body: JSON.stringify(coursesData)
         });
 
+        setSnackMessage("Informações salvas com sucesso!");
+        setSnackSeverity("success");
+        setSnackOpen(true);
+
         updateSession();
+
         e.target.querySelector("button[type='submit']").disabled = false;
     }
 
@@ -103,6 +114,20 @@ export default function CoursesForm({ session, updateSession }) {
                     </div>
                 </div>
             </div>
+
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={isSnackOpen}
+                autoHideDuration={6000}
+                onClose={() => setSnackOpen(false)}
+            >
+                <Alert onClose={() => setSnackOpen(false)} severity={snackSeverity} sx={{ width: '90%' }}>
+                    {snackMessage}
+                </Alert>
+            </Snackbar>
         </form>
     )
 }

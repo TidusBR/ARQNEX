@@ -104,6 +104,7 @@ export default function People({ session }) {
                                                 <Button
                                                     variant='contained'
                                                     size='small'
+                                                    color='primary'
                                                     style={{textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}}
                                                     onClick={(e) => handlePersonOfficeInvite(e, person.id)}
                                                 >

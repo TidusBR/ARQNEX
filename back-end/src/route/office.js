@@ -216,7 +216,8 @@ OfficeRouter.get("/list", async (req, res) => {
                         ? images
                         : images.map(value => ({ value, sort: Math.random() }))
                             .sort((a, b) => a.sort - b.sort)
-                            .map(({ value }) => value);
+                            .map(({ value }) => value)
+                            .slice(0, 3);
     }
 
     res.json(offices);

@@ -54,7 +54,7 @@ export default function Offices({ session }) {
                                         <hr />
                                     </div> }
                                     <div className="col-12 col-md-3 mb-3 mb-md-0 d-flex align-items-center">
-                                        <img src={`${config.api}/${office.photo !== '' ? office.photo : '/uploads/-1/office'}`} className="rounded-circle me-2" alt="fotoPerfil" width={100} height={100} />
+                                        <img src={`${config.api}/${office.photo !== '' ? office.photo : 'uploads/-1/office'}`} className="rounded-circle me-2" alt="fotoPerfil" width={100} height={100} />
                                         <div className="d-flex flex-column justify-content-around">
                                             <p style={{color: "#1D252C"}}  className="fw-bold">{office.name}</p>
                                             <p style={{color: "#1D252C52"}}>{office.address.city}</p>

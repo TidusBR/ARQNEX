@@ -3,6 +3,8 @@ import { config } from "../../config";
 
 import PropTypes from 'prop-types';
 
+import { Snackbar, Alert } from "@mui/material";
+
 export default function OfficesForm({ updateSession }) {
     const [name, setName] = useState("");
     const [avatar, setAvatar] = useState(`${config.api}/uploads/-1/office`);
@@ -12,6 +14,10 @@ export default function OfficesForm({ updateSession }) {
     const [street, setStreet] = useState("");
     const [neighborhood, setNeighborhood] = useState("");
     const [city, setCity] = useState("");
+
+    const [isSnackOpen, setSnackOpen] = useState(false);
+    const [snackMessage, setSnackMessage] = useState("");
+    const [snackSeverity, setSnackSeverity] = useState("success");
 
     useEffect(() => {
         fetch(`${config.api}${config.endpoints.office.info}`, { credentials: "include" })
@@ -87,7 +93,15 @@ export default function OfficesForm({ updateSession }) {
             input?.setCustomValidity(response.message);
             input?.checkValidity();
             input?.reportValidity();
+
+            setSnackMessage("Falha ao validar informações!");
+            setSnackSeverity("error");
+            setSnackOpen(true);
         } else {
+            setSnackMessage("Informações salvas com sucesso!");
+            setSnackSeverity("success");
+            setSnackOpen(true);
+
             updateSession();
         }
 
@@ -183,6 +197,20 @@ export default function OfficesForm({ updateSession }) {
             <div className="mb-4 col-12 d-flex flex-row-reverse">
                 <button className="btn button-create btn-block text-white border-0 col-6 col-lg-4" type="submit">Salvar</button>
             </div>
+
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={isSnackOpen}
+                autoHideDuration={6000}
+                onClose={() => setSnackOpen(false)}
+            >
+                <Alert onClose={() => setSnackOpen(false)} severity={snackSeverity} sx={{ width: '90%' }}>
+                    {snackMessage}
+                </Alert>
+            </Snackbar>
 
         </form>
     </>

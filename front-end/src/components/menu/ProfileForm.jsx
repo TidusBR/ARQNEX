@@ -5,6 +5,7 @@ import { config } from "../../config";
 
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { Alert, Snackbar } from "@mui/material";
 
 export default function ProfileForm({ session, updateSession }) {
     const [name, setName] = useState(session.account.name);
@@ -18,6 +19,10 @@ export default function ProfileForm({ session, updateSession }) {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [biography, setBiography] = useState("");
     const [avatar, setAvatar] = useState(`${config.api}/uploads/${session.account.id}/avatar`);
+
+    const [isSnackOpen, setSnackOpen] = useState(false);
+    const [snackMessage, setSnackMessage] = useState("");
+    const [snackSeverity, setSnackSeverity] = useState("success");
 
     const inputFileRef = useRef();
 
@@ -68,7 +73,15 @@ export default function ProfileForm({ session, updateSession }) {
             input?.setCustomValidity(response.message);
             input?.checkValidity();
             input?.reportValidity();
+
+            setSnackMessage("Falha ao validar informações!");
+            setSnackSeverity("error");
+            setSnackOpen(true);
         } else {
+            setSnackMessage("Informações salvas com sucesso!");
+            setSnackSeverity("success");
+            setSnackOpen(true);
+
             updateSession();
         }
 
@@ -217,6 +230,19 @@ export default function ProfileForm({ session, updateSession }) {
                 <button className="btn button-create btn-block text-white border-0 col-6 col-lg-4" type="submit">Salvar</button>
             </div>
 
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={isSnackOpen}
+                autoHideDuration={6000}
+                onClose={() => setSnackOpen(false)}
+            >
+                <Alert onClose={() => setSnackOpen(false)} severity={snackSeverity} sx={{ width: '90%' }}>
+                    {snackMessage}
+                </Alert>
+            </Snackbar>
         </form>
     </>
 }
