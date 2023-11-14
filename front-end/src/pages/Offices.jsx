@@ -3,13 +3,10 @@ import { useEffect, useState } from 'react'
 import { config } from '../config';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
-import avatarDefault from "../assets/fotoPerfil.png";
-import jobDefault from "../assets/fotoRegister.jpeg";
 
-export default function Offices({ session }) {
+export default function Offices() {
     // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
-    const [disablePagination, setDisablePagination] = useState(false);
+    const [disablePagination] = useState(false);
     const [page, setPage] = useState(1)
 
     const [offices, setOffices] = useState([]);

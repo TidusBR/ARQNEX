@@ -5,7 +5,7 @@ import SoftwareUser from "../software_user/SoftwareUser"
 import PropTypes from 'prop-types';
 import { config } from "../../config";
 
-export default function CardUser({ info, session }) {
+export default function CardUser({ info, session, handlePersonFollow }) {
     const isMyProfile = session.account?.id === info.id;
     
     return (
@@ -18,7 +18,16 @@ export default function CardUser({ info, session }) {
                     <p className="address-user">{info.address.city}</p>
                     {info.premium_level > 0 && <p className="upgrade">PRO</p>}
                 </div>
-                {session.loggedIn && !isMyProfile && <button className="button-follow bg-white rounded p-2 px-5 mb-4">Seguir</button>}
+                {session.loggedIn && !isMyProfile &&
+                <button
+                    className="button-follow bg-white rounded p-2 px-5 mb-4"
+                    onClick={handlePersonFollow}
+                >
+                    {
+                        info.isFollowing ? "Seguindo" : "Seguir"
+                    }
+                </button>
+                }
                 <p className="bio-user mb-5">{info.biography}</p>
                 <p className="softwares text-start fw-bold mb-2">Softwares</p>
                 <div className="container-softwares mb-3 d-flex row">
@@ -37,4 +46,5 @@ export default function CardUser({ info, session }) {
 CardUser.propTypes = {
     session: PropTypes.object.isRequired,
     info: PropTypes.object.isRequired,
+    handlePersonFollow: PropTypes.func.isRequired
 }

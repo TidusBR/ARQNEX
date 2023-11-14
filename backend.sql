@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Nov-2023 às 18:57
+-- Tempo de geração: 14-Nov-2023 às 18:14
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.0.25
 
@@ -145,6 +145,7 @@ CREATE TABLE `collections` (
   `project` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   `upload_time` text NOT NULL,
+  `upload_timestamp` bigint(20) NOT NULL,
   `views` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -290,6 +291,17 @@ INSERT INTO `collection_details_types` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `following`
+--
+
+CREATE TABLE `following` (
+  `account_id` int(11) NOT NULL,
+  `follow_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `notifications`
 --
 
@@ -417,10 +429,19 @@ ALTER TABLE `collection_details_styles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `following`
+--
+ALTER TABLE `following`
+  ADD KEY `cascade follow id to following` (`account_id`),
+  ADD KEY `cascade follow_id to following` (`follow_id`);
+
+--
 -- Índices para tabela `notifications`
 --
 ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cascade account id to notifications` (`account_id`),
+  ADD KEY `cascade sender id to notifications` (`sender_id`);
 
 --
 -- Índices para tabela `offices`
@@ -536,6 +557,19 @@ ALTER TABLE `collections_likes`
 --
 ALTER TABLE `collections_softwares`
   ADD CONSTRAINT `cascade collection id to collection_softwares` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `following`
+--
+ALTER TABLE `following`
+  ADD CONSTRAINT `cascade account id to following` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `cascade account id to notifications` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cascade sender id to notifications` FOREIGN KEY (`sender_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `offices`

@@ -35,6 +35,19 @@ PeopleRouter.get("/list", async (req, res) => {
 
         const [[office]] = await DBConn.execute('SELECT COUNT(*) FROM offices_members WHERE account_id = ?;', [person.id]);
         person.isOfficeMember = office['COUNT(*)'] > 0;
+
+        person.isAlreadyInvited = false;
+
+        if (!req.session.loggedIn)
+            continue;
+
+        if (req.session.user?.office != undefined) {
+            const [[invite]] = await DBConn.execute('SELECT COUNT(*) FROM notifications WHERE account_id = ? AND sender_id = ? AND action_id = 1;', [person.id, req.session.user.id]); 
+            person.isAlreadyInvited = invite['COUNT(*)'] > 0;
+        }
+
+        const [[following]] = await DBConn.execute('SELECT COUNT(*) FROM following WHERE account_id = ? AND follow_id = ?', [req.session.user.id, person.id]);
+        person.isAlreadyFollowing = following['COUNT(*)'] > 0;
     }
 
     res.json(people);

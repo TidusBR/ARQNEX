@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Snackbar, Alert } from "@mui/material";
 
-export default function InterestsForm({ session }) {
+export default function InterestsForm({ session, updateSession }) {
     const [softwares, setSoftwares] = useState(session.account.softwares.map(s => s.id));
     const [styles, setStyles] = useState(session.account.styles);
 
@@ -46,6 +46,8 @@ export default function InterestsForm({ session }) {
                 styles
             })
         });
+
+        updateSession();
 
         setSnackMessage("Informações salvas com sucesso!");
         setSnackSeverity("success");
@@ -135,5 +137,6 @@ export default function InterestsForm({ session }) {
 }
 
 InterestsForm.propTypes = {
-    session: PropTypes.object.isRequired
+    session: PropTypes.object.isRequired,
+    updateSession: PropTypes.func.isRequired
 }

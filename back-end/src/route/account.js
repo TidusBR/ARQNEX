@@ -24,6 +24,32 @@ AccountRouter.post("/upload-avatar", async (req, res) => {
     res.sendStatus(200);
 });
 
+AccountRouter.post("/follow", async (req, res) => {
+    if (!req.session.loggedIn) {
+        return res.sendStatus(401); // Unauthorized
+    }
+
+    const { followId } = req.body;
+
+    if (typeof followId !== "number") {
+        return res.sendStatus(406);
+    }
+
+    if (!await checkAccountExistance({ id: followId })) {
+        return res.sendStatus(406);
+    }
+    
+    const [[check]] = await DBConn.execute('SELECT COUNT(*) FROM following WHERE account_id = ? AND follow_id = ?', [req.session.user.id, followId]);
+
+    if (check['COUNT(*)'] > 0) {
+        await DBConn.execute('DELETE FROM following WHERE account_id = ? AND follow_id = ?', [req.session.user.id, followId]);
+    } else {
+        await DBConn.execute('INSERT INTO following(account_id, follow_id) VALUES(?, ?);', [req.session.user.id, followId]);
+    }
+
+    res.sendStatus(200);
+});
+
 AccountRouter.post("/delete-avatar", async (req, res) => {
     if (!req.session.loggedIn) {
         return res.sendStatus(401); // Unauthorized
@@ -410,6 +436,16 @@ AccountRouter.get("/profile/:username", async (req, res) => {
     for (const softwareId of softwares.map(s => s.software_id)) {
         const [[software]] = await DBConn.execute(`SELECT id, name, iconPath FROM collection_details_softwares WHERE id = ?`, [softwareId]);
         result.softwares.push(software);
+    }
+
+    const [[followers]] = await DBConn.execute('SELECT COUNT(*) FROM following WHERE follow_id = ?;', [result.id]);
+    result.followers = followers['COUNT(*)'];
+
+    if (req.session.loggedIn && req.session.user !== undefined) {
+        const [[following]] = await DBConn.execute('SELECT COUNT(*) FROM following WHERE account_id = ? AND follow_id = ?', [req.session.user.id, result.id]);
+        result.isFollowing = following['COUNT(*)'] > 0;
+    } else {
+        result.isFollowing = false;
     }
 
     return res.json(result);

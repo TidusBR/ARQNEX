@@ -26,8 +26,6 @@ export default function OfficesForm({ updateSession }) {
             setName(data.name);
             setCnpj(data.cnpj);
 
-            console.log(data.photo)
-
             if (data.photo.length > 0)
                 setAvatar(`${config.api}/${data.photo}`);
 
@@ -49,7 +47,9 @@ export default function OfficesForm({ updateSession }) {
             .then(response => response.json())
             .then(json => {
                 if (json.erro) {
-                    console.log("CEP inválido!");
+                    setSnackMessage("CEP Inválido!");
+                    setSnackSeverity("error");
+                    setSnackOpen(true);
                     setCep("");
                 } else {
                     setCity(json.localidade);

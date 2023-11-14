@@ -98,7 +98,9 @@ export default function ProfileForm({ session, updateSession }) {
             .then(response => response.json())
             .then(json => {
                 if (json.erro) {
-                    console.log("CEP inválido!");
+                    setSnackMessage("CEP Inválido!");
+                    setSnackSeverity("error");
+                    setSnackOpen(true);
                     setCep("");
                 } else {
                     setCity(json.localidade);

@@ -30,6 +30,7 @@ export const config = {
             list: "/people/list"
         },
         account: {
+            follow: "/account/follow",
             signin_firebase: "/account/signin/firebase",
             validate: "/account/validate/",
             signup: "/account/signup",
@@ -55,6 +56,7 @@ export const config = {
             upload: "/collection/upload",
             upload_details: "/collection/upload-details",
             list: "/collection/list",
+            newlist: "/collection/newlist",
             like: "/collection/%1/like",
             view: "/collection/%1/view"
         },

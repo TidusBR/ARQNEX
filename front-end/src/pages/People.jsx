@@ -4,13 +4,12 @@ import { config } from '../config';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+
 export default function People({ session }) {
     const navigate = useNavigate();
 
-    const [disablePagination, setDisablePagination] = useState(false);
+    const [disablePagination] = useState(false);
     const [page, setPage] = useState(1)
-
-    const [collections, setCollections] = useState([]);
 
     const [people, setPeople] = useState([]);
 
@@ -20,17 +19,17 @@ export default function People({ session }) {
         })
         .then(response => response.json())
         .then(people => {
-            console.log(people);
             setPeople(people);
         });
     }, []);
 
-    const handlePersonOfficeInvite = async function(event, personId) {
+    const handlePersonOfficeInvite = async function(event, person) {
         event.preventDefault();
-        event.target.disabled = true;
         
-        if (!session.loggedIn || !session.account.isPremium || !session.account.hasOffice)
+        if (!session.loggedIn || !session.account.isPremium || !session.account.hasOffice || person.isAlreadyInvited)
             return;
+
+        person.isAlreadyInvited = true;
 
         await fetch(`${config.api}${config.endpoints.office.invite}`, {
             credentials: "include",
@@ -39,9 +38,32 @@ export default function People({ session }) {
             },
             method: "POST",
             body: JSON.stringify({
-                personId
+                personId: person.id
             })
         });
+
+        setPeople(people.map(p => p.id === person.id ? person : p));
+    }
+    
+    const handlePersonFollow = async function(event, person) {
+        event.preventDefault();
+        
+        if (!session.loggedIn)
+            return;
+
+        await fetch(`${config.api}${config.endpoints.account.follow}`, {
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                followId: person.id
+            })
+        });
+
+        person.isAlreadyFollowing = !person.isAlreadyFollowing;
+        setPeople(people.map(p => p.id === person.id ? person : p));
     }
 
     return (
@@ -93,20 +115,30 @@ export default function People({ session }) {
                                             {
                                             (session.loggedIn && person.id !== session.account.id) &&
                                             <div className='d-flex'>
-                                                <Button variant='contained' className='me-2' size='small'
-                                                    style={person.following ? {textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}
+                                                <Button
+                                                    onClick={(e) => handlePersonFollow(e, person)}
+                                                    variant='contained' className='me-2' size='small'
+                                                    style={person.isAlreadyFollowing ? {textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}
                                                     : {textTransform: "none", backgroundColor: "#DB752C", color: "white"}}
                                                 >
-                                                    {person.following ? "Seguindo" : "Seguir"}
+                                                    {person.isAlreadyFollowing ? "Seguindo" : "Seguir"}
                                                 </Button>
                                                 {
                                                 (session.account.hasOffice && !person.isOfficeMember) && 
                                                 <Button
                                                     variant='contained'
                                                     size='small'
-                                                    color='primary'
-                                                    style={{textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}}
-                                                    onClick={(e) => handlePersonOfficeInvite(e, person.id)}
+                                                    disabled={person.isAlreadyInvited}
+                                                    style={{
+                                                        textTransform: "none",
+                                                        backgroundColor: "white",
+                                                        color: "#1D252C",
+                                                        border: "1.5px solid #EEEEEE",
+                                                        "&:disabled": {
+                                                            backgroundColor: "gray"
+                                                        }
+                                                    }}
+                                                    onClick={(e) => handlePersonOfficeInvite(e, person)}
                                                 >
                                                     Convidar
                                                 </Button>
@@ -131,7 +163,7 @@ export default function People({ session }) {
                 <div className="col-10 m-auto p-0">
                     <div className='row justify-content-center'>
                         <Button disabled={disablePagination} onClick={() => setPage(page + 1)}
-                            style={{ display: (collections.length > 16) ? "block" : "none", backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE" }} variant="contained" sx={{ marginTop: "5rem", width: "20%", bottom: "3rem" }}>Carregar mais...</Button>
+                            style={{ display: (people.length > 16) ? "block" : "none", backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE" }} variant="contained" sx={{ marginTop: "5rem", width: "20%", bottom: "3rem" }}>Carregar mais...</Button>
                     </div>
                 </div>
             </div>

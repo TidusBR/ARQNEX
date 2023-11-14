@@ -32,13 +32,37 @@ export default function ProfileUser({ session }) {
         });
     }, [navigate, username])
 
-    
-
     if(profileInfo === null) {
         return;
     }
 
     const openCollection = new URLSearchParams(window.location.search)?.get('col');
+
+    const handlePersonFollow = async function(event) {
+        event.preventDefault();
+        
+        if (!session.loggedIn || profileInfo.id === session.account.id)
+            return;
+
+        await fetch(`${config.api}${config.endpoints.account.follow}`, {
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                followId: profileInfo.id
+            })
+        });
+
+        const res = await fetch(`${config.api}${config.endpoints.account.profile}${username}`, { credentials: "include" })
+        
+        if (res.ok && res.status === 200) {
+            setProfileInfo(await res.json());
+        } else {
+            navigate("/");
+        }
+    }
 
     return (
         <div className="container-profile-user my-5">
@@ -46,7 +70,7 @@ export default function ProfileUser({ session }) {
                 <div className="col-10 m-auto">
                     <div className="row">
                         <div className="col-lg-3">
-                            <CardUser info={profileInfo} session={session}/>
+                            <CardUser info={profileInfo} handlePersonFollow={handlePersonFollow} session={session}/>
                         </div>
                         <div className="col-lg-9">
                             <div className="row mb-4">
@@ -58,7 +82,7 @@ export default function ProfileUser({ session }) {
                                 <div className="col-8 col-md-9 col-xl-10 d-flex flex-row-reverse align-items-center flex-start">
                                     <div>
                                         <span  className="followers me-1 fw-bold">{
-                                            0
+                                            profileInfo.followers
                                         }</span>
                                         <span className="text-job">Seguidores</span>
                                     </div>

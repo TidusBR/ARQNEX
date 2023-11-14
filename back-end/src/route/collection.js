@@ -38,14 +38,15 @@ CollectionRouter.post("/upload", async (req, res) => {
         });
     }
 
-    const result = await DBConn.execute(`INSERT INTO collections(author_id, title, description, styles, project, type, upload_time, views) VALUES (?, ?, ?, ?, ?, ?, ?, 0);`, [
+    const result = await DBConn.execute(`INSERT INTO collections(author_id, title, description, styles, project, type, upload_time, upload_timestamp, views) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0);`, [
         req.session.user.id,
         req.body.title,
         req.body.description,
         req.body.styles,
         req.body.project,
         req.body.type,
-        Temporal.Now.zonedDateTimeISO().toString()
+        Temporal.Now.zonedDateTimeISO().toString(),
+        Temporal.Now.instant().epochMilliseconds
     ]);
 
     const collectionID = result[0].insertId;
@@ -107,6 +108,56 @@ CollectionRouter.get("/list", async (req, res) => {
     }
 
     return res.json(list);
+});
+
+async function getCollectionsByFilters(filter) {
+    const collectionLimitPerPage = 16;
+
+    let whereFilter = filter.style === 0 ? `styles = 1` : `styles >= 2 AND styles <= 3`;
+    const argList = [];
+
+    if (filter.search.length > 0) {
+        whereFilter += ` AND (title LIKE ? OR description LIKE ?)`;
+        argList.push(`%${filter.search}%`, `%${filter.search}%`);
+    }
+
+    argList.push(((filter.page ?? 0) - 1) * collectionLimitPerPage);
+
+    if (filter.relevance === 0) {
+        const [collections] = await DBConn.execute(`SELECT * FROM collections WHERE ${whereFilter} ORDER BY views DESC LIMIT 16 OFFSET ?`, argList);
+        return collections;
+    } else if (filter.relevance === 1) {
+        const [collections] = await DBConn.execute(`
+        SELECT c.id, c.author_id, c.title, c.description, c.styles, c.project, c.type, c.upload_time, c.views, COUNT(cl.account_id) as like_count
+        FROM collections c
+        LEFT JOIN collections_likes cl ON c.id = cl.collection_id
+        WHERE ${whereFilter}
+        GROUP BY c.id
+        ORDER BY like_count DESC LIMIT 16 OFFSET ?;`, argList);
+        return collections;
+    } else if (filter.relevance === 2) {
+        const [collections] = await DBConn.execute(`SELECT * FROM collections WHERE ${whereFilter} ORDER BY upload_timestamp DESC LIMIT 16 OFFSET ?`, argList);
+        return collections;
+    }
+
+    return [];
+}
+
+CollectionRouter.post("/newlist", async (req, res) => {
+    const filter = req.body;
+
+    const result = {
+        collections: [],
+    }
+
+    for (const collection of await getCollectionsByFilters(filter)) {
+        await fetchCollectionInfos(req, collection);
+        result.collections.push(collection);
+    }
+
+    result.hasNextPage = (await getCollectionsByFilters({...filter, page: filter.page + 1})).length > 0;
+
+    return res.json(result);
 });
 
 CollectionRouter.get("/:id/view", async (req, res) => {
