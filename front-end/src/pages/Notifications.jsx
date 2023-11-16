@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import "./css/notifications.css"
 import { config } from "../config"
 
-import { Favorite, PersonAdd } from '@mui/icons-material';
+import { Check, Favorite, PersonAdd } from '@mui/icons-material';
 import { Temporal } from '@js-temporal/polyfill';
 import { Typography, Button } from '@mui/material';
 
@@ -69,6 +69,11 @@ export default function Notifications({ updateSession }) {
         4: {
             icon: <PersonAdd size="large" />,
             description: "aceitou o convite para o seu escritório."
+        },
+
+        5: {
+            icon: <Check size="large" />,
+            description: "começou a seguir você."
         }
     }
 

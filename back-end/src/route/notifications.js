@@ -9,6 +9,7 @@ import { Temporal } from '@js-temporal/polyfill';
  * 2 = Convite para escritório (rejeitado)
  * 3 = Convite para escritório (aceitado)
  * 4 = Convite aceito (contexto: Quando um convidado aceita o convite para o escritório, você recebe um aviso que o convite foi aceito)
+ * 5 = Fulano seguiu ciclano
  */
 
 export const NotificationsRouter = express.Router();
@@ -136,4 +137,17 @@ export async function acceptOfficeInviteNotification(data) {
     });
 
     return notification.extra_id;
+}
+
+/**
+ * Cria uma notificação de seguindo para quem foi seguido
+ * @param {object} data
+ * @param {number} data.personId id da coleção que foi curtida
+ * @param {number} data.senderId id de quem curtiu a coleção 
+ */
+export async function createFollowingNotification(data) {
+    await DBConn.execute(
+        'INSERT INTO notifications(account_id, sender_id, action_id, extra_id, timestamp) VALUES(?, ?, ?, ?, ?)',
+        [data.personId, data.senderId, 5, 0, Temporal.Now.instant().epochMilliseconds]
+    );
 }
