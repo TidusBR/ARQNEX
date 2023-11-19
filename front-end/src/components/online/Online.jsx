@@ -60,7 +60,7 @@ export default function Online() {
                             <div style={{ color: "white" }}>
                                 {fotoJoao.map((item, index) => (
                                     <div key={index} className="row">
-                                        <div className="col-2">
+                                        <div className="col-3 col-lg-2 mb-3">
                                             <img src={item.image} alt="" style={{
                                                 border: "solid #DB752C 1px",
                                                 width: '100%',
@@ -68,7 +68,7 @@ export default function Online() {
                                                 ...(item.image === ana && item.style),
                                             }} />
                                         </div>
-                                        <div className="col-10">
+                                        <div className="col-8">
                                             <h5>{item.comment}</h5>
                                         </div>
                                     </div>

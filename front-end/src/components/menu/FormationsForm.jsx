@@ -105,15 +105,6 @@ export default function FormationsForm({ session, updateSession }) {
             body: JSON.stringify(formationData)
         });
 
-<<<<<<< Updated upstream
-=======
-        updateSession();
-
-        setSnackMessage("Informações salvas com sucesso!");
-        setSnackSeverity("success");
-        setSnackOpen(true);
-
->>>>>>> Stashed changes
         e.target.querySelector("button[type='submit']").disabled = false;
     }
 
