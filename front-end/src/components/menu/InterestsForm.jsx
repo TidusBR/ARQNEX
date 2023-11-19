@@ -3,7 +3,13 @@ import { config } from '../../config'
 import { useEffect } from "react";
 import PropTypes from 'prop-types';
 
+<<<<<<< Updated upstream
 export default function InterestsForm({ session }) {
+=======
+import { Snackbar, Alert } from "@mui/material";
+
+export default function InterestsForm({ session, updateSession }) {
+>>>>>>> Stashed changes
     const [softwares, setSoftwares] = useState(session.account.softwares.map(s => s.id));
     const [styles, setStyles] = useState(session.account.styles);
 
@@ -41,6 +47,15 @@ export default function InterestsForm({ session }) {
             })
         });
 
+<<<<<<< Updated upstream
+=======
+        updateSession();
+
+        setSnackMessage("Informações salvas com sucesso!");
+        setSnackSeverity("success");
+        setSnackOpen(true);
+
+>>>>>>> Stashed changes
         event.target.querySelector("button[type='submit']").disabled = false;
     }
 
@@ -111,5 +126,6 @@ export default function InterestsForm({ session }) {
 }
 
 InterestsForm.propTypes = {
-    session: PropTypes.object.isRequired
+    session: PropTypes.object.isRequired,
+    updateSession: PropTypes.func.isRequired
 }

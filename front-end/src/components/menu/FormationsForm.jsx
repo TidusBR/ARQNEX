@@ -87,7 +87,7 @@ FormationsInputs.propTypes = {
     session: PropTypes.object.isRequired
 }
 
-export default function FormationsForm({ session }) {
+export default function FormationsForm({ session, updateSession }) {
     const [formationCount, setFormationCount] = useState(Math.max(Math.min(session.account.formations.length, 3), 1));
     const formationData = Array(formationCount).fill({});
 
@@ -105,6 +105,15 @@ export default function FormationsForm({ session }) {
             body: JSON.stringify(formationData)
         });
 
+<<<<<<< Updated upstream
+=======
+        updateSession();
+
+        setSnackMessage("Informações salvas com sucesso!");
+        setSnackSeverity("success");
+        setSnackOpen(true);
+
+>>>>>>> Stashed changes
         e.target.querySelector("button[type='submit']").disabled = false;
     }
 
@@ -144,5 +153,6 @@ export default function FormationsForm({ session }) {
 }
 
 FormationsForm.propTypes = {
-    session: PropTypes.object.isRequired
+    session: PropTypes.object.isRequired,
+    updateSession: PropTypes.func.isRequired
 }

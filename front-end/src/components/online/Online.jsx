@@ -2,7 +2,9 @@ import React from "react";
 import ReactPlayer from "react-player";
 import cadernoCaneta from './online-images/escrevendo-caderno-p.png';
 import whiteLogo from './online-images/marcadagua.png';
-import joao from './online-images/joao.png'
+import joao from './online-images/joao.png';
+import ana from '../../assets/card-user-test/anna.png';
+import jorge from '../../assets/fotoPerfil2.png';
 
 const videoURL = "https://www.youtube.com/watch?v=gAhV48QiVAc";
 
@@ -12,11 +14,14 @@ const fotoJoao = [
         comment: '15/08: Talk sobre o mercado de trabalho da Arquitetura',
     },
     {
-        image: joao,
+        image: ana,
         comment: '27/08: Curso básico de REVIT',
+        style: {
+            padding: '4px',
+        }
     },
     {
-        image: joao,
+        image: jorge,
         comment: '31/08: Projeto executivo na prática',
     },
 ];
@@ -40,11 +45,11 @@ export default function Online() {
                         />
                     </div>
                 </div>
-                <div className="col-12 col-sm-5">
+                <div className="col-12 col-sm-4 m-4 d-flex justify-content-center">
                     <div className="d-flex flex-column p-4 chat-box" style={{
                         backgroundImage: `url(${cadernoCaneta})`,
                         height: "600px",
-                        width: "500px",
+                        width: "100%", // Ajuste conforme necessário
                         position: "relative",
                     }}>
                         <div>
@@ -58,9 +63,9 @@ export default function Online() {
                                         <div className="col-2">
                                             <img src={item.image} alt="" style={{
                                                 border: "solid #DB752C 1px",
-                                                width: 56,
-                                                height: 56,
+                                                width: '100%',
                                                 borderRadius: "50%",
+                                                ...(item.image === ana && item.style),
                                             }} />
                                         </div>
                                         <div className="col-10">

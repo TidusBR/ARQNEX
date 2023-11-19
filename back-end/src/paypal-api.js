@@ -32,12 +32,6 @@ export async function generateAccessToken() {
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
  */
 export async function createOrder(data) {
-    // use the cart information passed from the front-end to calculate the purchase unit details
-    console.log(
-        "shopping cart information passed from the frontend createOrder() callback:",
-        data,
-    );
-
     const accessToken = await generateAccessToken();
     const url = `${base}/v2/checkout/orders`;
     const payload = {

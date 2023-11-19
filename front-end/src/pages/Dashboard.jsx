@@ -9,22 +9,49 @@ import { useNavigate } from 'react-router-dom';
 export default function Dashboard({ session }) {
     // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
     const [disablePagination, setDisablePagination] = useState(false);
-    const [page, setPage] = useState(1)
     const navigate = useNavigate();
 
     const [collections, setCollections] = useState([]);
 
+<<<<<<< Updated upstream
+=======
+    const [filter, setFilter] = useState({
+        page: 1,
+        style: 0,
+        relevance: 0, // 0 = Popular, 1 = Mais curtido, 2 = Novo
+        search: ""
+    });
+
+    const [searchTerm, setSearchTerm] = useState("");
+
+>>>>>>> Stashed changes
     useEffect(() => {
-        fetch(`${config.api}${config.endpoints.collection.list}?page=${page}`, { credentials: "include" })
-            .then(response => response.json())
-            .then(data => {
-                if (data.length === 0) {
-                    setDisablePagination(true);
-                    return;
-                }
-                setCollections(collections => [...collections, ...data])
-            });
-    }, [page]);
+        const delayDebounceFn = setTimeout(() => {
+            setFilter(filter => ({...filter, page: 1, search: searchTerm}));
+        }, 500);
+    
+        return () => clearTimeout(delayDebounceFn)
+      }, [searchTerm]);
+
+    useEffect(() => {
+        if (filter.page === 1) {
+            setCollections([]);
+        }
+
+        fetch(`${config.api}${config.endpoints.collection.newlist}`, {
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify(filter)
+        })
+        .then(response => response.json())
+        .then(data => {
+            setDisablePagination(!data.hasNextPage);
+            setCollections(collections => [...collections, ...data.collections]);
+        });
+    }, [filter, setDisablePagination, setCollections]);
 
     const openCollection = new URLSearchParams(window.location.search)?.get('col');
 
@@ -49,6 +76,7 @@ export default function Dashboard({ session }) {
                     </div>
                 </div>
 
+<<<<<<< Updated upstream
                 <div className="col-sm-12 mt-4 px-5 d-none d-md-flex">
                     <div className="col-4 col-md-2 col-lg-2 col-xxl-1">
                         <select className="form-select d-inline">
@@ -65,6 +93,38 @@ export default function Dashboard({ session }) {
                     </div>
                     <div className="col-sm-2 col-xxl-1">
                         <input className="form-control icon-search" type="text" placeholder="Buscar" />
+=======
+                <div className="col-sm-12 mt-4 px-5 d-md-flex">
+                    <div className="col-12 mb-3 col-md-2 col-lg-2 col-xxl-1">
+                        <select
+                            className="form-select d-inline"
+                            value={filter.relevance}
+                            onChange={(e) => setFilter(f => ({...f, page: 1, relevance: Number(e.target.value)})) }
+                        >
+                            <option value="0">Popular</option>
+                            <option value="1">Mais curtido</option>
+                            <option value="2">Mais recente</option>
+                        </select>
+                    </div>
+                    <div className="col text-center mb-3">
+                        <button
+                            className="p-2 border-0 fw-bold rounded me-3"
+                            style={{ backgroundColor: filter.style === 0 ? "#DB752C52" : "white" }}
+                            onClick={() => setFilter(f => ({...f, page: 1, style: 0})) }
+                        >
+                            Clássico
+                        </button>
+                        <button
+                            className="p-2 border-0 fw-bold rounded"
+                            style={{ backgroundColor: filter.style === 1 ? "#DB752C52" : "white" }}
+                            onClick={() => setFilter(f => ({...f, page: 1, style: 1})) }
+                        >
+                            Contemporâneo + Moderno
+                        </button>
+                    </div>
+                    <div className="col-12 col-md-2 col-xxl-1">
+                        <input className="form-control icon-search" type="text" placeholder="Buscar" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+>>>>>>> Stashed changes
                     </div>
                 </div>
 
@@ -83,7 +143,7 @@ export default function Dashboard({ session }) {
                 </div>
                 <div className="col-10 m-auto p-0">
                     <div className='row justify-content-center'>
-                        <Button disabled={disablePagination} onClick={() => setPage(page + 1)}
+                        <Button disabled={disablePagination} onClick={() => setFilter(filter => ({...filter, page: filter.page + 1}))}
                             style={{ display: (collections.length > 16) ? "block" : "none", backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE" }} variant="contained" sx={{ marginTop: "5rem", width: "20%", bottom: "3rem" }}>Carregar mais...</Button>
                     </div>
                 </div>

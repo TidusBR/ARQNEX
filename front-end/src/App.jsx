@@ -32,10 +32,13 @@ export default function App() {
   const [session, setSession] = useState(null); // Inicialize com null
 
   const updateSession = () => {
-    console.log('updating session')
     fetch(`${config.api}${config.endpoints.session}`, { method: "POST", credentials: "include" })
       .then(response => response.json())
+<<<<<<< Updated upstream
       .then(data => { setSession(data); console.log(data); })
+=======
+      .then(data => setSession(data));
+>>>>>>> Stashed changes
   }
 
   useEffect(() => {
@@ -67,8 +70,15 @@ export default function App() {
               <Route path="password" element={<PasswordForm updateSession={updateSession} />}></Route>
               <Route path="courses" element={<CoursesForm session={session} updateSession={updateSession} />}></Route>
               <Route path="experiences" element={<ExperiencesForm session={session} updateSession={updateSession} />}></Route>
+<<<<<<< Updated upstream
               <Route path="interests" element={<InterestsForm session={session} />}></Route>
               <Route path="formations" element={<FormationsForm session={session} />}></Route>
+=======
+              <Route path="interests" element={<InterestsForm session={session} updateSession={updateSession} />}></Route>
+              <Route path="formations" element={<FormationsForm session={session} updateSession={updateSession} />}></Route>
+              <Route path="offices" element={<OfficesForm updateSession={updateSession} />}></Route>
+              <Route path="manage-office" element={<ManageOffice />}></Route>
+>>>>>>> Stashed changes
             </Route>
             
             <Route path="/dashboard" element={session.loggedIn ? <Dashboard session={session}></Dashboard> : <Navigate to="/" />}></Route>

@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< Updated upstream
 -- Tempo de geração: 17-Out-2023 às 20:52
+=======
+-- Tempo de geração: 14-Nov-2023 às 18:14
+>>>>>>> Stashed changes
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.0.25
 
@@ -168,6 +172,7 @@ CREATE TABLE `collections` (
   `project` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   `upload_time` text NOT NULL,
+  `upload_timestamp` bigint(20) NOT NULL,
   `views` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -310,6 +315,75 @@ INSERT INTO `collection_details_types` (`id`, `name`) VALUES
 (4, 'Layout'),
 (5, 'Croqui');
 
+<<<<<<< Updated upstream
+=======
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `following`
+--
+
+CREATE TABLE `following` (
+  `account_id` int(11) NOT NULL,
+  `follow_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `extra_id` int(11) NOT NULL,
+  `timestamp` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `offices`
+--
+
+CREATE TABLE `offices` (
+  `id` int(11) NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `cnpj` text NOT NULL,
+  `photo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `offices_address`
+--
+
+CREATE TABLE `offices_address` (
+  `office_id` int(11) NOT NULL,
+  `cep` text NOT NULL,
+  `house_number` text NOT NULL,
+  `street` text NOT NULL,
+  `neighborhood` text NOT NULL,
+  `city` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `offices_members`
+--
+
+CREATE TABLE `offices_members` (
+  `office_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+>>>>>>> Stashed changes
 --
 -- Índices para tabelas despejadas
 --
@@ -379,6 +453,44 @@ ALTER TABLE `collection_details_styles`
   ADD PRIMARY KEY (`id`);
 
 --
+<<<<<<< Updated upstream
+=======
+-- Índices para tabela `following`
+--
+ALTER TABLE `following`
+  ADD KEY `cascade follow id to following` (`account_id`),
+  ADD KEY `cascade follow_id to following` (`follow_id`);
+
+--
+-- Índices para tabela `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cascade account id to notifications` (`account_id`),
+  ADD KEY `cascade sender id to notifications` (`sender_id`);
+
+--
+-- Índices para tabela `offices`
+--
+ALTER TABLE `offices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cascade account id to offices` (`owner_id`);
+
+--
+-- Índices para tabela `offices_address`
+--
+ALTER TABLE `offices_address`
+  ADD KEY `cascade office id to offices_address` (`office_id`);
+
+--
+-- Índices para tabela `offices_members`
+--
+ALTER TABLE `offices_members`
+  ADD KEY `cascade office id to offices_members` (`office_id`),
+  ADD KEY `cascade account_id id to offices_members` (`account_id`);
+
+--
+>>>>>>> Stashed changes
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -454,6 +566,41 @@ ALTER TABLE `collections_likes`
 --
 ALTER TABLE `collections_softwares`
   ADD CONSTRAINT `cascade collection id to collection_softwares` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+<<<<<<< Updated upstream
+=======
+
+--
+-- Limitadores para a tabela `following`
+--
+ALTER TABLE `following`
+  ADD CONSTRAINT `cascade account id to following` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `cascade account id to notifications` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cascade sender id to notifications` FOREIGN KEY (`sender_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `offices`
+--
+ALTER TABLE `offices`
+  ADD CONSTRAINT `cascade account id to offices` FOREIGN KEY (`owner_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `offices_address`
+--
+ALTER TABLE `offices_address`
+  ADD CONSTRAINT `cascade office id to offices_address` FOREIGN KEY (`office_id`) REFERENCES `offices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `offices_members`
+--
+ALTER TABLE `offices_members`
+  ADD CONSTRAINT `cascade account_id id to offices_members` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cascade office id to offices_members` FOREIGN KEY (`office_id`) REFERENCES `offices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+>>>>>>> Stashed changes
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
