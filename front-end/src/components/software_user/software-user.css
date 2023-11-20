@@ -1,4 +1,7 @@
 .container-software-user {
     border: 1.5px solid #EEEEEE;
     font-weight: bold;
+    text-wrap: nowrap;
+    margin-bottom: 0.5rem;
+    display: inline-block;
 }

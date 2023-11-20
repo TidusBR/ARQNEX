@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { config } from '../config';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
+import CardJob from '../components/card-job/CardJob';
 import { useNavigate } from 'react-router-dom';
 
 export default function People({ session }) {
@@ -22,6 +23,8 @@ export default function People({ session }) {
             setPeople(people);
         });
     }, []);
+
+    const openCollection = new URLSearchParams(window.location.search)?.get('col');
 
     const handlePersonOfficeInvite = async function(event, person) {
         event.preventDefault();
@@ -82,7 +85,7 @@ export default function People({ session }) {
                             <option value="popular">Popular</option>
                         </select>
                     </div>
-                    <div className="col text-center mb-3">
+                    <div className="col text-center mb-3 d-md-block d-flex justify-content-between">
                         <button className="p-2 border-0 fw-bold bg-white rounded me-3">
                             Clássico
                         </button>
@@ -96,8 +99,8 @@ export default function People({ session }) {
                 </div>
 
                 <div className='col-12 col-sm-10 m-auto mt-5'>
-                    {people.map((person, index) => {
-                        return <div className='row' key={index}>
+                    {people.map((person, index, array) => {
+                        return <div className='row' key={index} style={{marginBottom: index === array.length - 1 ? "3rem" : ""}}>
                                     { index > 0 && <div className="col-12 my-3" >
                                         <hr />
                                     </div> }
@@ -111,7 +114,7 @@ export default function People({ session }) {
                                             person.semester && person.semester !== "" &&
                                             <p style={{color: "#1D252C52"}}>{person.semester}° Semestre</p>
                                             }
-                                            <p style={{color: "#1D252C52"}}>{person.city}</p>
+                                            <p style={{color: "#1D252C52"}}>{person.address.city}</p>
                                             {
                                             (session.loggedIn && person.id !== session.account.id) &&
                                             <div className='d-flex'>
@@ -148,12 +151,15 @@ export default function People({ session }) {
                                         </div>
                                     </div>
                                     {person.collections.map((collection, index) => {
-                                        return <div className="col-12 col-md-3 mb-3 mb-md-0" key={index}>
-                                                <img src={`${config.api}/${collection.files[0]}`} alt="" style={{height: "100%", width: "100%"}}/>
+                                        // return <div className="col-12 col-md-3 mb-3 mb-md-0" key={index}>
+                                        //         <img src={`${config.api}/${collection.files[0]}`} alt="" style={{height: "100%", width: "100%"}}/>
+                                        //     </div>
+                                        return <div key={index} className="col-12 col-xl-3 mb-3" style={{ height: "300px" }}>
+                                                <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
                                             </div>
                                     })}
                                     {person.collectionCount > 3 && <div className="col-12 mt-2 d-flex flex-row-reverse">
-                                        <a onClick={() => navigate(`/profile/${person.username}`)} style={{color: "#DB752C"}} className='text-decoration-none'>Ver mais {'>'}</a>
+                                        <a onClick={() => navigate(`/profile/${person.username}`)} style={{color: "#DB752C", cursor: "pointer"}} className='text-decoration-none'>Ver mais {'>'}</a>
                                     </div>}
                                 </div>
                     })}
