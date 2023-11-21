@@ -5,6 +5,12 @@
     cursor: pointer;
 }
 
+.softwares {
+    text-wrap: nowrap;
+    margin-bottom: 0.5rem;
+}
+
+
 .Modal {
     position: absolute;
     top: 50%;
@@ -28,7 +34,20 @@
     outline: none;
 }
 
-@media (min-width: 400px) {
+@media (min-width: 300px) {
+    .Modal {
+        width: 90%;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .text-data-job {
+        display: none;
+    }
+}
+
+@media (min-width: 500px) {
     .Modal {
         width: 30rem;
     }

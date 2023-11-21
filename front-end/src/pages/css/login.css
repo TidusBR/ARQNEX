@@ -37,3 +37,8 @@ i {
     cursor: pointer;
 }
 
+@media (min-width: 300px) {
+    Modal {
+        width: 90%;
+    }
+}

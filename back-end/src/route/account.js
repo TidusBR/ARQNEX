@@ -5,6 +5,7 @@ import { mkdir, unlink, writeFile } from "node:fs/promises";
 
 import { DBConn, checkAccountExistance, createAccount, getAccountInfo } from "../database.js";
 import { fetchCollectionInfos } from "./collection.js";
+import { createFollowingNotification } from "./notifications.js";
 
 export const AccountRouter = express.Router();
 
@@ -39,6 +40,11 @@ AccountRouter.post("/follow", async (req, res) => {
         return res.sendStatus(406);
     }
     
+    await createFollowingNotification({
+        personId: followId,
+        senderId: req.session.user.id
+    });
+
     const [[check]] = await DBConn.execute('SELECT COUNT(*) FROM following WHERE account_id = ? AND follow_id = ?', [req.session.user.id, followId]);
 
     if (check['COUNT(*)'] > 0) {

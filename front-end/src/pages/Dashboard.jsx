@@ -85,7 +85,7 @@ export default function Dashboard({ session }) {
                             <option value="2">Mais recente</option>
                         </select>
                     </div>
-                    <div className="col text-center mb-3">
+                    <div className="col text-center mb-3 d-md-block d-flex justify-content-between">
                         <button
                             className="p-2 border-0 fw-bold rounded me-3"
                             style={{ backgroundColor: filter.style === 0 ? "#DB752C52" : "white" }}

@@ -11,7 +11,7 @@ export default function CardUser({ info, session, handlePersonFollow }) {
     return (
         <div className="container-card-user rounded mb-4">
             {isMyProfile && <Link to="/edit-profile"><button className="edit-profile rounded p-2 px-4 fw-bold">Editar</button></Link>}
-            <img src={`${config.api}/uploads/${info.id}/avatar`} className="img-user" alt="" width="396px" height="456px" />
+            <img src={`${config.api}/uploads/${info.id}/avatar`} className="img-user" alt="" />
             <div className="text-center p-4 p-xxl-5">
                 <div className="mb-4">
                     <p className="name-user">{info.name}</p>
@@ -31,11 +31,13 @@ export default function CardUser({ info, session, handlePersonFollow }) {
                 <p className="bio-user mb-5">{info.biography}</p>
                 <p className="softwares text-start fw-bold mb-2">Softwares</p>
                 <div className="container-softwares mb-3 d-flex row">
+                    <div className="col px-0">
                     {info.softwares.map((softwareData, index) => (
-                        <div key={index} className="col-6 col-sm-3 col-md-2 col-lg-12 col-xxl-6 mb-2">
-                            <SoftwareUser iconPath={softwareData.iconPath} name={softwareData.name}/>
-                        </div>
+                        
+                            <SoftwareUser key={index}  iconPath={softwareData.iconPath} name={softwareData.name}/>
+                        
                     ))}
+                    </div>
                 </div>
                 {!isMyProfile && <Link className="link-curriculo" to="/">Visualizar currículo</Link>}
             </div>
