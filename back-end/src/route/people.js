@@ -5,16 +5,51 @@ import { fetchCollectionInfos } from "./collection.js";
 
 export const PeopleRouter = express.Router();
 
-PeopleRouter.get("/list", async (req, res) => {    
-    const [people] = await DBConn.execute(`SELECT id, name, username, premium_level FROM accounts ORDER BY RAND() LIMIT 5;`);
+async function getPeopleByFilter(filter) {
+    const collectionLimitPerPage = 16;
+
+    const argList = [];
+
+    let whereFilter = '';
     
+    if (filter.search.length > 0) {
+        whereFilter += `WHERE (name LIKE ? OR username LIKE ?)`;
+        argList.push(`%${filter.search}%`, `%${filter.search}%`);
+    }
+
+    argList.push(((filter.page ?? 0) - 1) * collectionLimitPerPage);
+
+    if (filter.relevance === 0) {
+        const [people] = await DBConn.execute(`
+        SELECT acc.id, acc.name, acc.username, acc.premium_level, COUNT(foll.follow_id) as follow_count
+        FROM accounts acc
+        LEFT JOIN following foll ON acc.id = foll.follow_id
+        ${whereFilter}
+        GROUP BY acc.id
+        ORDER BY follow_count DESC LIMIT 16 OFFSET ?;`, argList);
+
+        return people;
+
+    } else if (filter.relevance === 1) {
+        const [people] = await DBConn.execute(`SELECT id, name, username, premium_level FROM accounts ${whereFilter} ORDER BY register_date DESC LIMIT 16 OFFSET ?`, argList);
+        return people;
+    }
+
+    return [];
+}
+
+PeopleRouter.post("/list", async (req, res) => {
+    const filter = req.body;
+
+    const people = await getPeopleByFilter(filter);
+
     for (const person of people) {
         person.collections = [];
 
         const [[collectionCount]] = await DBConn.execute(`SELECT COUNT(*) FROM collections WHERE author_id=?`, [person.id]);
         person.collectionCount = collectionCount['COUNT(*)'];
 
-        const [collections] = await DBConn.execute(`SELECT * FROM collections WHERE author_id=? ORDER BY RAND() LIMIT 3;`, [person.id]);
+        const [collections] = await DBConn.execute(`SELECT * FROM collections WHERE author_id=? AND ${filter.style === 0 ? 'styles = 1' : 'styles >= 2 AND styles <= 3'} ORDER BY RAND() LIMIT 3;`, [person.id]);
 
         for (const collection of collections) {
             await fetchCollectionInfos(req, collection);

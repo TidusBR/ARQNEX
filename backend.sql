@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Nov-2023 às 18:14
+-- Tempo de geração: 21-Nov-2023 às 18:15
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.0.25
 
@@ -39,7 +39,8 @@ CREATE TABLE `accounts` (
   `premium_level` int(11) NOT NULL,
   `premium_time` bigint(20) NOT NULL,
   `biography` text NOT NULL,
-  `phone` text NOT NULL
+  `phone` text NOT NULL,
+  `register_date` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

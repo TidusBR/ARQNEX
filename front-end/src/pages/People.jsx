@@ -9,20 +9,42 @@ import { useNavigate } from 'react-router-dom';
 export default function People({ session }) {
     const navigate = useNavigate();
 
-    const [disablePagination] = useState(false);
-    const [page, setPage] = useState(1)
+    const [disablePagination, setDisablePagination] = useState(false);
 
     const [people, setPeople] = useState([]);
 
+    const [filter, setFilter] = useState({
+        page: 1,
+        style: 0,
+        relevance: 0, // 0 = Popular, 2 = Novo
+        search: ""
+    });
+
+    const [searchTerm, setSearchTerm] = useState("");
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            setFilter(filter => ({...filter, page: 1, search: searchTerm}));
+        }, 500);
+    
+        return () => clearTimeout(delayDebounceFn)
+      }, [searchTerm]);
+
     useEffect(() => {
         fetch(`${config.api}${config.endpoints.people.list}`, {
-            credentials: "include"
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify(filter)
         })
         .then(response => response.json())
-        .then(people => {
-            setPeople(people);
+        .then(data => {
+            setDisablePagination(!data.hasNextPage);
+            setPeople(people => filter.page === 1 ? data : [...people, ...data]);
         });
-    }, []);
+    }, [filter, setDisablePagination, setPeople]);
 
     const openCollection = new URLSearchParams(window.location.search)?.get('col');
 
@@ -81,20 +103,33 @@ export default function People({ session }) {
 
                 <div className="col-sm-12 mt-4 px-5 d-md-flex pb-4" style={{borderBottom: "1px solid #EEEEEE"}}>
                     <div className="col-12 mb-3 col-md-2 col-lg-2 col-xxl-1">
-                        <select className="form-select d-inline">
-                            <option value="popular">Popular</option>
+                    <select
+                            className="form-select d-inline"
+                            value={filter.relevance}
+                            onChange={(e) => setFilter(f => ({...f, page: 1, relevance: Number(e.target.value)})) }
+                        >
+                            <option value="0">Popular</option>
+                            <option value="1">Mais recente</option>
                         </select>
                     </div>
                     <div className="col text-center mb-3 d-md-block d-flex justify-content-between">
-                        <button className="p-2 border-0 fw-bold bg-white rounded me-3">
+                    <button
+                            className="p-2 border-0 fw-bold rounded me-3"
+                            style={{ backgroundColor: filter.style === 0 ? "#DB752C52" : "white" }}
+                            onClick={() => setFilter(f => ({...f, page: 1, style: 0})) }
+                        >
                             Clássico
                         </button>
-                        <button className="p-2 border-0 fw-bold bg-white rounded">
+                        <button
+                            className="p-2 border-0 fw-bold rounded"
+                            style={{ backgroundColor: filter.style === 1 ? "#DB752C52" : "white" }}
+                            onClick={() => setFilter(f => ({...f, page: 1, style: 1})) }
+                        >
                             Contemporâneo + Moderno
                         </button>
                     </div>
                     <div className="col-12 col-md-2 col-xxl-1">
-                        <input className="form-control icon-search" type="text" placeholder="Buscar" />
+                        <input className="form-control icon-search" type="text" placeholder="Buscar" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                     </div>
                 </div>
 
@@ -168,7 +203,7 @@ export default function People({ session }) {
                 
                 <div className="col-10 m-auto p-0">
                     <div className='row justify-content-center'>
-                        <Button disabled={disablePagination} onClick={() => setPage(page + 1)}
+                        <Button disabled={disablePagination} onClick={() => setFilter(filter => ({...filter, page: filter.page + 1}))}
                             style={{ display: (people.length > 16) ? "block" : "none", backgroundColor: "white", color: "black", border: "1.5px solid #EEEEEE" }} variant="contained" sx={{ marginTop: "5rem", width: "20%", bottom: "3rem" }}>Carregar mais...</Button>
                     </div>
                 </div>

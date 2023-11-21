@@ -7,6 +7,8 @@ import { DBConn, checkAccountExistance, createAccount, getAccountInfo } from "..
 import { fetchCollectionInfos } from "./collection.js";
 import { createFollowingNotification } from "./notifications.js";
 
+import { Temporal } from '@js-temporal/polyfill';
+
 export const AccountRouter = express.Router();
 
 AccountRouter.post("/upload-avatar", async (req, res) => {
@@ -509,7 +511,7 @@ AccountRouter.post("/signin/firebase", async (req, res) => {
     if (!(await checkAccountExistance({firebase_uid: uid, firebase_provider: providerId}))) {
         const username = name.split(" ")[0] + "-" + String(Math.floor(Math.random() * 9999));
 
-        if (!(await createAccount({name, email, firebase_uid: uid, firebase_provider: providerId, username, password: '', cpf: '', premium_level: 0, premium_time: 0, biography: '', phone: ''}))) {
+        if (!(await createAccount({name, email, firebase_uid: uid, firebase_provider: providerId, username, password: '', cpf: '', premium_level: 0, premium_time: 0, biography: '', phone: '', register_date: Temporal.Now.instant().epochMilliseconds}))) {
             return res.json({
                 ok: false,
                 message: 'Não foi possível criar sua conta, tente novamente.'
@@ -558,7 +560,7 @@ AccountRouter.post("/signup", async (req, res) => {
 
     const hashedPassword = await hash(password, 12);
 
-    if (await createAccount({name, username, password: hashedPassword, email, cpf, premium_level: 0, premium_time: 0, biography: '', phone: '', firebase_uid: '', firebase_provider: ''})) {
+    if (await createAccount({name, username, password: hashedPassword, email, cpf, premium_level: 0, premium_time: 0, biography: '', phone: '', firebase_uid: '', firebase_provider: '', register_date: Temporal.Now.instant().epochMilliseconds})) {
         const info = await getAccountInfo({name, username, password: hashedPassword, email, cpf});
 
         req.session.loggedIn = true;
