@@ -45,8 +45,8 @@ export default function Offices() {
                 </div>
 
                 <div className='col-12 col-sm-10 m-auto mt-3 mt-md-5 '>
-                    {offices.map((office, index) => {
-                        return <div className='row' key={index}>
+                    {offices.map((office, index, array) => {
+                        return <div className='row' key={index} style={index === array.length - 1 ? {marginBottom: "3rem"} : {}}>
                                     { index > 0 && <div className="col-12 my-3" >
                                         <hr />
                                     </div> }
@@ -63,7 +63,7 @@ export default function Offices() {
                                             </div>
                                     })}
                                     {office.hasManyJobs && <div className="col-12 mt-2 d-flex flex-row-reverse">
-                                        <a href='#' style={{color: "#DB752C"}} className='text-decoration-none'>Ver mais {'>'}</a>
+                                        <a href='#' style={{color: "#DB752C", cursor: "pointer"}} className='text-decoration-none'>Ver mais {'>'}</a>
                                     </div>}
                                 </div>
                     })}

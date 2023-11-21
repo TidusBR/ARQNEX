@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
 import IconUser from '../header/icon_user/IconUser';
-import imgTest from "../../assets/card-user-test/anna.png"
+import imgTest from "../../assets/fotoPerfil.png"
 import { config } from '../../config';
 import { Temporal } from '@js-temporal/polyfill';
 
