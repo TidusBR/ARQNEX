@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
 import IconUser from '../header/icon_user/IconUser';
-import imgTest from "../../assets/card-user-test/anna.png"
+import imgTest from "../../assets/fotoPerfil.png"
 import { config } from '../../config';
 import { Temporal } from '@js-temporal/polyfill';
 
@@ -69,7 +69,7 @@ export default function CardCollection({ imgProps, info, isOpen, session }) {
                     <div className="row">
                         <div className="col-12 d-flex flex-row align-items-center justify-content-between mb-3">
                             <div className='d-flex flex-row align-items-center'>
-                                <IconUser userImg={`${config.api}/uploads/${info.author_id}/avatar`}></IconUser>
+                                <IconUser userImg={imgTest}></IconUser>
                                 <div className='ms-3 d-flex flex-column'>
                                     <span style={{fontWeight: "bold", fontSize: "1.3rem"}}>{info.title}</span>
                                     <span style={{color: "#1D252C3D", fontSize: "1rem"}}>Por <span style={{color: "#DB752C", fontWeight: "bold"}}>{name}</span></span>

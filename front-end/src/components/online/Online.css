@@ -1,0 +1,7 @@
+@media screen and (max-width: 767px) {
+    .ana-icon {
+        /* Ajuste os estilos específicos para a imagem 'ana' em dispositivos móveis */
+        width: 100px; /* Ajuste conforme necessário */
+        height: 100px; /* Ajuste conforme necessário */
+    }
+}
