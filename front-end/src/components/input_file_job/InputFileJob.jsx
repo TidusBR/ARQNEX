@@ -7,7 +7,6 @@ export default function InputFileJob() {
 
     function insereImagem(e) {
         imgState(e.target.value)
-        console.log(img);
     }
     return (
         <div>

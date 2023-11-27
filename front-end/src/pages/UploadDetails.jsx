@@ -102,7 +102,7 @@ export default function UploadDetails({ files, setShowUploadDetails, setDialogMe
     return (
         <div className="container-upload-details">
             <div className="row">
-                <div className="col-10 col-sm-8  m-auto my-5">
+                <div className="col-12 col-sm-8  m-auto my-5">
                     <div className="row">
                         <div className="col-sm">
                             <h1 className="fw-bold">Adicionar detalhes</h1>
@@ -112,7 +112,7 @@ export default function UploadDetails({ files, setShowUploadDetails, setDialogMe
                     <form action="" className="w-100" ref={form}>
                         <div className="row">
                             <div className="col-md">
-                                <img src={files[0].uri} alt="" className="w-100" width="45rem" height="450rem" />
+                                <img src={files[0].uri} alt="" className="w-100" />
                                 {
                                 files.length > 1 &&
                                 <>
@@ -121,8 +121,8 @@ export default function UploadDetails({ files, setShowUploadDetails, setDialogMe
                                         {
                                             files.slice(1).map((file, index) =>
                                                 <div className="col-sm-3 d-flex align-items-center justify-content-center" key={index}>
-                                                    <label className='img-job rounded mb-3'>
-                                                    <img src={file.uri} alt="" className="w-100" width="400px" height="100px" />
+                                                    <label className='img-job rounded mb-3 h-auto'>
+                                                        <img src={file.uri} alt="" className="w-100 h-100" />
                                                     </label>
                                                 </div>
                                             )

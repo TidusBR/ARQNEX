@@ -22,6 +22,8 @@
     padding: 0;
     background-color: white;
     outline: none;
+    max-height: 90%;
+    overflow-y: auto;
 }
 
 .Overlay {

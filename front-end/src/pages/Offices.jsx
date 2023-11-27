@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react'
 import { config } from '../config';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
+import CardJob from '../components/card-job/CardJob';
 
-export default function Offices() {
+export default function Offices( {session} ) {
     // Desabilitar a paginação é temporário, o correto é notificar o usuário de que não há mais nada a ser mostrado
     const [disablePagination] = useState(false);
     const [page, setPage] = useState(1)
@@ -18,6 +19,8 @@ export default function Offices() {
             setOffices(data);
         });
     }, []);
+
+    const openCollection = new URLSearchParams(window.location.search)?.get('col');
 
     return (
         <div className="container-peoples">
@@ -57,14 +60,19 @@ export default function Offices() {
                                             <p style={{color: "#1D252C52"}}>{office.address.city}</p>
                                         </div>
                                     </div>
-                                    {office.images.map((path,index) => {
+                                    {/* {office.collections.map((path,index) => {
                                         return <div className="col-12 col-md-3 mb-3 mb-md-0" key={index}>
                                                 <img src={`${config.api}/${path}`} alt="" style={{height: "100%", width: "100%"}}/>
                                             </div>
+                                    })} */}
+                                    {office.collections.map((collection, index) => {
+                                        return <div key={index} className="col-12 col-xl-3 mb-3" style={{ height: "300px" }}>
+                                                <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
+                                            </div>
                                     })}
-                                    {office.hasManyJobs && <div className="col-12 mt-2 d-flex flex-row-reverse">
+                                    {/* {office.hasManyJobs && <div className="col-12 mt-2 d-flex flex-row-reverse">
                                         <a href='#' style={{color: "#DB752C", cursor: "pointer"}} className='text-decoration-none'>Ver mais {'>'}</a>
-                                    </div>}
+                                    </div>} */}
                                 </div>
                     })}
                 </div> 

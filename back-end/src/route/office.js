@@ -3,6 +3,7 @@ import { DBConn, checkAccountExistance, getAccountInfo } from '../database.js';
 import { acceptOfficeInviteNotification, createOfficeInviteNotification, rejectOfficeInviteNotification } from './notifications.js';
 
 import { mkdir, writeFile, unlink } from "node:fs/promises";
+import { fetchCollectionInfos } from './collection.js';
 
 export const OfficeRouter = express.Router();
 
@@ -204,38 +205,33 @@ OfficeRouter.get("/members", async (req, res) => {
 });
 
 OfficeRouter.get("/list", async (req, res) => {
-    const [offices] = await DBConn.execute(`SELECT id, name, photo FROM offices ORDER BY RAND() LIMIT 3;`);
+    const [offices] = await DBConn.execute(`SELECT id, name, photo FROM offices ORDER BY RAND();`);
 
     for (const office of offices) {
         const [[officeAddress]] = await DBConn.execute(`SELECT cep, house_number, street, neighborhood, city FROM offices_address WHERE office_id = ?;`, [office.id]);
         office.address = officeAddress;
 
-        const images = await getMembersCollectionImages(office.id);
+        const collections = await getMembersCollections(req, office.id);
 
-        office.images = images.length <= 3
-                        ? images
-                        : images.map(value => ({ value, sort: Math.random() }))
-                            .sort((a, b) => a.sort - b.sort)
-                            .map(({ value }) => value)
-                            .slice(0, 3);
+        office.collections = collections;
     }
 
     res.json(offices);
 });
 
-export async function getMembersCollectionImages(officeId) {
-    const collectionsImages = [];
+export async function getMembersCollections(req, officeId) {
+    const collectionsMember = [];
 
-    const [officeMembers] = await DBConn.execute(`SELECT account_id FROM offices_members WHERE office_id = ?;`, [officeId]);
+    const [officeMembers] = await DBConn.execute(`SELECT account_id FROM offices_members WHERE office_id = ? ORDER BY RAND() LIMIT 3;`, [officeId]);
 
     for (const member of officeMembers) {
-        const [collections] = await DBConn.execute(`SELECT id FROM collections WHERE author_id = ? ORDER BY RAND() LIMIT 3;`, [member.account_id]);
+        const [collections] = await DBConn.execute(`SELECT * FROM collections WHERE author_id = ? ORDER BY RAND() LIMIT 1;`, [member.account_id]);
 
         for (const collection of collections) {
-            const [files] = await DBConn.execute(`SELECT file_path FROM collections_files WHERE collection_id = ? ORDER BY RAND() LIMIT 3;`, [collection.id]);
-            collectionsImages.push(...files.map(f => f.file_path));
+            await fetchCollectionInfos(req, collection)
+            collectionsMember.push(collection);
         }
     }
 
-    return collectionsImages;
+    return collectionsMember;
 }

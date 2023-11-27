@@ -36,7 +36,6 @@ export default function Login({ open, setOpen }) {
     useEffect(() => {
         const handleWindowResize = () => {
             setWindowSize([window.innerWidth]);
-            console.log(windowSize);
         };
 
         window.addEventListener('resize', handleWindowResize);

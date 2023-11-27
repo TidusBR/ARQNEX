@@ -13,6 +13,8 @@ export default function People({ session }) {
 
     const [people, setPeople] = useState([]);
 
+    const [count, setCount] = useState(0);
+
     const [filter, setFilter] = useState({
         page: 1,
         style: 0,
@@ -135,69 +137,74 @@ export default function People({ session }) {
 
                 <div className='col-12 col-sm-10 m-auto mt-5'>
                     {people.map((person, index, array) => {
-                        return <div className='row' key={index} style={{marginBottom: index === array.length - 1 ? "3rem" : ""}}>
-                                    { index > 0 && <div className="col-12 my-3" >
-                                        <hr />
-                                    </div> }
-                                    <div className="col-12 col-md-3 mb-3 mb-md-0 d-flex align-items-center">
-                                        <img src={`${config.api}/uploads/${person.id}/avatar`} className="rounded-circle me-2" alt="fotoPerfil" width={100} height={100} />
-                                        <div className="d-flex flex-column justify-content-around">
-                                            <p style={{color: "#1D252C"}}  className="fw-bold">{person.name}
-                                                {person.isPremium && <span className="become-upgrade px-1">PRO</span>}
-                                            </p>
+                        if(person.collections.length) {
+                            return <div className='row' key={index} style={{marginBottom: index === array.length - 1 ? "3rem" : ""}}>
+                                { index > 0 && <div className="col-12 my-3" >
+                                    <hr />
+                                </div> }
+                                <div className="col-12 col-md-3 mb-3 mb-md-0 d-flex align-items-center">
+                                    <img src={`${config.api}/uploads/${person.id}/avatar`} className="rounded-circle me-2" alt="fotoPerfil" width={100} height={100} />
+                                    <div className="d-flex flex-column justify-content-around">
+                                        <p style={{color: "#1D252C"}}  className="fw-bold">{person.name}
+                                            {person.isPremium && <span className="become-upgrade px-1">PRO</span>}
+                                        </p>
+                                        {
+                                        person.semester && person.semester !== "" &&
+                                        <p style={{color: "#1D252C52"}}>{person.semester}° Semestre</p>
+                                        }
+                                        <p style={{color: "#1D252C52"}}>{person.address.city}</p>
+                                        {
+                                        (session.loggedIn && person.id !== session.account.id) &&
+                                        <div className='d-flex'>
+                                            <Button
+                                                onClick={(e) => handlePersonFollow(e, person)}
+                                                variant='contained' className='me-2' size='small'
+                                                style={person.isAlreadyFollowing ? {textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}
+                                                : {textTransform: "none", backgroundColor: "#DB752C", color: "white"}}
+                                            >
+                                                {person.isAlreadyFollowing ? "Seguindo" : "Seguir"}
+                                            </Button>
                                             {
-                                            person.semester && person.semester !== "" &&
-                                            <p style={{color: "#1D252C52"}}>{person.semester}° Semestre</p>
-                                            }
-                                            <p style={{color: "#1D252C52"}}>{person.address.city}</p>
-                                            {
-                                            (session.loggedIn && person.id !== session.account.id) &&
-                                            <div className='d-flex'>
-                                                <Button
-                                                    onClick={(e) => handlePersonFollow(e, person)}
-                                                    variant='contained' className='me-2' size='small'
-                                                    style={person.isAlreadyFollowing ? {textTransform: "none", backgroundColor: "white", color: "#1D252C", border: "1.5px solid #EEEEEE"}
-                                                    : {textTransform: "none", backgroundColor: "#DB752C", color: "white"}}
-                                                >
-                                                    {person.isAlreadyFollowing ? "Seguindo" : "Seguir"}
-                                                </Button>
-                                                {
-                                                (session.account.hasOffice && !person.isOfficeMember) && 
-                                                <Button
-                                                    variant='contained'
-                                                    size='small'
-                                                    disabled={person.isAlreadyInvited}
-                                                    style={{
-                                                        textTransform: "none",
-                                                        backgroundColor: "white",
-                                                        color: "#1D252C",
-                                                        border: "1.5px solid #EEEEEE",
-                                                        "&:disabled": {
-                                                            backgroundColor: "gray"
-                                                        }
-                                                    }}
-                                                    onClick={(e) => handlePersonOfficeInvite(e, person)}
-                                                >
-                                                    Convidar
-                                                </Button>
-                                                }
-                                            </div>
+                                            (session.account.hasOffice && !person.isOfficeMember) && 
+                                            <Button
+                                                variant='contained'
+                                                size='small'
+                                                disabled={person.isAlreadyInvited}
+                                                style={{
+                                                    textTransform: "none",
+                                                    backgroundColor: "white",
+                                                    color: "#1D252C",
+                                                    border: "1.5px solid #EEEEEE",
+                                                    "&:disabled": {
+                                                        backgroundColor: "gray"
+                                                    }
+                                                }}
+                                                onClick={(e) => handlePersonOfficeInvite(e, person)}
+                                            >
+                                                Convidar
+                                            </Button>
                                             }
                                         </div>
+                                        }
                                     </div>
-                                    {person.collections.map((collection, index) => {
-                                        // return <div className="col-12 col-md-3 mb-3 mb-md-0" key={index}>
-                                        //         <img src={`${config.api}/${collection.files[0]}`} alt="" style={{height: "100%", width: "100%"}}/>
-                                        //     </div>
-                                        return <div key={index} className="col-12 col-xl-3 mb-3" style={{ height: "300px" }}>
-                                                <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
-                                            </div>
-                                    })}
-                                    {person.collectionCount > 3 && <div className="col-12 mt-2 d-flex flex-row-reverse">
-                                        <a onClick={() => navigate(`/profile/${person.username}`)} style={{color: "#DB752C", cursor: "pointer"}} className='text-decoration-none'>Ver mais {'>'}</a>
-                                    </div>}
                                 </div>
+                                {person.collections.map((collection, index) => {
+                                    // return <div className="col-12 col-md-3 mb-3 mb-md-0" key={index}>
+                                    //         <img src={`${config.api}/${collection.files[0]}`} alt="" style={{height: "100%", width: "100%"}}/>
+                                    //     </div>
+                                    return <div key={index} className="col-12 col-xl-3 mb-3" style={{ height: "300px" }}>
+                                            <CardJob isOpen={openCollection == collection.id} session={session} collection={collection} key={index} name="Lorem Ipsum dolor sit" data="Postado 5 horas atrás"></CardJob>
+                                        </div>
+                                })}
+                                {person.collectionCount > 3 && <div className="col-12 mt-2 d-flex flex-row-reverse">
+                                    <a onClick={() => navigate(`/profile/${person.username}`)} style={{color: "#DB752C", cursor: "pointer"}} className='text-decoration-none'>Ver mais {'>'}</a>
+                                </div>}
+                            </div>
+                        }
+
+                        
                     })}
+                    {console.log(people)}
                 </div> 
 
                 

@@ -46,6 +46,11 @@ export default function Upload({ session }) {
             return event.preventDefault();
         }
 
+        if (event.target.files.length > 5) {
+            setDialogMessage("Você não pode fazer upload de mais de 5 arquivos.");
+            return event.preventDefault();
+        }
+
         for (const file of event.target.files) {
             const buffer = await readFileBuffer(file);
 

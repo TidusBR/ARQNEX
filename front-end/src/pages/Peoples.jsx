@@ -23,7 +23,6 @@ export default function Peoples({ session }) {
         })
         .then(response => response.json())
         .then(people => {
-            console.log(people);
             setPeople(people);
         });
     }, []);
