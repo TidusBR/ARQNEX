@@ -1,6 +1,9 @@
 # Projeto de Faculdade (ARQNEX)
 Trabalho para finalização de semestre nas disciplinas de TAP RAID e Tópicos Avançados.
 
+# Descrição
+Portifólio para divulgação de trabalhos de arquitetos.
+
 # Pré-Requisitos
 - MySQL-compatible server ([MySQL Community Edition](https://www.mysql.com/products/community/)).
 - NODE.JS 18 ([Node.js Latest Version](https://nodejs.org/en/download)).
