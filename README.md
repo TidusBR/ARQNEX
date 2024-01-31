@@ -5,12 +5,17 @@ Trabalho para finalização de semestre nas disciplinas de TAP RAID e Tópicos A
 - MySQL-compatible server ([MySQL Community Edition](https://www.mysql.com/products/community/)).
 - NODE.JS 18 ([Node.js Latest Version](https://nodejs.org/en/download)).
 
-# Bibliotecas FrontEnd
+# Deploy da Aplicação
+Execute o comando "npm install" em ambas pastas para instalar as depedências e bibliotecas utilizadas.
 
-  
-# Bibliotecas BackEnd
-- ([Express](https://www.npmjs.com/package/express))
-- ([Express Session](https://www.npmjs.com/package/express-session))
-- ([Express Mysql Session](https://www.npmjs.com/package/express-mysql-session))
-- ([Cors](https://www.npmjs.com/package/cors))
-- ([MYSQL2](https://www.npmjs.com/package/mysql2))
+Para iniciar o back-end:
+
+	npm start
+	
+Para iniciar o front-end:
+
+	npm run dev
+	
+Se precisar gerar uma distribuição para usar o front como página estática:
+
+	npm run build
