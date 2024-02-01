@@ -3,8 +3,8 @@ export const config = {
     devPort: 3000,
     paypal: {
         baseURL: "https://api-m.sandbox.paypal.com",
-        clientId: "AQpA-hhfzocEfg3jkMyuziheekP0vE8aV0qUYvImjibDqvfrmZcH0-sEq0QGaITen2_ZlxoXvzO6-_Tg",
-        clientSecret: "EMalGsN8rL-VCIYJgicoZMCVjEup5KxqtRHcdJeXFEk88FtiLZ9sF7Kx_OqV302Scw_kz0C76vsAnaFl"
+        clientId: "Your ID",
+        clientSecret: "Your Secret"
     },
     cors: {
         origin: "http://localhost:5173",
