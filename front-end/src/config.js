@@ -1,14 +1,14 @@
 export const config = {
     firebase: {
-        apiKey: "AIzaSyDMQCa87wo4i7OQOSP_yl6TaySs4qs0ChI",
-        authDomain: "authtads-e3d62.firebaseapp.com",
-        projectId: "authtads-e3d62",
-        storageBucket: "authtads-e3d62.appspot.com",
-        messagingSenderId: "493789784827",
-        appId: "1:493789784827:web:6aadf77bcdc66467539e5e"
+        apiKey: "",
+        authDomain: "",
+        projectId: "",
+        storageBucket: "",
+        messagingSenderId: "",
+        appId: ""
     },
     paypalOptions: {
-        clientId: "AQpA-hhfzocEfg3jkMyuziheekP0vE8aV0qUYvImjibDqvfrmZcH0-sEq0QGaITen2_ZlxoXvzO6-_Tg",
+        clientId: "",
         currency: "BRL"
     },
     api: "http://localhost:3000",
